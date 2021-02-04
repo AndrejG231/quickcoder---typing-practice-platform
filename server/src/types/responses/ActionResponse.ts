@@ -1,13 +1,15 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-class ErrorReturn {
+class ActionResponse{
   @Field()
-  at: string;
+  success: boolean;
+  @Field()
+  action: string;
   @Field()
   info: string;
   @Field()
   message: string;
 }
 
-export default ErrorReturn;
+export default ActionResponse;

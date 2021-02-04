@@ -18,7 +18,7 @@ import express from "express";
 //==>Config
 import { SERVER_PORT, PG_SETTING } from "./config";
 //==>Entities
-import Users from "./entities/Users";
+import Users from "./types/entities/Users";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 
@@ -55,7 +55,8 @@ const main = async () => {
   //TESTS//
   /////////
 
-  // runTest("", () => "");
+
+  // runTest("", () => re.test(stg));
 
   ////////////////
   //SERVER START//

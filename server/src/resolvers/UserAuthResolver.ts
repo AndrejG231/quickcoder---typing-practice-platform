@@ -1,9 +1,7 @@
 import {
   Arg,
-  Field,
   Int,
   Mutation,
-  ObjectType,
   Query,
   Resolver,
 } from "type-graphql";
@@ -15,26 +13,18 @@ import { getConnection } from "typeorm";
 
 import argon2 from "argon2";
 import validateRegister from "../utilities/validateRegister";
+import generateResponse from "../utilities/generateResponse";
 
 ///////////
 //Objects//
 ///////////
 
-import Users from "../entities/Users";
+import Users from "../types/entities/Users";
+import ActionResponse from "../types/responses/ActionResponse";
+import UserInfoResponse from  "../types/responses/UserInfoResponse"
+import RegisterInput from "../types/arguments/RegisterInput";
+import LoginInput from "../types/arguments/LoginInput";
 
-import ErrorReturn from "../types/ErrorReturn";
-import RegisterInput from "../types/RegisterInput";
-import LoginInput from "../types/LoginInput";
-import generateError from "../utilities/generateError";
-
-@ObjectType()
-class UserResponse {
-  @Field(() => ErrorReturn, { nullable: true })
-  error?: ErrorReturn;
-
-  @Field(() => Users, { nullable: true })
-  user?: Users;
-}
 
 ////////////
 //Resolver//
@@ -42,19 +32,18 @@ class UserResponse {
 
 @Resolver(Users)
 class UserAuthResolver {
-  @Mutation(() => UserResponse)
+  @Mutation(() => ActionResponse)
   async register(@Arg("credentials") credentials: RegisterInput) {
     const hashedPassword = await argon2.hash(credentials.password);
 
     const error = await validateRegister(credentials, "en");
 
-    console.log("ERRORS:", error);
 
     if (error) {
       return error;
     }
 
-    const user = await getConnection()
+    await getConnection()
       .createQueryBuilder()
       .insert()
       .into(Users)
@@ -63,13 +52,12 @@ class UserAuthResolver {
         username: credentials.username,
         password: hashedPassword,
       })
-      .returning("*")
       .execute();
 
-    return { user: user.raw[0] };
+    return generateResponse(true, "register_account_registered", "en")
   }
 
-  @Mutation(() => UserResponse)
+  @Mutation(() => ActionResponse)
   async login(@Arg("credentials") credentials: LoginInput) {
     const credType = credentials.identification.includes("@")
       ? "email"
@@ -80,24 +68,39 @@ class UserAuthResolver {
     });
 
     if (!user) {
-      return generateError("login_username_notFound", "en");
+      return generateResponse(false, "login_username_notFound", "en");
     }
 
-    const authorized = argon2.verify(user.password, credentials.password);
+    const authorized = await argon2.verify(user.password, credentials.password);
 
-    if(!authorized){
-      return generateError("login_password_invalid", "en");
+    if (authorized) {
+
+      /////Make a cookie//////
+
+      return generateResponse(true, "login_account_loggedIn", "en")
     }
-    return {user: user};
+
+    return generateResponse(false, "login_password_invalid", "en");
   }
 
-  @Query(() => Users)
+  @Mutation(() => ActionResponse)
+  async changeKnownPassword(
+    @Arg("orginalPassword", () => String) originalPassword: string,
+    @Arg("newPassword", () => String) newPassowrd: String,
+  ){
+
+  }
+
+  @Query(() => UserInfoResponse)
   async getUserInfo(@Arg("id", () => Int) id: number) {
     const user = await Users.findOne(id);
 
-    console.log(user);
+    if(user){
+      return {user: user}
+    }
 
-    return { user: user };
+    const error = generateResponse(false, "login_username_notFound", "en");
+    return {error: error};
   }
 }
 
