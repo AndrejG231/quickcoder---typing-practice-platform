@@ -20,9 +20,10 @@ import { SERVER_PORT, PG_SETTING } from "./config";
 //==>Entities
 import Users from "./entities/Users";
 //==>Resolvers
-import UserResolver from "./resolvers/UserResolver";
-//==>Utilities
-import validateRegister from "./utilities/validateRegister";
+import UserAuthResolver from "./resolvers/UserAuthResolver";
+
+//==>Test
+// import runTest from "./tests/test";
 
 const main = async () => {
   /////////
@@ -39,7 +40,7 @@ const main = async () => {
   const server = express();
 
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserAuthResolver],
   });
 
   server.use(
@@ -54,14 +55,7 @@ const main = async () => {
   //TESTS//
   /////////
 
-  console.log(
-    "Validate Register TEST:",
-    await validateRegister({
-      username: "AndrejG",
-      email: "andrej.germic@gmail.com",
-      password: "AG123456AG",
-    })
-  );
+  // runTest("", () => "");
 
   ////////////////
   //SERVER START//
