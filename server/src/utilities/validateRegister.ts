@@ -22,6 +22,11 @@ const validateRegister: validateReg = async (credentials, lang) => {
     return generateResponse(false, "register_username_specialCharacters", lang)
   }
 
+  const usernameLength = credentials.username.length > 3;
+  if(!usernameLength){
+    return generateResponse(false, "register_username_length", lang)
+  }
+
   //----email validation----//
   if (!validate(credentials.email)) {
     return generateResponse(false, "register_email_invalid", lang)
@@ -44,7 +49,7 @@ const validateRegister: validateReg = async (credentials, lang) => {
 
   //----password strength----//
   const strengthResult = zxcvbn(credentials.password);
-  if (strengthResult.score < 3) {
+  if (strengthResult.score < 2) {
     return generateResponse(false, "register_password_weak", lang)
   }
   const passwordCharTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)?/.test(credentials.password);

@@ -38,6 +38,9 @@ class Users extends BaseEntity {
   @Column({ default: "dark" })
   color_scheme!: string;
 
+  @Column({default: 0})
+  token_version: number;
+
   @Field(() => String)
   @CreateDateColumn()
   created_at = Date;
@@ -45,6 +48,7 @@ class Users extends BaseEntity {
   @Field(() => String)
   @UpdateDateColumn()
   updated_at = Date;
+
 }
 
 export default Users;

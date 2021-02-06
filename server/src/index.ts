@@ -5,10 +5,9 @@
 require("dotenv").config();
 import "reflect-metadata";
 
-import { graphqlHTTP } from "express-graphql";
-import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-
+import { buildSchema } from "type-graphql";
+import { ApolloServer } from 'apollo-server-express';
 import express from "express";
 
 ///////////
@@ -21,40 +20,35 @@ import { SERVER_PORT, PG_SETTING } from "./config";
 import Users from "./types/entities/Users";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
+import { DevelopmentUserResolver } from "./resolvers/Development";
+//==>Types
+import GraphqlContex from "./types/GraphqlContext";
 
 //==>Test
 // import runTest from "./tests/test";
 
 const main = async () => {
+  const entities = [Users]
+  const resolvers: [Function, ...Function[]] = [UserAuthResolver, DevelopmentUserResolver]
+
   /////////
   //SETUP//
   /////////
-  await createConnection({
-    type: "postgres",
-    ...PG_SETTING,
-    logging: true,
-    synchronize: true,
-    entities: [Users],
-  });
+
+  await createConnection({ ...PG_SETTING, entities: entities } as any);
 
   const server = express();
 
-  const schema = await buildSchema({
-    resolvers: [UserAuthResolver],
-  });
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({resolvers: resolvers}),
+    context: ({req, res}) => ({req, res})
+  })
 
-  server.use(
-    "/graphql",
-    graphqlHTTP({
-      schema: schema,
-      graphiql: true,
-    })
-  );
+  apolloServer.applyMiddleware({app: server, cors: false})
 
   /////////
   //TESTS//
   /////////
-
 
   // runTest("", () => re.test(stg));
 
