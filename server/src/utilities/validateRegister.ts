@@ -9,6 +9,7 @@ import ActionResponse from "../types/responses/ActionResponse";
 import RegisterInput from "../types/arguments/RegisterInput";
 
 import generateResponse from "./generateResponse";
+import checkPasswordStrength from "./checkPasswordStrength";
 
 interface validateReg {
   (credentials: RegisterInput, lang: LangList): Promise<
@@ -47,14 +48,10 @@ const validateRegister: validateReg = async (credentials, lang) => {
     return generateResponse(false, "register_email_exists", lang)
   }
 
-  //----password strength----//
-  const strengthResult = zxcvbn(credentials.password);
-  if (strengthResult.score < 2) {
-    return generateResponse(false, "register_password_weak", lang)
-  }
-  const passwordCharTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)?/.test(credentials.password);
-  if (!passwordCharTest) {
-    return generateResponse(false, "register_password_noInclude", lang)
+  const weakPass = checkPasswordStrength(credentials.password, lang)
+  
+  if(weakPass !== false){
+    return weakPass;
   }
 
   return undefined;

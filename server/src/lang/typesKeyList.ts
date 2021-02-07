@@ -20,7 +20,9 @@ type keyList =
   | "getUserInfo_token_outdated"
   | "getUserInfo_clientParameter_invalid"
   | "getUserInfo_user_notFound"
+  | "getUserInfo_user_wrongSession"
   //CHANGE PASSWORD
-  | "changePassword_user_notAuthenticated";
+  | "changePassword_user_notAuthenticated"
+  | "changePassword_password_changed";
 
 export default keyList;

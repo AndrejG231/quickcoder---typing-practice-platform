@@ -18,14 +18,18 @@ const Messages = {
     // LOGIN SUCCESS //
     login_account_loggedIn: "Successfully logged in",
     // USER INFO QUERY //
-    getUserInfo_cookies_notFound: "Could not retrieve cookies, please check your browser settings.",
-    getUserInfo_tokne_notFound: "Could not retrieve login token. Please login",
+    getUserInfo_cookies_notFound:
+      "Could not retrieve cookies, please check your browser settings.",
+    getUserInfo_token_notFound: "Could not retrieve login token. Please login",
     getUserInfo_token_outdated: "Session has expired. Please login",
     getUserInfo_clientParameter_invalid:
       "There was problem with your client. Please login",
     getUserInfo_user_notFound: "Could not find specified user. Please login",
+    getUserInfo_user_wrongSession: "Invalid user data. Please login",
     // CHANGE PASSWORD //
-    changePassword_user_notAuthenticated: "Not logged in or could not retrieve cookies",
+    changePassword_user_notAuthenticated:
+      "Not logged in or could not retrieve cookies",
+    changePassword_password_changed: "Password changed successfully",
   },
 };
 

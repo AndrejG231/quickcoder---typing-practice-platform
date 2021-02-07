@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Generated,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -39,7 +40,11 @@ class Users extends BaseEntity {
   color_scheme!: string;
 
   @Column({default: 0})
-  token_version: number;
+  token_version!: number;
+
+  @Column()
+  @Generated("uuid")
+  secret: string;
 
   @Field(() => String)
   @CreateDateColumn()

@@ -5,12 +5,13 @@ import { getConnection } from "typeorm";
 //Utilities//
 /////////////
 
-import argon2, { verify } from "argon2";
-import { sign, decode } from "jsonwebtoken";
+import argon2 from "argon2";
 import validateRegister from "../utilities/validateRegister";
+import checkPasswordStrength from "../utilities/checkPasswordStrength";
+import validateUserFromCookie from "../utilities/validateUserFromCookie";
+import getUserFromCookie from "../utilities/getUserFromCookie";
 import generateResponse from "../utilities/generateResponse";
 import createAuthCookie from "../utilities/createAuthCookie";
-import getCookieValue from "../utilities/getCookieValue";
 
 ///////////
 //Objects//
@@ -25,6 +26,7 @@ import UserInfoResponse from "../types/responses/UserInfoResponse";
 
 import RegisterInput from "../types/arguments/RegisterInput";
 import LoginInput from "../types/arguments/LoginInput";
+import { userInfo } from "os";
 
 ////////////
 //Resolver//
@@ -97,77 +99,57 @@ class UserAuthResolver {
     @Arg("clientParameter") clientParameter: string,
     @Ctx() { req, res }: GraphqlContext
   ) {
-    if (!req.headers.cookie) {
-      return {
-        error: generateResponse(false, "getUserInfo_cookies_notFound", lang),
-      };
-    }
-    const cookie = getCookieValue(req.headers.cookie, process.env.COOKIE_NAME!);
+    const validationData = await validateUserFromCookie(
+      req,
+      clientParameter,
+      lang
+    );
 
-    //...is there a cookie?
-    if (typeof cookie !== "string") {
-      return {
-        error: generateResponse(false, "getUserInfo_token_notFound", lang),
-      };
-    }
-    const decodedCookie = decode(cookie) as any;
-    const currentTime = new Date().getTime();
-
-    //...is token expired?
-    if (currentTime > decodedCookie.time) {
-      return {
-        error: generateResponse(false, "getUserInfo_token_outdated", lang),
-      };
+    if (!validationData.user?.id) {
+      console.log("Validation data Error", validationData)
+      return validationData;
     }
 
-    //...does clientParameter match?
-    if (decodedCookie.clientParameter !== clientParameter) {
-      return {
-        error: generateResponse(
-          false,
-          "getUserInfo_clientParameter_invalid",
-          lang
-        ),
-      };
-    }
-
-    //...is there such a user?
-    const user = await Users.findOne(decodedCookie.userId);
-    if (!user) {
-      return {
-        error: generateResponse(false, "getUserInfo_user_notFound", lang),
-      };
-    }
-
-    //...does token version match?
-    if (decodedCookie.token_version !== user.token_version) {
-      return {
-        error: generateResponse(false, "getUserInfo_token_outdated", lang),
-      };
-    }
-
-    //...all good, refreshing cookie and returning user..
-
-    createAuthCookie(res, user, clientParameter);
-    return { user: user };
+    createAuthCookie(res, validationData.user, clientParameter);
+    return { user: validationData.user };
   }
 
   // CHANGE KNOWN PASSWORD //
-  // @Mutation(() => ActionResponse)
-  // async changeKnownPassword(
-  //   @Arg("orginalPassword") originalPassword: string,
-  //   @Arg("newPassword") newPassowrd: string,
-  //   @Ctx() { req }: GraphqlContext
-  // ) {
-  //   const cookie = getCookieValue(req.headers.cookie!, process.env.COOKIE_NAME!)
-  //   if (!cookie){
-  //     return {error: generateResponse(false, 'changePassword_user_notAuthenticated', lang)}
-  //   }
+  @Mutation(() => ActionResponse)
+  async changeKnownPassword(
+    @Arg("orginalPassword") originalPassword: string,
+    @Arg("newPassword") newPassowrd: string,
+    @Ctx() { req }: GraphqlContext
+  ) {
+    const validUserInfo= await getUserFromCookie(req, lang);
 
-  //   const tokenData = verify()
+    if(!validUserInfo.user){
+      return validUserInfo.error
+    }
 
-  //   const user = await Users.findOne(cookie.userId)
-  // }
+    const authorized = await argon2.verify(validUserInfo.user.password, originalPassword);
+
+    if(!authorized){
+      return generateResponse(false, "login_password_invalid", lang)
+    }
+
+    const weakPassword = checkPasswordStrength(newPassowrd, lang)
+
+    if(weakPassword){
+      return weakPassword
+    }
+
+    const hashedNewPassword = await argon2.hash(newPassowrd);
+
+    await getConnection()
+    .createQueryBuilder()
+    .update(Users)
+    .set({ password:  hashedNewPassword})
+    .where("id = :id", { id: validUserInfo.user.id })
+    .execute();
+    
+    return generateResponse(true, "changePassword_password_changed", lang)
+  }
 }
 
 export default UserAuthResolver;

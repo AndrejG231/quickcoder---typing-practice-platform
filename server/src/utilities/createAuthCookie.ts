@@ -12,10 +12,11 @@ const createAuthCookie: createAuthCookie = (res, user, clientParameter) => {
 
   const token = sign(
     {
-      expires: currentTime + expiresAfter,
-      userId: user.id,
-      tokenVersion: user.token_version,
-      clientParameter: clientParameter,
+      [process.env.EXPIRES!]: currentTime + expiresAfter,
+      [process.env.USER_ID!]: user.id,
+      [process.env.USER_SECRET!]: user.secret,
+      [process.env.TOKEN_VERSION!]: user.token_version,
+      [process.env.CLIENT_PARAM!]: clientParameter,
     },
     process.env.JWT_KEY!
   );
@@ -24,7 +25,6 @@ const createAuthCookie: createAuthCookie = (res, user, clientParameter) => {
 
   res.cookie(cookieName, token);
 
-  console.log("NEW EXPIRE ", currentTime + expiresAfter)
   return true
 };
 

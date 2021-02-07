@@ -20,7 +20,7 @@ import { SERVER_PORT, PG_SETTING } from "./config";
 import Users from "./types/entities/Users";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
-import { DevelopmentUserResolver } from "./resolvers/Development";
+import { DevelopmentUserResolver } from "./development/DevelopmentUserResolver";
 //==>Types
 import GraphqlContex from "./types/GraphqlContext";
 
