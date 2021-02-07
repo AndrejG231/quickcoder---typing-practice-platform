@@ -1,3 +1,4 @@
+import PassTokens from "../types/entities/PassTokens";
 import {
   Arg,
   Field,
@@ -42,6 +43,14 @@ export class DevelopmentUserResolver {
       console.log(error);
       return false;
     }
+    return true;
+  }
+
+  @Query(() => Boolean)
+  async passTokenList() {
+    const tokens = await PassTokens.find();
+    console.log(tokens);
+
     return true;
   }
 }

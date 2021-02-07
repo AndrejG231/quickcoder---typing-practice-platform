@@ -1,10 +1,10 @@
 import { Request } from "express";
-import getCookieValue from "./getCookieValue";
-import dlog from "../development/dlog";
+import getCookieValue from "../getCookieValue";
+import dlog from "../../development/dlog";
 import UserInfoResponse from "src/types/responses/UserInfoResponse";
-import generateResponse from "./generateResponse";
-import Users from "../types/entities/Users";
-import LangList from "../lang/typesLangList"
+import generateResponse from "../generateResponse";
+import Users from "../../types/entities/Users";
+import LangList from "../../lang/typesLangList"
 import { verify } from "jsonwebtoken";
 
 interface userFromCookie {

@@ -1,14 +1,14 @@
 import { validate } from "email-validator";
 import zxcvbn from "zxcvbn";
 
-import LangList from "../lang/typesLangList";
+import LangList from "../../lang/typesLangList";
 
-import User from "../types/entities/Users";
+import User from "../../types/entities/Users";
 
-import ActionResponse from "../types/responses/ActionResponse";
-import RegisterInput from "../types/arguments/RegisterInput";
+import ActionResponse from "../../types/responses/ActionResponse";
+import RegisterInput from "../../types/arguments/RegisterInput";
 
-import generateResponse from "./generateResponse";
+import generateResponse from "../generateResponse";
 import checkPasswordStrength from "./checkPasswordStrength";
 
 interface validateReg {

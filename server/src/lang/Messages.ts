@@ -30,6 +30,14 @@ const Messages = {
     changePassword_user_notAuthenticated:
       "Not logged in or could not retrieve cookies",
     changePassword_password_changed: "Password changed successfully",
+    // RETRIEVE PASSWORD //
+    retrievePassword_email_notFound: "Could not find your email specified",
+    retrievePassword_server_unknownError:
+      "Unknow error occured. Please try again later",
+    retrievePassword_resetLink_sent:
+      "Password recovery link was sent to your email",
+    retrievePassword_token_invalid: "Invalid token. Please try again",
+    retrievePassword_token_expired: "Token expired. Please try again",
   },
 };
 

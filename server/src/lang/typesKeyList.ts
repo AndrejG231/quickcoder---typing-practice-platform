@@ -23,6 +23,11 @@ type keyList =
   | "getUserInfo_user_wrongSession"
   //CHANGE PASSWORD
   | "changePassword_user_notAuthenticated"
-  | "changePassword_password_changed";
-
+  | "changePassword_password_changed"
+  //RETRIEVE PASSWORD
+  | "retrievePassword_email_notFound"
+  | "retrievePassword_server_unknownError"
+  | "retrievePassword_resetLink_sent"
+  |"retrievePassword_token_invalid"
+  |"retrievePassword_token_expired"
 export default keyList;

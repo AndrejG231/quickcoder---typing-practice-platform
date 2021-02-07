@@ -1,7 +1,7 @@
-import typesLangList from "../lang/typesLangList";
-import ActionResponse from "../types/responses/ActionResponse";
+import typesLangList from "../../lang/typesLangList";
+import ActionResponse from "../../types/responses/ActionResponse";
 import zxcvbn from "zxcvbn";
-import generateResponse from "./generateResponse";
+import generateResponse from "../generateResponse";
 
 interface validPassword {
   (password: string, lang: typesLangList): false | ActionResponse

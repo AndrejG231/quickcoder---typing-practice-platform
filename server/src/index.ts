@@ -5,9 +5,9 @@
 require("dotenv").config();
 import "reflect-metadata";
 
-import { createConnection } from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import { buildSchema } from "type-graphql";
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer } from "apollo-server-express";
 import express from "express";
 
 ///////////
@@ -20,16 +20,22 @@ import { SERVER_PORT, PG_SETTING } from "./config";
 import Users from "./types/entities/Users";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
-import { DevelopmentUserResolver } from "./development/DevelopmentUserResolver";
+import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
+import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
 //==>Types
 import GraphqlContex from "./types/GraphqlContext";
+import PassTokens from "./types/entities/PassTokens";
 
 //==>Test
 // import runTest from "./tests/test";
 
 const main = async () => {
-  const entities = [Users]
-  const resolvers: [Function, ...Function[]] = [UserAuthResolver, DevelopmentUserResolver]
+  const entities = [Users, PassTokens];
+  const resolvers: [Function, ...Function[]] = [
+    UserAuthResolver,
+    ForgotPasswordResolver,
+    /* DEV ONLY */ DevelopmentUserResolver,
+  ];
 
   /////////
   //SETUP//
@@ -40,11 +46,11 @@ const main = async () => {
   const server = express();
 
   const apolloServer = new ApolloServer({
-    schema: await buildSchema({resolvers: resolvers}),
-    context: ({req, res}) => ({req, res})
-  })
+    schema: await buildSchema({ resolvers: resolvers }),
+    context: ({ req, res }) => ({ req, res }),
+  });
 
-  apolloServer.applyMiddleware({app: server, cors: false})
+  apolloServer.applyMiddleware({ app: server, cors: false });
 
   /////////
   //TESTS//

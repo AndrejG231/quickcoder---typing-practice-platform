@@ -6,12 +6,12 @@ import { getConnection } from "typeorm";
 /////////////
 
 import argon2 from "argon2";
-import validateRegister from "../utilities/validateRegister";
-import checkPasswordStrength from "../utilities/checkPasswordStrength";
-import validateUserFromCookie from "../utilities/validateUserFromCookie";
-import getUserFromCookie from "../utilities/getUserFromCookie";
+import validateRegister from "../utilities/auth/validateRegister";
+import checkPasswordStrength from "../utilities/auth/checkPasswordStrength";
+import validateUserFromCookie from "../utilities/auth/validateUserFromCookie";
+import getUserFromCookie from "../utilities/auth/getUserFromCookie";
 import generateResponse from "../utilities/generateResponse";
-import createAuthCookie from "../utilities/createAuthCookie";
+import createAuthCookie from "../utilities/auth/createAuthCookie";
 
 ///////////
 //Objects//
@@ -26,7 +26,6 @@ import UserInfoResponse from "../types/responses/UserInfoResponse";
 
 import RegisterInput from "../types/arguments/RegisterInput";
 import LoginInput from "../types/arguments/LoginInput";
-import { userInfo } from "os";
 
 ////////////
 //Resolver//
@@ -106,7 +105,7 @@ class UserAuthResolver {
     );
 
     if (!validationData.user?.id) {
-      console.log("Validation data Error", validationData)
+      console.log("Validation data Error", validationData);
       return validationData;
     }
 
@@ -118,37 +117,43 @@ class UserAuthResolver {
   @Mutation(() => ActionResponse)
   async changeKnownPassword(
     @Arg("orginalPassword") originalPassword: string,
-    @Arg("newPassword") newPassowrd: string,
+    @Arg("newPassword") newPassword: string,
     @Ctx() { req }: GraphqlContext
   ) {
-    const validUserInfo= await getUserFromCookie(req, lang);
+    const validUserInfo = await getUserFromCookie(req, lang);
 
-    if(!validUserInfo.user){
-      return validUserInfo.error
+    if (!validUserInfo.user) {
+      return validUserInfo.error;
     }
 
-    const authorized = await argon2.verify(validUserInfo.user.password, originalPassword);
+    const authorized = await argon2.verify(
+      validUserInfo.user.password,
+      originalPassword
+    );
 
-    if(!authorized){
-      return generateResponse(false, "login_password_invalid", lang)
+    if (!authorized) {
+      return generateResponse(false, "login_password_invalid", lang);
     }
 
-    const weakPassword = checkPasswordStrength(newPassowrd, lang)
+    const weakPassword = checkPasswordStrength(newPassword, lang);
 
-    if(weakPassword){
-      return weakPassword
+    if (weakPassword) {
+      return weakPassword;
     }
 
-    const hashedNewPassword = await argon2.hash(newPassowrd);
+    const hashedNewPassword = await argon2.hash(newPassword);
 
     await getConnection()
-    .createQueryBuilder()
-    .update(Users)
-    .set({ password:  hashedNewPassword})
-    .where("id = :id", { id: validUserInfo.user.id })
-    .execute();
-    
-    return generateResponse(true, "changePassword_password_changed", lang)
+      .createQueryBuilder()
+      .update(Users)
+      .set({
+        password: hashedNewPassword,
+        token_version: validUserInfo.user.token_version + 1, //<-- Invalidates all signed In devices.
+      })
+      .where("id = :id", { id: validUserInfo.user.id })
+      .execute();
+
+    return generateResponse(true, "changePassword_password_changed", lang);
   }
 }
 

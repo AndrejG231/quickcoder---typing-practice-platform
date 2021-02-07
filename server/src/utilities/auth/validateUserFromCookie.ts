@@ -1,12 +1,12 @@
-import generateResponse from "./generateResponse";
-import getCookieValue from "./getCookieValue";
+import generateResponse from "../generateResponse";
+import getCookieValue from "../getCookieValue";
 import { Request } from "express";
 import { verify } from "jsonwebtoken";
-import Users from "../types/entities/Users";
-import LangList from "../lang/typesLangList";
+import Users from "../../types/entities/Users";
+import LangList from "../../lang/typesLangList";
 import UserInfoResponse from "src/types/responses/UserInfoResponse";
 
-import dlog from "../development/dlog";
+import dlog from "../../development/dlog";
 
 interface valUserFromCookie {
   (
