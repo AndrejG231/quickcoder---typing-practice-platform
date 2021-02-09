@@ -1,11 +1,8 @@
-///////////////
-// LIBRARIES //
-///////////////
-
 require("dotenv").config();
 import "reflect-metadata";
+import cors from "cors";
 
-import { createConnection, getConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -23,7 +20,6 @@ import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
 import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
 //==>Types
-import GraphqlContex from "./types/GraphqlContext";
 import PassTokens from "./types/entities/PassTokens";
 
 //==>Test
@@ -44,6 +40,13 @@ const main = async () => {
   await createConnection({ ...PG_SETTING, entities: entities } as any);
 
   const server = express();
+
+  server.use(
+    cors({
+      credentials: true,
+      origin: "http://localhost:3000",
+    })
+  );
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({ resolvers: resolvers }),

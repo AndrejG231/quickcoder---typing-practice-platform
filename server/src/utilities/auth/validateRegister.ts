@@ -1,5 +1,4 @@
 import { validate } from "email-validator";
-import zxcvbn from "zxcvbn";
 
 import LangList from "../../lang/typesLangList";
 

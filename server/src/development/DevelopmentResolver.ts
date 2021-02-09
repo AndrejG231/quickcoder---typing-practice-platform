@@ -1,22 +1,13 @@
 import PassTokens from "../types/entities/PassTokens";
 import {
   Arg,
-  Field,
   Int,
   Mutation,
-  ObjectType,
   Query,
   Resolver,
 } from "type-graphql";
 import Users from "../types/entities/Users";
 
-@ObjectType()
-class DevUserInfo {
-  @Field()
-  user: Users;
-  @Field()
-  secret: String;
-}
 
 @Resolver(Users)
 export class DevelopmentUserResolver {
