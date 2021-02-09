@@ -1,0 +1,10 @@
+@import "../globalStyles/mixins.scss";
+@import "../globalStyles/colorScheme.scss";
+
+.forgot-pass{
+  font-size: 20px;
+  color: $b5;
+  font-family: monospace;
+  text-decoration: underline;
+  transform: scale(2);
+}

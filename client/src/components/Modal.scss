@@ -1,0 +1,22 @@
+@import "../globalStyles/colorscheme.scss";
+@import "../globalStyles/mixins.scss";
+
+
+.modal {
+  position: absolute;
+  @include position(10px);
+  z-index: 2;
+  &.border {
+    background: $b5;
+  }
+  &.content {
+    background: $b3;
+    @include centerContent();
+    flex-direction: column;
+  }
+  .back-button {
+    position: absolute;
+    z-index: 4;
+    @include position(10px);
+  }
+}

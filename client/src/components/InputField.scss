@@ -1,0 +1,60 @@
+@import "../globalStyles/colorScheme.scss";
+@import "../globalStyles/mixins.scss";
+
+.if-container {
+  height: 140px;
+  background: $b2;
+  width: 60vw;
+  @include centerContent();
+  flex-direction: column;
+  @include effect3D($w3, $b4);
+  &.submit {
+    height: 120px;
+    position: relative;
+  }
+  @media screen and (max-width: 900px) {
+    width: 80vw;
+  }
+}
+
+.if-label-field {
+  position: relative;
+  height: 50px;
+  font-family: monospace;
+  font-size: 50px;
+  margin: 0;
+  text-shadow: -0.5px -0.5px 1px $w4;
+}
+
+.if-label {
+  transform: translateY(-55px);
+}
+
+.if-field {
+  @include effect3D($w3, $b4);
+  height: 30px;
+  width: 80%;
+  margin-top: 10px;
+  font-size: 26px;
+  text-align: center;
+}
+
+.if-field:focus{
+  transform: scale(1.1);
+}
+
+.if-err-field {
+  height: 30px;
+  @include centerContent();
+  transform: translateY(5px);
+  .if-err-icon {
+    color: $err1;
+    margin-right: 10px;
+  }
+  .if-err-text {
+    color: $err1;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-shadow: 1px 2px 2px $b5;
+  }
+}

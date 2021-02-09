@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 //Components
 import Header from "../components/home/Header";
@@ -11,11 +12,14 @@ import "../globalStyles/component.css";
 import "./Home.css";
 
 const Home = () => {
+  const navigation = useHistory();
   return (
     <div className="homeContainer">
       <Header
-        onUserClick={() => console.log("Title Click")}
-        onTitleClick={() => console.log("Title Click")}
+        onUserClick={() => {
+          navigation.push("/home/profile/");
+        }}
+        onTitleClick={() => navigation.push("/home/")}
         username="USERNAME"
       />
       <div className="flexContainer">
@@ -26,7 +30,9 @@ const Home = () => {
       <ArrowButton
         className="signup button"
         bodyWidth="120px"
-        onClick={() => console.log("Clicked")}
+        onClick={() => {
+          navigation.push("/home/signup/");
+        }}
         variant="left"
       >
         Sign Up
@@ -34,7 +40,9 @@ const Home = () => {
       <ArrowButton
         className="login button"
         bodyWidth="100px"
-        onClick={() => console.log("Clicked")}
+        onClick={() => {
+          navigation.push("/home/login/");
+        }}
         variant="left"
       >
         Login

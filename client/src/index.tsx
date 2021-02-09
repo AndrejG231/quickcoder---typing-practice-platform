@@ -1,9 +1,11 @@
 import "dotenv/config";
 import React from "react";
 import ReactDOM from "react-dom";
-import Main from "./Main";
+
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { ApolloProvider } from "@apollo/react-hooks";
+
+import Routes from "./Routes";
 
 const client = new ApolloClient({
   uri: process.env.APOLLO_SERVER!,
@@ -13,7 +15,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Main />
+    <Routes />
   </ApolloProvider>,
   document.getElementById("root")
 );

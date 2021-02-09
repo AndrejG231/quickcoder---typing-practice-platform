@@ -6,7 +6,7 @@ interface ArrowButtonProps {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   variant: "left" | "right";
   bodyWidth: string;
-  className?: string
+  className?: string;
 }
 
 const ArrowButton: React.FC<ArrowButtonProps> = ({
@@ -14,7 +14,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
   onClick,
   variant,
   bodyWidth,
-  className = ""
+  className,
 }) => {
   return (
     <div
