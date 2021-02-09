@@ -112,3 +112,7 @@ server/dist/
 #lock files
 yarn.lock
 package-lock.json
+
+#compiled css
+*.css
+*.css.map
