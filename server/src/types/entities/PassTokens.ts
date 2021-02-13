@@ -8,13 +8,16 @@ import {
 } from "typeorm";
 
 @Entity("passtokens")
-class PassTokens extends BaseEntity{
+class PassTokens extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
-  @Generated('uuid')
-  token!: string
+  @Generated("uuid")
+  token!: string;
+
+  @Column({default: true})
+  valid!: boolean;
 
   @Column()
   user_id!: number;
@@ -29,4 +32,4 @@ class PassTokens extends BaseEntity{
   created_at = Date;
 }
 
-export default PassTokens
+export default PassTokens;

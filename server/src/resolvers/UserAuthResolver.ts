@@ -52,7 +52,7 @@ class UserAuthResolver {
       .into(Users)
       .values({
         email: credentials.email,
-        username: credentials.username,
+        username: credentials.username.toLowerCase(),
         password: hashedPassword,
       })
       .execute();
@@ -135,7 +135,7 @@ class UserAuthResolver {
       return generateResponse(false, "login_password_invalid", lang);
     }
 
-    const weakPassword = checkPasswordStrength(newPassword, lang);
+    const weakPassword = checkPasswordStrength(newPassword, lang, "new");
 
     if (weakPassword) {
       return weakPassword;

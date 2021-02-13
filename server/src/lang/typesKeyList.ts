@@ -24,6 +24,8 @@ type keyList =
   //CHANGE PASSWORD
   | "changePassword_user_notAuthenticated"
   | "changePassword_password_changed"
+  | "changePassword_newPassword_weak"
+  | "changePassword_newPassword_noInclude"
   //RETRIEVE PASSWORD
   | "retrievePassword_email_notFound"
   | "retrievePassword_server_unknownError"

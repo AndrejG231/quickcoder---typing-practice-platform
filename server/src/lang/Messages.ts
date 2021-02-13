@@ -30,6 +30,9 @@ const Messages = {
     changePassword_user_notAuthenticated:
       "Not logged in or could not retrieve cookies",
     changePassword_password_changed: "Password changed successfully",
+    changePassword_newPassword_weak: "Your password is too weak",
+    changePassword_newPassword_noInclude:
+      "Your password must includ uppercase letter, lowercase letter and number",
     // RETRIEVE PASSWORD //
     retrievePassword_email_notFound: "Could not find your email specified",
     retrievePassword_server_unknownError:
