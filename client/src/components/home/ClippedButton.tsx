@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ClippedButton.css";
+import "./ClippedButton.scss";
 
 interface ClippedButtonProps {
   children: string;

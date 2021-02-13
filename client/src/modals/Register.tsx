@@ -1,11 +1,18 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
-export const Register = () => {
-  const FieldErrors = ["username", "password"];
+import { useRegisterMutation } from "../graphql/auth";
+
+export const Register: React.FC<{}> = () => {
+  const nav = useHistory();
+
+  const { mutation, validate } = useRegisterMutation();
+  const [register] = mutation;
+
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -13,10 +20,28 @@ export const Register = () => {
   });
 
   const [errors, setErrors] = useState({
+    success: false,
     info: "",
     action: "",
     message: "",
   });
+
+  const FieldErrors = ["username", "password"];
+
+  const handleRegister = async () => {
+    const result = await validate(
+      register({ variables: { credentials: credentials } })
+    );
+    
+    console.log(result)
+    if (!result.success) {
+      setErrors(result);
+    } else {
+      nav.push("/home/login/");
+    }
+    return;
+  };
+
   return (
     <Modal>
       <InputField
@@ -63,7 +88,7 @@ export const Register = () => {
             : errors.message
         }
         label="Create Account"
-        onEvent={() => null}
+        onEvent={async () => handleRegister()}
       />
     </Modal>
   );

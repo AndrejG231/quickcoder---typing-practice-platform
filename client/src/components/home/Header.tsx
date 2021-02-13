@@ -1,6 +1,6 @@
 import React from "react";
-import "../../globalStyles/component.css";
-import "./Header.css";
+import "../../globalStyles/component.scss";
+import "./Header.scss";
 
 interface HeaderProps {
   className?: string;

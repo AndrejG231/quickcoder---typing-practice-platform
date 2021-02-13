@@ -8,10 +8,10 @@ import ClippedButton from "../components/home/ClippedButton";
 import ArrowButton from "../components/ArrowButton";
 
 //Styles
-import "../globalStyles/component.css";
-import "./Home.css";
+import "../globalStyles/component.scss";
+import "./Home.scss";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigation = useHistory();
   return (
     <div className="homeContainer">

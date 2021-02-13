@@ -2,7 +2,7 @@ import React from "react";
 import { IconContext } from "react-icons";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 
-import "./SubmitButton.css";
+import "./SubmitButton.scss";
 
 interface SubmitButtonProps {
   error: string;
@@ -19,7 +19,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
 }) => {
   return (
     <div className={`if-submit-container ${className}`}>
-      <button className="if-submit" onClick={onEvent}>
+      <button type="submit" className="if-submit" onClick={onEvent}>
         <p className="if-submit-text">{label}</p>
       </button>
       {error ? (

@@ -4,10 +4,10 @@
   "author": "Andrej Germič",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.8",
-    "@apollo/react-hooks": "^4.0.0",
+    "@apollo/client": "^3.3.9",
     "dotenv": "^8.2.0",
     "graphql": "^15.5.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",

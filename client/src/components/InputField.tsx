@@ -1,21 +1,20 @@
 import React from "react";
 
-import { Errors } from "../types";
+import { ActionResponse } from "../types/auth";
 
 //styles
 import { IconContext } from "react-icons";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
-import "./InputField.css";
-import "../globalStyles/component.css";
+import "./InputField.scss";
+import "../globalStyles/component.scss";
 
 interface InputFieldProps {
-  error: Errors;
+  error: ActionResponse;
   label: string;
   value?: string;
   onEvent: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   type?: string;
-  variant?: "submit";
   name?: string;
 }
 

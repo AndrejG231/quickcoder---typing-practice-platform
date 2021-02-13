@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../components/home/Header";
+import {gql, useQuery} from "@apollo/client"
 
 const componentStyle: React.CSSProperties = {
   height: 250,
@@ -10,9 +10,34 @@ const componentStyle: React.CSSProperties = {
 
 ///////////////////////////
 const DisplayTest = () => {
-  const Component = () => (<div></div>);
+  const query = gql`
+    query {
+      userInfo(id: 10)
+    }
+  `;
+
+  const { loading, error, data } = useQuery(query);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
+
+  console.log(data);
+
+  const Component = () => <div></div>;
   return (
     <div>
+      <button
+        onClick={(e) => {
+          console.log(data);
+        }}
+      >
+        Click
+      </button>
       <h1>Component Visual</h1>
       <div
         style={{

@@ -1,17 +1,29 @@
 import "dotenv/config";
-import React from "react";
 import ReactDOM from "react-dom";
-
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { ApolloProvider } from "@apollo/react-hooks";
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+} from "@apollo/client";
 
 import Routes from "./Routes";
 
 const client = new ApolloClient({
-  uri: process.env.APOLLO_SERVER!,
+  uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
   credentials: "include",
 });
+
+client
+  .query({
+    query: gql`
+      query userInfo {
+        userInfo(id: 10)
+      }
+    `,
+  })
+  .then((result) => console.log(result));
 
 ReactDOM.render(
   <ApolloProvider client={client}>

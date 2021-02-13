@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import ArrowButton from "./ArrowButton";
 
 
-import "./Modal.css";
+import "./Modal.scss";
 
 interface ModalProps {
   children: React.ReactChild | React.ReactChild[] | never[];
