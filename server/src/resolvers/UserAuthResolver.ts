@@ -1,4 +1,4 @@
-import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 
 /////////////
@@ -93,7 +93,7 @@ class UserAuthResolver {
   }
 
   // GET USER INFO //
-  @Mutation(() => UserInfoResponse)
+  @Query(() => UserInfoResponse)
   async getSignedUser(
     @Arg("clientParameter") clientParameter: string,
     @Ctx() { req, res }: GraphqlContext
@@ -154,6 +154,12 @@ class UserAuthResolver {
       .execute();
 
     return generateResponse(true, "changePassword_password_changed", lang);
+  }
+
+  @Mutation(() => Boolean)
+  logout(@Ctx() { res }: GraphqlContext) {
+    res.clearCookie(process.env.COOKIE_NAME!);
+    return true
   }
 }
 
