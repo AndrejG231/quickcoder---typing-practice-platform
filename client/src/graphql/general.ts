@@ -1,4 +1,4 @@
-import { ActionResponse } from "../types/auth";
+import { ActionResponse, UserInfo } from "../types/auth";
 import { DocumentNode, MutationTuple, useMutation } from "@apollo/client";
 
 interface defaultError {
@@ -24,6 +24,18 @@ const isActionResponse: isActionResTypes = (response) => {
     typeof response.action === "string" &&
     typeof response.message === "string" &&
     typeof response.success === "boolean"
+  );
+};
+
+const isUserResponse: isActionResTypes = (response) => {
+  return (
+    typeof response.id === "number" &&
+    typeof response.username === "string" &&
+    typeof response.email === "string" &&
+    typeof response.language === "string" &&
+    typeof response.keyboard_layout === "string" &&
+    typeof response.color_scheme === "string" &&
+    typeof response.created_at === "string"
   );
 };
 

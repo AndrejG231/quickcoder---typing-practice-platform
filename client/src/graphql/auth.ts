@@ -1,5 +1,12 @@
-import { DocumentNode, gql, MutationTuple } from "@apollo/client";
+import {
+  DocumentNode,
+  gql,
+  MutationTuple,
+  useMutation,
+  useQuery,
+} from "@apollo/client";
 import { LoginCredentials, RegisterCredentials } from "../types/auth";
+import getClientParam from "../utilites/clientParameter";
 import {
   ActionResponseMutation,
   connectServerError,
@@ -167,3 +174,41 @@ export const useChangeKnownPasswordMutation: ChangeForgottenPasswordMutation = (
   );
 };
 
+//GetUserInfo
+const userInfoQuery = gql`
+  query getSignedUser($clientParameter: String!) {
+    getSignedUser(clientParameter: $clientParameter) {
+      user {
+        id
+        username
+        email
+        language
+        keyboard_layout
+        color_scheme
+        created_at
+      }
+      error {
+        action
+        success
+        message
+        info
+      }
+    }
+  }
+`;
+
+export const GetUserInfo = () => {
+  return useQuery(userInfoQuery, {
+    variables: { clientParameter: getClientParam() },
+  });
+};
+
+const logoutMutation = gql`
+  mutation {
+    logout
+  }
+`;
+
+export const Logout = () => {
+  return useMutation(logoutMutation);
+};

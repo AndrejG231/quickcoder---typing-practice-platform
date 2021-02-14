@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
+import reduxStore from "../redux/reduxStore";
+import { loginAction } from "../redux/actions";
+
+import getClientParam from "../utilites/clientParameter";
+
 import { useLoginMutation } from "../graphql/auth";
 import { ActionResponse, LoginCredentials } from "../types/auth";
 
@@ -36,14 +41,16 @@ export const Login: React.FC = () => {
       login({
         variables: {
           credentials: credentials,
-          clientParameter: "graaphql",
+          clientParameter: getClientParam(),
         },
       })
     );
+    console.log(result);
 
     if (!result.success) {
       setErrors(result);
     } else {
+      reduxStore.dispatch(loginAction);
       nav.push("/home/");
     }
   };
@@ -66,6 +73,7 @@ export const Login: React.FC = () => {
         label={"Password"}
         error={errors}
         value={credentials.password}
+        name="password"
         type="password"
         onEvent={(event: any) => {
           setCredentials({

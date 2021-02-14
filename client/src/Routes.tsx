@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import DisplayTest from "./test/DisplayTest";
 //pages
 import Home from "./pages/Home";
 
@@ -36,7 +35,6 @@ const Routes: React.FC = () => {
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}
       />
-      <Route exact path="/dt" component={() => <DisplayTest />} />
     </BrowserRouter>
   );
 };
