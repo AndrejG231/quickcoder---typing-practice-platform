@@ -35,24 +35,26 @@ export const ChangeTokenPassword: React.FC = () => {
     if (!response.success) {
       setErrors(response);
     } else {
-      nav.push("/home/login/")
+      nav.push("/home/login/");
     }
   };
 
   return (
     <Modal>
-      <InputField
-        label="New Password"
-        error={errors}
-        onEvent={(e) => setNewPassowrd(e.target.value)}
-        value={newPassowrd}
-        name="password"
-      />
-      <SubmitButton
-        label="Change Password"
-        error={errors.info.split("_")[1] !== "password" ? errors.message : ""}
-        onEvent={() => handleChangePassword()}
-      />
+      <form onSubmit={(e) => e.preventDefault()}>
+        <InputField
+          label="New Password"
+          error={errors}
+          onEvent={(e) => setNewPassowrd(e.target.value)}
+          value={newPassowrd}
+          name="password"
+        />
+        <SubmitButton
+          label="Change Password"
+          error={errors.info.split("_")[1] !== "password" ? errors.message : ""}
+          onEvent={() => handleChangePassword()}
+        />
+      </form>
     </Modal>
   );
 };

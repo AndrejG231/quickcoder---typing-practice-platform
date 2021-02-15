@@ -32,8 +32,8 @@ export const Register: React.FC<{}> = () => {
     const result = await validate(
       register({ variables: { credentials: credentials } })
     );
-    
-    console.log(result)
+
+    console.log(result);
     if (!result.success) {
       setErrors(result);
     } else {
@@ -44,52 +44,54 @@ export const Register: React.FC<{}> = () => {
 
   return (
     <Modal>
-      <InputField
-        label="Username"
-        name="username"
-        value={credentials.username}
-        onEvent={(event) =>
-          setCredentials({
-            ...credentials,
-            username: event.target.value,
-          })
-        }
-        error={errors}
-      />
-      <InputField
-        label="Email"
-        name="email"
-        value={credentials.email}
-        onEvent={(event) =>
-          setCredentials({
-            ...credentials,
-            email: event.target.value,
-          })
-        }
-        error={errors}
-      />
-      <InputField
-        label="Password"
-        name="password"
-        value={credentials.password}
-        type="password"
-        onEvent={(event) =>
-          setCredentials({
-            ...credentials,
-            password: event.target.value,
-          })
-        }
-        error={errors}
-      />
-      <SubmitButton
-        error={
-          FieldErrors.some((err) => err === errors.info.split("_")[1])
-            ? ""
-            : errors.message
-        }
-        label="Create Account"
-        onEvent={async () => handleRegister()}
-      />
+      <form onSubmit={(e) => e.preventDefault()}>
+        <InputField
+          label="Username"
+          name="username"
+          value={credentials.username}
+          onEvent={(event) =>
+            setCredentials({
+              ...credentials,
+              username: event.target.value,
+            })
+          }
+          error={errors}
+        />
+        <InputField
+          label="Email"
+          name="email"
+          value={credentials.email}
+          onEvent={(event) =>
+            setCredentials({
+              ...credentials,
+              email: event.target.value,
+            })
+          }
+          error={errors}
+        />
+        <InputField
+          label="Password"
+          name="password"
+          value={credentials.password}
+          type="password"
+          onEvent={(event) =>
+            setCredentials({
+              ...credentials,
+              password: event.target.value,
+            })
+          }
+          error={errors}
+        />
+        <SubmitButton
+          error={
+            FieldErrors.some((err) => err === errors.info.split("_")[1])
+              ? ""
+              : errors.message
+          }
+          label="Create Account"
+          onEvent={async () => handleRegister()}
+        />
+      </form>
     </Modal>
   );
 };

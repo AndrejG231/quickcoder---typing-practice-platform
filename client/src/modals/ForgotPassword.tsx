@@ -27,7 +27,7 @@ export const ForgotPassword: React.FC<{}> = () => {
       register({ variables: { email: email, clientInfo: "client" } })
     );
 
-    console.log(response)
+    console.log(response);
 
     if (!response.success) {
       setErrors(response);
@@ -38,19 +38,21 @@ export const ForgotPassword: React.FC<{}> = () => {
 
   return (
     <Modal>
-      <InputField
-        value={email}
-        name="email"
-        label="Email"
-        onEvent={(event) => setEmail(event.target.value)}
-        error={errors}
-        type="email"
-      />
-      <SubmitButton
-        label="Reset Password"
-        error={errors.info.split("_")[1] !== "email" ? errors.message : ""}
-        onEvent={() => handleForgotPassword()}
-      />
+      <form onSubmit={(e) => e.preventDefault()}>
+        <InputField
+          value={email}
+          name="email"
+          label="Email"
+          onEvent={(event) => setEmail(event.target.value)}
+          error={errors}
+          type="email"
+        />
+        <SubmitButton
+          label="Reset Password"
+          error={errors.info.split("_")[1] !== "email" ? errors.message : ""}
+          onEvent={() => handleForgotPassword()}
+        />
+      </form>
     </Modal>
   );
 };

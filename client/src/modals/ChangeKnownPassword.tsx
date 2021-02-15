@@ -40,35 +40,37 @@ export const ChangeKnownPassword: React.FC = () => {
 
   return (
     <Modal>
-      <InputField
-        label="Password"
-        type="password"
-        error={errors}
-        onEvent={(event) =>
-          setVariables({ ...variables, originalPassword: event.target.value })
-        }
-        name="password"
-        value={variables.originalPassword}
-      />
-      <InputField
-        label="New Password"
-        type="password"
-        error={errors}
-        onEvent={(event) =>
-          setVariables({ ...variables, newPassword: event.target.value })
-        }
-        name="newPassword"
-        value={variables.newPassword}
-      />
-      <SubmitButton
-        error={
-          !TypeErrors.some((error) => error === errors.info.split("_")[1])
-            ? errors.message
-            : ""
-        }
-        label="Change Password"
-        onEvent={() => handleChangePassword()}
-      />
+      <form onSubmit={(e) => e.preventDefault()}>
+        <InputField
+          label="Password"
+          type="password"
+          error={errors}
+          onEvent={(event) =>
+            setVariables({ ...variables, originalPassword: event.target.value })
+          }
+          name="password"
+          value={variables.originalPassword}
+        />
+        <InputField
+          label="New Password"
+          type="password"
+          error={errors}
+          onEvent={(event) =>
+            setVariables({ ...variables, newPassword: event.target.value })
+          }
+          name="newPassword"
+          value={variables.newPassword}
+        />
+        <SubmitButton
+          error={
+            !TypeErrors.some((error) => error === errors.info.split("_")[1])
+              ? errors.message
+              : ""
+          }
+          label="Change Password"
+          onEvent={() => handleChangePassword()}
+        />
+      </form>
     </Modal>
   );
 };
