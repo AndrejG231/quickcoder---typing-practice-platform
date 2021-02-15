@@ -1,19 +1,21 @@
-import { AuthReducer, UserInfoReducer } from "../types/redux";
+import {
+  AuthReducer,
+  GlobalMessageReducer,
+  UserInfoReducer,
+} from "../types/redux";
 
-export const isAuthReducer: AuthReducer = (
-  state = { isAuth: false },
-  action
-) => {
+export const isAuth: AuthReducer = (state = { isAuth: false }, action) => {
   switch (action.type) {
     case "auth/login":
       return { isAuth: true };
     case "auth/logout":
       return { isAuth: false };
+    default:
+      return state;
   }
-  return state;
 };
 
-export const setUserInfoReducer: UserInfoReducer = (
+export const setUserInfo: UserInfoReducer = (
   state = {
     id: 0,
     username: "",
@@ -32,7 +34,23 @@ export const setUserInfoReducer: UserInfoReducer = (
         ...state,
         username: action.user.username,
       };
+    default:
+      return state;
   }
+};
 
-  return state;
+export const setGlobalMessage: GlobalMessageReducer = (
+  state = {
+    message: "",
+  },
+  action
+) => {
+  switch (action.type) {
+    case "message/set":
+      return {
+        message: action.message,
+      };
+    default:
+      return state;
+  }
 };

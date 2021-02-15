@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import reduxStore from "../redux/reduxStore";
+import { setGlobalMessage, logoutAction } from "../redux/actions";
+
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
@@ -34,7 +37,9 @@ export const ChangeKnownPassword: React.FC = () => {
     if (!response.success) {
       setErrors(response);
     } else {
-      nav.goBack();
+      reduxStore.dispatch(setGlobalMessage(response.message));
+      reduxStore.dispatch(logoutAction);
+      nav.push("/home/login/");
     }
   };
 

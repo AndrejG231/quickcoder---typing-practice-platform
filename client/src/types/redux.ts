@@ -1,4 +1,4 @@
-import {UserInfo} from "./auth";
+import { UserInfo } from "./auth";
 //--actions
 
 export interface SetAuthAction {
@@ -14,6 +14,18 @@ export interface getUserInfoAction {
   (user: UserInfo): UserInfoAction;
 }
 
+interface globalMessage {
+  message: string;
+}
+
+interface globalMessageAction {
+  message: string;
+  type: "message/set";
+}
+
+export interface setGlobalMessageAction {
+  (message: string): globalMessageAction;
+}
 //--reducers
 
 interface AuthReducerState {
@@ -28,9 +40,14 @@ export interface UserInfoReducer {
   (state: UserInfo, action: UserInfoAction): UserInfo;
 }
 
+export interface GlobalMessageReducer {
+  (state: globalMessage, action: globalMessageAction): globalMessage;
+}
+
 //Main
 
 export type ReduxState = {
   UserInfo: UserInfo;
   isAuth: AuthReducerState;
+  globalMessage: globalMessage;
 };

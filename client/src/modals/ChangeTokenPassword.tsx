@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import InputField from "../components/InputField";
 
+//redux
+import reduxStore from "../redux/reduxStore";
+import { setGlobalMessage } from "../redux/actions";
+
+//components
+import InputField from "../components/InputField";
 import Modal from "../components/Modal";
 import SubmitButton from "../components/SubmitButton";
+
+//graphql
 import { useChangeForgottenPasswordMutation } from "../graphql/auth";
 import { ActionResponse } from "../types/auth";
 
@@ -35,6 +42,7 @@ export const ChangeTokenPassword: React.FC = () => {
     if (!response.success) {
       setErrors(response);
     } else {
+      reduxStore.dispatch(setGlobalMessage(response.message));
       nav.push("/home/login/");
     }
   };

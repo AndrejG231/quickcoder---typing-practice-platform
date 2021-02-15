@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import reduxStore from "../redux/reduxStore";
+import { setGlobalMessage } from "../redux/actions";
+
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
@@ -26,7 +29,7 @@ export const Register: React.FC<{}> = () => {
     message: "",
   });
 
-  const FieldErrors = ["username", "password"];
+  const FieldErrors = ["username", "password", "email"];
 
   const handleRegister = async () => {
     const result = await validate(
@@ -37,6 +40,7 @@ export const Register: React.FC<{}> = () => {
     if (!result.success) {
       setErrors(result);
     } else {
+      reduxStore.dispatch(setGlobalMessage(result.message));
       nav.push("/home/login/");
     }
     return;

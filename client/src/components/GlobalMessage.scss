@@ -1,0 +1,42 @@
+@import "../globalStyles/colorScheme.scss";
+@import "../globalStyles/mixins.scss";
+
+.msg-container {
+  position: fixed;
+  height: 40px;
+  z-index: 999;
+  background: $b3;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 40px;
+  border-bottom: 4px solid $b4;
+  border-right: 4px solid $b4;
+  border-top: 4px solid $w3;
+  border-left: 4px solid $w3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.msg-close-icon {
+  font-size: 35px;
+  background: $b5;
+  color: $b2;
+  border-radius: 5px;
+  box-shadow: -1px -1px 1px 1px $w3, 1.5px 1.5px 1px 1px $b4;
+  cursor: pointer;
+}
+
+.msg-text-container {
+  margin-left: 15px;
+  @include centerContent();
+}
+
+.msg-text {
+  font-family: monospace;
+  font-style: italic;
+  font-size: 30px;
+  color: $b2;
+  text-shadow: -1px -1px 0 $w4, 2px 2px 0 $b4, 0px 0px 4px $b5;
+}

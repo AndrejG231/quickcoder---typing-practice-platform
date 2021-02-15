@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import reduxStore from "../redux/reduxStore";
-import { loginAction } from "../redux/actions";
+import { loginAction, setGlobalMessage } from "../redux/actions";
 
 import getClientParam from "../utilites/clientParameter";
 
@@ -45,12 +45,12 @@ export const Login: React.FC = () => {
         },
       })
     );
-    console.log(result);
 
     if (!result.success) {
       setErrors(result);
     } else {
       reduxStore.dispatch(loginAction);
+      reduxStore.dispatch(setGlobalMessage(result.message + "!"));
       nav.push("/home/");
     }
   };

@@ -1,12 +1,12 @@
 import { createStore, combineReducers } from "redux";
-import { isAuthReducer, setUserInfoReducer } from "../redux/reducers";
+import { isAuth, setUserInfo, setGlobalMessage } from "../redux/reducers";
 
 const reducers = combineReducers({
-  isAuth: isAuthReducer,
-  UserInfo: setUserInfoReducer,
+  isAuth: isAuth,
+  UserInfo: setUserInfo,
+  globalMessage: setGlobalMessage,
 });
 
 const reduxStore = createStore(reducers);
 
 export default reduxStore;
-
