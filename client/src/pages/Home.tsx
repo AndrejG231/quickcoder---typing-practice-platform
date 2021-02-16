@@ -10,6 +10,7 @@ import guestUser from "../utilites/guestUser";
 
 //Redux
 import { setUserInfoAction, logoutAction } from "../redux/actions";
+import { ToggleAnimationIn, ToggleAnimationOut } from "../redux/animations";
 import { ReduxState } from "../types/redux";
 
 //types
@@ -30,6 +31,7 @@ const rdxState = (state: ReduxState) => {
   return {
     userInfo: state.UserInfo,
     isAuth: state.isAuth,
+    AnimationState: state.Animations.HomePage,
   };
 };
 
@@ -41,6 +43,12 @@ const rdxDispatch = (dispatch: any) => {
     localLogout: () => {
       dispatch(logoutAction);
     },
+    AnimationIn: () => {
+      dispatch(ToggleAnimationIn("HomePage"));
+    },
+    AnimationOut: () => {
+      dispatch(ToggleAnimationOut("HomePage"));
+    },
   };
 };
 
@@ -51,11 +59,21 @@ const Home: React.FC<any> = ({
   userInfo,
   setUserInfo,
   isAuth,
+  AnimationState,
+  AnimationIn,
+  AnimationOut,
 }) => {
   const [logout] = Logout();
   const { data, loading, error, refetch } = GetUserInfo();
 
   const navigation = useHistory();
+
+  useEffect(() => {
+    AnimationIn();
+    return () => {
+      AnimationOut();
+    };
+  }, []);
 
   useEffect(() => {
     refetch();
@@ -72,59 +90,85 @@ const Home: React.FC<any> = ({
     }
   }, [data, loading, error]);
 
-  const handleLogout = () => {};
-
   return (
     <div className="homeContainer">
-      <Header
-        onUserClick={() => {
-          navigation.push("/home/profile/");
+      <div
+        style={{
+          transform: `translateY(-${AnimationState.main}px)`,
         }}
-        onTitleClick={() => navigation.push("/home/")}
-        username={userInfo.username === "" ? "GUEST" : userInfo.username}
-      />
-      <div className="flexContainer">
+      >
+        <Header
+          onUserClick={() => {
+            navigation.push("/home/profile/");
+          }}
+          onTitleClick={() => navigation.push("/home/")}
+          username={userInfo.username === "" ? "GUEST" : userInfo.username}
+        />
+      </div>
+      <div
+        className="flexContainer"
+        style={{ transform: `translateX(-${AnimationState.main * 3}px)` }}
+      >
         <ClippedButton>Typing test</ClippedButton>
         <ClippedButton>Practice</ClippedButton>
         <ClippedButton>Settings</ClippedButton>
       </div>
-      {userInfo.username === "GUEST" ? (
-        <>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          width: "100vw",
+          transform: `translateX(${AnimationState.main}px)`,
+        }}
+      >
+        {userInfo.username === "GUEST" ? (
+          <>
+            <ArrowButton
+              className="signup button"
+              bodyWidth="120px"
+              onClick={() => {
+                navigation.push("/home/signup/");
+              }}
+              variant="left"
+            >
+              Sign Up
+            </ArrowButton>
+            <ArrowButton
+              className="login button"
+              bodyWidth="100px"
+              onClick={() => {
+                navigation.push("/home/login/");
+              }}
+              variant="left"
+            >
+              Login
+            </ArrowButton>{" "}
+          </>
+        ) : (
           <ArrowButton
             className="signup button"
-            bodyWidth="120px"
-            onClick={() => {
-              navigation.push("/home/signup/");
-            }}
-            variant="left"
-          >
-            Sign Up
-          </ArrowButton>
-          <ArrowButton
-            className="login button"
             bodyWidth="100px"
-            onClick={() => {
-              navigation.push("/home/login/");
+            onClick={async () => {
+              await logout();
+              localLogout();
             }}
             variant="left"
           >
-            Login
-          </ArrowButton>{" "}
-        </>
-      ) : (
-        <ArrowButton
-          className="signup button"
-          bodyWidth="100px"
-          onClick={async () => {
-            await logout();
-            localLogout();
-          }}
-          variant="left"
-        >
-          Logout
-        </ArrowButton>
-      )}
-      <KeyboardBG className="keyboard-bg" />
+            Logout
+          </ArrowButton>
+        )}
+      </div>
+      <div
+        style={{
+          zIndex: -1,
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          transform: `translateY(${AnimationState.main}px)`,
+        }}
+      >
+        <KeyboardBG className="keyboard-bg" />
+      </div>
     </div>
   );
 };

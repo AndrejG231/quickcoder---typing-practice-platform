@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { connect } from "react-redux";
 
 //redux
-import reduxStore from "../redux/reduxStore";
 import { setGlobalMessage } from "../redux/actions";
 
 //components
@@ -14,7 +14,13 @@ import SubmitButton from "../components/SubmitButton";
 import { useChangeForgottenPasswordMutation } from "../graphql/auth";
 import { ActionResponse } from "../types/auth";
 
-export const ChangeTokenPassword: React.FC = () => {
+const rdxDispatch = (dispatch: any) => {
+  return {
+    SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
+  };
+};
+
+export const ChangeTokenPassword: React.FC = ({ SetMessage }: any) => {
   const { token }: { token: string } = useParams();
   const nav = useHistory();
 
@@ -42,7 +48,7 @@ export const ChangeTokenPassword: React.FC = () => {
     if (!response.success) {
       setErrors(response);
     } else {
-      reduxStore.dispatch(setGlobalMessage(response.message));
+      SetMessage(response.message);
       nav.push("/home/login/");
     }
   };
@@ -67,4 +73,4 @@ export const ChangeTokenPassword: React.FC = () => {
   );
 };
 
-export default ChangeTokenPassword;
+export default connect(() => {}, rdxDispatch)(ChangeTokenPassword);

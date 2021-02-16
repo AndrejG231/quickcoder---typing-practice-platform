@@ -13,12 +13,14 @@ import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 import ChangeKnownPassword from "./modals/ChangeKnownPassword";
 
 //components
-import GlobalMessage from './components/GlobalMessage'
+import GlobalMessage from "./components/GlobalMessage";
+import AnimationProvider from "./components/AnimationProvider";
 
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <GlobalMessage />
+      <AnimationProvider />
       <Route exact path="/" component={() => <Home />} />
       <Route path="/home/" component={() => <Home />} />I
       <Route exact path="/home/profile/" component={() => <Profile />} />
@@ -34,7 +36,7 @@ const Routes: React.FC = () => {
         path="/home/change_password_w_token/:token/"
         component={() => <ChangeTokenPassword />}
       />
- <Route
+      <Route
         exact
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}

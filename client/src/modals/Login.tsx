@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import reduxStore from "../redux/reduxStore";
+import { connect } from "react-redux";
+import { ToggleAnimationOut } from "../redux/animations";
 import { loginAction, setGlobalMessage } from "../redux/actions";
 
 import getClientParam from "../utilites/clientParameter";
@@ -16,7 +17,19 @@ import SubmitButton from "../components/SubmitButton";
 //style
 import "./Login.scss";
 
-export const Login: React.FC = () => {
+const rdxDispatch = (dispatch: any) => {
+  return {
+    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
+    RefreshUserInfo: () => dispatch(loginAction),
+    SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
+  };
+};
+
+export const Login: React.FC = ({
+  RefreshUserInfo,
+  AnimeOut,
+  SetMessage,
+}: any) => {
   const { validate, mutation } = useLoginMutation();
 
   const [login] = mutation;
@@ -49,9 +62,10 @@ export const Login: React.FC = () => {
     if (!result.success) {
       setErrors(result);
     } else {
-      reduxStore.dispatch(loginAction);
-      reduxStore.dispatch(setGlobalMessage(result.message + "!"));
-      nav.push("/home/");
+      RefreshUserInfo();
+      SetMessage(result.message + "!");
+      AnimeOut();
+      setTimeout(() => nav.push("/home/"), 500);
     }
   };
 
@@ -100,4 +114,6 @@ export const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default connect(() => {
+  return {};
+}, rdxDispatch)(Login);

@@ -1,6 +1,6 @@
 import { UserInfo } from "./auth";
-//--actions
 
+//--actions
 export interface SetAuthAction {
   type: "auth/login" | "auth/logout";
 }
@@ -14,6 +14,10 @@ export interface getUserInfoAction {
   (user: UserInfo): UserInfoAction;
 }
 
+//
+/* GLobal Message */
+//
+
 interface globalMessage {
   message: string;
 }
@@ -26,7 +30,14 @@ interface globalMessageAction {
 export interface setGlobalMessageAction {
   (message: string): globalMessageAction;
 }
-//--reducers
+
+//////////////
+// Reducers //
+//////////////
+
+//
+/* AUTH */
+//
 
 interface AuthReducerState {
   isAuth: boolean;
@@ -40,14 +51,21 @@ export interface UserInfoReducer {
   (state: UserInfo, action: UserInfoAction): UserInfo;
 }
 
+//
+/* Global Message */
+//
+
 export interface GlobalMessageReducer {
   (state: globalMessage, action: globalMessageAction): globalMessage;
 }
 
-//Main
+//////////
+// Main //
+//////////
 
 export type ReduxState = {
   UserInfo: UserInfo;
   isAuth: AuthReducerState;
   globalMessage: globalMessage;
+  Animations: any;
 };

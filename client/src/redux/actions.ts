@@ -4,6 +4,10 @@ import {
   setGlobalMessageAction,
 } from "../types/redux";
 
+//
+/* Auth */
+//
+
 export const loginAction: SetAuthAction = {
   type: "auth/login",
 };
@@ -19,9 +23,14 @@ export const setUserInfoAction: getUserInfoAction = (user) => {
   };
 };
 
+//
+/* Global Message */
+//
+
 export const setGlobalMessage: setGlobalMessageAction = (message) => {
   return {
     type: "message/set",
     message: message,
   };
 };
+

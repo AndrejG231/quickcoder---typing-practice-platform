@@ -1,8 +1,13 @@
+import { AnimationState } from "./animations";
 import {
   AuthReducer,
   GlobalMessageReducer,
   UserInfoReducer,
 } from "../types/redux";
+
+//
+/*Auth Reducers */
+//
 
 export const isAuth: AuthReducer = (state = { isAuth: false }, action) => {
   switch (action.type) {
@@ -39,6 +44,10 @@ export const setUserInfo: UserInfoReducer = (
   }
 };
 
+//
+/* GLOBAL MESSAGES */
+//
+
 export const setGlobalMessage: GlobalMessageReducer = (
   state = {
     message: "",
@@ -49,6 +58,44 @@ export const setGlobalMessage: GlobalMessageReducer = (
     case "message/set":
       return {
         message: action.message,
+      };
+    default:
+      return state;
+  }
+};
+
+//
+/* ANIMATION REDUCER */
+//
+
+export const ReduxAnimationHandler = (
+  state: any = AnimationState,
+  action: any
+) => {
+  switch (action.type) {
+    case "animation/turnOn":
+      return {
+        ...state,
+        [action.target]: {
+          ...state[action.target],
+          isDisplayed: true,
+        },
+      };
+    case "animation/turnOff":
+      return {
+        ...state,
+        [action.target]: {
+          ...state[action.target],
+          isDisplayed: false,
+        },
+      };
+    case "animation/animate":
+      return {
+        ...state,
+        [action.target]: {
+          ...state[action.target],
+          [action.element]: state[action.target][action.element] + action.frame,
+        },
       };
     default:
       return state;

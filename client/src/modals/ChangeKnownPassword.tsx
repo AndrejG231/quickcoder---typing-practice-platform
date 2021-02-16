@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-import reduxStore from "../redux/reduxStore";
 import { setGlobalMessage, logoutAction } from "../redux/actions";
+import { ToggleAnimationOut } from "../redux/animations";
 
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
@@ -11,7 +12,19 @@ import SubmitButton from "../components/SubmitButton";
 import { useChangeKnownPasswordMutation } from "../graphql/auth";
 import { ActionResponse, changeKnownPasswordVariables } from "../types/auth";
 
-export const ChangeKnownPassword: React.FC = () => {
+const rdxDispatch = (dispatch: any) => {
+  return {
+    RefreshAuth: () => dispatch(logoutAction),
+    SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
+    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
+  };
+};
+
+export const ChangeKnownPassword: React.FC = ({
+  RefreshAuth,
+  SetMessage,
+  AnimeOut,
+}: any) => {
   const nav = useHistory();
 
   const { validate, mutation } = useChangeKnownPasswordMutation();
@@ -37,9 +50,10 @@ export const ChangeKnownPassword: React.FC = () => {
     if (!response.success) {
       setErrors(response);
     } else {
-      reduxStore.dispatch(setGlobalMessage(response.message));
-      reduxStore.dispatch(logoutAction);
-      nav.push("/home/login/");
+      SetMessage(response.message);
+      RefreshAuth();
+      AnimeOut();
+      setTimeout(() => nav.push("/home/login/"), 500);
     }
   };
 
@@ -80,4 +94,4 @@ export const ChangeKnownPassword: React.FC = () => {
   );
 };
 
-export default ChangeKnownPassword;
+export default connect(() => {}, rdxDispatch)(ChangeKnownPassword);
