@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { setGlobalMessage, logoutAction } from "../redux/actions";
-import { ToggleAnimationOut } from "../redux/animations";
+//redux
+import { logoutAction } from "../redux/actions/authActions";
+import { setGlobalMessage } from "../redux/actions/globalMessageActions";
+import { ToggleAnimationOut } from "../redux/actions/animationActions";
 
+//components
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
+//graphql
 import { useChangeKnownPasswordMutation } from "../graphql/auth";
-import { ActionResponse, changeKnownPasswordVariables } from "../types/auth";
+import { ActionResponse } from "../types/graphql/ActResMutationsT";
+import { ChangeKnownPasswordVariables } from "../types/graphql/AuthMutationsT";
 
 const rdxDispatch = (dispatch: any) => {
   return {
@@ -20,17 +25,23 @@ const rdxDispatch = (dispatch: any) => {
   };
 };
 
-export const ChangeKnownPassword: React.FC = ({
+interface ChangeKnownPasswordProps {
+  RefreshAuth: () => void;
+  SetMessage: (message: string) => void;
+  AnimeOut: () => void;
+}
+
+export const ChangeKnownPassword: React.FC<ChangeKnownPasswordProps> = ({
   RefreshAuth,
   SetMessage,
   AnimeOut,
-}: any) => {
+}) => {
   const nav = useHistory();
 
   const { validate, mutation } = useChangeKnownPasswordMutation();
   const [changePassword] = mutation;
 
-  const [variables, setVariables] = useState<changeKnownPasswordVariables>({
+  const [variables, setVariables] = useState<ChangeKnownPasswordVariables>({
     newPassword: "",
     originalPassword: "",
   });

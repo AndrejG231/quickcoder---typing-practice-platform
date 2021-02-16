@@ -1,12 +1,7 @@
 import {
   SetAuthAction,
   getUserInfoAction,
-  setGlobalMessageAction,
-} from "../types/redux";
-
-//
-/* Auth */
-//
+} from "../../types/redux/AuthT";
 
 export const loginAction: SetAuthAction = {
   type: "auth/login",
@@ -20,17 +15,6 @@ export const setUserInfoAction: getUserInfoAction = (user) => {
   return {
     type: "auth/setUserInfo",
     user: user,
-  };
-};
-
-//
-/* Global Message */
-//
-
-export const setGlobalMessage: setGlobalMessageAction = (message) => {
-  return {
-    type: "message/set",
-    message: message,
   };
 };
 

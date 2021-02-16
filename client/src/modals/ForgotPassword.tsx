@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { ActionResponse } from "../types/auth";
+//redux
+import { setGlobalMessage } from "../redux/actions/globalMessageActions";
+import { ToggleAnimationOut } from "../redux/actions/animationActions";
+
+//graphql
+import { ActionResponse } from "../types/graphql/ActResMutationsT";
 import { useRetrievePasswordMutation } from "../graphql/auth";
 
+//components
 import InputField from "../components/InputField";
 import Modal from "../components/Modal";
 import SubmitButton from "../components/SubmitButton";
 
-export const ForgotPassword: React.FC<{}> = () => {
+const rdxDispatch = (dispatch: any) => {
+  return {
+    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
+    SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
+  };
+};
+
+interface ForgotPasswordProps {
+  AnimeOut: () => void;
+  SetMessage: (message: string) => void;
+}
+
+export const ForgotPassword: React.FC<ForgotPasswordProps> = ({
+  AnimeOut,
+  SetMessage,
+}) => {
   const { validate, mutation } = useRetrievePasswordMutation();
   const [register] = mutation;
 
@@ -32,7 +54,9 @@ export const ForgotPassword: React.FC<{}> = () => {
     if (!response.success) {
       setErrors(response);
     } else {
-      nav.push("/home/");
+      SetMessage(response.message);
+      AnimeOut();
+      setTimeout(() => nav.push("/home/"), 500);
     }
   };
 
@@ -57,4 +81,6 @@ export const ForgotPassword: React.FC<{}> = () => {
   );
 };
 
-export default ForgotPassword;
+export default connect(() => {
+  return {};
+}, rdxDispatch)(ForgotPassword);

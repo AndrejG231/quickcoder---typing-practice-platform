@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import ArrowButton from "./ArrowButton";
 
 import "./Modal.scss";
-import { ReduxState } from "../types/redux";
-import { ToggleAnimationIn, ToggleAnimationOut } from "../redux/animations";
-import { setConstantValue } from "typescript";
+import { ReduxState } from "../types/redux/ReduxState";
+import {
+  ToggleAnimationIn,
+  ToggleAnimationOut,
+} from "../redux/actions/animationActions";
 
 const rdxProps = (state: ReduxState) => {
   return {
@@ -48,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
         AnimeOut();
       };
     }
-  }, []);
+  }, [AnimeIn, AnimeOut, active]);
 
   return (
     <div
@@ -62,7 +64,7 @@ const Modal: React.FC<ModalProps> = ({
         variant="right"
         onClick={() => {
           if (active) {
-            setActive(false)
+            setActive(false);
             AnimeOut();
             setTimeout(() => navigation.push("/home/"), 500);
           }

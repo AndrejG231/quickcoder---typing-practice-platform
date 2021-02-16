@@ -1,9 +1,11 @@
-import { ActionResponse, UserInfo } from "../types/auth";
-import { DocumentNode, MutationTuple, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
-interface defaultError {
-  (action: string): ActionResponse;
-}
+import {
+  defaultError,
+  ResponseTypeValidator,
+  ResponseValidatorGetter,
+  ActionResponseMutationProvider,
+} from "../types/graphql/ActResMutationsT";
 
 export const connectServerError: defaultError = (action) => {
   return {
@@ -14,11 +16,7 @@ export const connectServerError: defaultError = (action) => {
   };
 };
 
-interface isActionResTypes {
-  (response: any): boolean;
-}
-
-const isActionResponse: isActionResTypes = (response) => {
+const isActionResponse: ResponseTypeValidator = (response) => {
   return (
     typeof response.info === "string" &&
     typeof response.action === "string" &&
@@ -27,27 +25,19 @@ const isActionResponse: isActionResTypes = (response) => {
   );
 };
 
-const isUserResponse: isActionResTypes = (response) => {
-  return (
-    typeof response.id === "number" &&
-    typeof response.username === "string" &&
-    typeof response.email === "string" &&
-    typeof response.language === "string" &&
-    typeof response.keyboard_layout === "string" &&
-    typeof response.color_scheme === "string" &&
-    typeof response.created_at === "string"
-  );
-};
+// const isUserResponse: ResponseTypeValidator = (response) => {
+//   return (
+//     typeof response.id === "number" &&
+//     typeof response.username === "string" &&
+//     typeof response.email === "string" &&
+//     typeof response.language === "string" &&
+//     typeof response.keyboard_layout === "string" &&
+//     typeof response.color_scheme === "string" &&
+//     typeof response.created_at === "string"
+//   );
+// };
 
-export interface validateResultFunction {
-  (mutationResult: any): Promise<ActionResponse>;
-}
-
-interface getValidateResultsTypes {
-  (defaultError: ActionResponse, field: string): validateResultFunction;
-}
-
-const getValidateResults: getValidateResultsTypes = (defaultError, field) => {
+const getValidateResults: ResponseValidatorGetter = (defaultError, field) => {
   return async (mutationResult) => {
     try {
       const result = await mutationResult;
@@ -63,14 +53,7 @@ const getValidateResults: getValidateResultsTypes = (defaultError, field) => {
   };
 };
 
-interface ActionResponseMutationTypes {
-  (field: string, defaultError: ActionResponse, mutation: DocumentNode): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<{ variables: any }, any>;
-  };
-}
-
-export const ActionResponseMutation: ActionResponseMutationTypes = (
+export const ActionResponseMutation: ActionResponseMutationProvider = (
   field,
   defaultError,
   mutation

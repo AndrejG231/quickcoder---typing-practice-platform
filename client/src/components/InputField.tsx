@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ActionResponse } from "../types/auth";
+import { ActionResponse } from "../types/graphql/ActResMutationsT";
 
 //styles
 import { IconContext } from "react-icons";

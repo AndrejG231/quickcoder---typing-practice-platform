@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 
 //redux
-import { setGlobalMessage } from "../redux/actions";
+import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 
 //components
 import InputField from "../components/InputField";
@@ -12,7 +12,7 @@ import SubmitButton from "../components/SubmitButton";
 
 //graphql
 import { useChangeForgottenPasswordMutation } from "../graphql/auth";
-import { ActionResponse } from "../types/auth";
+import { ActionResponse } from "../types/graphql/ActResMutationsT";
 
 const rdxDispatch = (dispatch: any) => {
   return {

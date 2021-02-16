@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-import { Animate } from "../redux/animations";
-import { ReduxState } from "../types/redux";
+import { Animate } from "../redux/actions/animationActions";
+import { ReduxState } from "../types/redux/ReduxState";
 
 const rdxState = (state: ReduxState) => {
   return {

@@ -1,12 +1,27 @@
 type animationTargets = "HomePage" | "Modal" | "GlobalMessage";
 
 type animationElements = {
-  HomePage: "main",
-  Modal: "main",
-  GlobalMessage: "main"
+  HomePage: "main";
+  Modal: "main";
+  GlobalMessage: "main";
 };
 
-export const AnimationState = {
+export type AnimationStateTypes = {
+  HomePage: {
+    isDisplayed: boolean;
+    main: number;
+  };
+  Modal: {
+    isDisplayed: boolean;
+    main: number;
+  };
+  GlobalMessage: {
+    isDisplayed: boolean;
+    main: number;
+  };
+};
+
+export const AnimationState: AnimationStateTypes = {
   HomePage: {
     isDisplayed: false,
     main: 200,
@@ -18,9 +33,8 @@ export const AnimationState = {
   GlobalMessage: {
     isDisplayed: false,
     main: 300,
-  }
+  },
 };
-
 
 //^^^^^^^^^//
 // Targets //
@@ -38,38 +52,14 @@ type AnimationActionObject =
       frame: number;
     };
 
-interface toggleAnimations {
+export interface toggleAnimations {
   (target: animationTargets): AnimationActionObject;
 }
 
-export const ToggleAnimationIn: toggleAnimations = (target) => {
-  return {
-    type: "animation/turnOn",
-    target: target,
-  };
-};
-
-export const ToggleAnimationOut: toggleAnimations = (target) => {
-  return {
-    type: "animation/turnOff",
-    target: target,
-  };
-};
-
-interface AnimateAction {
+export interface AnimateAction {
   (
     target: animationTargets,
     element: animationElements[animationTargets],
     frame: number
   ): AnimationActionObject;
 }
-
-export const Animate: AnimateAction = (target, element, frame) => {
-  return {
-    type: "animation/animate",
-    frame: frame,
-    target: target,
-    element: element,
-  };
-};
-

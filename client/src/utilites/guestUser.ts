@@ -1,4 +1,4 @@
-import { UserInfo } from "../types/auth";
+import { UserInfo } from "../types/graphql/AuthMutationsT";
 
 const guestUser: UserInfo = {
   id: -1,

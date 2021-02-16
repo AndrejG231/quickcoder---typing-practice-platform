@@ -9,12 +9,15 @@ import { GetUserInfo, Logout } from "../graphql/auth";
 import guestUser from "../utilites/guestUser";
 
 //Redux
-import { setUserInfoAction, logoutAction } from "../redux/actions";
-import { ToggleAnimationIn, ToggleAnimationOut } from "../redux/animations";
-import { ReduxState } from "../types/redux";
+import { setUserInfoAction, logoutAction } from "../redux/actions/authActions";
+import {
+  ToggleAnimationIn,
+  ToggleAnimationOut,
+} from "../redux/actions/animationActions";
+import { ReduxState } from "../types/redux/ReduxState";
 
 //types
-import { UserInfo } from "../types/auth";
+import { UserInfo } from "../types/graphql/AuthMutationsT";
 
 //Components
 import Header from "../components/home/Header";
@@ -73,11 +76,11 @@ const Home: React.FC<any> = ({
     return () => {
       AnimationOut();
     };
-  }, []);
+  }, [AnimationIn, AnimationOut]);
 
   useEffect(() => {
     refetch();
-  }, [isAuth]);
+  }, [isAuth, refetch]);
 
   useEffect(() => {
     if (!loading) {
@@ -88,7 +91,7 @@ const Home: React.FC<any> = ({
         setUserInfo(data.getSignedUser.user);
       }
     }
-  }, [data, loading, error]);
+  }, [data, loading, error, localLogout, setUserInfo]);
 
   return (
     <div className="homeContainer">

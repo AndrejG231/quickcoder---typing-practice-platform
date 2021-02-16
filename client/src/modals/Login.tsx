@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
 import { connect } from "react-redux";
-import { ToggleAnimationOut } from "../redux/animations";
-import { loginAction, setGlobalMessage } from "../redux/actions";
 
+//redux
+import { ToggleAnimationOut } from "../redux/actions/animationActions";
+import { loginAction } from "../redux/actions/authActions";
+import { setGlobalMessage } from "../redux/actions/globalMessageActions";
+
+//utilities
 import getClientParam from "../utilites/clientParameter";
 
+//graphql
 import { useLoginMutation } from "../graphql/auth";
-import { ActionResponse, LoginCredentials } from "../types/auth";
+import { ActionResponse } from "../types/graphql/ActResMutationsT";
+import { LoginCredentials } from "../types/graphql/AuthMutationsT";
 
+//components
 import Modal from "../components/Modal";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
 //style
 import "./Login.scss";
+
+interface LoginProps {
+  RefreshUserInfo: () => void;
+  AnimeOut: () => void;
+  SetMessage: (message: string) => void;
+}
 
 const rdxDispatch = (dispatch: any) => {
   return {
@@ -25,11 +37,11 @@ const rdxDispatch = (dispatch: any) => {
   };
 };
 
-export const Login: React.FC = ({
+export const Login: React.FC<LoginProps> = ({
   RefreshUserInfo,
   AnimeOut,
   SetMessage,
-}: any) => {
+}) => {
   const { validate, mutation } = useLoginMutation();
 
   const [login] = mutation;

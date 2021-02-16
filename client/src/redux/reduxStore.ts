@@ -1,10 +1,8 @@
 import { createStore, combineReducers } from "redux";
-import {
-  isAuth,
-  setUserInfo,
-  setGlobalMessage,
-  ReduxAnimationHandler,
-} from "../redux/reducers";
+
+import { isAuth, setUserInfo } from "../redux/reducers/authReducer";
+import { setGlobalMessage } from "../redux/reducers/globalMessageReducer";
+import { ReduxAnimationHandler } from "../redux/reducers/animationsReducer";
 
 const reducers = combineReducers({
   isAuth: isAuth,

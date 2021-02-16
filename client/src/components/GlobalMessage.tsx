@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { BsFillXSquareFill } from "react-icons/bs";
 import { connect } from "react-redux";
 
-import { setGlobalMessage } from "../redux/actions";
-import { ToggleAnimationIn, ToggleAnimationOut } from "../redux/animations";
-import { ReduxState } from "../types/redux";
+import { setGlobalMessage } from "../redux/actions/globalMessageActions";
+import {
+  ToggleAnimationIn,
+  ToggleAnimationOut,
+} from "../redux/actions/animationActions";
+import { ReduxState } from "../types/redux/ReduxState";
 
 import "./GlobalMessage.scss";
 
@@ -38,18 +41,19 @@ const GlobalMessage: React.FC<globalMessageProps> = ({
   AnimeIn,
   AnimeOut,
 }) => {
-  const RemoveMessageHandler = () => {
+  const RemoveMessageHandler = useCallback(() => {
     const messageToRemove = message;
     if (messageToRemove === message) {
       AnimeOut();
       setTimeout(() => clearMessage(), 1500);
     }
-  };
+  }, [AnimeOut, clearMessage, message]);
 
   useEffect(() => {
     AnimeIn();
     setTimeout(() => RemoveMessageHandler(), 4000);
-  }, [message]);
+  }, [AnimeIn, RemoveMessageHandler]);
+
   if (message === "") {
     return <div />;
   }

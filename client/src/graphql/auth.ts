@@ -1,17 +1,21 @@
 import {
   DocumentNode,
   gql,
-  MutationTuple,
   useMutation,
   useQuery,
 } from "@apollo/client";
-import { LoginCredentials, RegisterCredentials } from "../types/auth";
+
+import { ActionResponseMutation, connectServerError } from "./general";
+//Utilities
 import getClientParam from "../utilites/clientParameter";
+
+//Types
 import {
-  ActionResponseMutation,
-  connectServerError,
-  validateResultFunction,
-} from "./general";
+  LoginMutation,
+  RegisterMutation,
+  RetrievePasswordMutation,
+  ChangeForgottenPasswordMutation,
+} from "../types/graphql/AuthMutationsT";
 
 //REGISTER
 
@@ -25,16 +29,6 @@ const registerMutation: DocumentNode = gql`
     }
   }
 `;
-
-interface RegisterMutation {
-  (): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<
-      { variables: { credentials: RegisterCredentials } },
-      any
-    >;
-  };
-}
 
 export const useRegisterMutation: RegisterMutation = () => {
   return ActionResponseMutation(
@@ -57,16 +51,6 @@ const loginMutation: DocumentNode = gql`
 
 //LOGIN
 
-interface LoginMutation {
-  (): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<
-      { variables: { credentials: LoginCredentials; clientParameter: string } },
-      any
-    >;
-  };
-}
-
 export const useLoginMutation: LoginMutation = () => {
   return ActionResponseMutation(
     "login",
@@ -76,16 +60,6 @@ export const useLoginMutation: LoginMutation = () => {
 };
 
 //RETRIEVE PASSWORD TOKEN
-
-interface RetrievePasswordMutation {
-  (): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<
-      { variables: { email: string; clientInfo: string } },
-      any
-    >;
-  };
-}
 
 const retrievePasswordMutation = gql`
   mutation retrievePasswordToken($clientInfo: String!, $email: String!) {
@@ -119,16 +93,6 @@ const changeForgottenPasswordMutation = gql`
   }
 `;
 
-interface ChangeForgottenPasswordMutation {
-  (): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<
-      { variables: { newPassword: string; token: string } },
-      any
-    >;
-  };
-}
-
 export const useChangeForgottenPasswordMutation: ChangeForgottenPasswordMutation = () => {
   return ActionResponseMutation(
     "changeForgottenPassword",
@@ -155,16 +119,6 @@ const changeKnownPasswordMutation = gql`
     }
   }
 `;
-
-interface ChangeForgottenPasswordMutation {
-  (): {
-    validate: validateResultFunction;
-    mutation: MutationTuple<
-      { variables: { newPassword: string; originalPassword: string } },
-      any
-    >;
-  };
-}
 
 export const useChangeKnownPasswordMutation: ChangeForgottenPasswordMutation = () => {
   return ActionResponseMutation(
