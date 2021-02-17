@@ -19,7 +19,6 @@ export const UsTemplate = {
   ],
   Lower: [
     "LShift",
-    "\\",
     "z",
     "x",
     "c",
