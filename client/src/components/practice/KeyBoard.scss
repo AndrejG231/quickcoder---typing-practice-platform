@@ -1,0 +1,24 @@
+@import "../../globalStyles//colorScheme.scss";
+@import "../../globalStyles/mixins.scss";
+
+.p_key {
+  border-radius: 10px;
+  background: $b2;
+  @include centerContent();
+  @include effect3D($w3, $b5);
+}
+
+.keyboard-container{
+  padding: 3px 10px;
+  background: $b3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 15px;
+}
+
+.keyboard-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

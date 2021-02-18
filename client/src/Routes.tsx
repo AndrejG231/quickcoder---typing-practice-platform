@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //pages
 import Home from "./pages/Home";
+import Practice from "./pages/Practice"
 
 //modals
 import Login from "./modals/Login";
@@ -22,7 +23,7 @@ const Routes: React.FC = () => {
       <GlobalMessage />
       <AnimationProvider />
       <Route exact path="/" component={() => <Home />} />
-      <Route path="/home/" component={() => <Home />} />I
+      <Route path="/home/" component={() => <Home />} />
       <Route exact path="/home/profile/" component={() => <Profile />} />
       <Route exact path="/home/login/" component={() => <Login />} />
       <Route exact path="/home/signup/" component={() => <Register />} />
@@ -41,6 +42,7 @@ const Routes: React.FC = () => {
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}
       />
+      <Route exact path="/practice/:practiceCode/" component={() => <Practice />} />
     </BrowserRouter>
   );
 };
