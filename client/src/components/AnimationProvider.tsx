@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
-
 import { connect } from "react-redux";
+
 import { Animate } from "../redux/actions/animationActions";
+import { animatePracticeOffset } from "../redux/actions/practiceActions";
+
+//types
 import { ReduxState } from "../types/redux/ReduxState";
+import { animationProperties } from "../types/redux/AnimationT";
 
 const rdxState = (state: ReduxState) => {
   return {
     HomePage: state.Animations.HomePage,
     Modal: state.Animations.Modal,
     GlobalMessage: state.Animations.GlobalMessage,
+    PracticeLettersOffset: state.Practice.errorsCount + state.Practice.index,
+    PracticeOffset: state.PracticeOffset,
   };
 };
 
@@ -26,14 +32,36 @@ const rdxDispatch = (dispatch: any) => {
           dispatch(Animate("GlobalMessage", "main", frame)),
       },
     },
+    AddOffset: () => dispatch(animatePracticeOffset()),
   };
 };
 
-const AnimationProvider: React.FC<any> = ({
+interface MainAnimation {
+  main: (frame: number) => void;
+}
+
+interface AnimateT {
+  [key: string]: MainAnimation;
+}
+
+interface AnimationProviderProps {
+  HomePage: animationProperties;
+  Modal: animationProperties;
+  GlobalMessage: animationProperties;
+  PracticeLettersOffset: number;
+  PracticeOffset: number;
+  Animate: AnimateT;
+  AddOffset: () => void;
+}
+
+const AnimationProvider: React.FC<AnimationProviderProps> = ({
   HomePage,
   Animate,
   Modal,
   GlobalMessage,
+  PracticeLettersOffset,
+  PracticeOffset,
+  AddOffset,
 }) => {
   const handleAnimation = () => {
     //Home
@@ -53,6 +81,11 @@ const AnimationProvider: React.FC<any> = ({
       Animate.GlobalMessage.main(-30);
     } else if (GlobalMessage.main < 300 && !GlobalMessage.isDisplayed) {
       Animate.GlobalMessage.main(30);
+    }
+
+    //Practice text line
+    if (PracticeLettersOffset * 22 < PracticeOffset) {
+      AddOffset();
     }
   };
 

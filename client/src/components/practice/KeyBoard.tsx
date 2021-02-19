@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Keys } from "../../types/KeyBoardT";
+import { Layout, Keys } from "../../types/practice/KeyBoardT";
 import { UsColors, ColorScheme } from "../../data/KeysColors";
 import "./KeyBoard.scss";
 

@@ -1,4 +1,4 @@
-import { Layout } from "../types/KeyBoardT";
+import { Layout } from "../types/practice/KeyBoardT";
 
 export const UsTemplate: Layout = {
   Number: [

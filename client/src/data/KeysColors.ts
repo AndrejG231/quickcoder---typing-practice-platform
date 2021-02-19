@@ -1,4 +1,4 @@
-import { Keys, Colors } from "../types/KeyBoardT";
+import { Keys, Colors } from "../types/practice/KeyBoardT";
 export const ColorScheme: { [color in Colors]: string } = {
   L1: "#5b00d1",
   R1: "#5b00d1",

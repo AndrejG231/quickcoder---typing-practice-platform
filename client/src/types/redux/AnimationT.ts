@@ -1,4 +1,4 @@
-type animationTargets = "HomePage" | "Modal" | "GlobalMessage";
+export type animationTargets = "HomePage" | "Modal" | "GlobalMessage";
 
 type animationElements = {
   HomePage: "main";
@@ -6,19 +6,13 @@ type animationElements = {
   GlobalMessage: "main";
 };
 
+export type animationProperties = {
+  isDisplayed: boolean;
+  main: number;
+};
+
 export type AnimationStateTypes = {
-  HomePage: {
-    isDisplayed: boolean;
-    main: number;
-  };
-  Modal: {
-    isDisplayed: boolean;
-    main: number;
-  };
-  GlobalMessage: {
-    isDisplayed: boolean;
-    main: number;
-  };
+  [key in animationTargets]: animationProperties;
 };
 
 export const AnimationState: AnimationStateTypes = {

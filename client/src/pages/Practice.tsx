@@ -7,7 +7,7 @@ import "./Practice.scss";
 const Practice = () => {
   return (
     <div className="practiceContainer">
-      <TextLine/>
+      <TextLine />
       <KeyBoard
         width={window.innerWidth > 1280 ? 800 : 600}
         layout={UsTemplate}

@@ -32,7 +32,7 @@
 }
 
 .textLine-string {
-  color: $w5;
+  color: $w4;
   font-size: 40px;
   font-family: monospace;
   line-height: 70px;
@@ -44,6 +44,12 @@
 
 .textLine-nextChar {
   font-weight: 1000;
+  color: $w5;
+}
+
+.textLine-error{
+  background: $err1;
+  color: $err2;
 }
 
 .textLine-marker {
