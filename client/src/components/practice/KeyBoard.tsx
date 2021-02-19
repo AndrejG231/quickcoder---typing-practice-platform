@@ -1,7 +1,10 @@
 import React from "react";
-import { Layout, Keys } from "../../types/practice/KeyBoardT";
+import { connect } from "react-redux";
+import { Layout, Keys, Characters } from "../../types/practice/KeyBoardT";
 import { UsColors, ColorScheme } from "../../data/KeysColors";
+import { US } from "../../data/KeysMap";
 import "./KeyBoard.scss";
+import { ReduxState } from "../../types/redux/ReduxState";
 
 interface KeyProps {
   size: number;
@@ -13,17 +16,13 @@ interface KeyProps {
 const Key: React.FC<KeyProps> = ({ size, character, isNext, isLastWrong }) => {
   let background: string = "";
 
-  if (isNext){
-  background = ColorScheme[UsColors[character]];
+  if (isNext) {
+    background = ColorScheme[UsColors[character]];
   }
 
-  if(isLastWrong){
-    background = ColorScheme["ERROR"]
+  if (isLastWrong) {
+    background = ColorScheme["ERROR"];
   }
-
-  console.log(UsColors[character])
-  console.log(ColorScheme[UsColors[character]])
-  console.log(background)
 
   let width: number;
   switch (character) {
@@ -45,7 +44,7 @@ const Key: React.FC<KeyProps> = ({ size, character, isNext, isLastWrong }) => {
     case "BSpace":
       width = size * 2;
       break;
-    case " ":
+    case "--":
       width = size * 1.2;
       break;
     default:
@@ -61,14 +60,23 @@ const Key: React.FC<KeyProps> = ({ size, character, isNext, isLastWrong }) => {
   );
 };
 
+const rdxProps = (state: ReduxState) => {
+  return {
+    nextKey: state.Practice.string[state.Practice.index] as Characters,
+    lastError: state.Practice.lastError as Characters,
+  };
+};
+
 interface KeyBoardProps {
+  nextKey: Characters,
+  lastError: Characters,
   className: string;
   width: number;
   layout: Layout;
 }
 
-const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
-  const [next, last] = ["f", "b"];
+const KeyBoard: React.FC<KeyBoardProps> = ({ nextKey, lastError, width, layout, className }) => {
+  console.log(US["0"])
   return (
     <div
       className={`keyboard-container ${className}`}
@@ -78,8 +86,8 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
         {layout.Number.map((key, i) => {
           return (
             <Key
-              isLastWrong={last === key ? true : false}
-              isNext={next === key ? true : false}
+              isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}
+              isNext={US[nextKey]?.indexOf(key) >= 0 ? true : false}
               character={key}
               key={i}
               size={width * 0.06}
@@ -91,8 +99,8 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
         {layout.Upper.map((key, i) => {
           return (
             <Key
-              isLastWrong={last === key ? true : false}
-              isNext={next === key ? true : false}
+              isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}
+              isNext={US[nextKey]?.indexOf(key) >= 0 ? true : false}
               character={key}
               key={i}
               size={width * 0.06}
@@ -104,8 +112,8 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
         {layout.Middle.map((key, i) => {
           return (
             <Key
-              isLastWrong={last === key ? true : false}
-              isNext={next === key ? true : false}
+              isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}
+              isNext={US[nextKey]?.indexOf(key) >= 0 ? true : false}
               character={key}
               key={i}
               size={width * 0.06}
@@ -117,8 +125,8 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
         {layout.Lower.map((key, i) => {
           return (
             <Key
-              isLastWrong={last === key ? true : false}
-              isNext={next === key ? true : false}
+              isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}
+              isNext={US[nextKey]?.indexOf(key) >= 0 ? true : false}
               character={key}
               key={i}
               size={width * 0.06}
@@ -130,4 +138,6 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ width, layout, className }) => {
   );
 };
 
-export default KeyBoard;
+export default connect(rdxProps, () => {
+  return {};
+})(KeyBoard);

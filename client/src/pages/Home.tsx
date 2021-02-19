@@ -28,6 +28,7 @@ import ArrowButton from "../components/ArrowButton";
 //Styles
 import "../globalStyles/component.scss";
 import "./Home.scss";
+import { AuthReducerState } from "../types/redux/AuthT";
 
 //Redux
 const rdxState = (state: ReduxState) => {
@@ -56,8 +57,20 @@ const rdxDispatch = (dispatch: any) => {
 };
 
 //
+interface HomeProps {
+  localLogout: () => void;
+  userInfo: UserInfo;
+  setUserInfo: (user: UserInfo) => void;
+  isAuth: AuthReducerState;
+  AnimationState: {
+    isDisplayed: boolean;
+    main: number;
+  };
+  AnimationIn: () => void;
+  AnimationOut: () => void;
+}
 
-const Home: React.FC<any> = ({
+const Home: React.FC<HomeProps> = ({
   localLogout,
   userInfo,
   setUserInfo,
@@ -93,6 +106,11 @@ const Home: React.FC<any> = ({
     }
   }, [data, loading, error, localLogout, setUserInfo]);
 
+  const Redirect = (to: string) => {
+    AnimationOut();
+    setTimeout(() => navigation.push(to), 300);
+  };
+
   return (
     <div className="homeContainer">
       <div
@@ -112,9 +130,11 @@ const Home: React.FC<any> = ({
         className="flexContainer"
         style={{ transform: `translateX(-${AnimationState.main * 3}px)` }}
       >
-        <ClippedButton>Typing test</ClippedButton>
-        <ClippedButton>Practice</ClippedButton>
-        <ClippedButton>Settings</ClippedButton>
+        <ClippedButton onClick={() => null}>Typing test</ClippedButton>
+        <ClippedButton onClick={() => Redirect("/practice/")}>
+          Practice
+        </ClippedButton>
+        <ClippedButton onClick={() => null}>Settings</ClippedButton>
       </div>
       <div
         style={{
@@ -167,7 +187,7 @@ const Home: React.FC<any> = ({
           position: "absolute",
           bottom: 0,
           right: 0,
-          transform: `translateY(${AnimationState.main}px)`,
+          transform: `translateY(${AnimationState.main * 3}px)`,
         }}
       >
         <KeyboardBG className="keyboard-bg" />

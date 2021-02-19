@@ -5,7 +5,7 @@
   height: 90px;
   width: 100%;
   margin: 15px;
-  background: $b3;
+  background: $b4;
   position: relative;
   display: flex;
   justify-content: center;
@@ -24,15 +24,15 @@
   height: 100%;
   z-index: 30;
   &.left {
-    background: linear-gradient(90deg, $b3 5%, rgba(0, 0, 0, 0) 30%);
+    background: linear-gradient(90deg, $b2 5%, rgba(0, 0, 0, 0) 30%);
   }
   &.right {
-    background: linear-gradient(270deg, $b3 5%, rgba(0, 0, 0, 0) 30%);
+    background: linear-gradient(270deg, $b2 5%, rgba(0, 0, 0, 0) 30%);
   }
 }
 
 .textLine-string {
-  color: $w4;
+  color: $b2;
   font-size: 40px;
   font-family: monospace;
   line-height: 70px;
@@ -58,6 +58,6 @@
   color: $w5;
   font-size: 50px;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
+  font-weight: 200;
   height: 30px;
 }

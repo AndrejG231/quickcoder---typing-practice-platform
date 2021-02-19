@@ -1,6 +1,5 @@
 import {
   PracticeSetActionT,
-  PracticeProgressActionT,
   PracticeAnimationActoinObject,
   PracticeResetAction,
 } from "../../types/redux/PracticeT";
@@ -12,12 +11,6 @@ export const setPracticeAction: PracticeSetActionT = (practice) => {
   };
 };
 
-export const validateKeyPress: PracticeProgressActionT = (keyPressed) => {
-  return {
-    character: keyPressed,
-    type: "practice/progress",
-  };
-};
 
 export const resetPracticeSession: PracticeResetAction = () => {
   return {

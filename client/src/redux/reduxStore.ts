@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, compose } from "redux";
 
 import { isAuth, setUserInfo } from "./reducers/authReducer";
 import { setGlobalMessage } from "./reducers/globalMessageReducer";
@@ -17,6 +17,9 @@ const reducers = combineReducers({
   PracticeOffset: practiceAnimationReducer,
 });
 
-const reduxStore = createStore(reducers);
+const composeEnhancers =
+  (window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
+const reduxStore = createStore(reducers, composeEnhancers());
 
 export default reduxStore;

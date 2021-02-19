@@ -9,7 +9,7 @@ export const ColorScheme: { [color in Colors]: string } = {
   L4: "#2c99c7",
   R4: "#1c72c7",
   SPACE: "#f8ff33",
-  ERROR: "#d11100"
+  ERROR: "#d11100",
 };
 
 export const UsColors: { [key in Keys]: Colors } = {
@@ -74,6 +74,7 @@ export const UsColors: { [key in Keys]: Colors } = {
   j: "R4",
   n: "R4",
   m: "R4",
+  "--": "R4",
   //Space
   " ": "SPACE",
 };

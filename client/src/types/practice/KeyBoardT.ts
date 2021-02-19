@@ -24,6 +24,7 @@ export type Characters =
   | "7"
   | "8"
   | "9"
+  | "0"
   | ":"
   | ";"
   | "<"
@@ -95,6 +96,7 @@ export type Characters =
   | "~";
 
 export type Keys =
+  | "--"
   | "1"
   | "TAB"
   | "q"

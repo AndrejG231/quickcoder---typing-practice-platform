@@ -84,14 +84,14 @@ const AnimationProvider: React.FC<AnimationProviderProps> = ({
     }
 
     //Practice text line
-    if (PracticeLettersOffset * 22 < PracticeOffset) {
+    if (PracticeLettersOffset * 22 > PracticeOffset) {
       AddOffset();
     }
   };
 
   //
   useEffect(() => {
-    const Animate = setInterval(() => handleAnimation(), 25);
+    const Animate = setInterval(() => handleAnimation(), 15);
     return () => {
       clearInterval(Animate);
     };

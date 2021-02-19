@@ -3,6 +3,7 @@ import { Characters } from "../practice/KeyBoardT";
 
 export type PracticeObjectT = {
   index: number;
+  lastError: string;
   string: string;
   id: number;
   errors: Errors;
@@ -14,6 +15,7 @@ export type PracticeObjectT = {
 export const PracticeObject: PracticeObjectT = {
   index: 0,
   string: "",
+  lastError: "",
   id: -1,
   errors: {},
   errorsCount: 0,
@@ -27,15 +29,6 @@ type PracticeSetObject = {
 };
 export type PracticeSetActionT = {
   (practice: PracticeObjectT): PracticeSetObject;
-};
-
-type PracticeProgressObject = {
-  type: "practice/progress";
-  character: Characters;
-};
-
-export type PracticeProgressActionT = {
-  (keyPressed: Characters): PracticeProgressObject;
 };
 
 export type HandleProgressFunctionT = {
@@ -53,7 +46,7 @@ export type PracticeResetAction = {
 export type PracticeReducerT = {
   (
     state: PracticeObjectT,
-    action: PracticeProgressObject | PracticeSetObject | PracticeResetObject
+    action: PracticeSetObject | PracticeResetObject
   ): PracticeObjectT;
 };
 

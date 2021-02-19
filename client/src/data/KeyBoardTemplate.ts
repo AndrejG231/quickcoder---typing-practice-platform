@@ -47,7 +47,7 @@ export const UsTemplate: Layout = {
     ";",
     "'",
     "\\",
-    " ",
+    "--",
   ],
   Lower: ["LShift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "RShift"],
 };

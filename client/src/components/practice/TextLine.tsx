@@ -38,13 +38,13 @@ const TextLine: React.FC<TextAreaProps> = ({
           className="textLine-string"
           style={{ transform: `translateX(-${offset}px)` }}
         >
-          {Object.keys(errors).map((errIndex) => {
+          {Object.keys(errors).map((errIndex, i) => {
             const prevError = lastError;
             lastError = parseInt(errIndex);
             return (
-              <span>
+              <span key={i}>
                 {string.slice(prevError, lastError)}
-                <span className="textLine-error">{errors[lastError]}</span>
+                <span key={i*9+1000} className="textLine-error">{errors[lastError]}</span>
               </span>
             );
           })}
