@@ -15,21 +15,24 @@ import express from "express";
 import { SERVER_PORT, PG_SETTING } from "./config";
 //==>Entities
 import Users from "./types/entities/Users";
+import PassTokens from "./types/entities/PassTokens";
+import Practices from "./types/entities/Practices";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
+import PracticeResolver from "./resolvers/PracticeResolver";
 import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
-//==>Types
-import PassTokens from "./types/entities/PassTokens";
+//==>Typess";
 
 //==>Test
 // import runTest from "./tests/test";
 
 const main = async () => {
-  const entities = [Users, PassTokens];
+  const entities = [Users, PassTokens, Practices];
   const resolvers: [Function, ...Function[]] = [
     UserAuthResolver,
     ForgotPasswordResolver,
+    PracticeResolver,
     /* DEV ONLY */ DevelopmentUserResolver,
   ];
 

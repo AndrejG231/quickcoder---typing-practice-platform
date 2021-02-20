@@ -1,54 +1,43 @@
 import {
   Entity,
   Column,
-  BaseEntity,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  ManyToOne,
 } from "typeorm";
-import { ObjectType, Field } from "type-graphql";
-import Users from "./Users";
-
-export type Errors = {
-  [index: number]: string;
-};
+import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
 @Entity("practices")
-class Practices extends BaseEntity {
+class Practices {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Field()
-  @Column({ default: "" })
+  @Column()
   string!: string;
 
   @Field()
   @Column({ default: 0 })
-  errorsCount!: number;
+  errors_count!: number;
 
   @Field()
-  @Column({ default: {} })
-  errors!: Errors;
+  @Column({ default: "{}" })
+  errors!: string;
 
   @Field()
   @Column({ default: 0 })
-  timeSpent: number; //ms
+  time_spent: number; //ms
 
   @Field()
   @Column({ default: false })
-  isFinished!: boolean;
+  is_finished!: boolean;
 
-  @Field()
+  @Field(() => Int)
   @Column()
-  user_id: number;
+  user_id!: number;
 
-  @Field()
-  @ManyToOne(() => Users, (user) => user.practices)
-  user: Users;
-
-  @Field()
+  @Field(() => String)
   @CreateDateColumn()
   created_at = Date;
 }

@@ -41,6 +41,8 @@ const Messages = {
       "Password recovery link was sent to your email",
     retrievePassword_token_invalid: "Invalid token. Please try again",
     retrievePassword_token_expired: "Token expired. Please try again",
+    // PRACTICE //
+    getPracticesObject_practice_created: "Successfuly created practice object",
   },
 };
 

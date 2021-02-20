@@ -5,11 +5,9 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Practices from "./Practices";
 
 @ObjectType()
 @Entity()
@@ -47,10 +45,6 @@ class Users extends BaseEntity {
   @Column()
   @Generated("uuid")
   secret: string;
-
-  @Field()
-  @OneToMany(() => Practices, (practices) => practices.user)
-  practices: Practices[];
 
   @Field(() => String)
   @CreateDateColumn()

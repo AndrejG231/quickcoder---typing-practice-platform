@@ -32,4 +32,7 @@ type keyList =
   | "retrievePassword_resetLink_sent"
   |"retrievePassword_token_invalid"
   |"retrievePassword_token_expired"
+  //RECIEVED PRACTICE OBJECT
+  | "getPracticesObject_practice_created"
+
 export default keyList;
