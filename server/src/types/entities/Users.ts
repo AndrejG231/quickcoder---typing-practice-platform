@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Practices from "./Practices";
 
 @ObjectType()
 @Entity()
@@ -39,12 +41,16 @@ class Users extends BaseEntity {
   @Column({ default: "dark" })
   color_scheme!: string;
 
-  @Column({default: 0})
+  @Column({ default: 0 })
   token_version!: number;
 
   @Column()
   @Generated("uuid")
   secret: string;
+
+  @Field()
+  @OneToMany(() => Practices, (practices) => practices.user)
+  practices: Practices[];
 
   @Field(() => String)
   @CreateDateColumn()
@@ -53,7 +59,6 @@ class Users extends BaseEntity {
   @Field(() => String)
   @UpdateDateColumn()
   updated_at = Date;
-
 }
 
 export default Users;
