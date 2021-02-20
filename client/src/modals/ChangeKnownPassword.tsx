@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 //redux
-import { logoutAction } from "../redux/actions/authActions";
+import { refreshAuthAction } from "../redux/actions/authActions";
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 import { ToggleAnimationOut } from "../redux/actions/animationActions";
 
@@ -19,7 +19,7 @@ import { ChangeKnownPasswordVariables } from "../types/graphql/AuthMutationsT";
 
 const rdxDispatch = (dispatch: any) => {
   return {
-    RefreshAuth: () => dispatch(logoutAction),
+    RefreshAuth: () => dispatch(refreshAuthAction()),
     SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
     AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
   };

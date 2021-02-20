@@ -1,11 +1,9 @@
 import {AuthReducer, UserInfoReducer } from "../../types/redux/AuthT";
 
-export const isAuth: AuthReducer = (state = { isAuth: false }, action) => {
+export const refreshAuthReducer: AuthReducer = (state = { AuthCount: 0}, action) => {
   switch (action.type) {
-    case "auth/login":
-      return { isAuth: true };
-    case "auth/logout":
-      return { isAuth: false };
+    case "auth/refresh":
+      return { AuthCount: ++state.AuthCount};
     default:
       return state;
   }

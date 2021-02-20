@@ -25,7 +25,7 @@ export const practiceAnimationReducer: PracticeAnimationReducerT = (
 ) => {
   switch (action.type) {
     case "animate":
-      return state + 7.333;
+      return state + 7.334;
     case "errorSkip":
       return state + 22;
     case "reset":

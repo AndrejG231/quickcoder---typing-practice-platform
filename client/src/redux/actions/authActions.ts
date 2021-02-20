@@ -1,20 +1,14 @@
-import {
-  SetAuthAction,
-  getUserInfoAction,
-} from "../../types/redux/AuthT";
+import { refreshAuthActionT, getUserInfoAction } from "../../types/redux/AuthT";
 
-export const loginAction: SetAuthAction = {
-  type: "auth/login",
-};
-
-export const logoutAction: SetAuthAction = {
-  type: "auth/logout",
+export const refreshAuthAction: refreshAuthActionT = () => {
+  return {
+    type: "auth/refresh",
+  };
 };
 
 export const setUserInfoAction: getUserInfoAction = (user) => {
   return {
-    type: "auth/setUserInfo",
     user: user,
+    type: "auth/setUserInfo",
   };
 };
-

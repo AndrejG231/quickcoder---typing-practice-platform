@@ -24,10 +24,10 @@
   height: 100%;
   z-index: 30;
   &.left {
-    background: linear-gradient(90deg, $b2 5%, rgba(0, 0, 0, 0) 30%);
+    background: linear-gradient(90deg, $b4 5%, rgba(0, 0, 0, 0) 30%);
   }
   &.right {
-    background: linear-gradient(270deg, $b2 5%, rgba(0, 0, 0, 0) 30%);
+    background: linear-gradient(270deg, $b4 5%, rgba(0, 0, 0, 0) 30%);
   }
 }
 
@@ -36,7 +36,7 @@
   font-size: 40px;
   font-family: monospace;
   line-height: 70px;
-  white-space: nowrap;
+  white-space: pre;
   position: relative;
   left: 389px;
   font-weight: 400;
@@ -45,11 +45,13 @@
 .textLine-nextChar {
   font-weight: 1000;
   color: $w5;
+  white-space: pre;
 }
 
-.textLine-error{
+.textLine-error {
   background: $err1;
   color: $err2;
+  white-space: pre;
 }
 
 .textLine-marker {

@@ -6,7 +6,7 @@ import { PracticeObjectT } from "../../types/redux/PracticeT";
 
 export type ReduxState = {
   UserInfo: UserInfo;
-  isAuth: AuthReducerState;
+  AuthCount: AuthReducerState;
   globalMessage: globalMessage;
   Animations: AnimationStateTypes;
   Practice: PracticeObjectT;

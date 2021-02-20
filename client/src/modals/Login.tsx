@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 //redux
 import { ToggleAnimationOut } from "../redux/actions/animationActions";
-import { loginAction } from "../redux/actions/authActions";
+import { refreshAuthAction } from "../redux/actions/authActions";
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 
 //utilities
@@ -32,7 +32,7 @@ interface LoginProps {
 const rdxDispatch = (dispatch: any) => {
   return {
     AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
-    RefreshUserInfo: () => dispatch(loginAction),
+    RefreshUserInfo: () => dispatch(refreshAuthAction()),
     SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
   };
 };

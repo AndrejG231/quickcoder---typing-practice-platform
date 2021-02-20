@@ -60,7 +60,7 @@ const Practice: React.FC<any> = ({
   practice,
   validateKey,
 }) => {
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === "Enter" || !practice.isActive) {
       return;
     }
@@ -71,8 +71,15 @@ const Practice: React.FC<any> = ({
     setPracticeSession(TestPractice);
   }, [setPracticeSession]);
 
+  useEffect(() => {
+    window.addEventListener("keypress", handleKeyPress);
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+    };
+  });
+  
   return (
-    <div className="practiceContainer" onKeyPress={handleKeyPress} tabIndex={1}>
+    <div className="practiceContainer" tabIndex={1}>
       <TextLine />
       <KeyBoard
         width={window.innerWidth > 1280 ? 800 : 600}

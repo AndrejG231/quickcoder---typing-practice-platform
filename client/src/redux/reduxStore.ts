@@ -1,6 +1,6 @@
 import { createStore, combineReducers, compose } from "redux";
 
-import { isAuth, setUserInfo } from "./reducers/authReducer";
+import { refreshAuthReducer, setUserInfo } from "./reducers/authReducer";
 import { setGlobalMessage } from "./reducers/globalMessageReducer";
 import { ReduxAnimationHandler } from "./reducers/animationsReducer";
 import {
@@ -9,7 +9,7 @@ import {
 } from "./reducers/practiceReducer";
 
 const reducers = combineReducers({
-  isAuth: isAuth,
+  AuthCount: refreshAuthReducer,
   UserInfo: setUserInfo,
   globalMessage: setGlobalMessage,
   Animations: ReduxAnimationHandler,

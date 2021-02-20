@@ -9,7 +9,10 @@ import { GetUserInfo, Logout } from "../graphql/auth";
 import guestUser from "../utilites/guestUser";
 
 //Redux
-import { setUserInfoAction, logoutAction } from "../redux/actions/authActions";
+import {
+  setUserInfoAction,
+  refreshAuthAction,
+} from "../redux/actions/authActions";
 import {
   ToggleAnimationIn,
   ToggleAnimationOut,
@@ -28,24 +31,21 @@ import ArrowButton from "../components/ArrowButton";
 //Styles
 import "../globalStyles/component.scss";
 import "./Home.scss";
-import { AuthReducerState } from "../types/redux/AuthT";
 
 //Redux
 const rdxState = (state: ReduxState) => {
   return {
     userInfo: state.UserInfo,
-    isAuth: state.isAuth,
+    AuthCount: state.AuthCount.AuthCount,
     AnimationState: state.Animations.HomePage,
   };
 };
 
 const rdxDispatch = (dispatch: any) => {
   return {
+    refreshAuth: () => dispatch(refreshAuthAction()),
     setUserInfo: (user: UserInfo) => {
       dispatch(setUserInfoAction(user));
-    },
-    localLogout: () => {
-      dispatch(logoutAction);
     },
     AnimationIn: () => {
       dispatch(ToggleAnimationIn("HomePage"));
@@ -58,10 +58,10 @@ const rdxDispatch = (dispatch: any) => {
 
 //
 interface HomeProps {
-  localLogout: () => void;
+  refreshAuth: () => void;
   userInfo: UserInfo;
+  AuthCount: number;
   setUserInfo: (user: UserInfo) => void;
-  isAuth: AuthReducerState;
   AnimationState: {
     isDisplayed: boolean;
     main: number;
@@ -71,10 +71,10 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({
-  localLogout,
+  refreshAuth,
   userInfo,
   setUserInfo,
-  isAuth,
+  AuthCount,
   AnimationState,
   AnimationIn,
   AnimationOut,
@@ -92,19 +92,20 @@ const Home: React.FC<HomeProps> = ({
   }, [AnimationIn, AnimationOut]);
 
   useEffect(() => {
-    refetch();
-  }, [isAuth, refetch]);
+    if (AuthCount > 0) {
+      refetch();
+    }
+  }, [AuthCount, refetch]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && data) {
       if (error || data.getSignedUser.user === null) {
-        localLogout();
         setUserInfo(guestUser);
       } else {
         setUserInfo(data.getSignedUser.user);
       }
     }
-  }, [data, loading, error, localLogout, setUserInfo]);
+  }, [data, loading, error, setUserInfo]);
 
   const Redirect = (to: string) => {
     AnimationOut();
@@ -173,7 +174,7 @@ const Home: React.FC<HomeProps> = ({
             bodyWidth="100px"
             onClick={async () => {
               await logout();
-              localLogout();
+              refreshAuth();
             }}
             variant="left"
           >

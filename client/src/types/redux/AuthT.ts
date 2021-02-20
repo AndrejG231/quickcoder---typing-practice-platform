@@ -1,7 +1,11 @@
 import { UserInfo } from "../graphql/AuthMutationsT";
 
-export interface SetAuthAction {
-  type: "auth/login" | "auth/logout";
+export interface refreshAuthActionObject {
+  type: "auth/refresh";
+}
+
+export interface refreshAuthActionT {
+  (): refreshAuthActionObject;
 }
 
 interface UserInfoAction {
@@ -14,11 +18,11 @@ export interface getUserInfoAction {
 }
 
 export interface AuthReducerState {
-  isAuth: boolean;
+  AuthCount: number;
 }
 
 export interface AuthReducer {
-  (state: AuthReducerState, action: SetAuthAction): AuthReducerState;
+  (state: AuthReducerState, action: refreshAuthActionObject): AuthReducerState;
 }
 
 export interface UserInfoReducer {
