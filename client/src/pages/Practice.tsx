@@ -9,6 +9,7 @@ import { setPracticeAction } from "../redux/actions/practiceActions";
 //components
 import KeyBoard from "../components/practice/KeyBoard";
 import TextLine from "../components/practice/TextLine";
+import FingerIndex from "../components/practice/FingerIndex";
 
 //styles
 import "./Practice.scss";
@@ -103,6 +104,7 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
 
   return (
     <div className="practiceContainer" tabIndex={1}>
+      <FingerIndex width={window.innerWidth > 1580 ? 1000 : 800} />
       <TextLine />
       <KeyBoard
         width={window.innerWidth > 1580 ? 800 : 600}
