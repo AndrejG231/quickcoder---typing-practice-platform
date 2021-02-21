@@ -151,6 +151,9 @@ export type Keys =
   | "m"
   | "`"
   | " "
+  | "ctrl"
+  | "alt"
+  | "XX";
 
 export type Colors =
   | "L1"

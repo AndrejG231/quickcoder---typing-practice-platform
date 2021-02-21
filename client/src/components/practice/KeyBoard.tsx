@@ -5,6 +5,7 @@ import { UsColors, ColorScheme } from "../../data/KeysColors";
 import { US } from "../../data/KeysMap";
 import "./KeyBoard.scss";
 import { ReduxState } from "../../types/redux/ReduxState";
+import { BottomLine } from "../../data/KeyBoardTemplate";
 
 interface KeyProps {
   size: number;
@@ -47,6 +48,18 @@ const Key: React.FC<KeyProps> = ({ size, character, isNext, isLastWrong }) => {
     case "--":
       width = size * 1.2;
       break;
+    case " ":
+      width = size * 6;
+      break;
+    case "ctrl":
+      width = size * 1.5;
+      break;
+    case "alt":
+      width = size * 1.5;
+      break;
+    case "XX":
+      width = size * 1.5;
+      break;
     default:
       width = size;
   }
@@ -68,19 +81,25 @@ const rdxProps = (state: ReduxState) => {
 };
 
 interface KeyBoardProps {
-  nextKey: Characters,
-  lastError: Characters,
+  nextKey: Characters;
+  lastError: Characters;
   className: string;
   width: number;
   layout: Layout;
 }
 
-const KeyBoard: React.FC<KeyBoardProps> = ({ nextKey, lastError, width, layout, className }) => {
-  console.log(US["0"])
+const KeyBoard: React.FC<KeyBoardProps> = ({
+  nextKey,
+  lastError,
+  width,
+  layout,
+  className,
+}) => {
+  console.log(US["0"]);
   return (
     <div
       className={`keyboard-container ${className}`}
-      style={{ width: width, height: width * 0.3 }}
+      style={{ width: width, height: width * 0.37 }}
     >
       <div className="keyboard-row">
         {layout.Number.map((key, i) => {
@@ -123,6 +142,19 @@ const KeyBoard: React.FC<KeyBoardProps> = ({ nextKey, lastError, width, layout, 
       </div>
       <div className="keyboard-row">
         {layout.Lower.map((key, i) => {
+          return (
+            <Key
+              isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}
+              isNext={US[nextKey]?.indexOf(key) >= 0 ? true : false}
+              character={key}
+              key={i}
+              size={width * 0.06}
+            />
+          );
+        })}
+      </div>
+      <div className="keyboard-row">
+        {BottomLine.map((key, i) => {
           return (
             <Key
               isLastWrong={US[lastError]?.indexOf(key) >= 0 ? true : false}

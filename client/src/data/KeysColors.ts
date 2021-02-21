@@ -77,4 +77,7 @@ export const UsColors: { [key in Keys]: Colors } = {
   "--": "R4",
   //Space
   " ": "SPACE",
+  ctrl: "SPACE",
+  alt: "SPACE",
+  XX: "SPACE",
 };

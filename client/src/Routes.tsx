@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //pages
 import Home from "./pages/Home";
-import Practice from "./pages/Practice"
+import Practice from "./pages/Practice";
 
 //modals
 import Login from "./modals/Login";
@@ -42,7 +42,11 @@ const Routes: React.FC = () => {
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}
       />
-      <Route exact path="/practice/:practiceCode/" component={() => <Practice />} />
+      <Route
+        exact
+        path="/practice/p=:practiceCode/l=:practiceLength"
+        component={() => <Practice />}
+      />
     </BrowserRouter>
   );
 };

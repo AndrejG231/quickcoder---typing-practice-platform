@@ -1,4 +1,4 @@
-import { Layout } from "../types/practice/KeyBoardT";
+import { Layout, Keys } from "../types/practice/KeyBoardT";
 
 export const UsTemplate: Layout = {
   Number: [
@@ -51,3 +51,5 @@ export const UsTemplate: Layout = {
   ],
   Lower: ["LShift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "RShift"],
 };
+
+export const BottomLine : Keys[] = ["ctrl", "XX", "alt", " ", "alt", "XX", "ctrl"];
