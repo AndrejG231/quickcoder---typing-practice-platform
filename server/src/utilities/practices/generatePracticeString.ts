@@ -5,12 +5,15 @@ interface generatePracticeStringT {
 }
 
 const generatePracticeString: generatePracticeStringT = (name, length) => {
+  const [category, practice] = name.split("+") as string[];
+
+  const practices = PracticeStrings[category][practice].parts;
+
   let finalString = "";
+
   while (finalString.length < length) {
     finalString +=
-      PracticeStrings[name]["parts"][
-        Math.floor(Math.random() * PracticeStrings[name]["parts"].length)
-      ].trim() + " ";
+      practices[Math.floor(Math.random() * practices.length)].trim() + " ";
   }
 
   return finalString.slice(0, length);
