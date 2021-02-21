@@ -1,4 +1,7 @@
-const Messages = {
+import keyList from "./typesKeyList";
+import langList from "./typesLangList";
+
+const Messages: { [lang in langList]: { [message in keyList]: string } } = {
   en: {
     // REGISTER ERRORS //
     register_username_specialCharacters:
@@ -42,7 +45,10 @@ const Messages = {
     retrievePassword_token_invalid: "Invalid token. Please try again",
     retrievePassword_token_expired: "Token expired. Please try again",
     // PRACTICE //
-    getPracticesObject_practice_created: "Successfuly created practice object",
+    getPracticesObject_practice_created: "Successfuly created practice session",
+    updatePracticeObject_practice_updated:
+      "Successfuly updated practice session.",
+    updatePracticeObject_practice_failed: "Failed to update practice session",
   },
 };
 

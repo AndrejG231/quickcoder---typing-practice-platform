@@ -3,12 +3,13 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
+  BaseEntity,
 } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
 @Entity("practices")
-class Practices {
+class Practices extends BaseEntity{
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
@@ -16,6 +17,10 @@ class Practices {
   @Field()
   @Column()
   string!: string;
+
+  @Field()
+  @Column({ default: 0 })
+  index!: number;
 
   @Field()
   @Column({ default: 0 })

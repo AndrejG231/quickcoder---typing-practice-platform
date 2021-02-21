@@ -1,13 +1,7 @@
 import PassTokens from "../types/entities/PassTokens";
-import {
-  Arg,
-  Int,
-  Mutation,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
 import Users from "../types/entities/Users";
-
+import Practices from "../types/entities/Practices";
 
 @Resolver(Users)
 export class DevelopmentUserResolver {
@@ -41,6 +35,14 @@ export class DevelopmentUserResolver {
   async passTokenList() {
     const tokens = await PassTokens.find();
     console.log(tokens);
+
+    return true;
+  }
+
+  @Query(() => Boolean)
+  async getPracticeList() {
+    const practices = await Practices.find();
+    console.log(practices);
 
     return true;
   }

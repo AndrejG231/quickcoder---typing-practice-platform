@@ -8,7 +8,7 @@ class PracticeInfoResponse {
   result: ActionResponse;
 
   @Field({nullable: true})
-  data?: Practices;
+  practice?: Practices;
 }
 
 export default PracticeInfoResponse;

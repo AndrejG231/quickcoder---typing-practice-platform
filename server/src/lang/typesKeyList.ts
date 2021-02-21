@@ -30,9 +30,11 @@ type keyList =
   | "retrievePassword_email_notFound"
   | "retrievePassword_server_unknownError"
   | "retrievePassword_resetLink_sent"
-  |"retrievePassword_token_invalid"
-  |"retrievePassword_token_expired"
+  | "retrievePassword_token_invalid"
+  | "retrievePassword_token_expired"
   //RECIEVED PRACTICE OBJECT
   | "getPracticesObject_practice_created"
+  | "updatePracticeObject_practice_updated"
+  | "updatePracticeObject_practice_failed";
 
 export default keyList;
