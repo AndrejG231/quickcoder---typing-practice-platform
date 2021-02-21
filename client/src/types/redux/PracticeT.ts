@@ -1,22 +1,11 @@
-import { Errors } from "../practice/PracticeT";
 import { Characters } from "../practice/KeyBoardT";
-
-export type PracticeObjectT = {
-  index: number;
-  lastError: string;
-  string: string;
-  id: number;
-  errors: Errors;
-  errorsCount: number;
-  isActive: boolean;
-  isFinished: boolean;
-};
+import { PracticeObjectT } from "../practice/PracticeT";
 
 export const PracticeObject: PracticeObjectT = {
   index: 0,
   string: "",
-  lastError: "",
   id: -1,
+  lastError: "",
   errors: {},
   errorsCount: 0,
   isActive: false,

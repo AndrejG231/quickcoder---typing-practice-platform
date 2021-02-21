@@ -1,6 +1,7 @@
 import { Characters, Keys } from "../types/practice/KeyBoardT";
 
 export const US: { [key in Characters]: Keys[] } = {
+  "": ["none"],
   " ": [" "],
   "!": ["1", "RShift"],
   '"': ["'", "LShift"],

@@ -93,9 +93,11 @@ export type Characters =
   | "{"
   | "|"
   | "}"
-  | "~";
+  | "~"
+  | "";
 
 export type Keys =
+  | "none"
   | "--"
   | "1"
   | "TAB"

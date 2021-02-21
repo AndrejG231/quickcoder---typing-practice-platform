@@ -95,7 +95,6 @@ const KeyBoard: React.FC<KeyBoardProps> = ({
   layout,
   className,
 }) => {
-  console.log(US["0"]);
   return (
     <div
       className={`keyboard-container ${className}`}

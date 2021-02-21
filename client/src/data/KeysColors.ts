@@ -80,4 +80,5 @@ export const UsColors: { [key in Keys]: Colors } = {
   ctrl: "SPACE",
   alt: "SPACE",
   XX: "SPACE",
+  none: "SPACE",
 };
