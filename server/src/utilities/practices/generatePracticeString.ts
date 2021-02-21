@@ -1,16 +1,16 @@
-import PracticeStrings, {
-  PracticeStringsKeys,
-} from "../../data/PracticeStrings";
+import PracticeStrings from "../../data/PracticeStrings";
 
 interface generatePracticeStringT {
-  (name: PracticeStringsKeys, length: number): string;
+  (name: string, length: number): string;
 }
 
 const generatePracticeString: generatePracticeStringT = (name, length) => {
   let finalString = "";
   while (finalString.length < length) {
     finalString +=
-      PracticeStrings[name][Math.floor(Math.random() * PracticeStrings[name].length)] + " ";
+      PracticeStrings[name]["parts"][
+        Math.floor(Math.random() * PracticeStrings[name]["parts"].length)
+      ].trim() + " ";
   }
 
   return finalString.slice(0, length);

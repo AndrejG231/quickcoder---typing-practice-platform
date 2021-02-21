@@ -1,7 +1,6 @@
 import { Arg, Ctx, Int, Mutation, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 
-import { PracticeStringsKeys } from "../data/PracticeStrings";
 //types
 import GraphqlContext from "../types/GraphqlContext";
 import Practices from "../types/entities/Practices";
@@ -18,7 +17,7 @@ import generatePracticeString from "../utilities/practices/generatePracticeStrin
 class PracticeResolver {
   @Mutation(() => PracticeInfoResponse)
   async createPractice(
-    @Arg("practiceName", () => String) practiceName: PracticeStringsKeys,
+    @Arg("practiceName", () => String) practiceName: string,
     @Arg("clientParameter") clientParameter: string,
     @Arg("length", () => Int) length: number,
     @Ctx() { req }: GraphqlContext
