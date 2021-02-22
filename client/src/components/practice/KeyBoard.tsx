@@ -52,10 +52,10 @@ const Key: React.FC<KeyProps> = ({ size, character, isNext, isLastWrong }) => {
       width = size * 6;
       break;
     case "ctrl":
-      width = size * 1.5;
+      width = size * 1.6;
       break;
     case "alt":
-      width = size * 1.5;
+      width = size * 1.6;
       break;
     case "XX":
       width = size * 1.5;
@@ -98,7 +98,7 @@ const KeyBoard: React.FC<KeyBoardProps> = ({
   return (
     <div
       className={`keyboard-container ${className}`}
-      style={{ width: width, height: width * 0.37 }}
+      style={{ width: width, height: width * 0.35 }}
     >
       <div className="keyboard-row">
         {layout.Number.map((key, i) => {

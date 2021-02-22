@@ -21,6 +21,7 @@ import Practices from "./types/entities/Practices";
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
 import PracticeResolver from "./resolvers/PracticeResolver";
+import MenuResolver from "./resolvers/MenuResolver";
 import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
 //==>Typess";
 
@@ -33,6 +34,7 @@ const main = async () => {
     UserAuthResolver,
     ForgotPasswordResolver,
     PracticeResolver,
+    MenuResolver,
     /* DEV ONLY */ DevelopmentUserResolver,
   ];
 
