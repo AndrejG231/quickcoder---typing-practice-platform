@@ -30,6 +30,21 @@ const createPracticeMutation = gql`
   }
 `;
 
+export const practiceMenuQuery = gql`
+  query getItem($index: Int!) {
+    getItem(index: $index) {
+      hasMore
+      item {
+        type
+        name
+        description
+        overview
+      }
+      error
+    }
+  }
+`;
+
 export const useCreatePracticeSession = () => {
   return useMutation(createPracticeMutation);
 };

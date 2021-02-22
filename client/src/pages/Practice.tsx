@@ -21,10 +21,9 @@ import { ReduxState } from "../types/redux/ReduxState";
 //utilities
 import HandlePracticeProgress from "../utilites/handlePracticeProgress";
 import { Characters } from "../types/practice/KeyBoardT";
+import getClientParam from "../utilites/clientParameter";
 
 import { useCreatePracticeSession } from "../graphql/practice";
-import getClientParam from "../utilites/clientParameter";
-import { create } from "domain";
 
 const rdxProps = (state: ReduxState) => {
   return {

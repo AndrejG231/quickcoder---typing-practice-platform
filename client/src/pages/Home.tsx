@@ -109,7 +109,7 @@ const Home: React.FC<HomeProps> = ({
 
   const Redirect = (to: string) => {
     AnimationOut();
-    setTimeout(() => navigation.push(to), 300);
+    setTimeout(() => navigation.push(to), 150);
   };
 
   return (
@@ -132,7 +132,7 @@ const Home: React.FC<HomeProps> = ({
         style={{ transform: `translateX(-${AnimationState.main * 3}px)` }}
       >
         <ClippedButton onClick={() => null}>Typing test</ClippedButton>
-        <ClippedButton onClick={() => Redirect("/practice/")}>
+        <ClippedButton onClick={() => Redirect("/practice_menu/")}>
           Practice
         </ClippedButton>
         <ClippedButton onClick={() => null}>Settings</ClippedButton>
