@@ -101,6 +101,8 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
     return <div>Error</div>;
   }
 
+  console.log(data)
+
   return (
     <div className="practiceContainer" tabIndex={1}>
       <FingerIndex width={window.innerWidth > 1580 ? 1000 : 800} />

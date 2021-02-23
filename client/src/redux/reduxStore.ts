@@ -7,6 +7,7 @@ import {
   practiceReducer,
   practiceAnimationReducer,
 } from "./reducers/practiceReducer";
+import { practiceMenuReducer } from "./reducers/practiceMenuReducer";
 
 const reducers = combineReducers({
   AuthCount: refreshAuthReducer,
@@ -15,6 +16,7 @@ const reducers = combineReducers({
   Animations: ReduxAnimationHandler,
   Practice: practiceReducer,
   PracticeOffset: practiceAnimationReducer,
+  PracticeMenu: practiceMenuReducer,
 });
 
 const composeEnhancers =
