@@ -1,4 +1,4 @@
-import { Arg, Ctx, Int, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Int, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 
 //types
@@ -100,6 +100,31 @@ class PracticeResolver {
         "en"
       );
     }
+  }
+
+  @Query(() => PracticeInfoResponse)
+  async getPracticeResult(@Arg("id", () => Int) id: number) {
+    const practice = await Practices.findOne({ id: id });
+
+    if (practice) {
+      return {
+        result: generateResponse(
+          true,
+          "getPracticesObject_practice_received",
+          "en"
+        ),
+        practice: practice,
+      };
+    }
+
+    return {
+      result: generateResponse(
+        false,
+        "getPracticesObject_practice_received",
+        "en"
+      ),
+      practice: null,
+    };
   }
 }
 

@@ -34,6 +34,7 @@ type keyList =
   | "retrievePassword_token_expired"
   //RECIEVED PRACTICE OBJECT
   | "getPracticesObject_practice_created"
+  | "getPracticesObject_practice_received"
   | "updatePracticeObject_practice_updated"
   | "updatePracticeObject_practice_failed";
 

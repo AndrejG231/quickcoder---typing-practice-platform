@@ -15,7 +15,7 @@ class PracticeUpdateFields {
   is_finished?: boolean;
 
   @Field(() => Int, { nullable: true })
-  time_spend?: number;
+  time_spent?: number;
 }
 
 export default PracticeUpdateFields;

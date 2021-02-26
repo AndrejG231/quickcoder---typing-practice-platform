@@ -2,7 +2,7 @@ require("dotenv").config();
 import "reflect-metadata";
 import cors from "cors";
 
-import { createConnection } from "typeorm";
+import { createConnection, getConnection} from "typeorm";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -43,6 +43,8 @@ const main = async () => {
   /////////
 
   await createConnection({ ...PG_SETTING, entities: entities } as any);
+
+  // await getConnection().createQueryBuilder().delete().from(Practices).execute()
 
   const server = express();
 

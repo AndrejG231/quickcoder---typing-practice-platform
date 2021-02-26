@@ -46,6 +46,7 @@ const Messages: { [lang in langList]: { [message in keyList]: string } } = {
     retrievePassword_token_expired: "Token expired. Please try again",
     // PRACTICE //
     getPracticesObject_practice_created: "Successfuly created practice session",
+    getPracticesObject_practice_received: "Successfuly retrieved practice session",
     updatePracticeObject_practice_updated:
       "Successfuly updated practice session.",
     updatePracticeObject_practice_failed: "Failed to update practice session",
