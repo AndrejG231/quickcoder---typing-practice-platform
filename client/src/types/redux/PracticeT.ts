@@ -7,6 +7,7 @@ export const PracticeObject: PracticeObjectT = {
   id: -1,
   lastError: "",
   errors: {},
+  startTime: 0,
   errorsCount: 0,
   isActive: false,
   isFinished: false,

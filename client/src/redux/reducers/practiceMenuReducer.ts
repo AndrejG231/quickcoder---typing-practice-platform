@@ -21,6 +21,9 @@ export const practiceMenuReducer: practiceMenuReducerT = (
       };
 
     case "categories/setTrue":
+      if (state.categoriesDisplay.hasOwnProperty(action.categoryName)) {
+        return state;
+      }
       return {
         ...state,
         categoriesDisplay: {

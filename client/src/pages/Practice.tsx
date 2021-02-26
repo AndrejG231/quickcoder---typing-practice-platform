@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { UsTemplate } from "../data/KeyBoardTemplate";
 
@@ -23,7 +23,10 @@ import HandlePracticeProgress from "../utilites/handlePracticeProgress";
 import { Characters } from "../types/practice/KeyBoardT";
 import getClientParam from "../utilites/clientParameter";
 
-import { useCreatePracticeSession } from "../graphql/practice";
+import {
+  useCreatePracticeSession,
+  useUpdatePracticeMutation,
+} from "../graphql/practice";
 
 const rdxProps = (state: ReduxState) => {
   return {
@@ -38,7 +41,16 @@ const rdxDispatch = (dispatch: any) => {
   };
 };
 
-const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
+interface PracticeProps {
+  setPracticeSession: (practice: PracticeObjectT) => void;
+  practice: PracticeObjectT;
+}
+
+const Practice: React.FC<PracticeProps> = ({
+  setPracticeSession,
+  practice,
+}) => {
+  const navigator = useHistory();
   const {
     practiceCode,
     practiceLength,
@@ -48,6 +60,8 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
   } = useParams();
 
   const [createPractice, { data, error, loading }] = useCreatePracticeSession();
+  const { validate, mutation } = useUpdatePracticeMutation();
+  const [updatePractice] = mutation;
 
   const loadPractice = async () => {
     await createPractice({
@@ -66,6 +80,29 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
     setPracticeSession(HandlePracticeProgress(e.key as Characters, practice));
   };
 
+  const handleUpdatePractice = async () => {
+    console.log(new Date().getTime() - practice.startTime);
+    const result = await validate(
+      updatePractice({
+        variables: {
+          practiceId: practice.id,
+          practiceUpdateFields: {
+            index: practice.index,
+            errors_count: practice.errorsCount,
+            errors: JSON.stringify(practice.errors),
+            time_spent: new Date().getTime() - practice.startTime,
+            is_finished: true,
+          },
+        },
+      })
+    );
+    if (result.success) {
+      navigator.push(`/practice/finished/id=${practice.id}`);
+    } else {
+      navigator.push(`/server-error/`);
+    }
+  };
+
   useEffect(() => {
     if (!data) {
       loadPractice();
@@ -81,7 +118,7 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
         isFinished: false,
         isActive: true,
         string: newPractice.string,
-        timeSpent: 0,
+        startTime: new Date().getTime(),
       });
     }
   }, [data, loadPractice, setPracticeSession]);
@@ -93,6 +130,12 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
     };
   });
 
+  useEffect(() => {
+    if (practice.isFinished) {
+      handleUpdatePractice();
+    }
+  }, [practice]);
+
   if (loading) {
     return <div>loading...</div>;
   }
@@ -100,8 +143,6 @@ const Practice: React.FC<any> = ({ setPracticeSession, practice }) => {
   if (error) {
     return <div>Error</div>;
   }
-
-  console.log(data)
 
   return (
     <div className="practiceContainer" tabIndex={1}>

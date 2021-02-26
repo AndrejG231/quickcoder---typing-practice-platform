@@ -13,4 +13,5 @@ export type PracticeObjectT = {
   errorsCount: number;
   isActive: boolean;
   isFinished: boolean;
+  startTime: number;
 };

@@ -4,7 +4,6 @@ import {
   PracticeObject,
 } from "../../types/redux/PracticeT";
 
-
 export const practiceReducer: PracticeReducerT = (
   state = PracticeObject,
   action

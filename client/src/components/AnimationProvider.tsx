@@ -87,6 +87,7 @@ const AnimationProvider: React.FC<AnimationProviderProps> = ({
     if (PracticeLettersOffset * 22 > PracticeOffset) {
       AddOffset();
     }
+
   };
 
   //
