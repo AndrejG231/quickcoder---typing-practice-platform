@@ -3,32 +3,55 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import MenuItem from "../components/menu/MenuItem";
 import { practiceMenuQuery } from "../graphql/practice";
-import { setTrueCategoryAction } from "../redux/actions/practiceMenuActions";
+import {
+  setTrueCategoryAction,
+  addIndexAction,
+  addMenuItemAction,
+} from "../redux/actions/practiceMenuActions";
+import {
+  addIndexActionT,
+  addMenuItemActionT,
+  MenuItemT,
+} from "../types/redux/practiceMenuT";
+import { ReduxState } from "../types/redux/ReduxState";
 
-const rdxProps = () => {};
+const rdxProps = (state: ReduxState) => {
+  return {
+    practiceData: state.PracticeMenu.practiceData,
+    index: state.PracticeMenu.index,
+  };
+};
 
 const rdxDispatch = (dispatch: any) => {
   return {
     setTrue: (category: string) => dispatch(setTrueCategoryAction(category)),
+    addItem: (item: MenuItemT) => dispatch(addMenuItemAction(item)),
+    addIndex: () => dispatch(addIndexAction()),
   };
 };
 
 interface PracticeMenuProps {
   setTrue: (category: string) => void;
+  index: number;
+  practiceData: MenuItemT[];
+  addItem: addMenuItemActionT;
+  addIndex: addIndexActionT;
 }
 
-const PracticeMenu: React.FC<PracticeMenuProps> = ({ setTrue }) => {
-  const [index, setIndex] = useState(0);
-  const [practiceData, setPracticeData] = useState<any[]>([]);
-  const [getItem, { data, error, loading }] = useLazyQuery(practiceMenuQuery);
+const PracticeMenu: React.FC<PracticeMenuProps> = ({
+  setTrue,
+  index,
+  addIndex,
+  practiceData,
+  addItem,
+}) => {
+  const [getItem, { data, error }] = useLazyQuery(practiceMenuQuery);
 
   useEffect(() => {
     if (data?.getItem?.item?.type) {
-      setPracticeData([...practiceData, data]);
-      setIndex(index + 1);
-      console.log("Has valid data");
+      addItem(data.getItem.item);
+      addIndex();
     } else {
-      console.log("Has invalid data");
     }
   }, [data]);
 
@@ -43,9 +66,8 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({ setTrue }) => {
 
   let category: string;
   return (
-    <div>
-      {practiceData.map((data, index) => {
-        const item = data.getItem.item;
+    <div style={{ height: "100vh", overflowY: "scroll" }}>
+      {practiceData.map((item, index) => {
         if (item.type === "category") {
           category = item.name as string;
           setTrue(category);

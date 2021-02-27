@@ -31,6 +31,16 @@ export const practiceMenuReducer: practiceMenuReducerT = (
           [action.categoryName]: true,
         },
       };
+    case "items/add":
+      return {
+        ...state,
+        practiceData: [...state.practiceData, action.menuItem],
+      };
+    case "index/add":
+      return {
+        ...state,
+        index: ++state.index,
+      };
     default:
       return state;
   }
