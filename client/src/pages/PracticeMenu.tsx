@@ -66,7 +66,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
 
   let category: string;
   return (
-    <div style={{ height: "100vh", overflowY: "scroll" }}>
+    <div style={{ height: "100vh", overflowY: "auto" }}>
       {practiceData.map((item, index) => {
         if (item.type === "category") {
           category = item.name as string;

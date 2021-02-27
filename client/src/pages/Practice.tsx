@@ -10,6 +10,7 @@ import { setPracticeAction } from "../redux/actions/practiceActions";
 import KeyBoard from "../components/practice/KeyBoard";
 import TextLine from "../components/practice/TextLine";
 import FingerIndex from "../components/practice/FingerIndex";
+import LiveStats from "../components/practice/LiveStats";
 
 //styles
 import "./Practice.scss";
@@ -90,7 +91,6 @@ const Practice: React.FC<PracticeProps> = ({
             index: practice.index,
             errors_count: practice.errorsCount,
             errors: JSON.stringify(practice.errors),
-            time_spent: new Date().getTime() - practice.startTime,
             is_finished: true,
           },
         },
@@ -118,7 +118,7 @@ const Practice: React.FC<PracticeProps> = ({
         isFinished: false,
         isActive: true,
         string: newPractice.string,
-        startTime: new Date().getTime(),
+        startTime: -1,
       });
     }
   }, [data, loadPractice, setPracticeSession]);
@@ -152,6 +152,11 @@ const Practice: React.FC<PracticeProps> = ({
         width={window.innerWidth > 1580 ? 800 : 600}
         layout={UsTemplate}
         className="p-keyboard"
+      />
+      <LiveStats
+        startTime={practice.startTime}
+        characters={practice.index}
+        errors={Object.keys(practice.errors).length}
       />
     </div>
   );

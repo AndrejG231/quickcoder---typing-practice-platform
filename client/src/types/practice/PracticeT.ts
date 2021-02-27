@@ -1,7 +1,7 @@
 import { Characters } from "./KeyBoardT";
 
 export type Errors = {
-  [index: number]: string;
+  [index: string]: string;
 };
 
 export type PracticeObjectT = {

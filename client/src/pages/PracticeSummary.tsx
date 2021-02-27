@@ -1,6 +1,7 @@
 import { useHistory, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { getPracticeResultsQuery } from "../graphql/practice";
+import FormattedPracticeString from "../components/practice/FormattedPracticeString";
 
 const PracticeSummary = () => {
   const navigator = useHistory();
@@ -8,8 +9,6 @@ const PracticeSummary = () => {
   const { data, loading, error } = useQuery(getPracticeResultsQuery, {
     variables: { id: parseInt(id) },
   });
-
-  let lastError: any;
 
   if (loading) {
     return <div>Loading...</div>;
@@ -25,31 +24,11 @@ const PracticeSummary = () => {
   } = data.getPracticeResult.practice;
 
   const errors = JSON.parse(data.getPracticeResult.practice.errors);
-  const errKeys = Object.keys(errors).sort((a, b) => {
-    return ~~a - ~~b;
-  });
 
   return (
     <div className="practiceSummary-container">
-      <div className="practiceSummary-text">
-        {errKeys.map((errIndex, i) => {
-          const prevError = lastError;
-          lastError = ~~errIndex;
-          return (
-            <span key={i}>
-              {string.slice(prevError, lastError)}
-              <span key={i * 9 + 1000} className="textLine-error">
-                {errors[lastError]}
-              </span>
-            </span>
-          );
-        })}
-        <span>
-          {string.slice(lastError, index)}
-          <span className="textLine-nextChar">{string[index]}</span>
-          {string.slice(index + 1, string.length)}
-        </span>
-      </div>
+      <FormattedPracticeString index={index} errors={errors} string={string} />
+      <div className="practiceSummary-text"></div>
       <div className="practiceSummary-stats">
         Errors: {errors_count}
         <br />

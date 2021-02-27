@@ -24,6 +24,7 @@ const HandlePracticeProgress: HandleProgressFunctionT = (keyPressed, state) => {
       ...state,
       index: newIndex,
       lastError: "",
+      startTime: state.index === 0 ? new Date().getTime() : state.startTime,
     };
   }
   // bad key case

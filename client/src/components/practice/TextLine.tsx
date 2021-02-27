@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import FormattedPracticeString from "./FormattedPracticeString";
+
 //types
 import { Errors } from "../../types/practice/PracticeT";
 import { ReduxState } from "../../types/redux/ReduxState";
@@ -38,21 +40,11 @@ const TextLine: React.FC<TextAreaProps> = ({
           className="textLine-string"
           style={{ transform: `translateX(-${offset}px)` }}
         >
-          {Object.keys(errors).map((errIndex, i) => {
-            const prevError = lastError;
-            lastError = parseInt(errIndex);
-            return (
-              <span key={i}>
-                {string.slice(prevError, lastError)}
-                <span key={i*9+1000} className="textLine-error">{errors[lastError]}</span>
-              </span>
-            );
-          })}
-          <span>
-            {string.slice(lastError, index)}
-            <span className="textLine-nextChar">{string[index]}</span>
-            {string.slice(index + 1, string.length)}
-          </span>
+          <FormattedPracticeString
+            errors={errors}
+            string={string}
+            index={index}
+          />
         </div>
       </div>
       <div className="textLine-cover left" />
