@@ -1,0 +1,50 @@
+@import "../globalStyles/colorScheme.scss";
+@import "../globalStyles/mixins.scss";
+
+.practiceSummary-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.practiceSummary-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.practiceSummary-field {
+  font-family: monospace;
+  font-size: 30px;
+  font-weight: 900;
+  color: $w3;
+  margin-left: 20px;
+  @include textOutline($b5);
+}
+
+.practiceSummary-value {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 35px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: $b4;
+  margin-left: 60px;
+  @include textOutline($w3);
+}
+
+.practiceSummary-textView {
+  box-sizing: border-box;
+  height: 90vh;
+  width: 90%;
+  margin: auto 40px;
+  border: 10px solid $b4;
+  font-family: monospace;
+  font-size: 40px;
+  color: $w4;
+  background: $b3;
+  overflow-y: auto;
+  .practice {
+    padding: 10px;
+  }
+}

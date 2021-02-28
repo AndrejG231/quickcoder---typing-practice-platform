@@ -92,6 +92,7 @@ const Practice: React.FC<PracticeProps> = ({
             errors_count: practice.errorsCount,
             errors: JSON.stringify(practice.errors),
             is_finished: true,
+            time_spent: new Date().getTime() - practice.startTime,
           },
         },
       })

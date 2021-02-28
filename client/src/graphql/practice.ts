@@ -73,6 +73,7 @@ export const getPracticeResultsQuery = gql`
         message
       }
       practice {
+        practice_name
         string
         errors
         errors_count
