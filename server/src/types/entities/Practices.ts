@@ -9,10 +9,14 @@ import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
 @Entity("practices")
-class Practices extends BaseEntity{
+class Practices extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
+
+  @Field()
+  @Column()
+  practice_name!: string;
 
   @Field()
   @Column()

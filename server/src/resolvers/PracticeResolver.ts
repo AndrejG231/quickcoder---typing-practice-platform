@@ -41,6 +41,7 @@ class PracticeResolver {
       .into(Practices)
       .values({
         user_id: user.id,
+        practice_name: practiceName, 
         string: generatePracticeString(practiceName, length),
       })
       .returning("*")
