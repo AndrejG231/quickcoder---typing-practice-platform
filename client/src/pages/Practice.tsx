@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { UsTemplate } from "../data/KeyBoardTemplate";
 
 //redux
-import { setPracticeAction } from "../redux/actions/practiceActions";
+import {
+  setPracticeAction,
+  resetPracticeOffset,
+  resetPracticeSession,
+} from "../redux/actions/practiceActions";
 
 //components
 import KeyBoard from "../components/practice/KeyBoard";
@@ -28,6 +32,7 @@ import {
   useCreatePracticeSession,
   useUpdatePracticeMutation,
 } from "../graphql/practice";
+import { setTimeout } from "timers";
 
 const rdxProps = (state: ReduxState) => {
   return {
@@ -39,16 +44,22 @@ const rdxDispatch = (dispatch: any) => {
   return {
     setPracticeSession: (practice: PracticeObjectT) =>
       dispatch(setPracticeAction(practice)),
+    resetPractice: () => {
+      dispatch(resetPracticeSession());
+      dispatch(resetPracticeOffset());
+    },
   };
 };
 
 interface PracticeProps {
   setPracticeSession: (practice: PracticeObjectT) => void;
+  resetPractice(): () => void;
   practice: PracticeObjectT;
 }
 
 const Practice: React.FC<PracticeProps> = ({
   setPracticeSession,
+  resetPractice,
   practice,
 }) => {
   const navigator = useHistory();
@@ -82,7 +93,6 @@ const Practice: React.FC<PracticeProps> = ({
   };
 
   const handleUpdatePractice = async () => {
-    console.log(new Date().getTime() - practice.startTime);
     const result = await validate(
       updatePractice({
         variables: {
@@ -134,6 +144,7 @@ const Practice: React.FC<PracticeProps> = ({
   useEffect(() => {
     if (practice.isFinished) {
       handleUpdatePractice();
+      setTimeout(() => resetPractice(), 1000);
     }
   }, [practice]);
 

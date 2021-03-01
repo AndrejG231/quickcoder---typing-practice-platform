@@ -7,6 +7,7 @@ interface ArrowButtonProps {
   variant: "left" | "right";
   bodyWidth: string;
   className?: string;
+  textClass?: string;
 }
 
 const ArrowButton: React.FC<ArrowButtonProps> = ({
@@ -15,6 +16,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
   variant,
   bodyWidth,
   className,
+  textClass,
 }) => {
   return (
     <div
@@ -23,7 +25,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
       style={{ width: bodyWidth }}
     >
       <div className={"tip " + variant}></div>
-      <p className={"button-text " + variant}>{children}</p>
+      <p className={`button-text ${variant} ${textClass}`}>{children}</p>
     </div>
   );
 };

@@ -12,11 +12,11 @@
   bottom: $bottom;
 }
 
-@mixin effect3D($c1, $c2) {
-  border-top: 2px solid $c1;
-  border-left: 2px solid $c1;
-  border-bottom: 2px solid $c2;
-  border-right: 2px solid $c2;
+@mixin effect3D($size, $c1, $c2) {
+  border-top: $size solid $c1;
+  border-left: $size solid $c1;
+  border-bottom: $size solid $c2;
+  border-right: $size solid $c2;
 }
 
 @mixin textOutline($color) {

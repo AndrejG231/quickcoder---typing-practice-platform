@@ -12,7 +12,7 @@ import ArrowButton from "../components/ArrowButton";
 import { ReduxState } from "../types/redux/ReduxState";
 import "./PracticeSummary.scss";
 import msToTime from "../utilites/msToTime";
-
+import Stat from "../components/practice/Stat";
 interface PracticeSummaryProps {
   resetPractice: () => void;
   resetOffset: () => void;
@@ -56,24 +56,21 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
   const errors = JSON.parse(data.getPracticeResult.practice.errors);
 
   return (
-    <div className={`practiceSummary-container`}>
-      <div className={`practiceSummary-column`}>
-        <div className="practiceSummary-field">Errors:</div>
-        <div className="practiceSummary-value">{errors_count}</div>
-        <div className="practiceSummary-field">Error rate:</div>
-        <div className="practiceSummary-value">
-          {Math.round((errors_count / index) * 10000) / 100 || 0}%
-        </div>
-        <div className="practiceSummary-field">Length:</div>
-        <div className="practiceSummary-value">{index}</div>
-        <div className="practiceSummary-field">Time:</div>
-        <div className="practiceSummary-value">{msToTime(time_spent)}</div>
-        <div className="practiceSummary-field">Chars per min:</div>
-        <div className="practiceSummary-value">
-          {Math.round(index / (time_spent / 60000))}
-        </div>
+    <div className={`pS-container`}>
+      <div className={`pS-column`}>
+        <Stat field={"Errors"} value={errors_count} />
+        <Stat field={"Length"} value={index} />
+        <Stat field={"Time"} value={msToTime(time_spent)} />
+        <Stat
+          field={"Error rate"}
+          value={`${Math.round((errors_count / index) * 10000) / 100 || 0}%`}
+        />
+        <Stat
+          field={"Chars. per min"}
+          value={Math.round(index / (time_spent / 60000))}
+        />
       </div>
-      <div className="practiceSummary-textView">
+      <div className="pS-textView">
         <FormattedPracticeString
           className="practice"
           index={index}
@@ -81,27 +78,50 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
           string={string}
         />
       </div>
-      <div className="practiceSummary-column">
+      <div className="pS-column">
         <ArrowButton
-          bodyWidth="110px"
+          bodyWidth="150px"
           variant="left"
           onClick={() => {
             resetPractice();
             resetOffset();
             navigator.push(`/practice/p=${practice_name}/l=${index}`);
           }}
+          textClass="pS-buttonText"
         >
           RESTART
         </ArrowButton>
 
         <ArrowButton
-          bodyWidth="110px"
+          bodyWidth="150px"
+          variant="left"
+          onClick={() => {
+            navigator.push(`/practice_menu/`);
+          }}
+          textClass="pS-buttonText"
+        >
+          NEW EXERCISE
+        </ArrowButton>
+
+        <ArrowButton
+          bodyWidth="150px"
+          variant="left"
+          onClick={() => {
+            navigator.push(`/home/profile/`);
+          }}
+          textClass="pS-buttonText"
+        >
+          PROFILE
+        </ArrowButton>
+        <ArrowButton
+          bodyWidth="150px"
           variant="left"
           onClick={() => {
             resetPractice();
             resetOffset();
             navigator.push(`/home/`);
           }}
+          textClass="pS-buttonText"
         >
           HOME
         </ArrowButton>

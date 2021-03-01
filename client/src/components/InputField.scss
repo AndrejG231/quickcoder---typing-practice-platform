@@ -7,7 +7,7 @@
   width: 60vw;
   @include centerContent();
   flex-direction: column;
-  @include effect3D($w3, $b4);
+  @include effect3D(2px, $w3, $b4);
   &.submit {
     height: 120px;
     position: relative;
@@ -31,7 +31,7 @@
 }
 
 .if-field {
-  @include effect3D($w3, $b4);
+  @include effect3D(2px, $w3, $b4);
   height: 30px;
   width: 80%;
   margin-top: 10px;
@@ -39,7 +39,7 @@
   text-align: center;
 }
 
-.if-field:focus{
+.if-field:focus {
   transform: scale(1.1);
 }
 

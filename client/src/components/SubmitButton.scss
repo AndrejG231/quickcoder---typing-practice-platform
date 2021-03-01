@@ -7,14 +7,14 @@
   width: 60vw;
   @include centerContent();
   flex-direction: column;
-  @include effect3D($w3, $b4);
+  @include effect3D(2px, $w3, $b4);
 }
 
 .if-submit {
   height: 60px;
   width: 60%;
   background: $b3;
-  @include effect3D($w3, $b4);
+  @include effect3D(2px, $w3, $b4);
   @include centerContent();
   cursor: pointer;
   transform: translateY(10px);

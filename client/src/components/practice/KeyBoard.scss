@@ -5,10 +5,10 @@
   border-radius: 10px;
   background: $b2;
   @include centerContent();
-  @include effect3D($w3, $b5);
+  @include effect3D(2px, $w3, $b5);
 }
 
-.keyboard-container{
+.keyboard-container {
   padding: 3px 10px;
   background: $b3;
   display: flex;
@@ -17,7 +17,7 @@
   border-radius: 15px;
 }
 
-.keyboard-row{
+.keyboard-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
