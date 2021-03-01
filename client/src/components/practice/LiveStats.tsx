@@ -6,9 +6,15 @@ interface LiveStatsProps {
   startTime: number;
   characters: number;
   errors: number;
+  width: number;
 }
 
-const LiveStats: FC<LiveStatsProps> = ({ startTime, characters, errors }) => {
+const LiveStats: FC<LiveStatsProps> = ({
+  startTime,
+  characters,
+  errors,
+  width,
+}) => {
   const [time, setTime] = useState<number>(0);
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date().getTime()), 99);
@@ -17,7 +23,7 @@ const LiveStats: FC<LiveStatsProps> = ({ startTime, characters, errors }) => {
     };
   }, []);
   return (
-    <div className="lS-container">
+    <div className="lS-container" style={{ width: width }}>
       <div className="lS-time">
         {startTime >= 0 ? msToTime(time - startTime) : msToTime(0)}
         <div className="lS-time-underLine" />

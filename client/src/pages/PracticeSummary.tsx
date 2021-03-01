@@ -66,7 +66,7 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
           value={`${Math.round((errors_count / index) * 10000) / 100 || 0}%`}
         />
         <Stat
-          field={"Chars. per min"}
+          field={"CPM"}
           value={Math.round(index / (time_spent / 60000))}
         />
       </div>

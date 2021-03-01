@@ -53,7 +53,7 @@ const rdxDispatch = (dispatch: any) => {
 
 interface PracticeProps {
   setPracticeSession: (practice: PracticeObjectT) => void;
-  resetPractice(): () => void;
+  resetPractice: () => void;
   practice: PracticeObjectT;
 }
 
@@ -166,6 +166,7 @@ const Practice: React.FC<PracticeProps> = ({
         className="p-keyboard"
       />
       <LiveStats
+        width={window.innerWidth > 1580 ? 1000 : 800}
         startTime={practice.startTime}
         characters={practice.index}
         errors={Object.keys(practice.errors).length}

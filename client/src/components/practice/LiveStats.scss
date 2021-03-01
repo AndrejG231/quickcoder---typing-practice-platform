@@ -2,7 +2,7 @@
 @import "../../globalStyles/colorScheme.scss";
 
 .lS-container {
-  width: 800px;
+  height: 120px;
   margin: 20px;
   padding: 22px;
   background: $b2;
@@ -38,13 +38,16 @@
 
 .lS-field {
   font-family: "Times New Roman", Times, serif;
-  font-size: 30px;
+  font-size: 25px;
   color: $b4;
+  @media screen and(min-width:1580px) {
+    font-size: 30px;
+  }
 }
 
 .lS-value {
   font-family: monospace;
-  font-size: 40px;
+  font-size: 30px;
   color: $b5;
   margin-left: 20px;
 }
