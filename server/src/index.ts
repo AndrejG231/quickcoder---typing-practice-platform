@@ -2,7 +2,7 @@ require("dotenv").config();
 import "reflect-metadata";
 import cors from "cors";
 
-import { createConnection, getConnection} from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -21,6 +21,7 @@ import Practices from "./types/entities/Practices";
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
 import PracticeResolver from "./resolvers/PracticeResolver";
+import PracticeStatsResolver from "./resolvers/PracticeStatsResolver";
 import MenuResolver from "./resolvers/MenuResolver";
 import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
 //==>Typess";
@@ -35,6 +36,7 @@ const main = async () => {
     ForgotPasswordResolver,
     PracticeResolver,
     MenuResolver,
+    PracticeStatsResolver,
     /* DEV ONLY */ DevelopmentUserResolver,
   ];
 

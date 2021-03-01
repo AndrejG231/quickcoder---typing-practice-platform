@@ -16,6 +16,7 @@ const generateMenu: { (): [Menu] } = () => {
       menu.push({
         type: "practice",
         name: practice,
+        category: category,
         description: categoryObject[practice].desc,
         overview: generatePracticeString(`${category}+${practice}`, 11) + "...",
       });
