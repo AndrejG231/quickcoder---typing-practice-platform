@@ -30,6 +30,12 @@ export class Menu {
 
   @Field({ nullable: true })
   overview?: string;
+
+  @Field(() => Int, { nullable: true })
+  userScore?: number;
+
+  @Field(() => Int, { nullable: true })
+  userPlayLength?: number;
 }
 
 @ObjectType()
@@ -42,12 +48,6 @@ class MenuResponse {
 
   @Field({ nullable: true })
   error?: string;
-
-  @Field(() => Int, { nullable: true })
-  userScore?: number;
-
-  @Field(() => Int, { nullable: true })
-  userPlayLength?: number;
 }
 
 @Resolver()
@@ -85,9 +85,11 @@ class MenuResolver {
 
     return {
       hasMore: index + 1 < MenuArray.length,
-      item: MenuArray[index],
-      userScore: userScore > 0 ? userScore : 0,
-      userPlayLength: userPlayLength,
+      item: {
+        ...MenuArray[index],
+        userScore: userScore > 0 ? userScore : 0,
+        userPlayLength: userPlayLength,
+      },
     };
   }
 }
