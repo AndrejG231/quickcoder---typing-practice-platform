@@ -14,6 +14,7 @@ import {
   MenuItemT,
 } from "../types/redux/practiceMenuT";
 import { ReduxState } from "../types/redux/ReduxState";
+import "./PracticeMenu.scss";
 
 const rdxProps = (state: ReduxState) => {
   return {
@@ -57,7 +58,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
 
   useEffect(() => {
     console.log("Getting new data");
-    setTimeout(() => getItem({ variables: { index: index } }), 50);
+    setTimeout(() => getItem({ variables: { index: index } }), 10);
   }, [index]);
 
   if (error) {
@@ -66,25 +67,29 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
 
   let category: string;
   return (
-    <div style={{ height: "100vh", overflowY: "auto" }}>
-      {practiceData.map((item, index) => {
-        if (item.type === "category") {
-          category = item.name as string;
-          setTrue(category);
-        }
-        return (
-          <MenuItem
-            category={category}
-            onClick={() => null}
-            selected={false}
-            desc={item.description as string}
-            type={item.type as string}
-            title={item.name.replaceAll("_", " ") as string}
-            overwiev={item.overview ? (item.overview as string) : ""}
-            key={index}
-          />
-        );
-      })}
+    <div>
+      <div className="pM-items">
+        {practiceData.map((item, index) => {
+          if (item.type === "category") {
+            category = item.name as string;
+            setTrue(category);
+          }
+          return (
+            <MenuItem
+              category={category}
+              onClick={() => null}
+              desc={item.description as string}
+              type={item.type as string}
+              title={item.name.replaceAll("_", " ") as string}
+              overwiev={item.overview ? (item.overview as string) : ""}
+              key={index}
+              userScore={item.userScore}
+              userPlayLength={item.userPlayLength}
+            />
+          );
+        })}
+      </div>
+      <div className="pM-settingsBar"></div>
     </div>
   );
 };

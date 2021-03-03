@@ -1,31 +1,48 @@
 @import "../../globalStyles/colorScheme.scss";
 @import "../../globalStyles/mixins.scss";
 
-.menuItem-container {
-  height: 120px;
+.mI-container {
+  height: 100px;
   @include effect3D(2px, $w4, $b5);
   margin: 10px;
   padding: 10px;
-  width: 600px;
+  width: 95%;
   background: $b3;
   color: $w5;
   font-family: sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
 
   &.practice {
-    margin-left: 50px;
+    margin-left: 20px;
+    height: 80px;
+    width: 90%;
+    border-radius: 50px;
   }
 }
 
-.menuItem-title {
+.mI-text{
+  margin-left: 30px;
+}
+
+.mI-visual{
+  margin-right: 60px;
+}
+
+.mI-title {
   font-size: 54px;
   text-transform: capitalize;
+  &.practice{
+    font-size: 40px;
+  }
 }
-.menuItem-desc {
+.mI-desc {
   font-size: 30px;
 }
-.menuItem-overview {
+.mI-overview {
   padding: 3px;
   width: max-content;
 }

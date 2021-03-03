@@ -6,6 +6,10 @@ export type MenuItemT = {
   description: string;
 
   overview?: string;
+
+  userScore?: number;
+
+  userPlayLength?: number;
 };
 
 export type MenuResponse = {
