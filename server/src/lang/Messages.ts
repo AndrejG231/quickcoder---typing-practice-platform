@@ -1,7 +1,6 @@
-import keyList from "./typesKeyList";
 import langList from "./typesLangList";
 
-const Messages: { [lang in langList]: { [message in keyList]: string } } = {
+const Messages: { [lang in langList]: { [message in string]: string } } = {
   en: {
     // REGISTER ERRORS //
     register_username_specialCharacters:
