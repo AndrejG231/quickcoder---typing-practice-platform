@@ -1,7 +1,5 @@
 import GraphqlContext from "../types/GraphqlContext";
 import getUserFromCookie from "../utilities/auth/getUserFromCookie";
-import calculatePracticeScore from "../utilities/calculatePracticeScore";
-import getRecentPracticeStats from "../utilities/practices/getRecentPractices";
 import {
   Arg,
   Ctx,
@@ -12,7 +10,6 @@ import {
   Resolver,
 } from "type-graphql";
 import MenuArray from "../utilities/practices/generateMenu";
-import getUserPlayLength from "../utilities/practices/getUserPlayLength";
 
 @ObjectType()
 export class Menu {
@@ -30,12 +27,6 @@ export class Menu {
 
   @Field({ nullable: true })
   overview?: string;
-
-  @Field(() => Int, { nullable: true })
-  userScore?: number;
-
-  @Field(() => Int, { nullable: true })
-  userPlayLength?: number;
 }
 
 @ObjectType()
@@ -72,23 +63,10 @@ class MenuResolver {
       };
     }
 
-    const recentPractice = await getRecentPracticeStats(
-      userData.user.id,
-      MenuArray[index].category + "+" + MenuArray[index].name
-    );
-
-    const userScore = calculatePracticeScore(recentPractice);
-    const userPlayLength = getUserPlayLength(
-      userData.user.id,
-      MenuArray[index].category + "+" + MenuArray[index].name
-    );
-
     return {
       hasMore: index + 1 < MenuArray.length,
       item: {
         ...MenuArray[index],
-        userScore: userScore > 0 ? userScore : 0,
-        userPlayLength: userPlayLength,
       },
     };
   }
