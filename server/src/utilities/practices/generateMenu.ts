@@ -1,6 +1,6 @@
 import PracticeStrings, { categoryDesc } from "../../data/PracticeStrings";
 import generatePracticeString from "./generatePracticeString";
-import { Menu } from "../../resolvers/MenuResolver";
+import { Menu } from "../../types/responses/MenuResponse";
 
 const generateMenu: { (): [Menu] } = () => {
   const menu: [Menu] = [{ type: "", name: "", description: "" }];
