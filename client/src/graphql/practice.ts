@@ -40,8 +40,6 @@ export const practiceMenuQuery = gql`
         name
         description
         overview
-        userScore
-        userPlayLength
       }
       error
     }
