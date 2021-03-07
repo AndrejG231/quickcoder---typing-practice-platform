@@ -4,7 +4,7 @@ type practiceUserStat = { score: number; length: number };
 export type userStatObjectT = { [key in string]: practiceUserStat };
 
 export type PracticeUserStatsActionT = {
-  (stat: practiceUserStat): { type: "userStats/set"; stat: practiceUserStat };
+  (stat: userStatObjectT): PracticeUserStatsActionObjectT;
 };
 
 export type PracticeUserStatsActionObjectT = {

@@ -2,7 +2,7 @@ import {
   categoryActionT,
   addMenuItemActionT,
   addIndexActionT,
-} from "../../types/redux/practiceMenuT";
+} from "../../types/redux/PracticeMenuT";
 
 export const toggleCategoryAction: categoryActionT = (category) => {
   return {

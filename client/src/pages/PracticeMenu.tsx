@@ -1,18 +1,20 @@
-import { useLazyQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MenuItem from "../components/menu/MenuItem";
-import { practiceMenuQuery } from "../graphql/practice";
+import { practiceMenuQuery, userStatsQuery } from "../graphql/practice";
 import {
   setTrueCategoryAction,
   addIndexAction,
   addMenuItemAction,
 } from "../redux/actions/practiceMenuActions";
+import { setPracticeUserStatsAction } from "../redux/actions/practiceUserStatsActions";
 import {
   addIndexActionT,
   addMenuItemActionT,
   MenuItemT,
-} from "../types/redux/practiceMenuT";
+} from "../types/redux/PracticeMenuT";
+import { userStatObjectT } from "../types/redux/PracticeUserStats";
 import { ReduxState } from "../types/redux/ReduxState";
 import "./PracticeMenu.scss";
 
@@ -27,6 +29,8 @@ const rdxDispatch = (dispatch: any) => {
   return {
     setTrue: (category: string) => dispatch(setTrueCategoryAction(category)),
     addItem: (item: MenuItemT) => dispatch(addMenuItemAction(item)),
+    setStats: (stat: userStatObjectT) =>
+      dispatch(setPracticeUserStatsAction(stat)),
     addIndex: () => dispatch(addIndexAction()),
   };
 };
@@ -37,6 +41,7 @@ interface PracticeMenuProps {
   practiceData: MenuItemT[];
   addItem: addMenuItemActionT;
   addIndex: addIndexActionT;
+  setStats: (stat: userStatObjectT) => void;
 }
 
 const PracticeMenu: React.FC<PracticeMenuProps> = ({
@@ -45,46 +50,54 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   addIndex,
   practiceData,
   addItem,
+  setStats,
 }) => {
   const [getItem, { data, error }] = useLazyQuery(practiceMenuQuery);
+  const practiceStats = useQuery(userStatsQuery);
 
   useEffect(() => {
-    if (data?.getItem?.item?.type) {
+    if (data?.getItem?.item) {
       addItem(data.getItem.item);
       addIndex();
-    } else {
     }
   }, [data]);
 
   useEffect(() => {
-    console.log("Getting new data");
     setTimeout(() => getItem({ variables: { index: index } }), 10);
   }, [index]);
+
+  useEffect(() => {
+    if (practiceStats.data?.getUserStats) {
+      practiceStats.refetch();
+      practiceStats.data.getUserStats.stats.forEach(
+        (stat: { name: string; length: number; score: number }) => {
+          const { length, score } = stat;
+          setStats({ [stat.name]: { length, score } });
+        }
+      );
+    }
+  }, [practiceStats.data]);
 
   if (error) {
     return <div>Error..</div>;
   }
 
-  let category: string;
   return (
     <div>
       <div className="pM-items">
         {practiceData.map((item, index) => {
           if (item.type === "category") {
-            category = item.name as string;
-            setTrue(category);
+            setTrue(item.name);
           }
           return (
             <MenuItem
-              category={category}
+              category={item.category}
               onClick={() => null}
               desc={item.description as string}
               type={item.type as string}
-              title={item.name.replaceAll("_", " ") as string}
+              title={item.name as string}
               overwiev={item.overview ? (item.overview as string) : ""}
               key={index}
-              userScore={item.userScore}
-              userPlayLength={item.userPlayLength}
             />
           );
         })}

@@ -29,6 +29,7 @@ import { Characters } from "../types/practice/KeyBoardT";
 import getClientParam from "../utilites/clientParameter";
 
 import {
+  practiceStatsQuery,
   useCreatePracticeSession,
   useUpdatePracticeMutation,
 } from "../graphql/practice";

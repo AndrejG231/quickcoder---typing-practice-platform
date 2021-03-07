@@ -1,7 +1,7 @@
 import {
   practiceMenuReducerT,
   menuStateObject,
-} from "../../types/redux/practiceMenuT";
+} from "../../types/redux/PracticeMenuT";
 
 export const practiceMenuReducer: practiceMenuReducerT = (
   state = menuStateObject,

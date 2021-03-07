@@ -8,10 +8,13 @@ import { toggleCategoryAction } from "../../redux/actions/practiceMenuActions";
 import { resetPracticeSession } from "../../redux/actions/practiceActions";
 import ScoreVisual from "./ScoreVisual";
 import "./MenuItem.scss";
+import { PracticeObjectT } from "../../types/practice/PracticeT";
+import { userStatObjectT } from "../../types/redux/PracticeUserStats";
 
 const rdxProps = (state: ReduxState) => {
   return {
     isOpen: state.PracticeMenu.categoriesDisplay,
+    practiceStats: state.PracticeUserStats,
   };
 };
 
@@ -37,8 +40,7 @@ interface MenuItemProps {
   overwiev?: string;
   category: string;
   onClick: () => void;
-  userScore?: number;
-  userPlayLength?: number;
+  practiceStats: userStatObjectT;
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({
@@ -52,34 +54,31 @@ const MenuItem: React.FC<MenuItemProps> = ({
   category,
   overwiev,
   onClick,
-  userScore,
-  userPlayLength,
+  practiceStats,
 }) => {
-  console.log(title, userScore);
   const nav = useHistory();
+
+  const stats = practiceStats[`${category}+${title}`];
+
   if (!isOpen[category] && type === "practice") {
     return null;
   }
+
   return (
     <div
       onClick={() => {
         if (type === "practice") {
           resetPractice();
-          nav.push(
-            `/practice/p=${category.replaceAll(" ", "_")}+${title.replaceAll(
-              " ",
-              "_"
-            )}/l=50/`
-          );
+          nav.push(`/practice/p=${category}+${title}/l=50/`);
         } else {
-          toggle(category);
+          toggle(title);
         }
         onClick();
       }}
       className={`${type} ${className} mI-container`}
     >
       <div className="mI-text">
-        <div className={`${type} mI-title`}>{title}</div>
+        <div className={`${type} mI-title`}>{title.replaceAll("_", " ")}</div>
         <div className={`${type} menuItem-desc`}>{desc}</div>
         {/* 
         {type === "practice" ? (
@@ -90,16 +89,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
       <div className="mI-visual">
         {type === "practice" ? (
           <ScoreVisual
-            practiceLength={userPlayLength ? userPlayLength : 0}
-            score={userScore ? userScore : 0}
+            practiceLength={stats?.length ? stats.length : 0}
+            score={stats?.score ? stats.score : 0}
           />
         ) : (
           <IconContext.Provider value={{ className: "mI-category-open" }}>
-            {isOpen[category] ? (
-              <BsFillCaretUpFill />
-            ) : (
-              <BsFillCaretRightFill />
-            )}
+            {isOpen[title] ? <BsFillCaretUpFill /> : <BsFillCaretRightFill />}
           </IconContext.Provider>
         )}
       </div>

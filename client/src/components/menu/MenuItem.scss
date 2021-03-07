@@ -24,18 +24,18 @@
   }
 }
 
-.mI-text{
+.mI-text {
   margin-left: 30px;
 }
 
-.mI-visual{
+.mI-visual {
   margin-right: 60px;
 }
 
 .mI-title {
   font-size: 54px;
   text-transform: capitalize;
-  &.practice{
+  &.practice {
     font-size: 40px;
   }
 }
@@ -45,4 +45,8 @@
 .mI-overview {
   padding: 3px;
   width: max-content;
+}
+
+.mI-category-open {
+  font-size: 30px;
 }

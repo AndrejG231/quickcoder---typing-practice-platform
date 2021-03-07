@@ -10,7 +10,7 @@ interface ScoreVisualProps {
 
 const ScoreVisual: FC<ScoreVisualProps> = ({ practiceLength, score }) => {
   const iconColor =
-    practiceLength < 1000 ? "#ffa600" : score > 800 ? "#15ff00" : "#ff0000";
+    practiceLength < 500 ? "#ffa600" : score > 800 ? "#15ff00" : "#ff0000";
   return (
     <div className="sV-container">
       <IconContext.Provider

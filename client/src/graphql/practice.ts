@@ -40,8 +40,44 @@ export const practiceMenuQuery = gql`
         name
         description
         overview
+        category
       }
       error
+    }
+  }
+`;
+
+export const practiceStatsQuery = gql`
+  query getPracticeStats($practiceName: String!) {
+    getPracticeStats(practiceName: $practiceName) {
+      stats {
+        score
+        length
+      }
+      response {
+        success
+        action
+        info
+        message
+      }
+    }
+  }
+`;
+
+export const userStatsQuery = gql`
+  query getUserStats {
+    getUserStats {
+      stats {
+        score
+        length
+        name
+      }
+      response {
+        success
+        action
+        info
+        message
+      }
     }
   }
 `;

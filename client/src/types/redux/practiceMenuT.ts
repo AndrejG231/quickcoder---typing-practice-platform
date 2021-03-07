@@ -3,6 +3,8 @@ export type MenuItemT = {
 
   name: string;
 
+  category: string;
+
   description: string;
 
   overview?: string;
