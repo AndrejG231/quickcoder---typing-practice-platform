@@ -47,9 +47,9 @@ class PracticeStats {
       response: generateResponse(true, "practiceStats_stats_retrieved", "en"),
       stats: [
         {
-          score: practiceScore,
+          score: practiceLength >= 500 ? practiceScore : 0,
           length: practiceLength,
-          name: practiceLength,
+          name: practiceName,
         },
       ],
     };
@@ -73,7 +73,7 @@ class PracticeStats {
       .execute();
 
     for (let i = 0; i < stats.length; i++) {
-      if (stats[i].length > 500) {
+      if (stats[i].length >= 500) {
         const practiceData = await getRecentPracticeStats(
           userData.user.id,
           stats[i].name
