@@ -1,0 +1,27 @@
+@import "../../globalStyles/colorScheme";
+.pSel-container {
+  position: fixed;
+  background: $b4;
+  top: 0;
+  right: 0;
+  left: 70%;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.pSel-title {
+  font-size: 40px;
+  color: $w5;
+}
+
+.pSel-length {
+  color: $w3;
+  font-size: 40px;
+}
+
+.pSel-Icon {
+  color: $w4;
+  font-size: 30px;
+}

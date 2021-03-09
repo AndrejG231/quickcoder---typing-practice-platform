@@ -9,11 +9,13 @@ import {
   addMenuItemAction,
 } from "../redux/actions/practiceMenuActions";
 import { setPracticeUserStatsAction } from "../redux/actions/practiceUserStatsActions";
+import { practiceSetSelected } from "../redux/actions/practiceSelectionActions";
 import {
   addIndexActionT,
   addMenuItemActionT,
   MenuItemT,
 } from "../types/redux/PracticeMenuT";
+import PracticeSelector from "../components/menu/PracticeSelector";
 import { userStatObjectT } from "../types/redux/PracticeUserStats";
 import { ReduxState } from "../types/redux/ReduxState";
 import "./PracticeMenu.scss";
@@ -32,6 +34,8 @@ const rdxDispatch = (dispatch: any) => {
     setStats: (stat: userStatObjectT) =>
       dispatch(setPracticeUserStatsAction(stat)),
     addIndex: () => dispatch(addIndexAction()),
+    selectPractice: (practice: string) =>
+      dispatch(practiceSetSelected(practice)),
   };
 };
 
@@ -42,6 +46,7 @@ interface PracticeMenuProps {
   addItem: addMenuItemActionT;
   addIndex: addIndexActionT;
   setStats: (stat: userStatObjectT) => void;
+  selectPractice: (practice: string) => void;
 }
 
 const PracticeMenu: React.FC<PracticeMenuProps> = ({
@@ -51,6 +56,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   practiceData,
   addItem,
   setStats,
+  selectPractice,
 }) => {
   const [getItem, { data, error }] = useLazyQuery(practiceMenuQuery);
   const practiceStats = useQuery(userStatsQuery);
@@ -67,7 +73,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   }, [index]);
 
   useEffect(() => {
-    if (practiceStats.data?.getUserStats) {
+    if (practiceStats.data?.getUserStats.stats) {
       practiceStats.refetch();
       practiceStats.data.getUserStats.stats.forEach(
         (stat: { name: string; length: number; score: number }) => {
@@ -83,16 +89,21 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   }
 
   return (
-    <div>
+    <div style={{width: "100vw"}}>
       <div className="pM-items">
         {practiceData.map((item, index) => {
+          let onClick = () => {};
           if (item.type === "category") {
             setTrue(item.name);
+          } else {
+            onClick = () => {
+              selectPractice(`${item.category}+${item.name}`);
+            };
           }
           return (
             <MenuItem
               category={item.category}
-              onClick={() => null}
+              onClick={onClick}
               desc={item.description as string}
               type={item.type as string}
               title={item.name as string}
@@ -102,7 +113,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
           );
         })}
       </div>
-      <div className="pM-settingsBar"></div>
+      <PracticeSelector />
     </div>
   );
 };

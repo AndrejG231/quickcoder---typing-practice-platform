@@ -15,12 +15,30 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 15px;
+  transition: all linear 0.3s;
+  * {
+    transition: all linear 0.5s;
+  }
 
   &.practice {
     margin-left: 20px;
     height: 80px;
     width: 90%;
     border-radius: 50px;
+  }
+
+  &.selected {
+    box-shadow: 0px 0px 8px 10px $b4;
+    background: $w3;
+
+    .mI-title {
+      text-decoration: underline;
+      color: $b5;
+    }
+
+    .mI-text {
+      color: $b5;
+    }
   }
 }
 

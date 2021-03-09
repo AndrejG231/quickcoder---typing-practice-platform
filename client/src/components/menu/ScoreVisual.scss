@@ -6,6 +6,9 @@
   width: 70px;
   height: 70px;
   @include centerContent();
+  * {
+    transition: linear all 0.5s;
+  }
 }
 
 .sV-icon {
@@ -31,4 +34,14 @@
 
 .sV-length {
   transform: translateY(-10px);
+}
+
+.selected {
+  .sV-score {
+    color: $b5;
+    text-shadow: none;
+  }
+  .sV-length {
+    color: $b5;
+  }
 }

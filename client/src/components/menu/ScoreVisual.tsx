@@ -6,13 +6,18 @@ import "./ScoreVisual.scss";
 interface ScoreVisualProps {
   practiceLength: number;
   score: number;
+  className: string;
 }
 
-const ScoreVisual: FC<ScoreVisualProps> = ({ practiceLength, score }) => {
+const ScoreVisual: FC<ScoreVisualProps> = ({
+  practiceLength,
+  score,
+  className,
+}) => {
   const iconColor =
     practiceLength < 500 ? "#ffa600" : score > 800 ? "#15ff00" : "#ff0000";
   return (
-    <div className="sV-container">
+    <div className={`sV-container ${className}`}>
       <IconContext.Provider
         value={{ className: "sV-icon", style: { color: iconColor } }}
       >
