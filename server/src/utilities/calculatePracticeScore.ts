@@ -2,7 +2,11 @@ import RecentPracticeStats from "src/types/RecentPracticeStats";
 import Practices from "../types/entities/Practices";
 
 interface calcPracticeScore {
-  (practice: Practices | RecentPracticeStats): number;
+  (practice: Practices | RecentPracticeStats): {
+    score: number;
+    cpm: number;
+    error_rate: number;
+  };
 }
 
 /*
@@ -24,7 +28,11 @@ const calculatePracticeScore: calcPracticeScore = (practice) => {
   const errQ = (1 / 26) * (26 - errRate);
   const cpmQ = (1 / 300) * (cpm - 50);
 
-  return Math.round(Math.max(1000 * errQ * cpmQ, 0));
+  return {
+    score: Math.round(Math.max(1000 * errQ * cpmQ, 0)),
+    cpm: Math.round(cpm),
+    error_rate: parseFloat(errRate.toFixed(2)),
+  };
 };
 
 export default calculatePracticeScore;

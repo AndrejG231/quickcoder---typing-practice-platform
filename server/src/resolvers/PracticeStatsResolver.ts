@@ -25,12 +25,6 @@ class PracticeStats {
       };
     }
 
-    const practiceData = await getRecentPracticeStats(
-      userData.user.id,
-      practiceName
-    );
-
-    const practiceScore = calculatePracticeScore(practiceData);
     const practiceLength = (
       await getConnection()
         .createQueryBuilder()
@@ -43,11 +37,26 @@ class PracticeStats {
         .execute()
     )[0].sum;
 
+    let practiceScore;
+    if (practiceLength >= 500) {
+      const practiceData = await getRecentPracticeStats(
+        userData.user.id,
+        practiceName
+      );
+      practiceScore = calculatePracticeScore(practiceData);
+    } else {
+      practiceScore = {
+        score: 0,
+        cpm: 0,
+        error_rate: 0,
+      };
+    }
+
     return {
       response: generateResponse(true, "practiceStats_stats_retrieved", "en"),
       stats: [
         {
-          score: practiceLength >= 500 ? practiceScore : 0,
+          ...practiceScore,
           length: practiceLength,
           name: practiceName,
         },
@@ -78,9 +87,9 @@ class PracticeStats {
           userData.user.id,
           stats[i].name
         );
-        stats[i].score = calculatePracticeScore(practiceData);
+        stats[i] = { ...stats[i], ...calculatePracticeScore(practiceData) };
       } else {
-        stats[i].score = 0;
+        stats[i] = { ...stats[i], score: 0, cpm: 0, error_rate: 0 };
       }
     }
 
