@@ -1,4 +1,6 @@
 @import "../../globalStyles/colorScheme";
+@import "../../globalStyles/mixins";
+
 .pSel-container {
   position: fixed;
   background: $b4;
@@ -8,20 +10,124 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 1vw;
+}
+
+.pSel-header {
+  display: flex;
+  height: 8vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .pSel-title {
-  font-size: 40px;
+  font-size: 2.5vw;
+  text-transform: capitalize;
   color: $w5;
+  padding: 0;
+  margin: 0;
+}
+
+.pSel-titleUnderline {
+  width: 70%;
+  height: 0.7vw;
+  background: $w3;
+  border-radius: 0.7vw;
+}
+//
+
+.pSel-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.pSel-statTitle {
+  font-size: 2.5vw;
+  color: $w5;
+}
+
+.pSel-statMessage {
+  color: $w4;
+  font-size: 2vw;
+  &.good {
+    text-decoration: underline;
+    text-decoration-color: green;
+  }
+  &.bad{
+    text-decoration: underline;
+    text-decoration-color: $err1;
+  }
+}
+
+.pSel-statPair {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pSel-statField {
+  color: $w3;
+  font-size: 1.8vw;
+}
+
+.pSel-statValue {
+  color: $w3;
+  font-size: 2vw;
+  &.good {
+    color: green;
+  }
+  &.bad {
+    color: $err1;
+  }
+}
+
+//
+.pSel-startSetting {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  margin-bottom: 0.3vw;
+}
+
+.pSel-setLength {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $w5;
+  font-size: 1.8vw;
 }
 
 .pSel-length {
   color: $w3;
-  font-size: 40px;
+  border: 0.2vw solid $w5;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pSel-lenValue {
+  color: $w5;
+  font-size: 2.8vw;
+  width: 7.3vw;
+  text-align: center;
+  border-left: 0.2vw solid $w5;
+  border-right: 0.2vw solid $w5;
 }
 
 .pSel-Icon {
   color: $w4;
-  font-size: 30px;
+  font-size: 3.5vw;
+  cursor: pointer;
+}
+
+.pSel-start {
+  cursor: pointer;
+  background: $b3;
+  color: $w5;
+  font-size: 2.8vw;
+  font-family: monospace;
+  padding: 0.5vw;
+  @include effect3D(0.3vw, $w3, $b5);
 }
