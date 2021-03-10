@@ -1,6 +1,6 @@
 export const userStatObject: userStatObjectT = {};
 
-type practiceUserStat = { score: number; length: number };
+type practiceUserStat = { score: number; length: number, cpm: number, error_rate: number };
 export type userStatObjectT = { [key in string]: practiceUserStat };
 
 export type PracticeUserStatsActionT = {

@@ -76,9 +76,15 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
     if (practiceStats.data?.getUserStats.stats) {
       practiceStats.refetch();
       practiceStats.data.getUserStats.stats.forEach(
-        (stat: { name: string; length: number; score: number }) => {
-          const { length, score } = stat;
-          setStats({ [stat.name]: { length, score } });
+        (stat: {
+          name: string;
+          length: number;
+          score: number;
+          cpm: number;
+          error_rate: number;
+        }) => {
+          const { length, score, cpm, error_rate } = stat;
+          setStats({ [stat.name]: { length, score, cpm, error_rate } });
         }
       );
     }
@@ -89,7 +95,7 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   }
 
   return (
-    <div style={{width: "100vw"}}>
+    <div style={{ width: "100vw" }}>
       <div className="pM-items">
         {practiceData.map((item, index) => {
           let onClick = () => {};

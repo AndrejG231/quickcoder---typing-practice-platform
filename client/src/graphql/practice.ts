@@ -53,6 +53,8 @@ export const practiceStatsQuery = gql`
       stats {
         score
         length
+        cpm
+        error_rate
       }
       response {
         success
@@ -71,6 +73,8 @@ export const userStatsQuery = gql`
         score
         length
         name
+        cpm
+        error_rate
       }
       response {
         success
