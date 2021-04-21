@@ -2,7 +2,7 @@ import generateResponse from "../generateResponse";
 import getCookieValue from "../getCookieValue";
 import { Request } from "express";
 import { verify } from "jsonwebtoken";
-import Users from "../../types/entities/Users";
+import Users from "../../entities/Users";
 import LangList from "../../lang/typesLangList";
 import UserInfoResponse from "src/types/responses/UserInfoResponse";
 

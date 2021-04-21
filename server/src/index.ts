@@ -2,7 +2,7 @@ require("dotenv").config();
 import "reflect-metadata";
 import cors from "cors";
 
-import { createConnection, getConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
@@ -14,9 +14,9 @@ import express from "express";
 //==>Config
 import { SERVER_PORT, PG_SETTING } from "./config";
 //==>Entities
-import Users from "./types/entities/Users";
-import PassTokens from "./types/entities/PassTokens";
-import Practices from "./types/entities/Practices";
+import Users from "./entities/Users";
+import PassTokens from "./entities/PassTokens";
+import Practices from "./entities/Practices";
 //==>Resolvers
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";

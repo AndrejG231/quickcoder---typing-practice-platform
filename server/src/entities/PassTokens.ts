@@ -28,8 +28,6 @@ class PassTokens extends BaseEntity {
   @Column()
   client_info!: string;
 
-  @CreateDateColumn()
-  created_at = Date;
 }
 
 export default PassTokens;

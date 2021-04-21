@@ -46,13 +46,6 @@ class Users extends BaseEntity {
   @Generated("uuid")
   secret: string;
 
-  @Field(() => String)
-  @CreateDateColumn()
-  created_at = Date;
-
-  @Field(() => String)
-  @UpdateDateColumn()
-  updated_at = Date;
 }
 
 export default Users;

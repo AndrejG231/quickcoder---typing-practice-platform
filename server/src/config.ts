@@ -6,8 +6,8 @@ export const SERVER_PORT: number = parseInt(process.env.SERVER_PORT!);
 //////////////////////
 
 export const PG_SETTING: object = {
-  host: "localhost",
-  type: "postgres",
+  host: process.env.PG_HOST,
+  type: "mysql",
   username: process.env.PG_USER,
   database: process.env.PG_DATABASE_NAME,
   password: process.env.PG_PASSWORD,

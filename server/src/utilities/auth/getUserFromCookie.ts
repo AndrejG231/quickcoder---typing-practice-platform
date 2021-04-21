@@ -3,7 +3,7 @@ import getCookieValue from "../getCookieValue";
 import dlog from "../../development/dlog";
 import UserInfoResponse from "src/types/responses/UserInfoResponse";
 import generateResponse from "../generateResponse";
-import Users from "../../types/entities/Users";
+import Users from "../../entities/Users";
 import LangList from "../../lang/typesLangList"
 import { verify } from "jsonwebtoken";
 

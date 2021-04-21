@@ -2,7 +2,7 @@ import { validate } from "email-validator";
 
 import LangList from "../../lang/typesLangList";
 
-import User from "../../types/entities/Users";
+import User from "../../entities/Users";
 
 import ActionResponse from "../../types/responses/ActionResponse";
 import RegisterInput from "../../types/arguments/RegisterInput";

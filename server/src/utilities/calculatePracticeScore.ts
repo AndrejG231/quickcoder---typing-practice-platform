@@ -1,5 +1,5 @@
 import RecentPracticeStats from "src/types/RecentPracticeStats";
-import Practices from "../types/entities/Practices";
+import Practices from "../entities/Practices";
 
 interface calcPracticeScore {
   (practice: Practices | RecentPracticeStats): {
