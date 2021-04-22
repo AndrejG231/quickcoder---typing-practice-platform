@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { IconContext, icons } from "react-icons";
 import { FaCircleNotch } from "react-icons/fa";
-import "./ScoreVisual.scss";
 
 interface ScoreVisualProps {
   practiceLength: number;

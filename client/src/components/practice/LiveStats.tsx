@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import msToTime from "../../utilites/msToTime";
-import "./LiveStats.scss";
 
 interface LiveStatsProps {
   startTime: number;

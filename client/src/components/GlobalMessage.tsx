@@ -10,7 +10,6 @@ import {
 } from "../redux/actions/animationActions";
 import { ReduxState } from "../types/redux/ReduxState";
 
-import "./GlobalMessage.scss";
 
 interface globalMessageProps {
   message: string;

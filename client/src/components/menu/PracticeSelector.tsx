@@ -4,7 +4,6 @@ import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { practiceSwitchLen } from "../../redux/actions/practiceSelectionActions";
 import { ReduxState } from "../../types/redux/ReduxState";
-import "./PracticeSelector.scss";
 import { useHistory } from "react-router-dom";
 import { userStatObjectT } from "../../types/redux/PracticeUserStats";
 

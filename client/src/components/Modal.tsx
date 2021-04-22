@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import ArrowButton from "./ArrowButton";
 
-import "./Modal.scss";
 import { ReduxState } from "../types/redux/ReduxState";
 import {
   ToggleAnimationIn,

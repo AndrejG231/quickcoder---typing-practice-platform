@@ -1,6 +1,5 @@
 import React from "react";
 import { ColorScheme } from "../../data/KeysColors";
-import "./FingerIndex.scss";
 
 interface FingerIndexPorps {
   className?: string;

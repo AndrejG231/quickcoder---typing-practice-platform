@@ -5,8 +5,6 @@ import { ActionResponse } from "../types/graphql/ActResMutationsT";
 //styles
 import { IconContext } from "react-icons";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
-import "./InputField.scss";
-import "../globalStyles/component.scss";
 
 interface InputFieldProps {
   error: ActionResponse;

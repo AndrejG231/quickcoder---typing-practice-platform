@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Layout, Keys, Characters } from "../../types/practice/KeyBoardT";
 import { UsColors, ColorScheme } from "../../data/KeysColors";
 import { US } from "../../data/KeysMap";
-import "./KeyBoard.scss";
 import { ReduxState } from "../../types/redux/ReduxState";
 import { BottomLine } from "../../data/KeyBoardTemplate";
 

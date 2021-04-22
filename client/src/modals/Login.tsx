@@ -21,7 +21,6 @@ import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
 //style
-import "./Login.scss";
 
 interface LoginProps {
   RefreshUserInfo: () => void;

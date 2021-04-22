@@ -8,7 +8,6 @@ import { Errors } from "../../types/practice/PracticeT";
 import { ReduxState } from "../../types/redux/ReduxState";
 
 //styles
-import "./TextLine.scss";
 
 const rdxProps = (state: ReduxState) => {
   return {

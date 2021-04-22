@@ -18,7 +18,6 @@ import {
 import PracticeSelector from "../components/menu/PracticeSelector";
 import { userStatObjectT } from "../types/redux/PracticeUserStats";
 import { ReduxState } from "../types/redux/ReduxState";
-import "./PracticeMenu.scss";
 
 const rdxProps = (state: ReduxState) => {
   return {

@@ -2,7 +2,6 @@ import React from "react";
 import { IconContext } from "react-icons";
 import { BsFillExclamationTriangleFill } from "react-icons/bs";
 
-import "./SubmitButton.scss";
 
 interface SubmitButtonProps {
   error: string;

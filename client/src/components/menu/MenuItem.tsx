@@ -6,7 +6,6 @@ import { ReduxState } from "../../types/redux/ReduxState";
 import { toggleCategoryAction } from "../../redux/actions/practiceMenuActions";
 import { resetPracticeSession } from "../../redux/actions/practiceActions";
 import ScoreVisual from "./ScoreVisual";
-import "./MenuItem.scss";
 import { PracticeObjectT } from "../../types/practice/PracticeT";
 import { userStatObjectT } from "../../types/redux/PracticeUserStats";
 

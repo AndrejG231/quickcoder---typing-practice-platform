@@ -17,7 +17,6 @@ import FingerIndex from "../components/practice/FingerIndex";
 import LiveStats from "../components/practice/LiveStats";
 
 //styles
-import "./Practice.scss";
 
 //types
 import { PracticeObjectT } from "../types/practice/PracticeT";
