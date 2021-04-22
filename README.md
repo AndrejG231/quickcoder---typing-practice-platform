@@ -6,4 +6,4 @@ Working authentication, typing sessions, score validation.
 - React, Sass StyleSheets, Apollo Client, Redux
 - TypeGraphql, Typeorm, JWT, PostgreSQL
 
-# Unfinished due to maintanence issues.
+# Unfinished due to maintenance issues.
