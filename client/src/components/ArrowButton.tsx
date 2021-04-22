@@ -1,5 +1,4 @@
 import React from "react";
-import "./ArrowButton.scss";
 
 interface ArrowButtonProps {
   children: string;

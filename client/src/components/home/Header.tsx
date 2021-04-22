@@ -1,4 +1,19 @@
 import React from "react";
+import {
+  ArrowsWrapper,
+  TitleArrow,
+  TitleArrowBody,
+  TitleArrowEnd,
+  TitleUnderline,
+  SpacerArrow,
+  SpacerArrowTip,
+  SpacerArrowBody,
+  SpacerArrowEnd,
+  UserArrow,
+  UserArrowTip,
+  UserArrowBody,
+  TitleText,
+} from "./Header/";
 
 interface HeaderProps {
   className?: string;
@@ -14,32 +29,27 @@ const Header: React.FC<HeaderProps> = ({
   onTitleClick,
 }) => {
   return (
-    <div className={`component container arrows ${className}`}>
-      <div className="title arrow">
-        <div onClick={onTitleClick} className="body fullH">
-          <h1 className="title-text">QuickCoder</h1>
-          <div className="underline f"></div>
-          <div className="underline"></div>
-        </div>
-        <div className="end fullH"></div>
-      </div>
-      <div className="spacer arrow">
-        <div className="tip fullH"></div>
-        <div className="body fullH"></div>
-        <div className="end fullH"></div>
-      </div>
-      <div
-        style={{
-          minWidth: username.length * 16.5 + 80,
-        }}
-        className="user arrow"
-      >
-        <div className="tip fullH"></div>
-        <div onClick={onUserClick} className="body fullH">
-          <h4 className="title-text">{username}</h4>
-        </div>
-      </div>
-    </div>
+    <ArrowsWrapper>
+      <TitleArrow>
+        <TitleArrowBody>
+          <TitleText big>QuickCoder</TitleText>
+          <TitleUnderline margin />
+          <TitleUnderline />
+        </TitleArrowBody>
+        <TitleArrowEnd />
+      </TitleArrow>
+      <SpacerArrow>
+        <SpacerArrowTip />
+        <SpacerArrowBody />
+        <SpacerArrowEnd />
+      </SpacerArrow>
+      <UserArrow minWidth={username.length * 16.5 + 80}>
+        <UserArrowTip />
+        <UserArrowBody>
+          <TitleText medium>{username}</TitleText>
+        </UserArrowBody>
+      </UserArrow>
+    </ArrowsWrapper>
   );
 };
 

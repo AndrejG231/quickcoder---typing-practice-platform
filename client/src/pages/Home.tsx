@@ -23,19 +23,14 @@ import { ReduxState } from "../types/redux/ReduxState";
 import { UserInfo } from "../types/graphql/AuthMutationsT";
 
 //Components
-import Header from "../components/home/Header";
-import KeyboardBG from "../components/home/KeyboardBG";
-import ClippedButton from "../components/home/ClippedButton";
-import ArrowButton from "../components/ArrowButton";
 import {
+  Header,
+  ClippedButton,
   HomeContainer,
-  NavigationWrapper,
+  NavWrapper,
   UserButtonWrapper,
-} from "../styles/Home";
-
-//Styles
-import "../globalStyles/component.scss";
-import "./Home.scss";
+} from "../components/home/";
+import ArrowButton from "../components/ArrowButton";
 
 //Redux
 const rdxState = (state: ReduxState) => {
@@ -126,13 +121,15 @@ const Home: React.FC<HomeProps> = ({
         onTitleClick={() => navigation.push("/home/")}
         username={userInfo.username === "" ? "GUEST" : userInfo.username}
       />
-      <NavigationWrapper>
+      <NavWrapper>
         <ClippedButton onClick={() => null}>Typing test</ClippedButton>
         <ClippedButton onClick={() => Redirect("/practice_menu/")}>
           Practice
         </ClippedButton>
         <ClippedButton onClick={() => null}>Settings</ClippedButton>
-      </NavigationWrapper>
+        <ClippedButton onClick={() => null}></ClippedButton>
+        <ClippedButton onClick={() => null}></ClippedButton>
+      </NavWrapper>
       <UserButtonWrapper>
         {userInfo.username === "GUEST" ? (
           <>

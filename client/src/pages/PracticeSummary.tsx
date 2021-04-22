@@ -10,7 +10,6 @@ import { getPracticeResultsQuery } from "../graphql/practice";
 import FormattedPracticeString from "../components/practice/FormattedPracticeString";
 import ArrowButton from "../components/ArrowButton";
 import { ReduxState } from "../types/redux/ReduxState";
-import "./PracticeSummary.scss";
 import msToTime from "../utilites/msToTime";
 import Stat from "../components/practice/Stat";
 interface PracticeSummaryProps {
