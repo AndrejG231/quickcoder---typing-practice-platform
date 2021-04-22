@@ -27,6 +27,11 @@ import Header from "../components/home/Header";
 import KeyboardBG from "../components/home/KeyboardBG";
 import ClippedButton from "../components/home/ClippedButton";
 import ArrowButton from "../components/ArrowButton";
+import {
+  HomeContainer,
+  NavigationWrapper,
+  UserButtonWrapper,
+} from "../styles/Home";
 
 //Styles
 import "../globalStyles/component.scss";
@@ -113,38 +118,22 @@ const Home: React.FC<HomeProps> = ({
   };
 
   return (
-    <div className="homeContainer">
-      <div
-        style={{
-          transform: `translateY(-${AnimationState.main}px)`,
+    <HomeContainer>
+      <Header
+        onUserClick={() => {
+          navigation.push("/home/profile/");
         }}
-      >
-        <Header
-          onUserClick={() => {
-            navigation.push("/home/profile/");
-          }}
-          onTitleClick={() => navigation.push("/home/")}
-          username={userInfo.username === "" ? "GUEST" : userInfo.username}
-        />
-      </div>
-      <div
-        className="flexContainer"
-        style={{ transform: `translateX(-${AnimationState.main * 3}px)` }}
-      >
+        onTitleClick={() => navigation.push("/home/")}
+        username={userInfo.username === "" ? "GUEST" : userInfo.username}
+      />
+      <NavigationWrapper>
         <ClippedButton onClick={() => null}>Typing test</ClippedButton>
         <ClippedButton onClick={() => Redirect("/practice_menu/")}>
           Practice
         </ClippedButton>
         <ClippedButton onClick={() => null}>Settings</ClippedButton>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          width: "100vw",
-          transform: `translateX(${AnimationState.main}px)`,
-        }}
-      >
+      </NavigationWrapper>
+      <UserButtonWrapper>
         {userInfo.username === "GUEST" ? (
           <>
             <ArrowButton
@@ -181,19 +170,8 @@ const Home: React.FC<HomeProps> = ({
             Logout
           </ArrowButton>
         )}
-      </div>
-      <div
-        style={{
-          zIndex: -1,
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          transform: `translateY(${AnimationState.main * 3}px)`,
-        }}
-      >
-        <KeyboardBG className="keyboard-bg" />
-      </div>
-    </div>
+      </UserButtonWrapper>
+    </HomeContainer>
   );
 };
 
