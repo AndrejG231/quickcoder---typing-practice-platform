@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, Int, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
@@ -46,6 +46,9 @@ class Users extends BaseEntity {
   @Generated("uuid")
   secret: string;
 
+  @Field(() => Int)
+  @Column()
+  created_at!: Date;
 }
 
 export default Users;

@@ -1,7 +1,7 @@
-import PassTokens from "../types/entities/PassTokens";
+import PassTokens from "../entities/PassTokens";
 import { Arg, Int, Mutation, Query, Resolver } from "type-graphql";
-import Users from "../types/entities/Users";
-import Practices from "../types/entities/Practices";
+import Users from "../entities/Users";
+import Practices from "../entities/Practices";
 
 @Resolver(Users)
 export class DevelopmentUserResolver {

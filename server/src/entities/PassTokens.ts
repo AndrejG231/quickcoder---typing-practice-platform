@@ -16,7 +16,7 @@ class PassTokens extends BaseEntity {
   @Generated("uuid")
   token!: string;
 
-  @Column({default: true})
+  @Column({ default: true })
   valid!: boolean;
 
   @Column()
@@ -28,6 +28,8 @@ class PassTokens extends BaseEntity {
   @Column()
   client_info!: string;
 
+  @Column()
+  created_at!: Date;
 }
 
 export default PassTokens;

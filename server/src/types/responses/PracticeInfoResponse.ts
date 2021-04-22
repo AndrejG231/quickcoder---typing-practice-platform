@@ -1,5 +1,5 @@
 import { ObjectType, Field } from "type-graphql";
-import Practices from "../entities/Practices";
+import Practices from "../../entities/Practices";
 import ActionResponse from "./ActionResponse";
 
 @ObjectType()

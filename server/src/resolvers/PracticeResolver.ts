@@ -3,7 +3,7 @@ import { getConnection } from "typeorm";
 
 //types
 import GraphqlContext from "../types/GraphqlContext";
-import Practices from "../types/entities/Practices";
+import Practices from "../entities/Practices";
 import PracticeInfoResponse from "../types/responses/PracticeInfoResponse";
 import ActionResponse from "../types/responses/ActionResponse";
 import PracticeUpdateFields from "../types/arguments/PracticeUpdateFields";

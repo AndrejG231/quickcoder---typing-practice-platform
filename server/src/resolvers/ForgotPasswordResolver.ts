@@ -15,8 +15,8 @@ import checkPasswordStrength from "../utilities/auth/checkPasswordStrength";
 //Utilities//
 /////////////
 
-import PassTokens from "../types/entities/PassTokens";
-import Users from "../types/entities/Users";
+import PassTokens from "../entities/PassTokens";
+import Users from "../entities/Users";
 import ActionResponse from "../types/responses/ActionResponse";
 
 const lang = "en";

@@ -8,7 +8,7 @@ import PracticeStatsResponse, {
 import generateResponse from "../utilities/generateResponse";
 import getRecentPracticeStats from "../utilities/practices/getRecentPractices";
 import { getConnection } from "typeorm";
-import Practices from "../types/entities/Practices";
+import Practices from "../entities/Practices";
 
 @Resolver()
 class PracticeStats {

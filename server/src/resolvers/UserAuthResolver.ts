@@ -19,7 +19,7 @@ import createAuthCookie from "../utilities/auth/createAuthCookie";
 
 import GraphqlContext from "../types/GraphqlContext";
 
-import Users from "../types/entities/Users";
+import Users from "../entities/Users";
 
 import ActionResponse from "../types/responses/ActionResponse";
 import UserInfoResponse from "../types/responses/UserInfoResponse";
@@ -54,9 +54,9 @@ class UserAuthResolver {
         email: credentials.email,
         username: credentials.username.toLowerCase(),
         password: hashedPassword,
+        created_at: new Date()
       })
-      .execute();
-
+      .execut
     return generateResponse(true, "register_account_registered", lang);
   }
 

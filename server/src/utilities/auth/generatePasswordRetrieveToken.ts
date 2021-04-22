@@ -1,5 +1,5 @@
-import PassTokens from "../../types/entities/PassTokens";
-import Users from "../../types/entities/Users";
+import PassTokens from "../../entities/PassTokens";
+import Users from "../../entities/Users";
 import { getConnection } from "typeorm";
 import add from "date-fns/add";
 

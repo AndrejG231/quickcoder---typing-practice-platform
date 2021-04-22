@@ -46,6 +46,9 @@ class Practices extends BaseEntity {
   @Column()
   user_id!: number;
 
+  @Field(() => Int)
+  @Column()
+  created_at!: Date;
 }
 
 export default Practices;
