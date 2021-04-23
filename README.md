@@ -1,2 +1,9 @@
 # QuickCoder.com
-Fullstack app focused on typing practice, mainly for coders.
+Fullstack app focused on typing practice.
+
+## Version 1:
+Working authentication, typing sessions, score validation.    
+### Stack:
+- React, Sass StyleSheets, Apollo Client, Redux
+- TypeGraphql, Typeorm, JWT, PostgreSQL
+
