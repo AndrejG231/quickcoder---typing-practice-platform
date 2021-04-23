@@ -9,6 +9,9 @@ const TitleUnderline = styled.div`
   left: 20px;
   margin-bottom: 5px;
   ${(props: { margin?: boolean }) => (props.margin ? "left: 65px;" : "")}
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 export default TitleUnderline;
