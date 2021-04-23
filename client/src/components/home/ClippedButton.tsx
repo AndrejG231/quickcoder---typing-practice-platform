@@ -12,12 +12,12 @@ const ClippedButton = styled.button`
   justify-content: flex-start;
   font-size: 40px;
   font-family: monospace;
-  color: ${({ theme }) => theme.colors.w4};
+  color: ${({ theme }) => theme.colors.w5};
   border: 0px;
   padding-left: 20px;
   &:hover {
-    color: ${({ theme }) => theme.colors.b4};
-    background: ${({ theme }) => theme.colors.w4};
+    color: ${({ theme }) => theme.colors.b5};
+    background: ${({ theme }) => theme.colors.w3};
   }
 `;
 

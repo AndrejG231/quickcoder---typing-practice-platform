@@ -1,5 +1,4 @@
 export { default as ArrowsWrapper } from "./ArrowsWrapper";
-export { default as TitleText } from "./TitleText";
 
 //Title Arrow
 export { default as TitleArrow } from "./TitleArrow";

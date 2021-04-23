@@ -28,6 +28,11 @@ const theme = {
   height: 100%;
   position: absolute;
   `,
+  centerContent: `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
 };
 
 ReactDOM.render(

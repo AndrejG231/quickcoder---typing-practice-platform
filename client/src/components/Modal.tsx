@@ -59,8 +59,7 @@ const Modal: React.FC<ModalProps> = ({
       <div className={`modal content ${contentClass}`}>{children}</div>
       <ArrowButton
         className="back-button"
-        bodyWidth="90px"
-        variant="right"
+        width={90}
         onClick={() => {
           if (active) {
             setActive(false);

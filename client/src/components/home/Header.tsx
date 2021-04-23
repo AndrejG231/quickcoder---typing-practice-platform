@@ -12,8 +12,8 @@ import {
   UserArrow,
   UserArrowTip,
   UserArrowBody,
-  TitleText,
 } from "./Header/";
+import { TitleText } from "../../components";
 
 interface HeaderProps {
   className?: string;
@@ -31,14 +31,14 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <ArrowsWrapper>
       <TitleArrow>
-        <TitleArrowBody>
+        <TitleArrowBody onClick={onTitleClick}>
           <TitleText big>QuickCoder</TitleText>
           <TitleUnderline margin />
           <TitleUnderline />
         </TitleArrowBody>
         <TitleArrowEnd />
       </TitleArrow>
-      <SpacerArrow>
+      <SpacerArrow onClick={onUserClick}>
         <SpacerArrowTip />
         <SpacerArrowBody />
         <SpacerArrowEnd />

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const UserButtonWrapper = styled.div`
-    position: "absolute",
-    top: 0,
-    width: "100vw",
+    position: absolute;
+    right: 0;
+    top: 100px;
 `;
 
 export default UserButtonWrapper;

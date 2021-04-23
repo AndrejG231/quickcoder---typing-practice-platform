@@ -5,7 +5,7 @@ const TitleText = styled.h1`
   width: 100%;
   text-align: center;
   font-family: monospace;
-  color: ${({ theme }) => theme.colors.w4};
+  color: ${({ theme }) => theme.colors.w5};
   font-size: ${(props: {
     big?: boolean;
     medium?: boolean;
