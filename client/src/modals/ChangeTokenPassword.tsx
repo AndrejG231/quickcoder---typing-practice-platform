@@ -7,7 +7,7 @@ import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 
 //components
 import InputField from "../components/InputField";
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import SubmitButton from "../components/SubmitButton";
 
 //graphql

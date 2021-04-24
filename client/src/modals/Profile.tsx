@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import ArrowButton from "../components/ArrowButton";
 
 export const Profile: React.FC = () => {

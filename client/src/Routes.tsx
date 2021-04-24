@@ -17,13 +17,11 @@ import ChangeKnownPassword from "./modals/ChangeKnownPassword";
 
 //components
 import GlobalMessage from "./components/GlobalMessage";
-import AnimationProvider from "./components/AnimationProvider";
 
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <GlobalMessage />
-      <AnimationProvider />
       <Route exact path="/" component={() => <Home />} />
       <Route path="/home/" component={() => <Home />} />
       <Route exact path="/home/profile/" component={() => <Profile />} />

@@ -16,7 +16,7 @@ import { ActionResponse } from "../types/graphql/ActResMutationsT";
 import { LoginCredentials } from "../types/graphql/AuthMutationsT";
 
 //components
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
@@ -81,7 +81,7 @@ export const Login: React.FC<LoginProps> = ({
   };
 
   return (
-    <Modal contentClass="lg-container">
+    <Modal>
       <form onSubmit={(e) => e.preventDefault()}>
         <InputField
           label={"Username or email"}

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import reduxStore from "../redux/reduxStore";
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 

@@ -12,7 +12,7 @@ import { useRetrievePasswordMutation } from "../graphql/auth";
 
 //components
 import InputField from "../components/InputField";
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import SubmitButton from "../components/SubmitButton";
 
 const rdxDispatch = (dispatch: any) => {

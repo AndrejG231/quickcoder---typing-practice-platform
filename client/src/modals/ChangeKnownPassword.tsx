@@ -8,7 +8,7 @@ import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 import { ToggleAnimationOut } from "../redux/actions/animationActions";
 
 //components
-import Modal from "../components/Modal";
+import { Modal } from "../components/";
 import InputField from "../components/InputField";
 import SubmitButton from "../components/SubmitButton";
 
