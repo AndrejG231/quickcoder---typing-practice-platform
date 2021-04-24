@@ -5,6 +5,9 @@ const UserAction = styled.p`
   font-size: 20px;
   width: 100%;
   margin-right: 12px;
+  @media screen and (max-width: 700px) {
+    text-align: center;
+  }
 `;
 
 export default UserAction;

@@ -159,16 +159,13 @@ const Home: React.FC<HomeProps> = ({
           <ArrowButton
             width={100}
             onClick={() => navigation.push("/home/login/")}
-            right
+            left
           >
             <UserAction>Login</UserAction>
           </ArrowButton>
         </UserButtonWrapper>
       ) : (
         <UserButtonWrapper>
-          <ArrowButton width={100} onClick={userLogout} left>
-            <UserAction>Logout</UserAction>
-          </ArrowButton>
           <ArrowButton width={100} onClick={userLogout} left>
             <UserAction>Logout</UserAction>
           </ArrowButton>
