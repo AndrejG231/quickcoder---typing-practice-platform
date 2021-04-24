@@ -33,6 +33,7 @@ const ArrowButton = styled.div`
     width: ${w}px;
     height: ${h}px;
     cursor: pointer;
+    margin-left: auto;
     background: ${theme.colors.b4};
     clip-path: polygon(${left ? leftClip : right ? rightClip : ""});
     ${theme.centerContent};
@@ -43,6 +44,7 @@ const ArrowButton = styled.div`
     }
     @media screen and (max-width: 700px){
       clip-path: none;
+      margin: 0;
     }
   `;
   }}

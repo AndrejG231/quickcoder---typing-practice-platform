@@ -20,18 +20,36 @@ class PracticeResolver {
     @Arg("practiceName", () => String) practiceName: string,
     @Arg("clientParameter") clientParameter: string,
     @Arg("length", () => Int) length: number,
-    @Ctx() { req }: GraphqlContext
+    @Ctx() { req, res }: GraphqlContext
   ) {
     let { user } = await validateUserFromCookie(req, clientParameter, "en");
 
     if (!user) {
       //Not signed it ==> Use Cookies
+
+      const practice = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(Practices)
+        .values({
+          user_id: -1,
+          practice_name: practiceName,
+          string: generatePracticeString(practiceName, length),
+        })
+        .returning("*")
+        .execute();
+
+      res.cookie(`@p${new Date().getTime()}`, practice.raw[0].id, {
+        expires: new Date("Tue, 19 Jan 2038 03:14:07 GMT"),
+      });
+
       return {
         result: generateResponse(
-          false,
+          true,
           "getPracticesObject_practice_created",
           "en"
         ),
+        practice: practice.raw[0],
       };
     }
     //signed User
@@ -41,7 +59,7 @@ class PracticeResolver {
       .into(Practices)
       .values({
         user_id: user.id,
-        practice_name: practiceName, 
+        practice_name: practiceName,
         string: generatePracticeString(practiceName, length),
       })
       .returning("*")

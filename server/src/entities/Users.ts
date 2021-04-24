@@ -1,12 +1,10 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
-  CreateDateColumn,
   Entity,
   Generated,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from "typeorm";
 
 @ObjectType()
@@ -46,7 +44,7 @@ class Users extends BaseEntity {
   @Generated("uuid")
   secret: string;
 
-  @Field(() => Int)
+  @Field(() => Float)
   @Column()
   created_at!: Date;
 }

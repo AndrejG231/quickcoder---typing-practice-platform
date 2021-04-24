@@ -56,7 +56,7 @@ class UserAuthResolver {
         password: hashedPassword,
         created_at: new Date()
       })
-      .execut
+      .execute()
     return generateResponse(true, "register_account_registered", lang);
   }
 

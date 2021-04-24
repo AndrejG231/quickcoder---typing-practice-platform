@@ -1,11 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  BaseEntity,
-} from "typeorm";
-import { ObjectType, Field, Int } from "type-graphql";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import { ObjectType, Field, Int, Float } from "type-graphql";
 
 @ObjectType()
 @Entity("practices")
@@ -46,7 +40,7 @@ class Practices extends BaseEntity {
   @Column()
   user_id!: number;
 
-  @Field(() => Int)
+  @Field(() => Float)
   @Column()
   created_at!: Date;
 }
