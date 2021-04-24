@@ -13,12 +13,12 @@ type PracticeStringsObject = {
 
 export const categoryDesc: { [key in string]: string } = {
   main_position: "Practice major 10 finger typing positions...",
-  popular_words: "Practice by typing most popular English words...",
+  english: "Practice by typing most popular English words...",
 };
 
 const PracticeStrings: PracticeStringsObject = {
   //Basics
-  main_position: {
+  main_positions: {
     basic_home_row_1: {
       desc: "Main finger positions in Home Row",
       parts: ["fjf", "jfj", "ffj", "jff", "fjj", "jff", "fff", "jjj"],
@@ -96,7 +96,7 @@ const PracticeStrings: PracticeStringsObject = {
       parts: ["101", "010", "110", "011", "100", "011", "111", "000"],
     },
   },
-  popular_words: {
+  english: {
     top_50_english_words: {
       desc: "Practice typing 50 most popular english words.",
       parts: topWords.slice(0, 50),

@@ -7,7 +7,7 @@ import MenuResponse from "../types/responses/MenuResponse";
 @Resolver()
 class MenuResolver {
   @Query(() => MenuResponse)
-  async getItem(
+  async getMenu(
     @Arg("index", () => Int) index: number,
     @Ctx() { req }: GraphqlContext
   ) {
