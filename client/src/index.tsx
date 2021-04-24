@@ -15,8 +15,8 @@ import Routes from "./Routes";
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
     <Provider store={reduxStore}>
-      <GlobalStyles />
       <ThemeProvider theme={theme}>
+        <GlobalStyles />
         <Routes />
       </ThemeProvider>
     </Provider>

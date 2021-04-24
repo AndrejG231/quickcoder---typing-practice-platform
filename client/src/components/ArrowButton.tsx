@@ -3,16 +3,46 @@ import styled from "styled-components";
 interface props {
   width?: number;
   height?: number;
-  variant?: any;
-  bodyWidth?: any;
-  textClass?: any;
+  left?: boolean;
+  right?: boolean;
+  theme: any;
 }
 
 const ArrowButton = styled.div`
-  width: ${({ width }: props) => width ?? 120}px;
-  height: ${({ height }: props) => height ?? 60}px;
-  background: ${({ theme }) => theme.colors.b4};
-  padding-left: ${({ height }: props) => (height ? height / 2 : 30)}px;
-  ${({ theme }) => theme.centerContent};
+  ${({ width, height, left, right, theme }: props) => {
+    const w = width ?? 120;
+    const h = height ?? 60;
+
+    const leftClip = `
+      0px ${h / 2}px,
+      ${h / 2}px 0px,
+      ${w}px 0px,
+      ${w}px ${h}px,
+      ${h / 2}px ${h}px
+    `;
+
+    const rightClip = `
+      0px 0px,
+      0px ${h}px,
+      ${w - h / 2}px ${h}px,
+      ${w}px ${h / 2}px,
+      ${w - h / 2}px 0px
+    `;
+
+    return `
+    width: ${w}px;
+    height: ${h}px;
+    cursor: pointer;
+    background: ${theme.colors.b4};
+    clip-path: polygon(${left ? leftClip : right ? rightClip : ""});
+    ${theme.centerContent};
+    color: ${theme.colors.w5};
+    &:hover{
+      color: ${theme.colors.b4};
+      background: ${theme.colors.w3};
+    }
+  `;
+  }}
 `;
+
 export default ArrowButton;

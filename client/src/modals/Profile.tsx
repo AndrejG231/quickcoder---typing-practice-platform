@@ -9,9 +9,8 @@ export const Profile: React.FC = () => {
   return (
     <Modal>
       <ArrowButton
-        bodyWidth="180px"
         onClick={() => nav.push("/home/change_known_password/")}
-        variant="right"
+        right
       >
         Change Password
       </ArrowButton>

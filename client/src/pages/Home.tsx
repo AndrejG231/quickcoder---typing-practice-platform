@@ -29,6 +29,7 @@ import {
   HomeContainer,
   NavWrapper,
   UserButtonWrapper,
+  UserAction,
 } from "../components/home/";
 import ArrowButton from "../components/ArrowButton";
 
@@ -107,9 +108,14 @@ const Home: React.FC<HomeProps> = ({
     }
   }, [data, loading, error, setUserInfo]);
 
-  const Redirect = (to: string) => {
+  const redirect = (to: string) => {
     AnimationOut();
     setTimeout(() => navigation.push(to), 150);
+  };
+
+  const userLogout = async () => {
+    await logout();
+    refreshAuth();
   };
 
   return (
@@ -123,51 +129,37 @@ const Home: React.FC<HomeProps> = ({
       />
       <NavWrapper>
         <ClippedButton onClick={() => null}>Typing test</ClippedButton>
-        <ClippedButton onClick={() => Redirect("/practice_menu/")}>
+        <ClippedButton onClick={() => redirect("/practice_menu/")}>
           Practice
         </ClippedButton>
         <ClippedButton onClick={() => null}>Settings</ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
-      <UserButtonWrapper>
-        {userInfo.username === "GUEST" ? (
-          <>
-            <ArrowButton
-              className="signup button"
-              bodyWidth="120px"
-              onClick={() => {
-                navigation.push("/home/signup/");
-              }}
-              variant="left"
-            >
-              Sign Up
-            </ArrowButton>
-            <ArrowButton
-              className="login button"
-              bodyWidth="100px"
-              onClick={() => {
-                navigation.push("/home/login/");
-              }}
-              variant="left"
-            >
-              Login
-            </ArrowButton>{" "}
-          </>
-        ) : (
+      {userInfo.username === "GUEST" ? (
+        <UserButtonWrapper>
           <ArrowButton
-            className="signup button"
-            bodyWidth="100px"
-            onClick={async () => {
-              await logout();
-              refreshAuth();
-            }}
-            variant="left"
+            width={130}
+            onClick={() => navigation.push("/home/signup/")}
+            left
           >
-            Logout
+            <UserAction>Sign Up</UserAction>
           </ArrowButton>
-        )}
-      </UserButtonWrapper>
+          <ArrowButton
+            width={100}
+            onClick={() => navigation.push("/home/login/")}
+            right
+          >
+            <UserAction>Login</UserAction>
+          </ArrowButton>
+        </UserButtonWrapper>
+      ) : (
+        <UserButtonWrapper>
+          <ArrowButton width={100} onClick={userLogout} left>
+            <UserAction>Logout</UserAction>
+          </ArrowButton>
+        </UserButtonWrapper>
+      )}
     </HomeContainer>
   );
 };

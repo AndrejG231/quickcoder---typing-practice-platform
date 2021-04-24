@@ -64,10 +64,7 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
           field={"Error rate"}
           value={`${Math.round((errors_count / index) * 10000) / 100 || 0}%`}
         />
-        <Stat
-          field={"CPM"}
-          value={Math.round(index / (time_spent / 60000))}
-        />
+        <Stat field={"CPM"} value={Math.round(index / (time_spent / 60000))} />
       </div>
       <div className="pS-textView">
         <FormattedPracticeString
@@ -79,48 +76,40 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
       </div>
       <div className="pS-column">
         <ArrowButton
-          bodyWidth="150px"
-          variant="left"
+          left
           onClick={() => {
             resetPractice();
             resetOffset();
             navigator.push(`/practice/p=${practice_name}/l=${index}`);
           }}
-          textClass="pS-buttonText"
         >
           RESTART
         </ArrowButton>
 
         <ArrowButton
-          bodyWidth="150px"
-          variant="left"
+          left
           onClick={() => {
             navigator.push(`/practice_menu/`);
           }}
-          textClass="pS-buttonText"
         >
           NEW EXERCISE
         </ArrowButton>
 
         <ArrowButton
-          bodyWidth="150px"
-          variant="left"
+          left
           onClick={() => {
             navigator.push(`/home/profile/`);
           }}
-          textClass="pS-buttonText"
         >
           PROFILE
         </ArrowButton>
         <ArrowButton
-          bodyWidth="150px"
-          variant="left"
+          left
           onClick={() => {
             resetPractice();
             resetOffset();
             navigator.push(`/home/`);
           }}
-          textClass="pS-buttonText"
         >
           HOME
         </ArrowButton>
