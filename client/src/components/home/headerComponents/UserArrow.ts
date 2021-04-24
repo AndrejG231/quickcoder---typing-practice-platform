@@ -11,8 +11,10 @@ const UserArrow = styled.div`
   clip-path: polygon(0px 40px, 40px 0px, 300px 0px, 300px 80px, 40px 80px);
   @media screen and (max-width: 700px) {
     clip-path: none;
-    position: static;
+    position: relative;
     height: 60px;
+    width: 100%;
+    overflow: hidden;
   }
   &:hover {
     color: ${({ theme }) => theme.colors.b4};

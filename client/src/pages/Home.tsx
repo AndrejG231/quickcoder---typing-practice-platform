@@ -30,6 +30,7 @@ import {
   NavWrapper,
   UserButtonWrapper,
   UserAction,
+  MenuItem,
 } from "../components/home/";
 import ArrowButton from "../components/ArrowButton";
 
@@ -125,14 +126,24 @@ const Home: React.FC<HomeProps> = ({
           navigation.push("/home/profile/");
         }}
         onTitleClick={() => navigation.push("/home/")}
-        username={userInfo.username === "" ? "GUEST" : userInfo.username}
+        username={`${
+          userInfo.username === ""
+            ? "GUEST"
+            : userInfo.username.length > 7
+            ? userInfo.username.slice(0, 7) + "..."
+            : userInfo.username
+        }`}
       />
       <NavWrapper>
-        <ClippedButton onClick={() => null}>Typing test</ClippedButton>
-        <ClippedButton onClick={() => redirect("/practice_menu/")}>
-          Practice
+        <ClippedButton onClick={() => null}>
+          <MenuItem>Typing test</MenuItem>
         </ClippedButton>
-        <ClippedButton onClick={() => null}>Settings</ClippedButton>
+        <ClippedButton onClick={() => redirect("/practice_menu/")}>
+          <MenuItem>Practice</MenuItem>
+        </ClippedButton>
+        <ClippedButton onClick={() => null}>
+          <MenuItem>Settings</MenuItem>
+        </ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
@@ -155,6 +166,9 @@ const Home: React.FC<HomeProps> = ({
         </UserButtonWrapper>
       ) : (
         <UserButtonWrapper>
+          <ArrowButton width={100} onClick={userLogout} left>
+            <UserAction>Logout</UserAction>
+          </ArrowButton>
           <ArrowButton width={100} onClick={userLogout} left>
             <UserAction>Logout</UserAction>
           </ArrowButton>

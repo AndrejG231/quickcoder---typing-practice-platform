@@ -10,6 +10,7 @@ const HeaderTitle = styled.h1`
     left: 0;
     right: 0;
     text-align: center;
+    transform: translateY(-20px);
   }
 `;
 

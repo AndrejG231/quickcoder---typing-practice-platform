@@ -41,6 +41,9 @@ const ArrowButton = styled.div`
       color: ${theme.colors.b4};
       background: ${theme.colors.w3};
     }
+    @media screen and (max-width: 700px){
+      clip-path: none;
+    }
   `;
   }}
 `;
