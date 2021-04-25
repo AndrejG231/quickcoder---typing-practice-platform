@@ -2,10 +2,6 @@ import React from "react";
 
 import { ActionResponse } from "../types/graphql/ActResMutationsT";
 
-//styles
-import { IconContext } from "react-icons";
-import { BsFillExclamationTriangleFill } from "react-icons/bs";
-
 interface InputFieldProps {
   error: ActionResponse;
   label: string;
@@ -40,9 +36,6 @@ const InputField: React.FC<InputFieldProps> = ({
 
       {error.info.split("_")[1] === name ? (
         <div className="if-err-field">
-          <IconContext.Provider value={{ className: "if-err-icon" }}>
-            <BsFillExclamationTriangleFill />
-          </IconContext.Provider>
           <p className="if-err-text">{error.message}</p>
         </div>
       ) : (

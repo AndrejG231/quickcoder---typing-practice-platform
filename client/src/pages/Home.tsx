@@ -106,9 +106,11 @@ const Home: React.FC<HomeProps> = ({
   const redirect = (to: string) => {
     if (isModalOpened) {
       closeModal();
+      setTimeout(() => animateOut(), 200);
       setTimeout(() => navigation.push(to), 500);
     } else {
-      setTimeout(() => navigation.push(to), 150);
+      animateOut();
+      setTimeout(() => navigation.push(to), 250);
     }
   };
 

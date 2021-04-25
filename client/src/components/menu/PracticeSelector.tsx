@@ -1,7 +1,5 @@
 import { FC } from "react";
 import { connect } from "react-redux";
-import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai";
-import { IconContext } from "react-icons";
 import { practiceSwitchLen } from "../../redux/actions/practiceSelectionActions";
 import { ReduxState } from "../../types/redux/ReduxState";
 import { useHistory } from "react-router-dom";
@@ -107,13 +105,7 @@ const PracticeSelector: FC<PracticeSelectorProps> = ({
         <div className="pSel-setLength">
           Practice Length:
           <div className="pSel-length">
-            <IconContext.Provider value={{ className: "pSel-Icon" }}>
-              <AiFillPlusSquare onClick={() => setLength(1)} />
-            </IconContext.Provider>
             <span className="pSel-lenValue">{length}</span>
-            <IconContext.Provider value={{ className: "pSel-Icon" }}>
-              <AiFillMinusSquare onClick={() => setLength(-1)} />
-            </IconContext.Provider>
           </div>
         </div>
         <button

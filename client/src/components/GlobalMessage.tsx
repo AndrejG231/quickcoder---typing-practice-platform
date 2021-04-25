@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-import { IconContext } from "react-icons";
-import { BsFillXSquareFill } from "react-icons/bs";
 import { connect } from "react-redux";
 
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
@@ -42,9 +40,6 @@ const GlobalMessage: React.FC<globalMessageProps> = ({
   }
   return (
     <div className="msg-container">
-      <IconContext.Provider value={{ className: "msg-close-icon" }}>
-        <BsFillXSquareFill onClick={() => RemoveMessageHandler()} />
-      </IconContext.Provider>
       <div
         className="msg-text-container"
         style={{ width: message.length * 17.39 }}

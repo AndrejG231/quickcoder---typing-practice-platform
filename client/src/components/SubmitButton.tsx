@@ -1,7 +1,4 @@
 import React from "react";
-import { IconContext } from "react-icons";
-import { BsFillExclamationTriangleFill } from "react-icons/bs";
-
 
 interface SubmitButtonProps {
   error: string;
@@ -23,9 +20,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
       </button>
       {error ? (
         <div className="if-err-field">
-          <IconContext.Provider value={{ className: "if-err-icon" }}>
-            <BsFillExclamationTriangleFill />
-          </IconContext.Provider>
           <p className="if-err-text">{error}</p>
         </div>
       ) : (
