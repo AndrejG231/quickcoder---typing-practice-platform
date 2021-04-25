@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 //redux
 import { refreshAuthAction } from "../redux/actions/authActions";
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
-import { ToggleAnimationOut } from "../redux/actions/animationActions";
 
 //components
 import { Modal } from "../components/";
@@ -21,7 +20,6 @@ const rdxDispatch = (dispatch: any) => {
   return {
     RefreshAuth: () => dispatch(refreshAuthAction()),
     SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
-    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
   };
 };
 
@@ -63,7 +61,6 @@ export const ChangeKnownPassword: React.FC<ChangeKnownPasswordProps> = ({
     } else {
       SetMessage(response.message);
       RefreshAuth();
-      AnimeOut();
       setTimeout(() => nav.push("/home/login/"), 500);
     }
   };

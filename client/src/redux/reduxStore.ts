@@ -2,7 +2,6 @@ import { createStore, combineReducers, compose } from "redux";
 
 import { refreshAuthReducer, setUserInfo } from "./reducers/authReducer";
 import { setGlobalMessage } from "./reducers/globalMessageReducer";
-import { ReduxAnimationHandler } from "./reducers/animationsReducer";
 import {
   practiceReducer,
   practiceAnimationReducer,
@@ -11,17 +10,15 @@ import { practiceMenuReducer } from "./reducers/practiceMenuReducer";
 import { practiceUserStatsReducer } from "./reducers/practiceUserStatsReducer";
 import { practiceSelectionReducer } from "./reducers/practiceSelectionReducer";
 
-
 const reducers = combineReducers({
   AuthCount: refreshAuthReducer,
   UserInfo: setUserInfo,
   globalMessage: setGlobalMessage,
-  Animations: ReduxAnimationHandler,
   Practice: practiceReducer,
   PracticeOffset: practiceAnimationReducer,
   PracticeMenu: practiceMenuReducer,
   PracticeUserStats: practiceUserStatsReducer,
-  PracticeSelection: practiceSelectionReducer, 
+  PracticeSelection: practiceSelectionReducer,
 });
 
 const composeEnhancers =

@@ -13,10 +13,6 @@ import {
   setUserInfoAction,
   refreshAuthAction,
 } from "../redux/actions/authActions";
-import {
-  ToggleAnimationIn,
-  ToggleAnimationOut,
-} from "../redux/actions/animationActions";
 import { ReduxState } from "../types/redux/ReduxState";
 
 //types
@@ -39,7 +35,6 @@ const rdxState = (state: ReduxState) => {
   return {
     userInfo: state.UserInfo,
     AuthCount: state.AuthCount.AuthCount,
-    AnimationState: state.Animations.HomePage,
   };
 };
 
@@ -48,12 +43,6 @@ const rdxDispatch = (dispatch: any) => {
     refreshAuth: () => dispatch(refreshAuthAction()),
     setUserInfo: (user: UserInfo) => {
       dispatch(setUserInfoAction(user));
-    },
-    AnimationIn: () => {
-      dispatch(ToggleAnimationIn("HomePage"));
-    },
-    AnimationOut: () => {
-      dispatch(ToggleAnimationOut("HomePage"));
     },
   };
 };
@@ -147,7 +136,7 @@ const Home: React.FC<HomeProps> = ({
         <ClippedButton onClick={() => null}></ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
-      {userInfo.username === "GUEST" ? (
+      {userInfo ? (
         <UserButtonWrapper>
           <ArrowButton
             width={130}

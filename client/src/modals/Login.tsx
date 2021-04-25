@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 //redux
-import { ToggleAnimationOut } from "../redux/actions/animationActions";
 import { refreshAuthAction } from "../redux/actions/authActions";
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
 
@@ -30,7 +29,6 @@ interface LoginProps {
 
 const rdxDispatch = (dispatch: any) => {
   return {
-    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
     RefreshUserInfo: () => dispatch(refreshAuthAction()),
     SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
   };
@@ -81,7 +79,7 @@ export const Login: React.FC<LoginProps> = ({
   };
 
   return (
-    <Modal>
+    <Modal offset="-100vw">
       <form onSubmit={(e) => e.preventDefault()}>
         <InputField
           label={"Username or email"}

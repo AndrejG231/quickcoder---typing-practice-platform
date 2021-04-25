@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 //redux
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
-import { ToggleAnimationOut } from "../redux/actions/animationActions";
 
 //graphql
 import { ActionResponse } from "../types/graphql/ActResMutationsT";
@@ -17,7 +16,6 @@ import SubmitButton from "../components/SubmitButton";
 
 const rdxDispatch = (dispatch: any) => {
   return {
-    AnimeOut: () => dispatch(ToggleAnimationOut("Modal")),
     SetMessage: (message: string) => dispatch(setGlobalMessage(message)),
   };
 };

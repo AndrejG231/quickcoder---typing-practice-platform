@@ -12,8 +12,8 @@ const Modal = styled.div`
         top: 10px;
         bottom: 10px;
         max-width: 600px;
-        left: 5%;
-        right: 5%;
+        left: 105%;
+        right: -95%;
         margin: auto;
         transition: 0.5s all linear;
         transform: translateX(${offset});
