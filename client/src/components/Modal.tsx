@@ -1,5 +1,6 @@
 import React, { FC, ReactChild, useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
 import { ReduxState } from "../types/redux/ReduxState";
@@ -32,6 +33,8 @@ const Modal: FC<ModalProps> = ({
   AnimateOut,
   onScreen,
 }) => {
+  const nav = useHistory();
+
   useEffect(() => {
     AnimateIn();
     return () => {
@@ -39,9 +42,14 @@ const Modal: FC<ModalProps> = ({
     };
   }, [AnimateIn, AnimateOut]);
 
+  const closeModal = () => {
+    AnimateOut();
+    setTimeout(() => nav.push("/home/"), 500);
+  };
+
   return (
     <ModalWrapper onScreen={onScreen}>
-      <ModalCloseButton>
+      <ModalCloseButton onClick={closeModal}>
         <ModalButtonText>BACK</ModalButtonText>
       </ModalCloseButton>
       <ModalContentWrapper>{children}</ModalContentWrapper>

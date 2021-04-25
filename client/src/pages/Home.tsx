@@ -29,12 +29,14 @@ import {
   MenuItem,
 } from "../components/components_home";
 import ArrowButton from "../components/ArrowButton";
+import { AnimeOut } from "../redux/actions/animationActions";
 
 //Redux
 const rdxState = (state: ReduxState) => {
   return {
     userInfo: state.UserInfo,
     AuthCount: state.AuthCount.AuthCount,
+    isModalOpened: state.Animation.modal,
   };
 };
 
@@ -44,6 +46,7 @@ const rdxDispatch = (dispatch: any) => {
     setUserInfo: (user: UserInfo) => {
       dispatch(setUserInfoAction(user));
     },
+    closeModal: () => dispatch(AnimeOut("modal")),
   };
 };
 
@@ -53,6 +56,8 @@ interface HomeProps {
   userInfo: UserInfo;
   AuthCount: number;
   setUserInfo: (user: UserInfo) => void;
+  isModalOpened: boolean;
+  closeModal: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -60,6 +65,8 @@ const Home: React.FC<HomeProps> = ({
   userInfo,
   setUserInfo,
   AuthCount,
+  isModalOpened,
+  closeModal,
 }) => {
   const [logout] = Logout();
   const { data, loading, error, refetch } = GetUserInfo();
@@ -83,12 +90,26 @@ const Home: React.FC<HomeProps> = ({
   }, [data, loading, error, setUserInfo]);
 
   const redirect = (to: string) => {
-    setTimeout(() => navigation.push(to), 150);
+    if (isModalOpened) {
+      closeModal();
+      setTimeout(() => navigation.push(to), 500);
+    } else {
+      setTimeout(() => navigation.push(to), 150);
+    }
   };
 
   const userLogout = async () => {
     await logout();
     refreshAuth();
+  };
+
+  const goHome = () => {
+    if (isModalOpened) {
+      closeModal();
+      setTimeout(() => navigation.push("/home/"), 500);
+    } else {
+      navigation.push("/home/");
+    }
   };
 
   return (
@@ -97,7 +118,7 @@ const Home: React.FC<HomeProps> = ({
         onUserClick={() => {
           navigation.push("/home/profile/");
         }}
-        onTitleClick={() => navigation.push("/home/")}
+        onTitleClick={goHome}
         username={`${
           userInfo.username === ""
             ? "GUEST"
