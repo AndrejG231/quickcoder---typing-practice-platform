@@ -16,8 +16,8 @@ const ModalCloseButton = styled.button`
         align-items: center;
         cursor: pointer;
         &:hover{
-            background: ${theme.colors.b4};
-            color: ${theme.colors.w5};
+            background: ${theme.colors.w3};
+            color: ${theme.colors.b4};
         }
       `;
   }}

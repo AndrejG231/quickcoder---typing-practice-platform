@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { IconContext } from "react-icons";
-import { BsFillCaretRightFill, BsFillCaretUpFill } from "react-icons/bs";
 import { ReduxState } from "../../types/redux/ReduxState";
 import { toggleCategoryAction } from "../../redux/actions/practiceMenuActions";
 import { resetPracticeSession } from "../../redux/actions/practiceActions";
@@ -87,11 +85,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
             practiceLength={stats?.length ? stats.length : 0}
             score={stats?.score ? stats.score : 0}
           />
-        ) : (
-          <IconContext.Provider value={{ className: "mI-category-open" }}>
-            {isOpen[title] ? <BsFillCaretUpFill /> : <BsFillCaretRightFill />}
-          </IconContext.Provider>
-        )}
+        ) : null}
       </div>
     </div>
   );

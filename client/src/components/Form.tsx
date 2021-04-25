@@ -30,27 +30,28 @@ const InputGroup: FC<InputGroupProps> = ({
     <FormContainer
       onSubmit={(e) => {
         e.preventDefault();
-        submitFunction;
+        submitFunction();
       }}
     >
       {Object.keys(data).map((inputKey, index) => {
         const input = data[inputKey];
         return (
           <InputWrapper key={index}>
-            <InputLabel>
-              <InputField
-                value={input.value}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    [inputKey]: { ...data[inputKey], value: e.target.value },
-                  })
-                }
-              />
-            </InputLabel>
+            <InputLabel htmlFor={inputKey}>{inputKey}</InputLabel>
+            <InputField
+              value={input.value}
+              name={inputKey}
+              type={inputKey}
+              onChange={(e) =>
+                setData({
+                  ...data,
+                  [inputKey]: { ...data[inputKey], value: e.target.value },
+                })
+              }
+            />
             {input.error ? (
               <InputError>
-                <InputErrorIcon />
+                <InputErrorIcon size={"20px"} />
                 <InputErrorText>{input.error}</InputErrorText>
               </InputError>
             ) : null}
