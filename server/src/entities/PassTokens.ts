@@ -1,4 +1,4 @@
-import { Field, Float } from "type-graphql";
+import { Field, Int } from "type-graphql";
 import {
   BaseEntity,
   Column,
@@ -28,9 +28,9 @@ class PassTokens extends BaseEntity {
   @Column()
   client_info!: string;
 
-  @Field(() => Float)
+  @Field(() => Int)
   @Column()
-  created_at!: Date;
+  created_at!: number;
 }
 
 export default PassTokens;

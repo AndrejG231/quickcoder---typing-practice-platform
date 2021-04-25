@@ -54,9 +54,9 @@ class UserAuthResolver {
         email: credentials.email,
         username: credentials.username.toLowerCase(),
         password: hashedPassword,
-        created_at: new Date()
+        created_at: new Date().getTime(),
       })
-      .execute()
+      .execute();
     return generateResponse(true, "register_account_registered", lang);
   }
 
@@ -159,7 +159,7 @@ class UserAuthResolver {
   @Mutation(() => Boolean)
   logout(@Ctx() { res }: GraphqlContext) {
     res.clearCookie(process.env.COOKIE_NAME!);
-    return true
+    return true;
   }
 }
 

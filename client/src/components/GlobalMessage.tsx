@@ -4,63 +4,44 @@ import { BsFillXSquareFill } from "react-icons/bs";
 import { connect } from "react-redux";
 
 import { setGlobalMessage } from "../redux/actions/globalMessageActions";
-import {
-  ToggleAnimationIn,
-  ToggleAnimationOut,
-} from "../redux/actions/animationActions";
 import { ReduxState } from "../types/redux/ReduxState";
-
 
 interface globalMessageProps {
   message: string;
-  AnimationState: number;
   clearMessage: any;
-  AnimeIn: any;
-  AnimeOut: any;
 }
 
 const rdxState = (state: ReduxState) => {
   return {
     message: state.globalMessage.message,
-    AnimationState: state.Animations.GlobalMessage.main,
   };
 };
 const rdxDispatch = (dispatch: any) => {
   return {
     clearMessage: () => dispatch(setGlobalMessage("")),
-    AnimeIn: () => dispatch(ToggleAnimationIn("GlobalMessage")),
-    AnimeOut: () => dispatch(ToggleAnimationOut("GlobalMessage")),
   };
 };
 
 const GlobalMessage: React.FC<globalMessageProps> = ({
   message,
   clearMessage,
-  AnimationState,
-  AnimeIn,
-  AnimeOut,
 }) => {
   const RemoveMessageHandler = useCallback(() => {
     const messageToRemove = message;
     if (messageToRemove === message) {
-      AnimeOut();
       setTimeout(() => clearMessage(), 1500);
     }
-  }, [AnimeOut, clearMessage, message]);
+  }, [clearMessage, message]);
 
   useEffect(() => {
-    AnimeIn();
     setTimeout(() => RemoveMessageHandler(), 4000);
-  }, [AnimeIn, RemoveMessageHandler]);
+  }, [RemoveMessageHandler]);
 
   if (message === "") {
     return <div />;
   }
   return (
-    <div
-      className="msg-container"
-      style={{ transform: `translateY(${AnimationState}px)` }}
-    >
+    <div className="msg-container">
       <IconContext.Provider value={{ className: "msg-close-icon" }}>
         <BsFillXSquareFill onClick={() => RemoveMessageHandler()} />
       </IconContext.Provider>

@@ -27,7 +27,7 @@ import {
   UserButtonWrapper,
   UserAction,
   MenuItem,
-} from "../components/home/";
+} from "../components/components_home";
 import ArrowButton from "../components/ArrowButton";
 
 //Redux
@@ -53,12 +53,6 @@ interface HomeProps {
   userInfo: UserInfo;
   AuthCount: number;
   setUserInfo: (user: UserInfo) => void;
-  AnimationState: {
-    isDisplayed: boolean;
-    main: number;
-  };
-  AnimationIn: () => void;
-  AnimationOut: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -66,21 +60,11 @@ const Home: React.FC<HomeProps> = ({
   userInfo,
   setUserInfo,
   AuthCount,
-  AnimationState,
-  AnimationIn,
-  AnimationOut,
 }) => {
   const [logout] = Logout();
   const { data, loading, error, refetch } = GetUserInfo();
 
   const navigation = useHistory();
-
-  useEffect(() => {
-    AnimationIn();
-    return () => {
-      AnimationOut();
-    };
-  }, [AnimationIn, AnimationOut]);
 
   useEffect(() => {
     if (AuthCount > 0) {
@@ -99,7 +83,6 @@ const Home: React.FC<HomeProps> = ({
   }, [data, loading, error, setUserInfo]);
 
   const redirect = (to: string) => {
-    AnimationOut();
     setTimeout(() => navigation.push(to), 150);
   };
 

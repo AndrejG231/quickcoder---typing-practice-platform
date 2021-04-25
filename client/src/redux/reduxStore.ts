@@ -9,6 +9,7 @@ import {
 import { practiceMenuReducer } from "./reducers/practiceMenuReducer";
 import { practiceUserStatsReducer } from "./reducers/practiceUserStatsReducer";
 import { practiceSelectionReducer } from "./reducers/practiceSelectionReducer";
+import { animationReducer } from "./reducers/animationReducer";
 
 const reducers = combineReducers({
   AuthCount: refreshAuthReducer,
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   PracticeMenu: practiceMenuReducer,
   PracticeUserStats: practiceUserStatsReducer,
   PracticeSelection: practiceSelectionReducer,
+  Animation: animationReducer,
 });
 
 const composeEnhancers =

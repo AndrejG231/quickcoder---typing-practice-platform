@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 interface props {
-  offset?: string;
+  onScreen?: boolean;
   theme: any;
 }
 
-const Modal = styled.div`
-  ${({ offset = "0", theme }: props) => {
+const ModalWrapper = styled.div`
+  ${({ onScreen, theme }: props) => {
     return `
         position: fixed;
         top: 10px;
@@ -16,7 +16,7 @@ const Modal = styled.div`
         right: -95%;
         margin: auto;
         transition: 0.5s all linear;
-        transform: translateX(${offset});
+        transform: translateX(${onScreen ? "-100vw" : 0});
         background: ${theme.colors.b2};
         border: 5px solid ${theme.colors.b4};
         padding: 0 100px;
@@ -24,4 +24,4 @@ const Modal = styled.div`
   }}
 `;
 
-export default Modal;
+export default ModalWrapper;

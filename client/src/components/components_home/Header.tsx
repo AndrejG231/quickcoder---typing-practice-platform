@@ -10,7 +10,7 @@ import {
   UserArrow,
   UserDisplayName,
   HeaderTitle,
-} from "./headerComponents";
+} from "./components_header";
 
 interface HeaderProps {
   username: string;

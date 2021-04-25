@@ -5,6 +5,7 @@ import { PracticeObjectT } from "../../types/practice/PracticeT";
 import { practiceMenuStateObjectT } from "./PracticeMenuT";
 import { userStatObjectT } from "./PracticeUserStats";
 import { practiceSelectionStateT } from "./PracticeSelectionT";
+import { animationStateT } from "./AnimeT";
 
 export type ReduxState = {
   UserInfo: UserInfo;
@@ -15,4 +16,5 @@ export type ReduxState = {
   PracticeMenu: practiceMenuStateObjectT;
   PracticeUserStats: userStatObjectT;
   PracticeSelection: practiceSelectionStateT;
+  Animation: animationStateT;
 };
