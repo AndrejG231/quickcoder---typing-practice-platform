@@ -6,6 +6,7 @@ const UserArrow = styled.div`
   right: 0px;
   width: 300px;
   height: 50%;
+  cursor: pointer;
   color: ${({ theme }) => theme.colors.w5};
   background: ${({ theme }) => theme.colors.b4};
   clip-path: polygon(0px 40px, 40px 0px, 300px 0px, 300px 80px, 40px 80px);

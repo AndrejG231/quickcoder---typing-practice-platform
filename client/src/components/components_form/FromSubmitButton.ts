@@ -17,6 +17,9 @@ const FormSubmitButton = styled.button`
       background: ${theme.colors.w4};
       color: ${theme.colors.b5};
     }
+    @media screen and (max-width: 700px){
+      width: 100%;
+    }
   `}
 `;
 

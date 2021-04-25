@@ -41,7 +41,7 @@ const InputGroup: FC<InputGroupProps> = ({
             <InputField
               value={input.value}
               name={inputKey}
-              type={inputKey}
+              type={input.type}
               onChange={(e) =>
                 setData({
                   ...data,

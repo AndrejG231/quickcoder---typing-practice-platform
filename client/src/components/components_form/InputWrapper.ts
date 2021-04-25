@@ -12,7 +12,7 @@ const InputWrapper = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.colors.b4};
   @media screen and (max-width: 700px) {
-    width: 95%;
+    width: 90%;
     border-radius: 0;
   }
 `;

@@ -1,10 +1,14 @@
 import { inputDataT } from "../types/InputDataT";
 
-const createInputGroup = (keys: string[]) => {
+const createInputGroup = (keys: string[], types?: string[]) => {
   const inputGroup: inputDataT = {};
 
-  for (const key of keys) {
-    inputGroup[key] = { value: "", error: "" };
+  for (let i = 0; i < keys.length; i++) {
+    inputGroup[keys[i]] = {
+      value: "",
+      error: "",
+      type: types ? types[i] ?? "text" : "text",
+    };
   }
 
   return inputGroup;

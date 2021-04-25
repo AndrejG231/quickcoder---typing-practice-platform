@@ -8,7 +8,9 @@ const FormContainer = styled.form`
   align-items: center;
   flex-direction: column;
   @media screen and (max-width: 700px) {
-    width: 95%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 `;
 

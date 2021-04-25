@@ -10,13 +10,16 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   AnimateOut: () => dispatch(AnimeOut("modal")),
 });
 
-interface LoginProps {
+interface RegisterProps {
   AnimateOut: () => void;
 }
 
-const Login: FC<LoginProps> = ({ AnimateOut }) => {
+const Register: FC<RegisterProps> = ({ AnimateOut }) => {
   const [inputData, setInputData] = useState(
-    createInputGroup(["username or email", "password"], ["text", "password"])
+    createInputGroup(
+      ["username", "email", "password"],
+      ["text", "email", "password"]
+    )
   );
 
   const submitForm = () => {};
@@ -25,7 +28,7 @@ const Login: FC<LoginProps> = ({ AnimateOut }) => {
     <Modal>
       <Form
         submitFunction={submitForm}
-        page="Log in"
+        page="register"
         data={inputData}
         setData={setInputData}
       />
@@ -33,4 +36,4 @@ const Login: FC<LoginProps> = ({ AnimateOut }) => {
   );
 };
 
-export default connect(() => ({}), rdxDispatch)(Login);
+export default connect(() => ({}), rdxDispatch)(Register);
