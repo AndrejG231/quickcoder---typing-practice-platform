@@ -2,6 +2,7 @@ import { animationsReducerT, animationStateT } from "../../types/redux/AnimeT";
 
 const animationState: animationStateT = {
   modal: false,
+  home: false,
 };
 
 export const animationReducer: animationsReducerT = (

@@ -7,6 +7,7 @@ const HomeContainer = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 `;
 
 export default HomeContainer;

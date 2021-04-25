@@ -29,7 +29,7 @@ import {
   MenuItem,
 } from "../components/components_home";
 import ArrowButton from "../components/ArrowButton";
-import { AnimeOut } from "../redux/actions/animationActions";
+import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
 
 //Redux
 const rdxState = (state: ReduxState) => {
@@ -37,6 +37,7 @@ const rdxState = (state: ReduxState) => {
     userInfo: state.UserInfo,
     AuthCount: state.AuthCount.AuthCount,
     isModalOpened: state.Animation.modal,
+    onScreen: state.Animation.home,
   };
 };
 
@@ -47,6 +48,8 @@ const rdxDispatch = (dispatch: any) => {
       dispatch(setUserInfoAction(user));
     },
     closeModal: () => dispatch(AnimeOut("modal")),
+    animateOut: () => dispatch(AnimeOut("home")),
+    animateIn: () => dispatch(AnimeIn("home")),
   };
 };
 
@@ -58,6 +61,9 @@ interface HomeProps {
   setUserInfo: (user: UserInfo) => void;
   isModalOpened: boolean;
   closeModal: () => void;
+  onScreen: boolean;
+  animateOut: () => void;
+  animateIn: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -67,11 +73,19 @@ const Home: React.FC<HomeProps> = ({
   AuthCount,
   isModalOpened,
   closeModal,
+  onScreen,
+  animateOut,
+  animateIn,
 }) => {
   const [logout] = Logout();
   const { data, loading, error, refetch } = GetUserInfo();
 
   const navigation = useHistory();
+
+  useEffect(() => {
+    animateIn();
+    return () => animateOut();
+  }, [animateIn, animateOut]);
 
   useEffect(() => {
     if (AuthCount > 0) {
@@ -115,6 +129,7 @@ const Home: React.FC<HomeProps> = ({
   return (
     <HomeContainer>
       <Header
+        onScreen={onScreen}
         onUserClick={() => {
           navigation.push("/home/profile/");
         }}
@@ -127,7 +142,7 @@ const Home: React.FC<HomeProps> = ({
             : userInfo.username
         }`}
       />
-      <NavWrapper>
+      <NavWrapper isOnScreen={onScreen}>
         <ClippedButton onClick={() => null}>
           <MenuItem>Typing test</MenuItem>
         </ClippedButton>
@@ -141,7 +156,7 @@ const Home: React.FC<HomeProps> = ({
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
       {userInfo ? (
-        <UserButtonWrapper>
+        <UserButtonWrapper isOnScreen={onScreen}>
           <ArrowButton
             width={130}
             onClick={() => navigation.push("/home/signup/")}
@@ -158,7 +173,7 @@ const Home: React.FC<HomeProps> = ({
           </ArrowButton>
         </UserButtonWrapper>
       ) : (
-        <UserButtonWrapper>
+        <UserButtonWrapper isOnScreen={onScreen}>
           <ArrowButton width={100} onClick={userLogout} left>
             <UserAction>Logout</UserAction>
           </ArrowButton>

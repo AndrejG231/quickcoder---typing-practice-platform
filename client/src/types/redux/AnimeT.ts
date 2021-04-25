@@ -1,4 +1,4 @@
-export type animationObjectsList = "modal";
+export type animationObjectsList = "modal" | "home";
 
 export type animationStateT = {
   [key in animationObjectsList]: boolean;
