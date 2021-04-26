@@ -12,7 +12,7 @@ import { practiceSelectionReducer } from "./reducers/practiceSelectionReducer";
 import { animationReducer } from "./reducers/animationReducer";
 
 const reducers = combineReducers({
-  AuthCount: refreshAuthReducer,
+  checkAuth: refreshAuthReducer,
   UserInfo: setUserInfo,
   globalMessage: setGlobalMessage,
   Practice: practiceReducer,

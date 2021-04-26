@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { formErrorT } from "../types/formTypes";
+import { formError } from "../types/";
 
 const useErrors = () => {
-  return useState<formErrorT>({ field: "", value: "" });
+  return useState<formError>({ field: "", value: "" });
 };
 
 export default useErrors;

@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup, useErrors } from "../utilites";
+import { createInputGroup, useAuthMutation, useErrors } from "../utilites";
 import { AnimeOut } from "../redux/actions/animationActions";
+import { serverError } from "../static";
 import { useRegisterMutation } from "../graphql/fetching_auth";
 import { useHistory } from "react-router";
 
@@ -16,43 +17,38 @@ interface RegisterProps {
   AnimateOut: () => void;
 }
 
-const registerFields = ["username", "email", "password"];
-const registerTypes = ["text", "email", "password"];
-
 const Register: FC<RegisterProps> = ({ AnimateOut }) => {
   const nav = useHistory();
   const [inputData, setInputData] = useState(
-    createInputGroup(registerFields, registerTypes)
+    createInputGroup(
+      ["username", "email", "password"],
+      ["text", "email", "password"]
+    )
   );
 
   const [errors, setErrors] = useErrors();
 
-  const [register, { data, error, fetching }] = useRegisterMutation();
+  const [register, { data, error }] = useRegisterMutation();
 
   const submitForm = () => {
     register({
-      variables: {
-        credentials: {
-          email: inputData.email.value,
-          username: inputData.username.value,
-          password: inputData.password.value,
-        },
-      },
+      email: inputData.email.value,
+      username: inputData.username.value,
+      password: inputData.password.value,
     });
   };
 
-  useEffect(() => {
-    if (data) {
-      if (data.register.success) {
-        AnimateOut();
-        setTimeout(() => nav.push("/home/login/"), 400);
-      } else {
-        const field = data.register.info.split("_")[1];
-        setErrors({ field, value: data.register.message });
-      }
-    } else if (error) {
-    }
-  }, [data, error, setInputData, AnimateOut]);
+  useAuthMutation({
+    data,
+    error,
+    setErrors,
+    field: "register",
+    onError: () => setErrors(serverError),
+    onSuccess: () => {
+      AnimateOut();
+      setTimeout(() => nav.push("/home/login/"), 400);
+    },
+  });
 
   return (
     <Modal>

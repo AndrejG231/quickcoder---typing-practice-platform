@@ -1,4 +1,4 @@
-import { UserInfo } from "../graphql/AuthMutationsT";
+import { userInfo } from "../../types";
 
 export interface refreshAuthActionObject {
   type: "auth/refresh";
@@ -10,15 +10,15 @@ export interface refreshAuthActionT {
 
 interface UserInfoAction {
   type: "auth/setUserInfo";
-  user: UserInfo;
+  user: userInfo;
 }
 
 export interface getUserInfoAction {
-  (user: UserInfo): UserInfoAction;
+  (user: userInfo): UserInfoAction;
 }
 
 export interface AuthReducerState {
-  AuthCount: number;
+  awaitingAuth: boolean;
 }
 
 export interface AuthReducer {
@@ -26,5 +26,5 @@ export interface AuthReducer {
 }
 
 export interface UserInfoReducer {
-  (state: UserInfo, action: UserInfoAction): UserInfo;
+  (state: userInfo, action: UserInfoAction): userInfo;
 }

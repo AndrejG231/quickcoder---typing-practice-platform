@@ -5,16 +5,6 @@ import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
 
 // //REGISTER
 
-// const loginMutation: DocumentNode = gql`
-//   mutation login($credentials: LoginInput!, $clientParameter: String!) {
-//     login(credentials: $credentials, clientParameter: $clientParameter) {
-//       info
-//       action
-//       success
-//       message
-//     }
-//   }
-// `;
 
 // //LOGIN
 

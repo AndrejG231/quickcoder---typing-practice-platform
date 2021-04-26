@@ -1,9 +1,12 @@
-import {AuthReducer, UserInfoReducer } from "../../types/redux/AuthT";
+import { AuthReducer, UserInfoReducer } from "../../types/redux/AuthT";
 
-export const refreshAuthReducer: AuthReducer = (state = { AuthCount: 0}, action) => {
+export const refreshAuthReducer: AuthReducer = (
+  state = { awaitingAuth: true },
+  action
+) => {
   switch (action.type) {
     case "auth/refresh":
-      return { AuthCount: ++state.AuthCount};
+      return { awaitingAuth: false };
     default:
       return state;
   }
@@ -19,7 +22,6 @@ export const setUserInfo: UserInfoReducer = (
     color_scheme: "",
     created_at: "0",
   },
-
   action
 ) => {
   switch (action.type) {
@@ -32,4 +34,3 @@ export const setUserInfo: UserInfoReducer = (
       return state;
   }
 };
-

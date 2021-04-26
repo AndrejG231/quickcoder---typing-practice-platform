@@ -1,4 +1,5 @@
 import { DocumentNode, gql, useMutation } from "@apollo/client";
+import { actionResponseResult } from "../../types";
 
 const registerMutation: DocumentNode = gql`
   mutation Register($credentials: RegisterInput!) {
@@ -12,33 +13,19 @@ const registerMutation: DocumentNode = gql`
 `;
 
 type RegisterInput = {
-  (options: {
-    variables: {
-      credentials: { username: string; email: string; password: string };
-    };
-  }): void;
-};
-
-type RegisterResults = {
-  data?: {
-    register: {
-      success: boolean;
-      action: string;
-      info: string;
-      message: string;
-    };
-  } | null;
-
-  fetching?: boolean;
-  error?: any;
+  (options: { username: string; email: string; password: string }): void;
 };
 
 type RegisterMutation = {
-  (): [RegisterInput, RegisterResults];
+  (): [RegisterInput, actionResponseResult];
 };
 
 const useRegisterMutation: RegisterMutation = () => {
-  return useMutation(registerMutation);
+  const [register, result] = useMutation(registerMutation);
+  return [
+    (options) => register({ variables: { credentials: options } }),
+    result,
+  ];
 };
 
 export default useRegisterMutation;

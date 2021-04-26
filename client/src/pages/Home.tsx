@@ -33,7 +33,7 @@ import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
 const rdxState = (state: ReduxState) => {
   return {
     userInfo: state.UserInfo,
-    AuthCount: state.AuthCount.AuthCount,
+    authNotRefreshed: state.checkAuth.awaitingAuth,
     isModalOpened: state.Animation.modal,
     onScreen: state.Animation.home,
   };
@@ -55,7 +55,7 @@ const rdxDispatch = (dispatch: any) => {
 interface HomeProps {
   refreshAuth: () => void;
   userInfo: any /*UserInfo*/;
-  AuthCount: number;
+  authNotRefreshed: boolean;
   setUserInfo: (user: any /*UserInfo*/) => void;
   isModalOpened: boolean;
   closeModal: () => void;
@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = ({
   refreshAuth,
   userInfo,
   setUserInfo,
-  AuthCount,
+  authNotRefreshed,
   isModalOpened,
   closeModal,
   onScreen,
@@ -84,12 +84,6 @@ const Home: React.FC<HomeProps> = ({
     animateIn();
     return () => animateOut();
   }, [animateIn, animateOut]);
-
-  useEffect(() => {
-    if (AuthCount > 0) {
-      refetch();
-    }
-  }, [AuthCount, refetch]);
 
   useEffect(() => {
     if (!loading && data) {

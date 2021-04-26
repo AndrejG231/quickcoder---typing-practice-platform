@@ -12,14 +12,14 @@ import {
   NofieldError,
 } from "./components_form";
 
-import { formErrorT, inputDataT } from "../types/formTypes";
+import { formError, inputData } from "../types/";
 
 interface InputGroupProps {
-  data: inputDataT;
-  setData: (data: inputDataT) => void;
+  data: inputData;
+  setData: (data: inputData) => void;
   submitFunction: () => void;
   page: string;
-  errors: formErrorT;
+  errors: formError;
 }
 
 const Form: FC<InputGroupProps> = ({

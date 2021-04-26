@@ -1,7 +1,7 @@
-import { inputDataT } from "../types/formTypes";
+import { inputData } from "../types/";
 
 const createInputGroup = (keys: string[], types?: string[]) => {
-  const inputGroup: inputDataT = {};
+  const inputGroup: inputData = {};
 
   for (let i = 0; i < keys.length; i++) {
     inputGroup[keys[i]] = {
