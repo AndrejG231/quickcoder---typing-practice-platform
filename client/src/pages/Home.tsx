@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 //queries
-import { GetUserInfo, Logout } from "../graphql/auth";
 
 //Utilities
 import guestUser from "../utilites/guestUser";
@@ -16,7 +15,6 @@ import {
 import { ReduxState } from "../types/redux/ReduxState";
 
 //types
-import { UserInfo } from "../types/graphql/AuthMutationsT";
 
 //Components
 import {
@@ -44,9 +42,9 @@ const rdxState = (state: ReduxState) => {
 const rdxDispatch = (dispatch: any) => {
   return {
     refreshAuth: () => dispatch(refreshAuthAction()),
-    setUserInfo: (user: UserInfo) => {
-      dispatch(setUserInfoAction(user));
-    },
+    setUserInfo: (user: any) => null, //(user: UserInfo) => {
+    //   dispatch(setUserInfoAction(user));
+    // },
     closeModal: () => dispatch(AnimeOut("modal")),
     animateOut: () => dispatch(AnimeOut("home")),
     animateIn: () => dispatch(AnimeIn("home")),
@@ -56,9 +54,9 @@ const rdxDispatch = (dispatch: any) => {
 //
 interface HomeProps {
   refreshAuth: () => void;
-  userInfo: UserInfo;
+  userInfo: any /*UserInfo*/;
   AuthCount: number;
-  setUserInfo: (user: UserInfo) => void;
+  setUserInfo: (user: any /*UserInfo*/) => void;
   isModalOpened: boolean;
   closeModal: () => void;
   onScreen: boolean;
@@ -77,8 +75,8 @@ const Home: React.FC<HomeProps> = ({
   animateOut,
   animateIn,
 }) => {
-  const [logout] = Logout();
-  const { data, loading, error, refetch } = GetUserInfo();
+  const [logout] = ["hi"]; //Logout();
+  const { data, loading, error, refetch }: any = {}; //GetUserInfo();
 
   const navigation = useHistory();
 
@@ -115,7 +113,7 @@ const Home: React.FC<HomeProps> = ({
   };
 
   const userLogout = async () => {
-    await logout();
+    // await logout();
     refreshAuth();
   };
 

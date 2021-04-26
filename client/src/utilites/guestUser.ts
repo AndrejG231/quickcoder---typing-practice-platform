@@ -1,6 +1,4 @@
-import { UserInfo } from "../types/graphql/AuthMutationsT";
-
-const guestUser: UserInfo = {
+const guestUser = {
   id: -1,
   username: "GUEST",
   email: "Not Logged In",

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup } from "../utilites";
+import { createInputGroup, useErrors } from "../utilites";
 import { AnimeOut } from "../redux/actions/animationActions";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -15,6 +15,7 @@ interface LoginProps {
 }
 
 const Login: FC<LoginProps> = ({ AnimateOut }) => {
+  const [errors, setErrors] = useErrors();
   const [inputData, setInputData] = useState(
     createInputGroup(["username or email", "password"], ["text", "password"])
   );
@@ -24,6 +25,7 @@ const Login: FC<LoginProps> = ({ AnimateOut }) => {
   return (
     <Modal>
       <Form
+        errors={errors}
         submitFunction={submitForm}
         page="Log in"
         data={inputData}

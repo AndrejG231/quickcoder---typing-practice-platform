@@ -1,4 +1,4 @@
-import { inputDataT } from "../types/InputDataT";
+import { inputDataT } from "../types/formTypes";
 
 const createInputGroup = (keys: string[], types?: string[]) => {
   const inputGroup: inputDataT = {};
@@ -6,7 +6,6 @@ const createInputGroup = (keys: string[], types?: string[]) => {
   for (let i = 0; i < keys.length; i++) {
     inputGroup[keys[i]] = {
       value: "",
-      error: "",
       type: types ? types[i] ?? "text" : "text",
     };
   }

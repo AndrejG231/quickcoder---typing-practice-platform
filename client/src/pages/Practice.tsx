@@ -30,7 +30,6 @@ import getClientParam from "../utilites/clientParameter";
 import {
   practiceStatsQuery,
   useCreatePracticeSession,
-  useUpdatePracticeMutation,
 } from "../graphql/practice";
 import { setTimeout } from "timers";
 
@@ -72,7 +71,6 @@ const Practice: React.FC<PracticeProps> = ({
   } = useParams();
 
   const [createPractice, { data, error, loading }] = useCreatePracticeSession();
-  const { validate, mutation } = useUpdatePracticeMutation();
   const [updatePractice] = mutation;
 
   const loadPractice = async () => {

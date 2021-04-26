@@ -1,5 +1,4 @@
 import { useMutation, gql, useQuery } from "@apollo/client";
-import { ActionResponseMutation, connectServerError } from "./general";
 
 const createPracticeMutation = gql`
   mutation createPractice(
@@ -130,10 +129,6 @@ export const useCreatePracticeSession = () => {
   return useMutation(createPracticeMutation);
 };
 
-export const useUpdatePracticeMutation = () => {
-  return ActionResponseMutation(
-    "updatePractice",
-    connectServerError("updatePractice"),
-    updatePracticeMutation
-  );
-};
+// export const useUpdatePracticeMutation = () => {
+//   return () => null;
+// };

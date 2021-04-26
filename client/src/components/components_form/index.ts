@@ -6,3 +6,4 @@ export { default as FormContainer } from "./FormContainer";
 export { default as FormSubmitButton } from "./FromSubmitButton";
 export { default as InputErrorIcon } from "./InputErrorIcon";
 export { default as InputErrorText } from "./InputErrorText";
+export { default as NofieldError } from "./NofieldError";

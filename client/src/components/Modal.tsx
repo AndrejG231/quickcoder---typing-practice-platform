@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
 import { ReduxState } from "../types/redux/ReduxState";
+
 import {
   ModalCloseButton,
   ModalWrapper,
