@@ -16,11 +16,11 @@ interface ModalProps {
   children?: ReactChild | ReactChild[];
   AnimateIn: () => void;
   AnimateOut: () => void;
-  onScreen: boolean;
+  isOnScreen: boolean;
 }
 
 const rdxProps = (state: ReduxState) => ({
-  onScreen: state.Animation.modal,
+  isOnScreen: state.Animation.modal,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -32,7 +32,7 @@ const Modal: FC<ModalProps> = ({
   children,
   AnimateIn,
   AnimateOut,
-  onScreen,
+  isOnScreen,
 }) => {
   const nav = useHistory();
 
@@ -49,7 +49,7 @@ const Modal: FC<ModalProps> = ({
   };
 
   return (
-    <ModalWrapper onScreen={onScreen}>
+    <ModalWrapper isOnScreen={isOnScreen}>
       <ModalCloseButton onClick={closeModal}>
         <ModalButtonText>BACK</ModalButtonText>
       </ModalCloseButton>

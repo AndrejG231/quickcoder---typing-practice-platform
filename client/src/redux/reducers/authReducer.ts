@@ -6,29 +6,19 @@ export const refreshAuthReducer: AuthReducer = (
 ) => {
   switch (action.type) {
     case "auth/refresh":
+      return { awaitingAuth: true };
+    case "auth/stopRefresh":
       return { awaitingAuth: false };
     default:
       return state;
   }
 };
 
-export const setUserInfo: UserInfoReducer = (
-  state = {
-    id: 0,
-    username: "",
-    email: "",
-    language: "",
-    keyboard_layout: "",
-    color_scheme: "",
-    created_at: "0",
-  },
-  action
-) => {
+export const setUserInfo: UserInfoReducer = (state = null, action) => {
   switch (action.type) {
     case "auth/setUserInfo":
       return {
-        ...state,
-        username: action.user.username,
+        ...action.user,
       };
     default:
       return state;

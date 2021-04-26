@@ -1,7 +1,7 @@
 import { userInfo } from "../../types";
 
 export interface refreshAuthActionObject {
-  type: "auth/refresh";
+  type: "auth/refresh" | "auth/stopRefresh";
 }
 
 export interface refreshAuthActionT {
@@ -26,5 +26,5 @@ export interface AuthReducer {
 }
 
 export interface UserInfoReducer {
-  (state: userInfo, action: UserInfoAction): userInfo;
+  (state: userInfo | null, action: UserInfoAction): userInfo | null;
 }

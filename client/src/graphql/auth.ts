@@ -6,16 +6,6 @@ import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
 // //REGISTER
 
 
-// //LOGIN
-
-// export const useLoginMutation: LoginMutation = () => {
-//   return ActionResponseMutation(
-//     "login",
-//     connectServerError("login"),
-//     loginMutation
-//   );
-// };
-
 // //RETRIEVE PASSWORD TOKEN
 
 // const retrievePasswordMutation = gql`
@@ -86,27 +76,6 @@ import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
 // };
 
 // //GetUserInfo
-// const userInfoQuery = gql`
-//   query getSignedUser($clientParameter: String!) {
-//     getSignedUser(clientParameter: $clientParameter) {
-//       user {
-//         id
-//         username
-//         email
-//         language
-//         keyboard_layout
-//         color_scheme
-//         created_at
-//       }
-//       error {
-//         action
-//         success
-//         message
-//         info
-//       }
-//     }
-//   }
-// `;
 
 // export const GetUserInfo = () => {
 //   return useQuery(userInfoQuery, {

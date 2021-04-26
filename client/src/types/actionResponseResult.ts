@@ -1,11 +1,8 @@
+import { actionResponse } from "./";
+
 type actionResponseResult = {
   data?: {
-    register: {
-      success: boolean;
-      action: string;
-      info: string;
-      message: string;
-    };
+    register: actionResponse;
   } | null;
 
   fetching?: boolean;
