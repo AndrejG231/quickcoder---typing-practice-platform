@@ -9,23 +9,15 @@ import UserInfoResponse from "src/types/responses/UserInfoResponse";
 import dlog from "../../development/dlog";
 
 interface valUserFromCookie {
-  (
-    req: Request,
-    clientParameter: string,
-    lang: LangList
-  ): Promise<UserInfoResponse>;
+  (req: Request, lang: LangList): Promise<UserInfoResponse>;
 }
 
-const validateUserFromCookie: valUserFromCookie = async (
-  req,
-  clientParameter,
-  lang
-) => {
+const validateUserFromCookie: valUserFromCookie = async (req, lang) => {
   if (!req.headers.cookie) {
     dlog("COOKIES NOT FOUND", req.headers.cookie);
 
     return {
-      error: generateResponse(false, "getUserInfo_cookies_notFound", lang),
+      error: generateResponse(false, "getUserInfo_cookies_notFound", "en"),
     };
   }
   const cookie = getCookieValue(req.headers.cookie, process.env.COOKIE_NAME!);
@@ -35,7 +27,7 @@ const validateUserFromCookie: valUserFromCookie = async (
     dlog("JWT COOKIE NOT FOUND: ", cookie);
 
     return {
-      error: generateResponse(false, "getUserInfo_token_notFound", lang),
+      error: generateResponse(false, "getUserInfo_token_notFound", "en"),
     };
   }
 
@@ -53,24 +45,6 @@ const validateUserFromCookie: valUserFromCookie = async (
 
     return {
       error: generateResponse(false, "getUserInfo_token_outdated", lang),
-    };
-  }
-
-  //...does clientParameter match?
-  if (decodedCookie[process.env.CLIENT_PARAM!] !== clientParameter) {
-    dlog(
-      "CLIENT PARAM NOT MATCHING: \nCookie: ",
-      decodedCookie[process.env.CLIENT_PARAM!],
-      "\nRecieved: ",
-      clientParameter
-    );
-
-    return {
-      error: generateResponse(
-        false,
-        "getUserInfo_clientParameter_invalid",
-        lang
-      ),
     };
   }
 

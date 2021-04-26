@@ -24,8 +24,6 @@ const Messages: { [lang in langList]: { [message in string]: string } } = {
       "Could not retrieve cookies, please check your browser settings.",
     getUserInfo_token_notFound: "Could not retrieve login token. Please login",
     getUserInfo_token_outdated: "Session has expired. Please login",
-    getUserInfo_clientParameter_invalid:
-      "There was problem with your client. Please login",
     getUserInfo_user_notFound: "Could not find specified user. Please login",
     getUserInfo_user_wrongSession: "Invalid user data. Please login",
     // CHANGE PASSWORD //

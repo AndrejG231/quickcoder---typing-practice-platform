@@ -18,11 +18,10 @@ class PracticeResolver {
   @Mutation(() => PracticeInfoResponse)
   async createPractice(
     @Arg("practiceName", () => String) practiceName: string,
-    @Arg("clientParameter") clientParameter: string,
     @Arg("length", () => Int) length: number,
     @Ctx() { req, res }: GraphqlContext
   ) {
-    let { user } = await validateUserFromCookie(req, clientParameter, "en");
+    let { user } = await validateUserFromCookie(req, "en");
 
     if (!user) {
       //Not signed it ==> Use Cookies

@@ -64,7 +64,6 @@ class UserAuthResolver {
   @Mutation(() => ActionResponse)
   async login(
     @Arg("credentials") credentials: LoginInput,
-    @Arg("clientParameter") clientParameter: string,
     @Ctx() { res }: GraphqlContext
   ) {
     //resolve user
@@ -84,7 +83,7 @@ class UserAuthResolver {
     const authorized = await argon2.verify(user.password, credentials.password);
 
     if (authorized) {
-      createAuthCookie(res, user, clientParameter);
+      createAuthCookie(res, user);
       return generateResponse(true, "login_account_loggedIn", lang);
     }
 
@@ -94,22 +93,15 @@ class UserAuthResolver {
 
   // GET USER INFO //
   @Query(() => UserInfoResponse)
-  async getSignedUser(
-    @Arg("clientParameter") clientParameter: string,
-    @Ctx() { req, res }: GraphqlContext
-  ) {
-    const validationData = await validateUserFromCookie(
-      req,
-      clientParameter,
-      lang
-    );
+  async getSignedUser(@Ctx() { req, res }: GraphqlContext) {
+    const validationData = await validateUserFromCookie(req, lang);
 
     if (!validationData.user?.id) {
       console.log("Validation data Error", validationData);
       return validationData;
     }
 
-    createAuthCookie(res, validationData.user, clientParameter);
+    createAuthCookie(res, validationData.user);
     return { user: validationData.user };
   }
 
