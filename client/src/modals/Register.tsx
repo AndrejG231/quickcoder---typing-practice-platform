@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 import { Modal, Form } from "../components";
 import { createInputGroup, useAuthMutation, useErrors } from "../utilites";
 import { AnimeOut } from "../redux/actions/animationActions";
-import { serverError } from "../static";
+import { serverError } from "../static/serverError";
 import { useRegisterMutation } from "../graphql/fetching_auth";
 import { useHistory } from "react-router";
 

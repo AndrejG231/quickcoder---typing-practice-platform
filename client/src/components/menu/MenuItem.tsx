@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ReduxState } from "../../types/redux/ReduxState";
+import { ReduxState } from "../../types/reduxStore";
 import { toggleCategoryAction } from "../../redux/actions/practiceMenuActions";
 import { resetPracticeSession } from "../../redux/actions/practiceActions";
 import ScoreVisual from "./ScoreVisual";
 import { PracticeObjectT } from "../../types/practice/PracticeT";
-import { userStatObjectT } from "../../types/redux/PracticeUserStats";
+import { userStatObjectT } from "../../types/types_redux/userPracticeStatsT";
 
 const rdxProps = (state: ReduxState) => {
   return {

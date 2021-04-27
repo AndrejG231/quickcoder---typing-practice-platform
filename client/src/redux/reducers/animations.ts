@@ -1,14 +1,11 @@
-import { animationsReducerT, animationStateT } from "../../types/redux/AnimeT";
+import { reducer } from "../../types/types_redux/animationsT";
 
-const animationState: animationStateT = {
+const defaultState = {
   modal: false,
   home: false,
 };
 
-export const animationReducer: animationsReducerT = (
-  state = animationState,
-  action
-) => {
+const animations: reducer = (state = defaultState, action) => {
   switch (action.type) {
     case "animeIn":
       return { ...state, [action.field]: true };
@@ -18,3 +15,5 @@ export const animationReducer: animationsReducerT = (
       return state;
   }
 };
+
+export default animations;

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Layout, Keys, Characters } from "../../types/practice/KeyBoardT";
 import { UsColors, ColorScheme } from "../../data/KeysColors";
 import { US } from "../../data/KeysMap";
-import { ReduxState } from "../../types/redux/ReduxState";
+import { ReduxState } from "../../types/reduxStore";
 import { BottomLine } from "../../data/KeyBoardTemplate";
 
 interface KeyProps {

@@ -10,7 +10,7 @@ import {
   setAuthRefreshedAction,
   refreshAuthAction,
 } from "../redux/actions/authActions";
-import { ReduxState } from "../types/redux/ReduxState";
+import { ReduxState } from "../types/reduxStore";
 
 //Components
 import {
@@ -24,7 +24,7 @@ import {
 } from "../components/components_home";
 import { ArrowButton } from "../components/";
 
-import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
+import { animateIn, animateOut } from "../redux/actions/";
 import { useLogoutMutation, useUserInfoQuery } from "../graphql/fetching_auth";
 import { userInfo } from "../types";
 import { useQuery } from "@apollo/client";
@@ -47,9 +47,9 @@ const rdxDispatch = (dispatch: any) => {
     setUserInfo: (user: userInfo) => {
       dispatch(setUserInfoAction(user));
     },
-    closeModal: () => dispatch(AnimeOut("modal")),
-    animateOut: () => dispatch(AnimeOut("home")),
-    animateIn: () => dispatch(AnimeIn("home")),
+    closeModal: () => dispatch(animateOut("modal")),
+    animateOut: () => dispatch(animateOut("home")),
+    animateIn: () => dispatch(animateIn("home")),
   };
 };
 

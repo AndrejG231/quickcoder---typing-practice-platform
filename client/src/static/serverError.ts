@@ -1,5 +1,6 @@
-export const serverError = {
+const serverError = {
   field: "global",
   value: "Couldn't connect to the server.",
 };
 
+export default serverError;

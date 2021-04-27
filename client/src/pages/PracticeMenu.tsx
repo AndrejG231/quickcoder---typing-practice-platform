@@ -14,10 +14,10 @@ import {
   addIndexActionT,
   addMenuItemActionT,
   MenuItemT,
-} from "../types/redux/PracticeMenuT";
+} from "../types/types_redux/PracticeMenuT";
 import PracticeSelector from "../components/menu/PracticeSelector";
-import { userStatObjectT } from "../types/redux/PracticeUserStats";
-import { ReduxState } from "../types/redux/ReduxState";
+import { userStatObjectT } from "../types/types_redux/userPracticeStatsT";
+import { ReduxState } from "../types/reduxStore";
 
 const rdxProps = (state: ReduxState) => {
   return {

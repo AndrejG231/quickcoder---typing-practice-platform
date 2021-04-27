@@ -8,7 +8,7 @@ import { AnimeOut } from "../redux/actions/animationActions";
 import { refreshAuthAction } from "../redux/actions/authActions";
 import { useLoginMutation } from "../graphql/fetching_auth";
 import { useHistory } from "react-router";
-import { serverError } from "../static";
+import { serverError } from "../static/serverError";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   animateOut: () => dispatch(AnimeOut("modal")),

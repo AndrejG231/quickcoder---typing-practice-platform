@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
-import { ReduxState } from "../types/redux/ReduxState";
+import { ReduxState } from "../types/reduxStore";
 
 import {
   ModalCloseButton,

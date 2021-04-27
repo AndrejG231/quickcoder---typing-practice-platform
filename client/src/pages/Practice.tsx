@@ -20,7 +20,7 @@ import LiveStats from "../components/practice/LiveStats";
 
 //types
 import { PracticeObjectT } from "../types/practice/PracticeT";
-import { ReduxState } from "../types/redux/ReduxState";
+import { ReduxState } from "../types/reduxStore";
 
 //utilities
 import HandlePracticeProgress from "../utilites/handlePracticeProgress";

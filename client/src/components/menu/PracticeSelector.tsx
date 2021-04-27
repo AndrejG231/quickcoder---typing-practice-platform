@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { connect } from "react-redux";
 import { practiceSwitchLen } from "../../redux/actions/practiceSelectionActions";
-import { ReduxState } from "../../types/redux/ReduxState";
+import { ReduxState } from "../../types/reduxStore";
 import { useHistory } from "react-router-dom";
-import { userStatObjectT } from "../../types/redux/PracticeUserStats";
+import { userStatObjectT } from "../../types/types_redux/userPracticeStatsT";
 
 const rdxProps = (state: ReduxState) => {
   return {

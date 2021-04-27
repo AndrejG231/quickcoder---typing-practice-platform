@@ -1,4 +1,4 @@
-export type Characters =
+type schemeCharacters=
   | " "
   | "!"
   | '"'
@@ -96,82 +96,4 @@ export type Characters =
   | "~"
   | "";
 
-export type Keys =
-  | "none"
-  | "--"
-  | "1"
-  | "TAB"
-  | "q"
-  | "CAPS"
-  | "a"
-  | "LShift"
-  | "z"
-  | "2"
-  | "w"
-  | "s"
-  | "x"
-  | "3"
-  | "e"
-  | "d"
-  | "c"
-  | "4"
-  | "5"
-  | "r"
-  | "t"
-  | "f"
-  | "g"
-  | "v"
-  | "b"
-  | "0"
-  | "-"
-  | "="
-  | "BSpace"
-  | "p"
-  | "["
-  | "]"
-  | ";"
-  | "'"
-  | "\\"
-  | "Enter"
-  | "/"
-  | "RShift"
-  | "9"
-  | "o"
-  | "l"
-  | "."
-  | "8"
-  | "i"
-  | "k"
-  | ","
-  | "6"
-  | "7"
-  | "y"
-  | "u"
-  | "h"
-  | "j"
-  | "n"
-  | "m"
-  | "`"
-  | " "
-  | "ctrl"
-  | "alt"
-  | "XX";
-
-export type Colors =
-  | "L1"
-  | "L2"
-  | "L3"
-  | "L4"
-  | "R1"
-  | "R2"
-  | "R3"
-  | "R4"
-  | "SPACE"
-  | "ERROR";
-
-export type Layout = {
-  Number: Keys[];
-  Upper: Keys[];
-  Middle: Keys[];
-  Lower: Keys[];
-};
+export default schemeCharacters;

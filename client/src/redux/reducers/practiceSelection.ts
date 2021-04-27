@@ -1,17 +1,17 @@
-import {
-  practiceSelectionReducerT,
-  practiceSelectionState,
-} from "../../types/redux/PracticeSelectionT";
+import { reducer } from "../../types/types_redux/practiceSelectionT";
 
 const lengths = [100, 300, 500, 1000, 1500, 2000, 3000];
 
-export const practiceSelectionReducer: practiceSelectionReducerT = (
-  state = practiceSelectionState,
-  action
-) => {
+const defaultState = {
+  selectedName: "",
+  lengthIndex: 2,
+  length: 500,
+};
+
+const practiceSelection: reducer = (state = defaultState, action) => {
   switch (action.type) {
     case "practiceSelect/setselect":
-      return { ...state, selected: action.selected };
+      return { ...state, selectedName: action.selected };
 
     case "practiceSelect/setlen":
       let length = state.lengthIndex + action.len;
@@ -28,3 +28,5 @@ export const practiceSelectionReducer: practiceSelectionReducerT = (
       return state;
   }
 };
+
+export default practiceSelection;

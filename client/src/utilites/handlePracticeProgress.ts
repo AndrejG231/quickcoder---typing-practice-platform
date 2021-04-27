@@ -1,8 +1,9 @@
-import { HandleProgressFunctionT } from "../types/redux/PracticeT";
-import ReduxStore from "../redux/reduxStore";
-import { skipPracticeOffset } from "../redux/actions/practiceActions";
+import { practiceObject, characterScheme } from "../types";
 
-const HandlePracticeProgress: HandleProgressFunctionT = (keyPressed, state) => {
+const HandlePracticeProgress = (
+  keyPressed: characterScheme,
+  state: practiceObject
+): practiceObject => {
   if (!state.isActive) {
     return state;
   }
@@ -36,8 +37,6 @@ const HandlePracticeProgress: HandleProgressFunctionT = (keyPressed, state) => {
   } else {
     newErrors = keyPressed;
   }
-
-  ReduxStore.dispatch(skipPracticeOffset());
 
   return {
     ...state,

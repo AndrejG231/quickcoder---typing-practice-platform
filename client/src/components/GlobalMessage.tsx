@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { setGlobalMessage } from "../redux/actions/globalMessageActions";
-import { ReduxState } from "../types/redux/ReduxState";
+import { setGlobalMessage } from "../redux/actions/setGlobalMessage";
+import { ReduxState } from "../types/reduxStore";
 
 interface globalMessageProps {
   message: string;

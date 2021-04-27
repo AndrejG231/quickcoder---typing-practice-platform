@@ -5,7 +5,7 @@ import FormattedPracticeString from "./FormattedPracticeString";
 
 //types
 import { Errors } from "../../types/practice/PracticeT";
-import { ReduxState } from "../../types/redux/ReduxState";
+import { ReduxState } from "../../types/reduxStore";
 
 //styles
 
