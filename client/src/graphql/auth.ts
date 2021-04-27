@@ -1,10 +1,8 @@
 import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
 
 // //Utilities
-// import getClientParam from "../utilites/clientParameter";
 
 // //REGISTER
-
 
 // //RETRIEVE PASSWORD TOKEN
 
@@ -75,19 +73,6 @@ import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
 //   );
 // };
 
-// //GetUserInfo
-
-// export const GetUserInfo = () => {
-//   return useQuery(userInfoQuery, {
-//     variables: { clientParameter: getClientParam() },
-//   });
-// };
-
-// const logoutMutation = gql`
-//   mutation {
-//     logout
-//   }
-// `;
 
 // export const Logout = () => {
 //   return useMutation(logoutMutation);

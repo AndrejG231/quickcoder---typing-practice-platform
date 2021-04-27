@@ -1,11 +1,9 @@
-import { gql, useLazyQuery } from "@apollo/client";
-import { userInfo } from "../../types";
-import getClientParam from "../../utilites/clientParameter";
-import clientParameter from "../../utilites/clientParameter";
+import { gql, useQuery } from "@apollo/client";
+import { actionResponse, userInfo } from "../../types";
 
-const userInfoQuery = gql`
-  query getSignedUser($clientParameter: String!) {
-    getSignedUser(clientParameter: $clientParameter) {
+export const userInfoQuery = gql`
+  query getSignedUser {
+    getSignedUser {
       user {
         id
         username
@@ -26,22 +24,23 @@ const userInfoQuery = gql`
 `;
 
 type QueryResult = {
-  data: {
+  data?: {
     getSignedUser: {
-      user: userInfo;
-      error: {};
+      user?: userInfo;
+      error?: actionResponse;
     };
   };
+  error?: any;
+  fetching?: boolean;
+  refetch: () => void;
 };
 
 type UserInfoQuery = {
-  (): [() => void];
+  (): QueryResult;
 };
 
-const useUserInfoQuery = () => {
-  return useLazyQuery(userInfoQuery, {
-    variables: { clientParameter: getClientParam() },
-  });
+const useUserInfoQuery: UserInfoQuery = () => {
+  return useQuery(userInfoQuery);
 };
 
 export default useUserInfoQuery;

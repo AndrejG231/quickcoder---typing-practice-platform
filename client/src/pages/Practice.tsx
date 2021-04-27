@@ -25,7 +25,6 @@ import { ReduxState } from "../types/redux/ReduxState";
 //utilities
 import HandlePracticeProgress from "../utilites/handlePracticeProgress";
 import { Characters } from "../types/practice/KeyBoardT";
-import getClientParam from "../utilites/clientParameter";
 
 import {
   practiceStatsQuery,
@@ -71,13 +70,12 @@ const Practice: React.FC<PracticeProps> = ({
   } = useParams();
 
   const [createPractice, { data, error, loading }] = useCreatePracticeSession();
-  const [updatePractice] = mutation;
+  const [updatePractice] = [(op: any) => null];
 
   const loadPractice = async () => {
     await createPractice({
       variables: {
         practiceName: practiceCode,
-        clientParameter: getClientParam(),
         length: parseInt(practiceLength),
       },
     });

@@ -1,10 +1,9 @@
 import { DocumentNode, gql, useMutation } from "@apollo/client";
 import { actionResponseResult } from "../../types";
-import getClientParam from "../../utilites/clientParameter";
 
 const loginMutation: DocumentNode = gql`
-  mutation login($credentials: LoginInput!, $clientParameter: String!) {
-    login(credentials: $credentials, clientParameter: $clientParameter) {
+  mutation login($credentials: LoginInput!) {
+    login(credentials: $credentials) {
       info
       action
       success
@@ -22,14 +21,15 @@ type LoginMutation = {
 };
 
 const useLoginMutation: LoginMutation = () => {
-  const [login, result] = useMutation(loginMutation);
+  const [login, result] = useMutation(loginMutation, {
+    fetchPolicy: "no-cache",
+  });
 
   return [
     (options) =>
       login({
         variables: {
           credentials: options,
-          clientParameter: getClientParam(),
         },
       }),
     result,

@@ -1,7 +1,7 @@
 import { AuthReducer, UserInfoReducer } from "../../types/redux/AuthT";
 
 export const refreshAuthReducer: AuthReducer = (
-  state = { awaitingAuth: true },
+  state = { awaitingAuth: false },
   action
 ) => {
   switch (action.type) {

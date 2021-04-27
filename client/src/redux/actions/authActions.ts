@@ -6,7 +6,7 @@ export const refreshAuthAction: refreshAuthActionT = () => {
   };
 };
 
-export const setAuthRefreshed: refreshAuthActionT = () => {
+export const setAuthRefreshedAction: refreshAuthActionT = () => {
   return {
     type: "auth/stopRefresh",
   };

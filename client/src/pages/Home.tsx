@@ -7,11 +7,10 @@ import { connect } from "react-redux";
 //Redux
 import {
   setUserInfoAction,
-  setAuthRefreshed,
+  setAuthRefreshedAction,
+  refreshAuthAction,
 } from "../redux/actions/authActions";
 import { ReduxState } from "../types/redux/ReduxState";
-
-//types
 
 //Components
 import {
@@ -24,9 +23,12 @@ import {
   MenuItem,
 } from "../components/components_home";
 import { ArrowButton } from "../components/";
+
 import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
-import { useUserInfoQuery } from "../graphql/fetching_auth";
+import { useLogoutMutation, useUserInfoQuery } from "../graphql/fetching_auth";
 import { userInfo } from "../types";
+import { useQuery } from "@apollo/client";
+import { userInfoQuery } from "../graphql/fetching_auth/useUserInfoQuery";
 
 //Redux
 const rdxState = (state: ReduxState) => {
@@ -40,7 +42,8 @@ const rdxState = (state: ReduxState) => {
 
 const rdxDispatch = (dispatch: any) => {
   return {
-    setAuthRefreshed: () => dispatch(setAuthRefreshed()),
+    setAuthRefreshed: () => dispatch(setAuthRefreshedAction()),
+    refreshAuth: () => dispatch(refreshAuthAction()),
     setUserInfo: (user: userInfo) => {
       dispatch(setUserInfoAction(user));
     },
@@ -61,6 +64,7 @@ interface HomeProps {
   onScreen: boolean;
   animateOut: () => void;
   animateIn: () => void;
+  setAuthRefreshed: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({
@@ -73,25 +77,30 @@ const Home: React.FC<HomeProps> = ({
   onScreen,
   animateOut,
   animateIn,
+  setAuthRefreshed,
 }) => {
-  const [getUser, { data, error, refetch }] = useUserInfoQuery();
+  const { data, error, loading, refetch } = useQuery(userInfoQuery, {
+    fetchPolicy: "network-only",
+  });
+  const [logout] = useLogoutMutation();
 
   const navigation = useHistory();
 
-  console.log(data);
+  useEffect(() => {
+    if (!loading) {
+      setUserInfo(data?.getSignedUser?.user ?? null);
+    }
+  }, [setUserInfo, data, loading]);
 
   useEffect(() => {
     if (awaitingAuth) {
-      getUser();
+      refetch();
       setAuthRefreshed();
     }
-  }, [awaitingAuth, getUser, setAuthRefreshed]);
+  }, [awaitingAuth, setAuthRefreshed]);
 
-  useEffect(() => {
-    if (data?.getSignedUser.user) {
-      setUserInfo(data.getSignedUser.user);
-    }
-  }, [data, setUserInfo]);
+  console.log(awaitingAuth);
+  console.log(data);
 
   useEffect(() => {
     //Animation
@@ -110,9 +119,9 @@ const Home: React.FC<HomeProps> = ({
     }
   };
 
-  const userLogout = async () => {
-    // await logout();
-    refreshAuth();
+  const userLogout = () => {
+    logout();
+    setUserInfo(null);
   };
 
   const goHome = () => {
@@ -133,7 +142,7 @@ const Home: React.FC<HomeProps> = ({
         }}
         onTitleClick={goHome}
         username={`${
-          userInfo
+          userInfo?.username
             ? userInfo.username.length > 7
               ? userInfo.username.slice(0, 7) + "..."
               : userInfo.username
@@ -153,7 +162,7 @@ const Home: React.FC<HomeProps> = ({
         <ClippedButton onClick={() => null}></ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
-      {userInfo ? (
+      {userInfo?.username ? (
         <UserButtonWrapper isOnScreen={onScreen}>
           <ArrowButton width={100} onClick={userLogout} left>
             <UserAction>Logout</UserAction>

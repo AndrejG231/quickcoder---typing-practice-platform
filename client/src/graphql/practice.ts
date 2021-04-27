@@ -3,12 +3,10 @@ import { useMutation, gql, useQuery } from "@apollo/client";
 const createPracticeMutation = gql`
   mutation createPractice(
     $practiceName: String!
-    $clientParameter: String!
     $length: Int!
   ) {
     createPractice(
       practiceName: $practiceName
-      clientParameter: $clientParameter
       length: $length
     ) {
       result {
