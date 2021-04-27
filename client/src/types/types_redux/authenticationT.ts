@@ -8,7 +8,7 @@ export type authentication = {
 export type action =
   | {
       type: "auth/setUserInfo";
-      user: userInfo;
+      user: userInfo | null;
     }
   | {
       type: "auth/refresh" | "auth/stopRefresh";

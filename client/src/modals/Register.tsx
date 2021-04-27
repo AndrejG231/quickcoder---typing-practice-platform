@@ -3,21 +3,20 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup, useAuthMutation, useErrors } from "../utilites";
-import { AnimeOut } from "../redux/actions/animationActions";
-import { serverError } from "../static/serverError";
-import { useRegisterMutation } from "../graphql/fetching_auth";
+import { createInputGroup, useErrors } from "../utilites";
+import { animateOut } from "../redux/actions/";
+import { serverError } from "../static/";
 import { useHistory } from "react-router";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  AnimateOut: () => dispatch(AnimeOut("modal")),
+  closeModal: () => dispatch(animateOut("modal")),
 });
 
 interface RegisterProps {
-  AnimateOut: () => void;
+  closeModal: () => void;
 }
 
-const Register: FC<RegisterProps> = ({ AnimateOut }) => {
+const Register: FC<RegisterProps> = ({ closeModal }) => {
   const nav = useHistory();
   const [inputData, setInputData] = useState(
     createInputGroup(
@@ -28,7 +27,8 @@ const Register: FC<RegisterProps> = ({ AnimateOut }) => {
 
   const [errors, setErrors] = useErrors();
 
-  const [register, { data, error }] = useRegisterMutation();
+  // --trp
+  const register = (a: any) => {};
 
   const submitForm = () => {
     register({
@@ -37,18 +37,6 @@ const Register: FC<RegisterProps> = ({ AnimateOut }) => {
       password: inputData.password.value,
     });
   };
-
-  useAuthMutation({
-    data,
-    error,
-    setErrors,
-    field: "register",
-    onError: () => setErrors(serverError),
-    onSuccess: () => {
-      AnimateOut();
-      setTimeout(() => nav.push("/home/login/"), 400);
-    },
-  });
 
   return (
     <Modal>

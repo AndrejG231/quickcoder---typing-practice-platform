@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { setGlobalMessage } from "../redux/actions/setGlobalMessage";
-import { ReduxState } from "../types/reduxStore";
+import { setGlobalMessage } from "../redux/actions/";
+import { reduxStore } from "../types/";
 
 interface globalMessageProps {
   message: string;
   clearMessage: any;
 }
 
-const rdxState = (state: ReduxState) => {
+const rdxState = (state: reduxStore) => {
   return {
     message: state.globalMessage.message,
   };

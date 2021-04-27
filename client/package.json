@@ -4,9 +4,7 @@
   "author": "Andrej Germič",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.9",
     "@styled-icons/boxicons-regular": "^10.23.0",
-    "@types/styled-components": "^5.1.9",
     "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "8.1.0",
@@ -24,9 +22,9 @@
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.9",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@types/graphql": "^14.5.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",

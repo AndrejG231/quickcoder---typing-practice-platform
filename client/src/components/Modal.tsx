@@ -2,8 +2,8 @@ import React, { FC, ReactChild, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { Dispatch } from "redux";
-import { AnimeIn, AnimeOut } from "../redux/actions/animationActions";
-import { ReduxState } from "../types/reduxStore";
+import { animateIn, animateOut } from "../redux/actions/";
+import { reduxStore } from "../types/";
 
 import {
   ModalCloseButton,
@@ -14,37 +14,37 @@ import {
 
 interface ModalProps {
   children?: ReactChild | ReactChild[];
-  AnimateIn: () => void;
-  AnimateOut: () => void;
+  animateIn: () => void;
+  animateOut: () => void;
   isOnScreen: boolean;
 }
 
-const rdxProps = (state: ReduxState) => ({
-  isOnScreen: state.Animation.modal,
+const rdxProps = (state: reduxStore) => ({
+  isOnScreen: state.animations.modal,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  AnimateIn: () => dispatch(AnimeIn("modal")),
-  AnimateOut: () => dispatch(AnimeOut("modal")),
+  animateIn: () => dispatch(animateIn("modal")),
+  animateOut: () => dispatch(animateOut("modal")),
 });
 
 const Modal: FC<ModalProps> = ({
   children,
-  AnimateIn,
-  AnimateOut,
+  animateIn,
+  animateOut,
   isOnScreen,
 }) => {
   const nav = useHistory();
 
   useEffect(() => {
-    AnimateIn();
+    animateIn();
     return () => {
-      AnimateOut();
+      animateOut();
     };
-  }, [AnimateIn, AnimateOut]);
+  }, [animateIn, animateOut]);
 
   const closeModal = () => {
-    AnimateOut();
+    animateOut();
     setTimeout(() => nav.push("/home/"), 500);
   };
 

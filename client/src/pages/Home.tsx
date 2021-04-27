@@ -1,16 +1,9 @@
 import React, { useEffect } from "react";
+import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 //queries
-
-//Redux
-import {
-  setUserInfoAction,
-  setAuthRefreshedAction,
-  refreshAuthAction,
-} from "../redux/actions/authActions";
-import { ReduxState } from "../types/reduxStore";
 
 //Components
 import {
@@ -24,28 +17,31 @@ import {
 } from "../components/components_home";
 import { ArrowButton } from "../components/";
 
-import { animateIn, animateOut } from "../redux/actions/";
-import { useLogoutMutation, useUserInfoQuery } from "../graphql/fetching_auth";
-import { userInfo } from "../types";
-import { useQuery } from "@apollo/client";
-import { userInfoQuery } from "../graphql/fetching_auth/useUserInfoQuery";
+import { reduxStore, userInfo } from "../types";
+
+import {
+  animateIn,
+  animateOut,
+  setUserInfo,
+  toggleAuthRefresh,
+} from "../redux/actions/";
 
 //Redux
-const rdxState = (state: ReduxState) => {
+const rdxState = (state: reduxStore) => {
   return {
-    userInfo: state.UserInfo,
-    awaitingAuth: state.checkAuth.awaitingAuth,
-    isModalOpened: state.Animation.modal,
-    onScreen: state.Animation.home,
+    userInfo: state.authentication.user,
+    awaitingAuth: state.authentication.awaitingAuth,
+    isModalOpened: state.animations.modal,
+    onScreen: state.animations.home,
   };
 };
 
-const rdxDispatch = (dispatch: any) => {
+const rdxDispatch = (dispatch: Dispatch) => {
   return {
-    setAuthRefreshed: () => dispatch(setAuthRefreshedAction()),
-    refreshAuth: () => dispatch(refreshAuthAction()),
-    setUserInfo: (user: userInfo) => {
-      dispatch(setUserInfoAction(user));
+    setAuthRefreshed: () => dispatch(toggleAuthRefresh(false)),
+    refreshAuth: () => dispatch(toggleAuthRefresh(true)),
+    setUserInfo: (user: userInfo | null) => {
+      dispatch(setUserInfo(user));
     },
     closeModal: () => dispatch(animateOut("modal")),
     animateOut: () => dispatch(animateOut("home")),
@@ -56,9 +52,9 @@ const rdxDispatch = (dispatch: any) => {
 //
 interface HomeProps {
   refreshAuth: () => void;
-  userInfo: userInfo | undefined;
+  userInfo: userInfo | null;
   awaitingAuth: boolean;
-  setUserInfo: (user: any /*UserInfo*/) => void;
+  setUserInfo: (user: userInfo | null) => void;
   isModalOpened: boolean;
   closeModal: () => void;
   onScreen: boolean;
@@ -79,28 +75,7 @@ const Home: React.FC<HomeProps> = ({
   animateIn,
   setAuthRefreshed,
 }) => {
-  const { data, error, loading, refetch } = useQuery(userInfoQuery, {
-    fetchPolicy: "network-only",
-  });
-  const [logout] = useLogoutMutation();
-
   const navigation = useHistory();
-
-  useEffect(() => {
-    if (!loading) {
-      setUserInfo(data?.getSignedUser?.user ?? null);
-    }
-  }, [setUserInfo, data, loading]);
-
-  useEffect(() => {
-    if (awaitingAuth) {
-      refetch();
-      setAuthRefreshed();
-    }
-  }, [awaitingAuth, setAuthRefreshed]);
-
-  console.log(awaitingAuth);
-  console.log(data);
 
   useEffect(() => {
     //Animation
@@ -120,7 +95,6 @@ const Home: React.FC<HomeProps> = ({
   };
 
   const userLogout = () => {
-    logout();
     setUserInfo(null);
   };
 

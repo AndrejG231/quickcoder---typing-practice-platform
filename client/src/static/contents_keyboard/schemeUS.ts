@@ -1,7 +1,5 @@
-import { Layout, Keys } from "../types/practice/KeyBoardT";
-
-export const UsTemplate: Layout = {
-  Number: [
+const schemeUS = {
+  r1: [
     "`",
     "1",
     "2",
@@ -17,7 +15,7 @@ export const UsTemplate: Layout = {
     "=",
     "BSpace",
   ],
-  Upper: [
+  r2: [
     "TAB",
     "q",
     "w",
@@ -33,7 +31,7 @@ export const UsTemplate: Layout = {
     "]",
     "Enter",
   ],
-  Middle: [
+  r3: [
     "CAPS",
     "a",
     "s",
@@ -49,7 +47,7 @@ export const UsTemplate: Layout = {
     "\\",
     "--",
   ],
-  Lower: ["LShift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "RShift"],
+  r4: ["LShift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "RShift"],
 };
 
-export const BottomLine : Keys[] = ["ctrl", "XX", "alt", " ", "alt", "XX", "ctrl"];
+export default schemeUS;

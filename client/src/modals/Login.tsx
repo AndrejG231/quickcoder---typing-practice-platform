@@ -3,46 +3,29 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup, useAuthMutation, useErrors } from "../utilites";
-import { AnimeOut } from "../redux/actions/animationActions";
-import { refreshAuthAction } from "../redux/actions/authActions";
-import { useLoginMutation } from "../graphql/fetching_auth";
+import { createInputGroup, useErrors } from "../utilites";
+import { animateOut, toggleAuthRefresh } from "../redux/actions/";
 import { useHistory } from "react-router";
-import { serverError } from "../static/serverError";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  animateOut: () => dispatch(AnimeOut("modal")),
-  refreshAuth: () => dispatch(refreshAuthAction()),
+  closeModal: () => dispatch(animateOut("modal")),
+  refreshAuth: () => dispatch(toggleAuthRefresh(true)),
 });
 
 interface LoginProps {
-  animateOut: () => void;
+  closeModal: () => void;
   refreshAuth: () => void;
 }
 
-const Login: FC<LoginProps> = ({ animateOut, refreshAuth }) => {
+const Login: FC<LoginProps> = ({ closeModal, refreshAuth }) => {
   const nav = useHistory();
   const [errors, setErrors] = useErrors();
   const [inputData, setInputData] = useState(
     createInputGroup(["username or email", "password"], ["text", "password"])
   );
 
-  const [login, { data, error }] = useLoginMutation();
-
-  useAuthMutation({
-    data,
-    error,
-    setErrors,
-    field: "login",
-    onSuccess: () => {
-      refreshAuth();
-      animateOut();
-      setTimeout(() => nav.push("/home/"), 450);
-    },
-    onError: () => {
-      setErrors(serverError);
-    },
-  });
+  //---trp
+  const login = (a: any) => null;
 
   const submitForm = () => {
     login({

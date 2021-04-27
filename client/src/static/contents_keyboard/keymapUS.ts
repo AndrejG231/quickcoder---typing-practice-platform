@@ -1,6 +1,4 @@
-import { Characters, Keys } from "../types/practice/KeyBoardT";
-
-export const US: { [key in Characters]: Keys[] } = {
+const keymapUS = {
   "": ["none"],
   " ": [" "],
   "!": ["1", "RShift"],
@@ -98,3 +96,5 @@ export const US: { [key in Characters]: Keys[] } = {
   "}": ["]", "LShift"],
   "~": ["`", "RShift"],
 };
+
+export default keymapUS;

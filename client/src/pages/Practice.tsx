@@ -8,7 +8,7 @@ import {
   setPracticeAction,
   resetPracticeOffset,
   resetPracticeSession,
-} from "../redux/actions/practiceActions";
+} from "../redux/actions/";
 
 //components
 import KeyBoard from "../components/practice/KeyBoard";

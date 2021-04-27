@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal } from "../components";
-import { AnimeOut } from "../redux/actions/animationActions";
+import { animateOut } from "../redux/actions/";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  AnimateOut: () => dispatch(AnimeOut("modal")),
+  closeModal: () => dispatch(animateOut("modal")),
 });
 
 interface LoginProps {
-  AnimateOut: () => void;
+  closeModal: () => void;
 }
 
-const Login: FC<LoginProps> = ({ AnimateOut }) => {
+const Login: FC<LoginProps> = ({ closeModal }) => {
   return <Modal></Modal>;
 };
 
