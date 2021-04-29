@@ -3,8 +3,6 @@ import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
-//queries
-
 //Components
 import {
   Header,
@@ -25,6 +23,8 @@ import {
   setUserInfo,
   toggleAuthRefresh,
 } from "../redux/actions/";
+
+import { getUserInfo, logout } from "../api/auth";
 
 //Redux
 const rdxState = (state: reduxStore) => {
@@ -78,6 +78,18 @@ const Home: React.FC<HomeProps> = ({
   const navigation = useHistory();
 
   useEffect(() => {
+    if (awaitingAuth) {
+      getUserInfo({
+        onSuccess: (userInfo) => {
+          setUserInfo(userInfo);
+          setAuthRefreshed();
+        },
+        onError: () => setUserInfo(null),
+      });
+    }
+  }, [awaitingAuth]);
+
+  useEffect(() => {
     //Animation
     animateIn();
     return () => animateOut();
@@ -95,7 +107,10 @@ const Home: React.FC<HomeProps> = ({
   };
 
   const userLogout = () => {
-    setUserInfo(null);
+    logout({
+      onSuccess: refreshAuth,
+      onError: () => console.log("Logout not successful"),
+    });
   };
 
   const goHome = () => {

@@ -12,9 +12,6 @@ const registerMutation: DocumentNode = gql`
   }
 `;
 
-type RegisterInput = {
-  (options: { username: string; email: string; password: string }): void;
-};
 
 type RegisterMutation = {
   (): [RegisterInput, actionResponseResult];

@@ -4,6 +4,7 @@ import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
 import { createInputGroup, useErrors } from "../utilites";
+import { login } from "../api/auth";
 import { animateOut, toggleAuthRefresh } from "../redux/actions/";
 import { useHistory } from "react-router";
 
@@ -24,13 +25,18 @@ const Login: FC<LoginProps> = ({ closeModal, refreshAuth }) => {
     createInputGroup(["username or email", "password"], ["text", "password"])
   );
 
-  //---trp
-  const login = (a: any) => null;
-
   const submitForm = () => {
     login({
-      identification: inputData["username or email"].value,
-      password: inputData.password.value,
+      credentials: {
+        identification: inputData["username or email"].value,
+        password: inputData.password.value,
+      },
+      onSuccess: () => {
+        closeModal();
+        refreshAuth();
+        setTimeout(() => nav.push("/home/"), 400);
+      },
+      setErrors: setErrors,
     });
   };
 

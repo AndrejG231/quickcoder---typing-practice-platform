@@ -5,8 +5,8 @@ import { Dispatch } from "redux";
 import { Modal, Form } from "../components";
 import { createInputGroup, useErrors } from "../utilites";
 import { animateOut } from "../redux/actions/";
-import { serverError } from "../static/";
 import { useHistory } from "react-router";
+import { register } from "../api/auth";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
@@ -27,21 +27,24 @@ const Register: FC<RegisterProps> = ({ closeModal }) => {
 
   const [errors, setErrors] = useErrors();
 
-  // --trp
-  const register = (a: any) => {};
-
-  const submitForm = () => {
+  const handleFormSubmit = () => {
     register({
-      email: inputData.email.value,
-      username: inputData.username.value,
-      password: inputData.password.value,
+      credentials: {
+        email: inputData.email.value,
+        username: inputData.username.value,
+        password: inputData.password.value,
+      },
+      onSuccess: () => {
+        setTimeout(() => nav.push("/home/login/"), 400);
+      },
+      setErrors: setErrors,
     });
   };
 
   return (
     <Modal>
       <Form
-        submitFunction={submitForm}
+        submitFunction={handleFormSubmit}
         page="register"
         data={inputData}
         setData={setInputData}

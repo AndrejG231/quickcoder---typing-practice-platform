@@ -11,7 +11,6 @@ const TitleText = styled.h1`
     medium?: boolean;
     small?: boolean;
   }) => {
-    console.log(props.big);
     return props.big ? 60 : props.medium ? 30 : props.small ? 20 : 15;
   }}px;
 `;
