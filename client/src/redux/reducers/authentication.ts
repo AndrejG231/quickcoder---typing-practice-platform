@@ -1,6 +1,6 @@
 import { reducer } from "../../types/types_redux/authenticationT";
 
-const defaultState = { awaitingAuth: false, user: null };
+const defaultState = { awaitingAuth: true, user: null };
 
 const authentication: reducer = (state = defaultState, action) => {
   switch (action.type) {

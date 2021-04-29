@@ -84,10 +84,15 @@ const Home: React.FC<HomeProps> = ({
           setUserInfo(userInfo);
           setAuthRefreshed();
         },
-        onError: () => setUserInfo(null),
+        onError: () => {
+          setUserInfo(null);
+          setAuthRefreshed();
+        },
       });
     }
-  }, [awaitingAuth]);
+  }, [awaitingAuth, setUserInfo]);
+
+  console.log(awaitingAuth);
 
   useEffect(() => {
     //Animation
