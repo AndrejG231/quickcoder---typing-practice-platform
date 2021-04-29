@@ -11,6 +11,7 @@ import {
   ModalButtonText,
   ModalContentWrapper,
 } from "./components_modal/";
+import { NeglectBackground } from "./";
 
 interface ModalProps {
   children?: ReactChild | ReactChild[];
@@ -49,12 +50,14 @@ const Modal: FC<ModalProps> = ({
   };
 
   return (
-    <ModalWrapper isOnScreen={isOnScreen}>
-      <ModalCloseButton onClick={closeModal}>
-        <ModalButtonText>BACK</ModalButtonText>
-      </ModalCloseButton>
-      <ModalContentWrapper>{children}</ModalContentWrapper>
-    </ModalWrapper>
+    <NeglectBackground darken={isOnScreen}>
+      <ModalWrapper isOnScreen={isOnScreen}>
+        <ModalCloseButton onClick={closeModal}>
+          <ModalButtonText>BACK</ModalButtonText>
+        </ModalCloseButton>
+        <ModalContentWrapper>{children}</ModalContentWrapper>
+      </ModalWrapper>
+    </NeglectBackground>
   );
 };
 
