@@ -3,6 +3,7 @@ import { reducer } from "../../types/types_redux/animationsT";
 const defaultState = {
   modal: false,
   home: false,
+  message: false,
 };
 
 const animations: reducer = (state = defaultState, action) => {

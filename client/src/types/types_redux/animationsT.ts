@@ -1,4 +1,4 @@
-export type field = "modal" | "home";
+export type field = "modal" | "home" | "message";
 
 export type animations = {
   [key in field]: boolean;

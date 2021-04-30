@@ -1,53 +1,56 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
-import { setGlobalMessage } from "../redux/actions/";
+import { setGlobalMessage, animateIn, animateOut } from "../redux/actions/";
+import { PopUp } from "./global_message";
 import { reduxStore } from "../types/";
-
-interface globalMessageProps {
-  message: string;
-  clearMessage: any;
-}
 
 const rdxState = (state: reduxStore) => {
   return {
     message: state.globalMessage.message,
+    onScreen: state.animations.message,
   };
 };
-const rdxDispatch = (dispatch: any) => {
+const rdxDispatch = (dispatch: Dispatch) => {
   return {
     clearMessage: () => dispatch(setGlobalMessage("")),
+    closePopUp: () => dispatch(animateOut("message")),
+    openPopUp: () => dispatch(animateIn("message")),
   };
 };
+
+interface globalMessageProps {
+  message: string;
+  onScreen: boolean;
+  clearMessage: () => void;
+  closePopUp: () => void;
+  openPopUp: () => void;
+}
 
 const GlobalMessage: React.FC<globalMessageProps> = ({
   message,
   clearMessage,
+  closePopUp,
+  openPopUp,
+  onScreen,
 }) => {
-  const RemoveMessageHandler = useCallback(() => {
-    const messageToRemove = message;
-    if (messageToRemove === message) {
-      setTimeout(() => clearMessage(), 1500);
+  const removeMessage = (tempMessage: string) => {
+    closePopUp();
+    if (tempMessage === message) {
+      setTimeout(() => clearMessage(), 400);
     }
-  }, [clearMessage, message]);
+  };
 
   useEffect(() => {
-    setTimeout(() => RemoveMessageHandler(), 4000);
-  }, [RemoveMessageHandler]);
+    if (message.length) {
+      openPopUp();
+    }
+    const tempMessage = message;
+    setTimeout(() => removeMessage(tempMessage), 4000);
+  }, [message, removeMessage, onScreen]);
 
-  if (message === "") {
-    return <div />;
-  }
-  return (
-    <div className="msg-container">
-      <div
-        className="msg-text-container"
-        style={{ width: message.length * 17.39 }}
-      >
-        <p className="msg-text">{message}</p>
-      </div>
-    </div>
-  );
+  return <PopUp onScreen={onScreen}></PopUp>;
 };
 
 export default connect(rdxState, rdxDispatch)(GlobalMessage);
