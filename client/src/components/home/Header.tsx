@@ -10,7 +10,7 @@ import {
   UserArrow,
   UserDisplayName,
   HeaderTitle,
-} from "./components_header";
+} from "./header/";
 
 interface HeaderProps {
   onScreen: boolean;

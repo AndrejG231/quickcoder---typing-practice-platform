@@ -54,7 +54,7 @@ class UserAuthResolver {
         email: credentials.email,
         username: credentials.username.toLowerCase(),
         password: hashedPassword,
-        created_at: new Date().getTime(),
+        created_at: new Date().getSeconds(),
       })
       .execute();
     return generateResponse(true, "register_account_registered", lang);

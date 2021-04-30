@@ -12,7 +12,7 @@ import {
   UserButtonWrapper,
   UserAction,
   MenuItem,
-} from "../components/components_home";
+} from "../components/home/";
 import { ArrowButton } from "../components/";
 
 import { reduxStore, userInfo } from "../types";

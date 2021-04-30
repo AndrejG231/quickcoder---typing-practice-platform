@@ -10,7 +10,7 @@ import {
   FormContainer,
   FormSubmitButton,
   NofieldError,
-} from "./components_form";
+} from "./form/";
 
 import { formError, inputData } from "../types/";
 

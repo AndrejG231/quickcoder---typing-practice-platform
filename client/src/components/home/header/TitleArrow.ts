@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TitleUnderline } from ".";
+import { TitleUnderline } from "./";
 
 const TitleArrow = styled.div`
   width: 550px;

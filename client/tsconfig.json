@@ -11,10 +11,10 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "classic",
-    "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noEmit": false,
-    "jsx": "react-jsx"
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true
   },
   "include": ["src"]
 }

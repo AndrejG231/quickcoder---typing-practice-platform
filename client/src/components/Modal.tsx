@@ -10,7 +10,7 @@ import {
   ModalWrapper,
   ModalButtonText,
   ModalContentWrapper,
-} from "./components_modal/";
+} from "./modal/";
 import { NeglectBackground } from "./";
 
 interface ModalProps {
