@@ -1,5 +1,5 @@
-import { api, serverError } from "../../static";
-import { formError, userInfo, actionResponse } from "../../types";
+import { api, serverError } from "../static";
+import { formError, userInfo, actionResponse } from "../types";
 
 const registerMutation = `
   mutation Register($credentials: RegisterInput!) {

@@ -24,7 +24,7 @@ import {
   toggleAuthRefresh,
 } from "../redux/actions/";
 
-import { getUserInfo, logout } from "../api/auth";
+import { getUserInfo, logout } from "../api/";
 import setGlobalMessage from "../redux/actions/setGlobalMessage";
 
 //Redux

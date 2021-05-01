@@ -1,5 +1,5 @@
-import { api } from "../../static";
-import { actionResponse } from "../../types";
+import { api } from "../static";
+import { actionResponse } from "../types";
 
 const logoutMutation = `
   mutation {

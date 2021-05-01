@@ -1,12 +1,12 @@
-import { actionResponse, userInfo } from "../../types";
-import { api } from "../../static";
+import { actionResponse, userInfo } from "../types";
+import { api } from "../static";
 
 export const userInfoQuery = `
   query getSignedUser {
     getSignedUser {
       user {
         id
-        username
+        usern
         email
         language
         keyboard_layout

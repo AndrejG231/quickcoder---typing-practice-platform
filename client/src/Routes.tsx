@@ -3,8 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 //pages
 import Home from "./pages/Home";
+import PracticeMenu from "./pages/PracticeMenu";
 // import Practice from "./pages/Practice";
-// import PracticeMenu from "./pages/PracticeMenu";
 // import PracticeSummary from "./pages/PracticeSummary";
 
 //modals
@@ -47,8 +47,8 @@ const Routes: React.FC = () => {
         exact
         path="/practice/finished/id=:id"
         component={() => <PracticeSummary />}
-      />
-      <Route exact path="/practice_menu/" component={() => <PracticeMenu />} /> */}
+      />*/}
+      <Route exact path="/practice_menu/" component={() => <PracticeMenu />} />
     </BrowserRouter>
   );
 };

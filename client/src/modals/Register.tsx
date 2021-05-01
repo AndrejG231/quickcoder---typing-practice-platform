@@ -6,7 +6,7 @@ import { Modal, Form } from "../components";
 import { createInputGroup, useErrors } from "../utilites";
 import { animateOut, setGlobalMessage } from "../redux/actions/";
 import { useHistory } from "react-router";
-import { register } from "../api/auth";
+import { register } from "../api/";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),

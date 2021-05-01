@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
 import { createInputGroup, useErrors } from "../utilites";
-import { login } from "../api/auth";
+import { login } from "../api/";
 import {
   animateOut,
   toggleAuthRefresh,

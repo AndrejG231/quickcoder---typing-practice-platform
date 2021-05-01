@@ -1,5 +1,5 @@
-import { formError, actionResponse } from "../../types";
-import { api, serverError } from "../../static";
+import { formError, actionResponse } from "../types";
+import { api, serverError } from "../static";
 
 const loginMutation = `
   mutation login($credentials: LoginInput!) {
