@@ -1,32 +1,29 @@
 import PracticeStrings, { categoryDesc } from "../../data/PracticeStrings";
 import generatePracticeString from "./generatePracticeString";
-import { Menu } from "../../types/responses/MenuResponse";
+import { MenuItem } from "../../types/responses/MenuResponse";
 
-const generateMenu: { (): [Menu] } = () => {
-  const menu: [Menu] = [{ type: "", name: "", description: "" }];
-  const categories = Object.keys(PracticeStrings);
-  categories.forEach((category) => {
-    menu.push({
-      type: "category",
-      name: category,
-      description: categoryDesc[category],
-    });
-    const categoryObject = PracticeStrings[category];
-    Object.keys(categoryObject).forEach((practice) => {
-      menu.push({
-        type: "practice",
-        name: practice,
-        category: category,
-        description: categoryObject[practice].desc,
-        overview: generatePracticeString(`${category}+${practice}`, 11) + "...",
+const generateMenu = () => {
+  const menu = [];
+
+  for (const category of Object.keys(PracticeStrings)) {
+    const description = categoryDesc[category];
+    const items: MenuItem[] = [];
+
+    for (const practiceKey of Object.keys(PracticeStrings[category])) {
+      const practice = PracticeStrings[category][practiceKey];
+      items.push({
+        name: practiceKey,
+        description: practice.desc,
+        overview: generatePracticeString(`${category}+${practiceKey}`, 15),
       });
-    });
-  });
+    }
 
-  menu.shift();
+    menu.push({ category, description, items });
+  }
+
   return menu;
 };
 
-const MenuArray = generateMenu();
+const Menu = generateMenu();
 
-export default MenuArray;
+export default Menu;

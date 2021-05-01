@@ -12,7 +12,7 @@ type PracticeStringsObject = {
 };
 
 export const categoryDesc: { [key in string]: string } = {
-  main_position: "Practice major 10 finger typing positions...",
+  main_positions: "Practice major 10 finger typing positions...",
   english: "Practice by typing most popular English words...",
 };
 

@@ -1,13 +1,7 @@
 import { ObjectType, Field } from "type-graphql";
 
 @ObjectType()
-export class Menu {
-  @Field()
-  type: string;
-
-  @Field({ nullable: true })
-  category?: string;
-
+export class MenuItem {
   @Field()
   name: string;
 
@@ -15,19 +9,19 @@ export class Menu {
   description: string;
 
   @Field({ nullable: true })
-  overview?: string;
+  overview: string;
 }
 
 @ObjectType()
 class MenuResponse {
-  @Field({ nullable: true })
-  hasMore?: boolean;
+  @Field()
+  category: string;
 
-  @Field(() => Menu, { nullable: true })
-  item?: Menu;
+  @Field()
+  description: string;
 
-  @Field({ nullable: true })
-  error?: string;
+  @Field(() => [MenuItem])
+  items: [MenuItem];
 }
 
-export default MenuResponse
+export default MenuResponse;
