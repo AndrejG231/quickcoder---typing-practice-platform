@@ -7,7 +7,6 @@ interface props {
 const PopUp = styled.div`
   position: absolute;
   bottom: 20px;
-  height: 20px;
   width: 600px;
   background: ${({ theme }) => theme.colors.b3};
   z-index: 999;
@@ -17,14 +16,14 @@ const PopUp = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: 0.4s all linear;
+  transition: 0.2s all linear;
   @media screen and (max-width: 700px) {
     width: 90%;
     height: 120px;
     padding: 10px;
   }
   ${({ onScreen }: props) =>
-    `transform: translateY(${onScreen ? 0 : "300px"})`};
+    `transform: translateY(${onScreen ? 0 : "140px"})`};
 `;
 
 export default PopUp;

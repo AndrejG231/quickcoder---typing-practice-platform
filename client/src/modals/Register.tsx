@@ -4,19 +4,21 @@ import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
 import { createInputGroup, useErrors } from "../utilites";
-import { animateOut } from "../redux/actions/";
+import { animateOut, setGlobalMessage } from "../redux/actions/";
 import { useHistory } from "react-router";
 import { register } from "../api/auth";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
+  setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
 });
 
 interface RegisterProps {
   closeModal: () => void;
+  setGlobalMessage: (message: string) => void;
 }
 
-const Register: FC<RegisterProps> = ({ closeModal }) => {
+const Register: FC<RegisterProps> = ({ closeModal, setGlobalMessage }) => {
   const nav = useHistory();
   const [inputData, setInputData] = useState(
     createInputGroup(
@@ -35,7 +37,8 @@ const Register: FC<RegisterProps> = ({ closeModal }) => {
         password: inputData.password.value,
       },
       onSuccess: () => {
-        setTimeout(() => nav.push("/home/login/"), 400);
+        setGlobalMessage("Successfully created account! Please log in.");
+        nav.push("/home/login/");
       },
       setErrors: setErrors,
     });

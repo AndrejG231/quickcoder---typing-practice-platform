@@ -25,6 +25,7 @@ import {
 } from "../redux/actions/";
 
 import { getUserInfo, logout } from "../api/auth";
+import setGlobalMessage from "../redux/actions/setGlobalMessage";
 
 //Redux
 const rdxState = (state: reduxStore) => {
@@ -38,6 +39,7 @@ const rdxState = (state: reduxStore) => {
 
 const rdxDispatch = (dispatch: Dispatch) => {
   return {
+    setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
     setAuthRefreshed: () => dispatch(toggleAuthRefresh(false)),
     refreshAuth: () => dispatch(toggleAuthRefresh(true)),
     setUserInfo: (user: userInfo | null) => {
@@ -51,6 +53,7 @@ const rdxDispatch = (dispatch: Dispatch) => {
 
 //
 interface HomeProps {
+  setGlobalMessage: (message: string) => void;
   refreshAuth: () => void;
   userInfo: userInfo | null;
   awaitingAuth: boolean;
@@ -64,6 +67,7 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({
+  setGlobalMessage,
   refreshAuth,
   userInfo,
   setUserInfo,
@@ -92,8 +96,6 @@ const Home: React.FC<HomeProps> = ({
     }
   }, [awaitingAuth, setUserInfo]);
 
-  console.log(awaitingAuth);
-
   useEffect(() => {
     //Animation
     animateIn();
@@ -113,8 +115,11 @@ const Home: React.FC<HomeProps> = ({
 
   const userLogout = () => {
     logout({
-      onSuccess: refreshAuth,
-      onError: () => console.log("Logout not successful"),
+      onSuccess: () => {
+        refreshAuth();
+        setGlobalMessage("Successfully logged out.");
+      },
+      onError: () => setGlobalMessage("Action not successful, try again."),
     });
   };
 

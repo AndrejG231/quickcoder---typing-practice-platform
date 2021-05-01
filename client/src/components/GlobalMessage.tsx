@@ -44,6 +44,12 @@ const GlobalMessage: React.FC<globalMessageProps> = ({
   };
 
   useEffect(() => {
+    if (message.length > 1) {
+      setTimeout(() => resetMessage(), 2500);
+    }
+  }, [message, resetMessage]);
+
+  useEffect(() => {
     if (displayedMessage !== message) {
       if (message.length > 0) {
         setDisplayedMessage(message);
