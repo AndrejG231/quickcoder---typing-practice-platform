@@ -1,7 +1,7 @@
-import { practiceObject, characterScheme } from "../types";
+import { practiceObject, schemeCharacters } from "../types";
 
 const HandlePracticeProgress = (
-  keyPressed: characterScheme,
+  keyPressed: schemeCharacters,
   state: practiceObject
 ): practiceObject => {
   if (!state.isActive) {

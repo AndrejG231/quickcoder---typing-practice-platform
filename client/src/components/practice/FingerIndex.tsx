@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorScheme } from "../../data/KeysColors";
+// import { ColorScheme } from "../../static/contents_keyboard/";
 
 interface FingerIndexPorps {
   className?: string;
@@ -15,7 +15,7 @@ export const FingerIndex: React.FC<FingerIndexPorps> = ({
       className={`fingerIndex-container ${className}`}
       style={{ width: width }}
     >
-      <div className="fingerIndex-hand left">
+      {/* <div className="fingerIndex-hand left">
         <div className="finger" style={{ background: ColorScheme["L1"] }}>
           Pinky
         </div>
@@ -42,7 +42,7 @@ export const FingerIndex: React.FC<FingerIndexPorps> = ({
         <div className="finger" style={{ background: ColorScheme["R4"] }}>
           Index
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,55 +1,57 @@
 import { FC } from "react";
 import { connect } from "react-redux";
-import { practiceSwitchLen } from "../../redux/actions/practiceSelectionActions";
-import { ReduxState } from "../../types/reduxStore";
-import { useHistory } from "react-router-dom";
-import { userStatObjectT } from "../../types/types_redux/userPracticeStatsT";
+// import { practiceSwitchLen } from "../../redux/actions/practiceSelectionActions";
+// import { ReduxState } from "../../types/reduxStore";
+// import { useHistory } from "react-router-dom";
+// import { userStatObjectT } from "../../types/types_redux/userPracticeStatsT";
 
-const rdxProps = (state: ReduxState) => {
+const rdxProps = () => {
   return {
-    practiceName: state.PracticeSelection.selected,
-    length: state.PracticeSelection.length,
-    stats: state.PracticeUserStats,
+    // practiceName: state.PracticeSelection.selected,
+    // length: state.PracticeSelection.length,
+    // stats: state.PracticeUserStats,
   };
 };
 
 const rdxDispatch = (dispatch: any) => {
   return {
-    setLength: (len: number) => dispatch(practiceSwitchLen(len)),
+    // setLength: (len: number) => dispatch(practiceSwitchLen(len)),
   };
 };
 
 interface PracticeSelectorProps {
-  className?: string;
-  practiceName: string;
-  length: number;
-  stats: userStatObjectT;
-  setLength: (len: number) => void;
+  // className?: string;
+  // practiceName: string;
+  // length: number;
+  // stats: userStatObjectT;
+  // setLength: (len: number) => void;
 }
 
-const PracticeSelector: FC<PracticeSelectorProps> = ({
-  className,
-  practiceName,
-  length,
-  setLength,
-  stats,
-}) => {
-  const nav = useHistory();
-  const stat = stats[practiceName];
-
-  const score = stat?.score < 650 ? "bad" : stat?.score > 800 ? "good" : "";
-
-  const errors =
-    stat?.error_rate > 4 ? "bad" : stat?.error_rate < 2 ? "good" : "";
-
-  const cpm = stat?.cpm < 320 ? "bad" : stat?.cpm > 350 ? "good" : "";
-
-  if (!practiceName) {
-    return <div />;
+const PracticeSelector: FC<PracticeSelectorProps> = (
+  {
+    // className,
+    // practiceName,
+    // length,
+    // setLength,
+    // stats,
   }
+) => {
+  // const nav = useHistory();
+  // const stat = stats[practiceName];
+
+  // const score = stat?.score < 650 ? "bad" : stat?.score > 800 ? "good" : "";
+
+  // const errors =
+  //   stat?.error_rate > 4 ? "bad" : stat?.error_rate < 2 ? "good" : "";
+
+  // const cpm = stat?.cpm < 320 ? "bad" : stat?.cpm > 350 ? "good" : "";
+
+  // if (!practiceName) {
+  //   return <div />;
+  // }
   return (
-    <div className={`pSel-container ${className || ""}`}>
-      <div className="pSel-header">
+    <div className={`pSel-container `}>
+      {/* <div className="pSel-header">
         <h1 className={`pSel-title`}>
           {practiceName ? practiceName.split("+")[1].replaceAll("_", " ") : ""}
         </h1>
@@ -114,7 +116,7 @@ const PracticeSelector: FC<PracticeSelectorProps> = ({
         >
           START
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

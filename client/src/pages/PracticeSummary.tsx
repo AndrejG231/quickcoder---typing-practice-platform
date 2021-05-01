@@ -1,62 +1,61 @@
 import { FC } from "react";
-import { useHistory, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  resetPracticeOffset,
-  resetPracticeSession,
-} from "../redux/actions/practiceActions";
-import { useQuery } from "@apollo/client";
-import { getPracticeResultsQuery } from "../graphql/practice";
-import FormattedPracticeString from "../components/practice/FormattedPracticeString";
-import ArrowButton from "../components/ArrowButton";
-import { ReduxState } from "../types/reduxStore";
-import msToTime from "../utilites/msToTime";
-import Stat from "../components/practice/Stat";
-interface PracticeSummaryProps {
-  resetPractice: () => void;
-  resetOffset: () => void;
-}
+// import { useHistory, useParams } from "react-router-dom";
+// import {
+//   resetPracticeOffset,
+//   resetPracticeSession,
+// } from "../redux/actions/practiceActions";
+// import { useQuery } from "@apollo/client";
+// import { getPracticeResultsQuery } from "../graphql/practice";
+// import FormattedPracticeString from "../components/practice/FormattedPracticeString";
+// import ArrowButton from "../components/ArrowButton";
+// import { ReduxState } from "../types/reduxStore";
+// import msToTime from "../utilites/msToTime";
+// import Stat from "../components/practice/Stat";
+// interface PracticeSummaryProps {
+//   resetPractice: () => void;
+//   resetOffset: () => void;
+// }
 
-const rdxProps = (state: ReduxState) => {
+const rdxProps = () => {
   return {};
 };
 
 const rdxDispatch = (dispatch: any) => {
-  return {
-    resetPractice: () => dispatch(resetPracticeSession()),
-    resetOffset: () => dispatch(resetPracticeOffset()),
-  };
+  return {};
 };
 
-const PracticeSummary: FC<PracticeSummaryProps> = ({
-  resetPractice,
-  resetOffset,
-}) => {
-  const navigator = useHistory();
-  const { id }: { id: string } = useParams();
-  const { data, loading, error } = useQuery(getPracticeResultsQuery, {
-    variables: { id: parseInt(id) },
-  });
-
-  if (loading) {
-    return <div>Loading...</div>;
-  } else if (!data.getPracticeResult.result.success || error) {
-    navigator.push("/server-error/");
+const PracticeSummary: FC = (
+  {
+    // resetPractice,
+    // resetOffset,
   }
+) => {
+  // const navigator = useHistory();
+  // const { id }: { id: string } = useParams();
+  // const { data, loading, error } = useQuery(getPracticeResultsQuery, {
+  //   variables: { id: parseInt(id) },
+  // });
 
-  const {
-    string,
-    index,
-    errors_count,
-    time_spent,
-    practice_name,
-  } = data.getPracticeResult.practice;
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // } else if (!data.getPracticeResult.result.success || error) {
+  //   navigator.push("/server-error/");
+  // }
 
-  const errors = JSON.parse(data.getPracticeResult.practice.errors);
+  // const {
+  //   string,
+  //   index,
+  //   errors_count,
+  //   time_spent,
+  //   practice_name,
+  // } = data.getPracticeResult.practice;
+
+  // const errors = JSON.parse(data.getPracticeResult.practice.errors);
 
   return (
     <div className={`pS-container`}>
-      <div className={`pS-column`}>
+      {/* <div className={`pS-column`}>
         <Stat field={"Errors"} value={errors_count} />
         <Stat field={"Length"} value={index} />
         <Stat field={"Time"} value={msToTime(time_spent)} />
@@ -113,7 +112,7 @@ const PracticeSummary: FC<PracticeSummaryProps> = ({
         >
           HOME
         </ArrowButton>
-      </div>
+      </div> */}
     </div>
   );
 };

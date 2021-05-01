@@ -4,8 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 //pages
 import Home from "./pages/Home";
 import PracticeMenu from "./pages/PracticeMenu";
-// import Practice from "./pages/Practice";
-// import PracticeSummary from "./pages/PracticeSummary";
+import Practice from "./pages/Practice";
+import PracticeSummary from "./pages/PracticeSummary";
 
 //modals
 import Login from "./modals/Login";
@@ -38,7 +38,7 @@ const Routes: React.FC = () => {
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}
       />
-      {/* <Route
+      <Route
         exact
         path="/practice/p=:practiceCode/l=:practiceLength"
         component={() => <Practice />}
@@ -47,7 +47,7 @@ const Routes: React.FC = () => {
         exact
         path="/practice/finished/id=:id"
         component={() => <PracticeSummary />}
-      />*/}
+      />
       <Route exact path="/practice_menu/" component={() => <PracticeMenu />} />
     </BrowserRouter>
   );

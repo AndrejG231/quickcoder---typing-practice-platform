@@ -1,26 +1,28 @@
 import { FC } from "react";
-import { Errors } from "../../types/practice/PracticeT";
+// import { Errors } from "../../types/practice/PracticeT";
 
-interface FormattedPracticeStringProps {
-  errors: Errors;
-  string: string;
-  index: number;
-  className?: string;
-}
+// interface FormattedPracticeStringProps {
+//   errors: Errors;
+//   string: string;
+//   index: number;
+//   className?: string;
+// }
 
-const FormattedPracticeString: FC<FormattedPracticeStringProps> = ({
-  errors,
-  string,
-  index,
-  className,
-}) => {
-  let lastError = 0;
-  const errKeys = Object.keys(errors).sort((a, b) => {
-    return ~~a - ~~b;
-  });
+const FormattedPracticeString: FC = (
+  {
+    // errors,
+    // string,
+    // index,
+    // className,
+  }
+) => {
+  // let lastError = 0;
+  // const errKeys = Object.keys(errors).sort((a, b) => {
+  //   return ~~a - ~~b;
+  // });
   return (
-    <div className={className}>
-      {errKeys.map((errIndex, i) => {
+    <div>
+      {/* {errKeys.map((errIndex, i) => {
         const prevError = lastError;
         lastError = ~~errIndex;
         return (
@@ -36,7 +38,7 @@ const FormattedPracticeString: FC<FormattedPracticeStringProps> = ({
         {string.slice(lastError, index)}
         <span className="textLine-nextChar">{string[index]}</span>
         {string.slice(index + 1, string.length)}
-      </span>
+      </span> */}
     </div>
   );
 };
