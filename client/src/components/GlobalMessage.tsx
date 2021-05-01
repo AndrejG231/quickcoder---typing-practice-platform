@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
 import { setGlobalMessage, animateIn, animateOut } from "../redux/actions/";
-import { PopUp } from "./global_message";
+import { PopUp, MessageText, CloseIcon } from "./global_message";
 import { reduxStore } from "../types/";
 
 const rdxState = (state: reduxStore) => {
@@ -23,34 +23,43 @@ const rdxDispatch = (dispatch: Dispatch) => {
 interface globalMessageProps {
   message: string;
   onScreen: boolean;
-  clearMessage: () => void;
   closePopUp: () => void;
   openPopUp: () => void;
+  clearMessage: () => void;
 }
 
 const GlobalMessage: React.FC<globalMessageProps> = ({
   message,
-  clearMessage,
   closePopUp,
   openPopUp,
+  clearMessage,
   onScreen,
 }) => {
-  const removeMessage = (tempMessage: string) => {
+  const [displayedMessage, setDisplayedMessage] = useState("");
+
+  const resetMessage = () => {
+    clearMessage();
     closePopUp();
-    if (tempMessage === message) {
-      setTimeout(() => clearMessage(), 400);
-    }
+    setTimeout(() => setDisplayedMessage(""), 400);
   };
 
   useEffect(() => {
-    if (message.length) {
-      openPopUp();
+    if (displayedMessage !== message) {
+      if (message.length > 0) {
+        setDisplayedMessage(message);
+        openPopUp();
+      } else {
+        resetMessage();
+      }
     }
-    const tempMessage = message;
-    setTimeout(() => removeMessage(tempMessage), 4000);
-  }, [message, removeMessage, onScreen]);
+  }, [message, displayedMessage, resetMessage]);
 
-  return <PopUp onScreen={onScreen}></PopUp>;
+  return (
+    <PopUp onScreen={onScreen}>
+      <MessageText>{displayedMessage}</MessageText>
+      <CloseIcon size="50px" onClick={resetMessage} />
+    </PopUp>
+  );
 };
 
 export default connect(rdxState, rdxDispatch)(GlobalMessage);

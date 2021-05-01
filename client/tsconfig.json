@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "classic",
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",

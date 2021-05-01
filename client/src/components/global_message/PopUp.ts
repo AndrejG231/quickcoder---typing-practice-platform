@@ -5,17 +5,21 @@ interface props {
 }
 
 const PopUp = styled.div`
-  postion: fixed;
+  position: absolute;
   bottom: 20px;
+  height: 20px;
   width: 600px;
-  height: 80px;
-  margin: auto;
-  padding: 20px 5px;
+  background: ${({ theme }) => theme.colors.b3};
+  z-index: 999;
+  border: 4px solid ${({ theme }) => theme.colors.b5};
+  border-radius: 40px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: 0.4s all linear;
   @media screen and (max-width: 700px) {
-    width: 100%;
+    width: 90%;
     height: 120px;
     padding: 10px;
   }

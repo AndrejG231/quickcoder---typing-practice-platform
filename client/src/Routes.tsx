@@ -15,13 +15,9 @@ import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 import ChangeKnownPassword from "./modals/ChangeKnownPassword";
 
-//components
-import GlobalMessage from "./components/GlobalMessage";
-
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
-      <GlobalMessage />
       <Route exact path="/" component={() => <Home />} />
       <Route path="/home/" component={() => <Home />} />
       <Route exact path="/home/profile/" component={() => <Profile />} />
