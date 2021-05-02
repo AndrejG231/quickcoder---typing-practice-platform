@@ -1,7 +1,9 @@
+import practiceItem from "./practiceItem";
+
 type practiceMenu = {
   category: string;
   description: string;
-  items: { name: string; description: string; overview: string }[];
+  items: practiceItem[];
 }[];
 
 export default practiceMenu;

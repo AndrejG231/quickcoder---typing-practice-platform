@@ -1,5 +1,7 @@
+import { practiceItem } from "../";
+
 export type practiceSelection = {
-  selectedName: string;
+  selectedPractice: practiceItem | null;
   lengthIndex: number;
   length: number;
 };
@@ -11,7 +13,7 @@ export type action =
     }
   | {
       type: "practiceSelect/setselect";
-      selected: string;
+      selected: practiceItem;
     };
 
 export type reducer = {

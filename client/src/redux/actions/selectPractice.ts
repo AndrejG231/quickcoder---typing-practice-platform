@@ -1,6 +1,7 @@
 import { action } from "../../types/types_redux/practiceSelectionT";
+import { practiceItem } from "../../types";
 
-const selectPractice = (selected: string): action => {
+const selectPractice = (selected: practiceItem): action => {
   return {
     type: "practiceSelect/setselect",
     selected: selected,

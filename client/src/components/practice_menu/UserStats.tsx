@@ -1,8 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import { UserStatsWrapper } from "./user_stats";
 
-const UserStats = () => {
-  return <UserStatsWrapper />;
+interface UserStatsProps {}
+
+const UserStats: FC<UserStatsProps> = ({}) => {
+  return <UserStatsWrapper></UserStatsWrapper>;
 };
 
 export default UserStats;

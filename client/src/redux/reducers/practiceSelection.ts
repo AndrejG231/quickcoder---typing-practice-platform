@@ -3,7 +3,7 @@ import { reducer } from "../../types/types_redux/practiceSelectionT";
 const lengths = [100, 300, 500, 1000, 1500, 2000, 3000];
 
 const defaultState = {
-  selectedName: "",
+  selectedPractice: null, 
   lengthIndex: 2,
   length: 500,
 };
