@@ -3,10 +3,10 @@ import { api } from "../static";
 
 export const userInfoQuery = `
   query getSignedUser {
-    getSignedUser {
+    getSignedUser{
       user {
         id
-        usern
+        username
         email
         language
         keyboard_layout
@@ -14,10 +14,10 @@ export const userInfoQuery = `
         created_at
       }
       error {
-        action
         success
-        message
+        action
         info
+        message
       }
     }
   }
