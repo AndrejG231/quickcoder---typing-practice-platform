@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Practices = styled.div`
+const PracticesWrapper = styled.div`
   grid-area: menu;
   width: 100%;
   height: 100%;
@@ -8,4 +8,4 @@ const Practices = styled.div`
   background: ${({ theme }) => theme.colors.b3};
 `;
 
-export default Practices;
+export default PracticesWrapper;

@@ -5,19 +5,10 @@ import { reduxStore } from "../types";
 import { getMenu } from "../api";
 import { practiceMenu } from "../types/";
 import {
-  CategoriesBar,
-  CategoryButton,
-  CategoryDescription,
-  CategoryItems,
   MenuWrapper,
-  PracticeItem,
-  PracticeItemDescription,
-  PracticeItemTitle,
-  Practices,
-  PracticeSelectIcon,
+  PracticesList,
   UserStats,
-  StartupSettings,
-  ItemsFade,
+  PracticeSettings,
 } from "../components/practice_menu";
 
 const rdxProps = (state: reduxStore) => {
@@ -36,8 +27,6 @@ interface PracticeMenuProps {
 }
 
 const PracticeMenu: React.FC<PracticeMenuProps> = ({ menu, setMenu }) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
-
   useEffect(() => {
     if (!menu) {
       getMenu({
@@ -55,39 +44,9 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({ menu, setMenu }) => {
 
   return (
     <MenuWrapper>
-      <Practices>
-        <CategoriesBar>
-          {menu.map((category, index) => {
-            return (
-              <CategoryButton
-                onClick={() => setSelectedCategory(index)}
-                key={index}
-                isSelected={index === selectedCategory}
-              >
-                {category.category}
-              </CategoryButton>
-            );
-          })}
-        </CategoriesBar>
-        <CategoryDescription>
-          {menu[selectedCategory].description}
-        </CategoryDescription>
-        <CategoryItems>
-          {menu[selectedCategory].items.map((item, index) => (
-            <PracticeItem key={index}>
-              <PracticeItemTitle>{item.name}</PracticeItemTitle>
-              <PracticeItemDescription>
-                {item.description}
-              </PracticeItemDescription>
-              <PracticeSelectIcon size="60px" />
-            </PracticeItem>
-          ))}
-        </CategoryItems>
-        <ItemsFade top />
-        <ItemsFade bottom />
-      </Practices>
-      <UserStats></UserStats>
-      <StartupSettings></StartupSettings>
+      <PracticesList menu={menu} />
+      <UserStats />
+      <PracticeSettings />
     </MenuWrapper>
   );
 };

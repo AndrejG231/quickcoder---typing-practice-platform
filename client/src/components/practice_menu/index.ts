@@ -1,13 +1,4 @@
-export { default as CategoriesBar } from "./CategoriesBar";
-export { default as CategoryButton } from "./CategoryButton";
-export { default as CategoryDescription } from "./CategoryDescription";
-export { default as CategoryItems } from "./CategoryItems";
-export { default as ItemsFade } from "./ItemsFade";
 export { default as MenuWrapper } from "./MenuWrapper";
-export { default as PracticeItem } from "./PracticeItem";
-export { default as PracticeItemDescription } from "./PracticeItemDescription";
-export { default as PracticeItemTitle } from "./PracticeItemTitle";
-export { default as Practices } from "./Practices";
-export { default as PracticeSelectIcon } from "./PracticeSelectIcon";
-export { default as StartupSettings } from "./StartupSettings";
+export { default as PracticesList } from "./PracticesList";
 export { default as UserStats } from "./UserStats";
+export { default as PracticeSettings } from "./PracticeSettings";
