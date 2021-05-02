@@ -13,8 +13,11 @@ import {
   PracticeItem,
   PracticeItemDescription,
   PracticeItemTitle,
-  PracticesContainer,
+  Practices,
   PracticeSelectIcon,
+  UserStats,
+  StartupSettings,
+  ItemsFade,
 } from "../components/practice_menu";
 
 const rdxProps = (state: reduxStore) => {
@@ -52,13 +55,14 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({ menu, setMenu }) => {
 
   return (
     <MenuWrapper>
-      <PracticesContainer>
+      <Practices>
         <CategoriesBar>
           {menu.map((category, index) => {
             return (
               <CategoryButton
                 onClick={() => setSelectedCategory(index)}
                 key={index}
+                isSelected={index === selectedCategory}
               >
                 {category.category}
               </CategoryButton>
@@ -75,13 +79,15 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({ menu, setMenu }) => {
               <PracticeItemDescription>
                 {item.description}
               </PracticeItemDescription>
-              <PracticeSelectIcon size="20px" />
+              <PracticeSelectIcon size="60px" />
             </PracticeItem>
           ))}
         </CategoryItems>
-      </PracticesContainer>
-      {/* StatViewer */}
-      {/* Selector */}
+        <ItemsFade top />
+        <ItemsFade bottom />
+      </Practices>
+      <UserStats></UserStats>
+      <StartupSettings></StartupSettings>
     </MenuWrapper>
   );
 };
