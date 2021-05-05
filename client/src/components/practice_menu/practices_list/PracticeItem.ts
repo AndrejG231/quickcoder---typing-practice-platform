@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
+interface props {
+  theme: any;
+  isSelected: boolean;
+}
+
 const PracticeItem = styled.div`
-  ${({ theme }) => `
+  ${({ theme, isSelected }: props) => `
     background: ${theme.colors.b2};
-    border: 2px solid ${theme.colors.b4};
+    border: 2px solid ${theme.colors[isSelected ? "w5" : "b4"]};
     width: 80%;
     height: 100px;
     margin: 10px;

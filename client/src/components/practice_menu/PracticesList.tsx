@@ -19,6 +19,7 @@ import {
 const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
   selectedCategory: state.practiceSelection.selectedCategory,
+  selectedPractice: state.practiceSelection.selectedPractice,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -36,6 +37,7 @@ const PracticesList: FC<props> = ({
   selectPractice,
   selectCategory,
   selectedCategory,
+  selectedPractice,
 }) => {
   return (
     <PracticesWrapper>
@@ -56,18 +58,23 @@ const PracticesList: FC<props> = ({
         {menu[selectedCategory].description}
       </CategoryDescription>
       <CategoryItems>
-        {menu[selectedCategory].items.map((item, index) => (
-          <PracticeItem key={index}>
-            <PracticeItemTitle>{item.name}</PracticeItemTitle>
-            <PracticeItemDescription>
-              {item.description}
-            </PracticeItemDescription>
-            <PracticeSelectIcon
-              size="60px"
-              onClick={() => selectPractice(item)}
-            />
-          </PracticeItem>
-        ))}
+        {menu[selectedCategory].items.map((item, index) => {
+          const isSelected = item === selectedPractice;
+          return (
+            <PracticeItem key={index} isSelected={isSelected}>
+              <PracticeItemTitle>{item.name}</PracticeItemTitle>
+              <PracticeItemDescription>
+                {item.description}
+              </PracticeItemDescription>
+              {isSelected ? null : (
+                <PracticeSelectIcon
+                  size="60px"
+                  onClick={() => selectPractice(item)}
+                />
+              )}
+            </PracticeItem>
+          );
+        })}
       </CategoryItems>
       <ItemsFade top />
       <ItemsFade bottom />
