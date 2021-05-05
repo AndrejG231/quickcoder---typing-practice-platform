@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
-import { selectPractice } from "../../redux/actions";
+import { selectCategory, selectPractice } from "../../redux/actions";
 import { practiceItem, practiceMenu, reduxStore } from "../../types";
 import {
   CategoriesBar,
@@ -18,9 +18,11 @@ import {
 
 const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
+  selectedCategory: state.practiceSelection.selectedCategory,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
+  selectCategory: (category: number) => dispatch(selectCategory(category)),
   selectPractice: (practice: practiceItem) =>
     dispatch(selectPractice(practice)),
 });
@@ -28,17 +30,23 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 interface PracticesListProps {
   menu: practiceMenu;
   selectPractice: (practice: practiceItem) => void;
+  selectedCategory: number;
+  selectCategory: (category: number) => void;
 }
 
-const PracticesList: FC<PracticesListProps> = ({ menu, selectPractice }) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
+const PracticesList: FC<PracticesListProps> = ({
+  menu,
+  selectPractice,
+  selectCategory,
+  selectedCategory,
+}) => {
   return (
     <PracticesWrapper>
       <CategoriesBar>
         {menu.map((category, index) => {
           return (
             <CategoryButton
-              onClick={() => setSelectedCategory(index)}
+              onClick={() => selectCategory(index)}
               key={index}
               isSelected={index === selectedCategory}
             >

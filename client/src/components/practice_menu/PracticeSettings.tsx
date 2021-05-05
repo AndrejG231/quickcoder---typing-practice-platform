@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { selectPracticeLength } from "../../redux/actions";
 import { practiceItem, reduxStore } from "../../types";
@@ -12,11 +13,20 @@ import {
   StartButton,
 } from "./practice_settings";
 
-const rdxProps = (state: reduxStore) => ({
-  selectedPractice: state.practiceSelection.selectedPractice,
-  length: state.practiceSelection.length,
-  lengthIndex: state.practiceSelection.lengthIndex,
-});
+const rdxProps = (state: reduxStore) => {
+  const category =
+    state.practiceMenu.length > 0
+      ? state.practiceMenu[state.practiceSelection.selectedCategory].category
+      : "";
+  const practiceName = state.practiceSelection.selectedPractice
+    ? state.practiceSelection.selectedPractice.name
+    : "";
+  return {
+    length: state.practiceSelection.length,
+    selectionString: `${category}+${practiceName}`,
+    practiceName,
+  };
+};
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   setLength: (length: number) => dispatch(selectPracticeLength(length)),
@@ -24,25 +34,36 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 
 interface PracticeSettingsProps {
   setLength: (length: number) => void;
-  selectedPractice: practiceItem | null;
   length: number;
-  lengthIndex: number;
+  selectionString: string;
+  practiceName: string;
 }
 
 const PracticeSettings: FC<PracticeSettingsProps> = ({
-  selectedPractice,
   length,
-  lengthIndex,
   setLength,
-}) => (
-  <SettingsWrapper>
-    <LengthSelection>
-      <LengthDecreaseButton onClick={() => setLength(lengthIndex - 1)} />
-      <LengthDisplay>{length}</LengthDisplay>
-      <LengthDecreaseButton onClick={() => setLength(lengthIndex - 1)} />
-    </LengthSelection>
-    <StartButton>Start</StartButton>
-  </SettingsWrapper>
-);
+  selectionString,
+  practiceName,
+}) => {
+  const nav = useHistory();
+  return (
+    <SettingsWrapper>
+      <LengthSelection>
+        <LengthDecreaseButton size={22} onClick={() => setLength(-1)} />
+        <LengthDisplay>{length}</LengthDisplay>
+        <LengthIncreaseButton size={22} onClick={() => setLength(1)} />
+      </LengthSelection>
+      {practiceName ? (
+        <StartButton
+          onClick={() => nav.push(`/practice/p=${selectionString}/l=${length}`)}
+        >
+          Start
+        </StartButton>
+      ) : (
+        <StartButton>Select practice first..</StartButton>
+      )}
+    </SettingsWrapper>
+  );
+};
 
 export default connect(rdxProps, rdxDispatch)(PracticeSettings);

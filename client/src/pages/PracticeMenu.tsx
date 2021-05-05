@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadMenu, selectPractice } from "../redux/actions";
-import { reduxStore } from "../types";
+import { practiceItem, reduxStore } from "../types";
 import { getMenu } from "../api";
 import { practiceMenu } from "../types/";
 import {
@@ -14,22 +14,23 @@ import {
 const rdxProps = (state: reduxStore) => {
   return {
     menu: state.practiceMenu,
-    selectedPractice: state.practiceSelection.selectedName,
+    selectedPractice: state.practiceSelection.selectedPractice,
   };
 };
 
 const rdxDispatch = (dispatch: any) => {
   return {
     setMenu: (menu: practiceMenu) => dispatch(loadMenu(menu)),
-    selectPractice: (practice: string) => dispatch(selectPractice(practice)),
+    selectPractice: (practice: practiceItem) =>
+      dispatch(selectPractice(practice)),
   };
 };
 
 interface PracticeMenuProps {
   menu: practiceMenu;
-  selectedPractice: string;
+  selectedPractice: practiceItem | null;
   setMenu: (menu: practiceMenu) => void;
-  selectPractice: (practice: string) => void;
+  selectPractice: (practice: practiceItem) => void;
 }
 
 const PracticeMenu: React.FC<PracticeMenuProps> = ({

@@ -3,7 +3,8 @@ import { reducer } from "../../types/types_redux/practiceSelectionT";
 const lengths = [100, 300, 500, 1000, 1500, 2000, 3000];
 
 const defaultState = {
-  selectedPractice: null, 
+  selectedPractice: null,
+  selectedCategory: 0,
   lengthIndex: 2,
   length: 500,
 };
@@ -11,7 +12,7 @@ const defaultState = {
 const practiceSelection: reducer = (state = defaultState, action) => {
   switch (action.type) {
     case "practiceSelect/setselect":
-      return { ...state, selectedName: action.selected };
+      return { ...state, selectedPractice: action.selected };
 
     case "practiceSelect/setlen":
       let length = state.lengthIndex + action.len;
@@ -23,6 +24,13 @@ const practiceSelection: reducer = (state = defaultState, action) => {
       }
 
       return { ...state, lengthIndex: length, length: lengths[length] };
+
+    case "practiceSelect/selectCategory":
+      return {
+        ...state,
+        selectedPractice: null,
+        selectedCategory: action.selected,
+      };
 
     default:
       return state;
