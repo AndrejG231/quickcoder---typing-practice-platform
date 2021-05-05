@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { setGlobalMessage, animateIn, animateOut } from "../redux/actions/";
 import { PopUp, MessageText, CloseIcon } from "./global_message";
 import { reduxStore } from "../types/";
 
-const rdxState = (state: reduxStore) => {
+const rdxProps = (state: reduxStore) => {
   return {
     message: state.globalMessage.message,
     onScreen: state.animations.message,
@@ -20,15 +20,11 @@ const rdxDispatch = (dispatch: Dispatch) => {
   };
 };
 
-interface globalMessageProps {
-  message: string;
-  onScreen: boolean;
-  closePopUp: () => void;
-  openPopUp: () => void;
-  clearMessage: () => void;
-}
+const withRedux = connect(rdxProps, rdxDispatch);
 
-const GlobalMessage: React.FC<globalMessageProps> = ({
+type props = ConnectedProps<typeof withRedux>;
+
+const GlobalMessage: React.FC<props> = ({
   message,
   closePopUp,
   openPopUp,
@@ -68,4 +64,4 @@ const GlobalMessage: React.FC<globalMessageProps> = ({
   );
 };
 
-export default connect(rdxState, rdxDispatch)(GlobalMessage);
+export default withRedux(GlobalMessage);

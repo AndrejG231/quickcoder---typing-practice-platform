@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal } from "../components";
@@ -9,12 +9,12 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
 });
 
-interface LoginProps {
-  closeModal: () => void;
-}
+const withRedux = connect(() => ({}), rdxDispatch);
 
-const Login: FC<LoginProps> = ({ closeModal }) => {
+type props = ConnectedProps<typeof withRedux>;
+
+const Profile: FC<props> = ({ closeModal }) => {
   return <Modal></Modal>;
 };
 
-export default connect(() => ({}), rdxDispatch)(Login);
+export default withRedux(Profile);

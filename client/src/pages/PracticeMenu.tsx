@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { loadMenu, selectPractice } from "../redux/actions";
 import { practiceItem, reduxStore } from "../types";
 import { getMenu } from "../api";
@@ -26,14 +26,11 @@ const rdxDispatch = (dispatch: any) => {
   };
 };
 
-interface PracticeMenuProps {
-  menu: practiceMenu;
-  selectedPractice: practiceItem | null;
-  setMenu: (menu: practiceMenu) => void;
-  selectPractice: (practice: practiceItem) => void;
-}
+const withRedux = connect(rdxProps, rdxDispatch);
 
-const PracticeMenu: React.FC<PracticeMenuProps> = ({
+type props = ConnectedProps<typeof withRedux>;
+
+const PracticeMenu: React.FC<props> = ({
   menu,
   setMenu,
   selectPractice,
@@ -63,4 +60,4 @@ const PracticeMenu: React.FC<PracticeMenuProps> = ({
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(PracticeMenu);
+export default withRedux(PracticeMenu);

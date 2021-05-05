@@ -19,6 +19,8 @@ const rdxDispatch = (dispatch: any) => {
   return {};
 };
 
+const withRedux = connect(rdxProps, rdxDispatch);
+
 interface PracticeProps {}
 
 const Practice: React.FC<PracticeProps> = ({}) => {
@@ -58,4 +60,4 @@ const Practice: React.FC<PracticeProps> = ({}) => {
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(Practice);
+export default withRedux(Practice);

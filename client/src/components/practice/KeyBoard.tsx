@@ -79,6 +79,8 @@ const rdxProps = () => {
   };
 };
 
+const withRedux = connect(rdxProps, () => ({}));
+
 interface KeyBoardProps {
   // nextKey: Characters;
   // lastError: Characters;
@@ -171,6 +173,4 @@ const KeyBoard: React.FC<KeyBoardProps> = (
   );
 };
 
-export default connect(rdxProps, () => {
-  return {};
-})(KeyBoard);
+export default withRedux(KeyBoard);

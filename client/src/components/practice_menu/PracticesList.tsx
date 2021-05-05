@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Dispatch } from "redux";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { selectCategory, selectPractice } from "../../redux/actions";
 import { practiceItem, practiceMenu, reduxStore } from "../../types";
 import {
@@ -27,14 +27,11 @@ const rdxDispatch = (dispatch: Dispatch) => ({
     dispatch(selectPractice(practice)),
 });
 
-interface PracticesListProps {
-  menu: practiceMenu;
-  selectPractice: (practice: practiceItem) => void;
-  selectedCategory: number;
-  selectCategory: (category: number) => void;
-}
+const withRedux = connect(rdxProps, rdxDispatch);
 
-const PracticesList: FC<PracticesListProps> = ({
+type props = ConnectedProps<typeof withRedux>;
+
+const PracticesList: FC<props> = ({
   menu,
   selectPractice,
   selectCategory,
@@ -78,4 +75,4 @@ const PracticesList: FC<PracticesListProps> = ({
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(PracticesList);
+export default withRedux(PracticesList);

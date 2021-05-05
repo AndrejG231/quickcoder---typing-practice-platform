@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
@@ -13,12 +13,11 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
 });
 
-interface RegisterProps {
-  closeModal: () => void;
-  setGlobalMessage: (message: string) => void;
-}
+const withRedux = connect(() => ({}), rdxDispatch);
 
-const Register: FC<RegisterProps> = ({ closeModal, setGlobalMessage }) => {
+type props = ConnectedProps<typeof withRedux>;
+
+const Register: FC<props> = ({ closeModal, setGlobalMessage }) => {
   const nav = useHistory();
   const [inputData, setInputData] = useState(
     createInputGroup(
@@ -57,4 +56,4 @@ const Register: FC<RegisterProps> = ({ closeModal, setGlobalMessage }) => {
   );
 };
 
-export default connect(() => ({}), rdxDispatch)(Register);
+export default withRedux(Register);

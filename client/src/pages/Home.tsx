@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 
 //Components
 import {
@@ -51,22 +51,11 @@ const rdxDispatch = (dispatch: Dispatch) => {
   };
 };
 
-//
-interface HomeProps {
-  setGlobalMessage: (message: string) => void;
-  refreshAuth: () => void;
-  userInfo: userInfo | null;
-  awaitingAuth: boolean;
-  setUserInfo: (user: userInfo | null) => void;
-  isModalOpened: boolean;
-  closeModal: () => void;
-  onScreen: boolean;
-  animateOut: () => void;
-  animateIn: () => void;
-  setAuthRefreshed: () => void;
-}
+const withRedux = connect(rdxState, rdxDispatch);
 
-const Home: React.FC<HomeProps> = ({
+type props = ConnectedProps<typeof withRedux>;
+
+const Home: React.FC<props> = ({
   setGlobalMessage,
   refreshAuth,
   userInfo,
@@ -99,7 +88,9 @@ const Home: React.FC<HomeProps> = ({
   useEffect(() => {
     //Animation
     animateIn();
-    return () => animateOut();
+    return () => {
+      animateOut();
+    };
   }, [animateIn, animateOut]);
 
   const redirect = (to: string) => {
@@ -189,4 +180,4 @@ const Home: React.FC<HomeProps> = ({
   );
 };
 
-export default connect(rdxState, rdxDispatch)(Home);
+export default withRedux(Home);

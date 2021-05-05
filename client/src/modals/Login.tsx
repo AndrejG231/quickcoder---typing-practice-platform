@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
@@ -18,17 +18,11 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
 });
 
-interface LoginProps {
-  closeModal: () => void;
-  refreshAuth: () => void;
-  setGlobalMessage: (message: string) => void;
-}
+const withRedux = connect(() => ({}), rdxDispatch);
 
-const Login: FC<LoginProps> = ({
-  closeModal,
-  refreshAuth,
-  setGlobalMessage,
-}) => {
+type props = ConnectedProps<typeof withRedux>;
+
+const Login: FC<props> = ({ closeModal, refreshAuth, setGlobalMessage }) => {
   const nav = useHistory();
   const [errors, setErrors] = useErrors();
   const [inputData, setInputData] = useState(
@@ -66,4 +60,4 @@ const Login: FC<LoginProps> = ({
   );
 };
 
-export default connect(() => ({}), rdxDispatch)(Login);
+export default withRedux(Login);

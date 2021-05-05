@@ -19,6 +19,8 @@ const rdxDispatch = (dispatch: any) => {
   };
 };
 
+const withRedux = connect(rdxProps, rdxDispatch);
+
 interface PracticeSelectorProps {
   // className?: string;
   // practiceName: string;
@@ -121,4 +123,4 @@ const PracticeSelector: FC<PracticeSelectorProps> = (
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(PracticeSelector);
+export default withRedux(PracticeSelector);

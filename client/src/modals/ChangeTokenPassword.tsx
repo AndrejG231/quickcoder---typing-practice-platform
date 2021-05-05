@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
@@ -10,11 +10,11 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
 });
 
-interface ChangePasswordProps {
-  closeModal: () => void;
-}
+const withRedux = connect(() => ({}), rdxDispatch);
 
-const ChangeKnownPassword: FC<ChangePasswordProps> = ({ closeModal }) => {
+type props = ConnectedProps<typeof withRedux>;
+
+const ChangeKnownPassword: FC<props> = ({ closeModal }) => {
   const [errors, setErrors] = useErrors();
   const [inputData, setInputData] = useState(
     createInputGroup(
@@ -38,4 +38,4 @@ const ChangeKnownPassword: FC<ChangePasswordProps> = ({ closeModal }) => {
   );
 };
 
-export default connect(() => ({}), rdxDispatch)(ChangeKnownPassword);
+export default withRedux(ChangeKnownPassword);

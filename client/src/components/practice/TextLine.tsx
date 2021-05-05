@@ -17,6 +17,8 @@ const rdxProps = () => {
   };
 };
 
+const withRedux = connect(rdxProps, () => ({}));
+
 interface TextAreaProps {
   index: number;
   string: string;
@@ -52,6 +54,4 @@ const TextLine: React.FC<TextAreaProps> = ({
   );
 };
 
-export default connect(rdxProps, () => {
-  return {};
-})(TextLine);
+export default withRedux(TextLine);

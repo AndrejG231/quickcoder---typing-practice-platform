@@ -1,5 +1,5 @@
 import React, { FC, ReactChild, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { animateIn, animateOut } from "../redux/actions/";
@@ -13,13 +13,6 @@ import {
 } from "./modal/";
 import { NeglectBackground } from "./";
 
-interface ModalProps {
-  children?: ReactChild | ReactChild[];
-  animateIn: () => void;
-  animateOut: () => void;
-  isOnScreen: boolean;
-}
-
 const rdxProps = (state: reduxStore) => ({
   isOnScreen: state.animations.modal,
 });
@@ -29,12 +22,15 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   animateOut: () => dispatch(animateOut("modal")),
 });
 
-const Modal: FC<ModalProps> = ({
-  children,
-  animateIn,
-  animateOut,
-  isOnScreen,
-}) => {
+const withRedux = connect(rdxProps, rdxDispatch);
+
+interface ModalProps {
+  children?: ReactChild | ReactChild[];
+}
+
+type props = ModalProps & ConnectedProps<typeof withRedux>;
+
+const Modal: FC<props> = ({ children, animateIn, animateOut, isOnScreen }) => {
   const nav = useHistory();
 
   useEffect(() => {
@@ -61,4 +57,4 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(Modal);
+export default withRedux(Modal);

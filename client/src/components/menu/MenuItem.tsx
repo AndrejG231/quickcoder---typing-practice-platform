@@ -15,6 +15,8 @@ const rdxDispatch = (dispatch: any) => {
   return {};
 };
 
+const withRedux = connect(rdxProps, rdxDispatch);
+
 interface MenuItemProps {
   // isOpen: { [key in string]: boolean };
   // toggle: (category: string) => void;
@@ -82,4 +84,4 @@ const MenuItem: React.FC<MenuItemProps> = (
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(MenuItem);
+export default withRedux(MenuItem);

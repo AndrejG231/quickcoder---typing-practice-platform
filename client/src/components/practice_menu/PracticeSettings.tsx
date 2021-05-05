@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router";
 import { Dispatch } from "redux";
 import { selectPracticeLength } from "../../redux/actions";
-import { practiceItem, reduxStore } from "../../types";
+import { reduxStore } from "../../types";
 import {
   LengthDecreaseButton,
   LengthIncreaseButton,
@@ -32,14 +32,11 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   setLength: (length: number) => dispatch(selectPracticeLength(length)),
 });
 
-interface PracticeSettingsProps {
-  setLength: (length: number) => void;
-  length: number;
-  selectionString: string;
-  practiceName: string;
-}
+const withRedux = connect(rdxProps, rdxDispatch);
 
-const PracticeSettings: FC<PracticeSettingsProps> = ({
+type props = ConnectedProps<typeof withRedux>;
+
+const PracticeSettings: FC<props> = ({
   length,
   setLength,
   selectionString,
@@ -66,4 +63,4 @@ const PracticeSettings: FC<PracticeSettingsProps> = ({
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(PracticeSettings);
+export default withRedux(PracticeSettings);

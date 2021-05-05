@@ -25,6 +25,8 @@ const rdxDispatch = (dispatch: any) => {
   return {};
 };
 
+const withRedux = connect(rdxProps, rdxDispatch);
+
 const PracticeSummary: FC = (
   {
     // resetPractice,
@@ -117,4 +119,4 @@ const PracticeSummary: FC = (
   );
 };
 
-export default connect(rdxProps, rdxDispatch)(PracticeSummary);
+export default withRedux(PracticeSummary);
