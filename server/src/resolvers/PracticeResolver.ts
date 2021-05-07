@@ -47,7 +47,6 @@ class PracticeResolver {
         result: generateResponse(
           true,
           "getPracticesObject_practice_created",
-          "en"
         ),
         practice: practice.generatedMaps[0],
       };

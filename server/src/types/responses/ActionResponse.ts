@@ -1,11 +1,9 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-class ActionResponse{
+class ActionResponse {
   @Field()
   success: boolean;
-  @Field()
-  action: string;
   @Field()
   info: string;
   @Field()

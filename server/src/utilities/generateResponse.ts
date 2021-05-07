@@ -1,18 +1,11 @@
-import keyList from "../lang/typesKeyList";
-import langList from "../lang/typesLangList";
-import Messages from "../lang/Messages";
+import messages from "../data/messages";
 import ActionResponse from "../types/responses/ActionResponse";
 
-interface genError {
-  (success: boolean, key: keyList, lang: langList): ActionResponse; 
-}
-
-const generateResponse: genError = (success, key, lang) => {
+const generateResponse = (success: boolean, key: string): ActionResponse => {
   return {
-      success: success,
-      action: key.split('_')[0],
-      info: key,
-      message: Messages[lang][key],
+    success: success,
+    info: key,
+    message: messages[key],
   };
 };
 

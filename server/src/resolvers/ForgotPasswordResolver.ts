@@ -19,8 +19,6 @@ import PassTokens from "../entities/PassTokens";
 import Users from "../entities/Users";
 import ActionResponse from "../types/responses/ActionResponse";
 
-const lang = "en";
-
 @Resolver(PassTokens)
 class ForgotPasswordResolver {
   // RETRIEVE FORGOT PASSWORD TOKEN //
@@ -32,17 +30,13 @@ class ForgotPasswordResolver {
     const user = await Users.findOne({ email: email });
 
     if (!user) {
-      return generateResponse(false, "retrievePassword_email_notFound", lang);
+      return generateResponse(false, "retrievePassword_email_notFound");
     }
 
     const token = await generatePasswordRetrieveToken(user, clientInfo);
 
     if (!token) {
-      return generateResponse(
-        false,
-        "retrievePassword_server_unknownError",
-        lang
-      );
+      return generateResponse(false, "retrievePassword_server_unknownError");
     }
 
     const successfulMessage = await sendMail({
@@ -52,14 +46,10 @@ class ForgotPasswordResolver {
     });
 
     if (!successfulMessage) {
-      return generateResponse(
-        false,
-        "retrievePassword_server_unknownError",
-        lang
-      );
+      return generateResponse(false, "retrievePassword_server_unknownError");
     }
 
-    return generateResponse(true, "retrievePassword_resetLink_sent", lang);
+    return generateResponse(true, "retrievePassword_resetLink_sent");
   }
 
   @Mutation(() => ActionResponse)
@@ -71,28 +61,24 @@ class ForgotPasswordResolver {
     try {
       const tokenObject = await PassTokens.findOne({ token: token });
       if (!tokenObject) {
-        return generateResponse(false, "retrievePassword_token_invalid", lang);
+        return generateResponse(false, "retrievePassword_token_invalid");
       }
 
       if (!tokenObject.valid) {
-        return generateResponse(false, "retrievePassword_token_invalid", lang);
+        return generateResponse(false, "retrievePassword_token_invalid");
       }
 
       if (tokenObject.expires_at.getTime() < new Date().getTime()) {
-        return generateResponse(false, "retrievePassword_token_expired", lang);
+        return generateResponse(false, "retrievePassword_token_expired");
       }
 
       const user = await Users.findOne(tokenObject.user_id);
 
       if (!user) {
-        return generateResponse(
-          false,
-          "retrievePassword_server_unknownError",
-          lang
-        );
+        return generateResponse(false, "retrievePassword_server_unknownError");
       }
 
-      const weakPassword = checkPasswordStrength(newPassword, lang);
+      const weakPassword = checkPasswordStrength(newPassword);
 
       if (weakPassword) {
         return weakPassword;
@@ -119,11 +105,11 @@ class ForgotPasswordResolver {
         .where("id = :id", { id: user.id })
         .execute();
 
-      return generateResponse(true, "changePassword_password_changed", lang);
+      return generateResponse(true, "changePassword_password_changed");
       //
     } catch (error) {
       console.log(error);
-      return generateResponse(false, "retrievePassword_token_invalid", lang);
+      return generateResponse(false, "retrievePassword_token_invalid");
     }
   }
 }

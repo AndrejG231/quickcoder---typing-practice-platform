@@ -1,49 +1,48 @@
 import { Request } from "express";
 import getCookieValue from "../getCookieValue";
-import dlog from "../../development/dlog";
 import UserInfoResponse from "src/types/responses/UserInfoResponse";
 import generateResponse from "../generateResponse";
 import Users from "../../entities/Users";
-import LangList from "../../lang/typesLangList"
 import { verify } from "jsonwebtoken";
 
-interface userFromCookie {
-  (req: Request, lang: LangList): Promise<UserInfoResponse>
-}
-
-const getUserFromCookie: userFromCookie = async (req, lang) => {
+const getUserFromCookie = async (req: Request): Promise<UserInfoResponse> => {
   if (!req.headers.cookie) {
-    dlog("COOKIES NOT FOUND", req.headers.cookie);
-
     return {
-      error: generateResponse(false, "getUserInfo_cookies_notFound", lang),
+      error: generateResponse(false, "getUserInfo_cookies_notFound"),
     };
   }
 
   const cookie = getCookieValue(req.headers.cookie, process.env.COOKIE_NAME!);
+  const tokenError = {
+    error: generateResponse(false, "getUserInfo_token_notFound"),
+  };
+  const idKey = process.env.USER_ID!;
 
   //...is there a cookie?
   if (typeof cookie !== "string") {
-    dlog("JWT COOKIE NOT FOUND: ", cookie);
-
-    return {
-      error: generateResponse(false, "getUserInfo_token_notFound", lang),
-    };
+    return tokenError;
   }
 
-  const decodedCookie = verify(cookie, process.env.JWT_KEY!) as any;
+  try {
+    const decodedCookie = verify(cookie, process.env.JWT_KEY!) as any;
+    const userId = decodedCookie[idKey];
 
-  const user = await Users.findOne(decodedCookie[process.env.USER_ID!]);
+    if (!decodedCookie.hasOwnProperty(process.env.USER_ID!)) {
+      return tokenError;
+    }
 
-  if (!user) {
-    dlog("NO USER FIND ON ID: ", decodedCookie[process.env.USER_ID!]);
+    const user = await Users.findOne(userId);
 
-    return {
-      error: generateResponse(false, "getUserInfo_user_notFound", lang),
-    };
+    if (!user) {
+      return {
+        error: generateResponse(false, "getUserInfo_user_notFound"),
+      };
+    }
+
+    return { user: user };
+  } catch (err) {
+    return tokenError;
   }
-
-  return {user: user}
 };
 
 export default getUserFromCookie;
