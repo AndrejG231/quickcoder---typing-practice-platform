@@ -1,22 +1,20 @@
-import PracticeStrings from "../../data/PracticeStrings";
+import practices from "../../data/practices";
 
-interface generatePracticeStringT {
-  (name: string, length: number): string;
-}
+const generatePracticeString = (
+  category: string,
+  practiceIndex: number,
+  length: number
+): string => {
+  let practiceString = "";
 
-const generatePracticeString: generatePracticeStringT = (name, length) => {
-  const [category, practice] = name.split("+") as string[];
-
-  const practices = PracticeStrings[category][practice].parts;
-
-  let finalString = "";
-
-  while (finalString.length < length) {
-    finalString +=
-      practices[Math.floor(Math.random() * practices.length)].trim() + " ";
+  while (practiceString.length < length) {
+    practiceString +=
+      practices[category].items[practiceIndex].parts[
+        Math.floor(Math.random() * practices[category].items.length)
+      ].trim() + " ";
   }
 
-  return finalString.slice(0, length);
+  return practiceString.slice(0, length);
 };
 
 export default generatePracticeString;

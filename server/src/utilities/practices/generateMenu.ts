@@ -1,24 +1,24 @@
-import PracticeStrings, { categoryDesc } from "../../data/PracticeStrings";
+import practices from "../../data/practices";
 import generatePracticeString from "./generatePracticeString";
 import { MenuItem } from "../../types/responses/MenuResponse";
 
 const generateMenu = () => {
   const menu = [];
 
-  for (const category of Object.keys(PracticeStrings)) {
-    const description = categoryDesc[category];
+  for (const [name, category] of Object.entries(practices)) {
     const items: MenuItem[] = [];
 
-    for (const practiceKey of Object.keys(PracticeStrings[category])) {
-      const practice = PracticeStrings[category][practiceKey];
+    for (let i = 0; i < category.items.length; i++) {
+      const practice = category.items[i];
       items.push({
-        name: practiceKey,
+        name: practice.name,
         description: practice.desc,
-        overview: generatePracticeString(`${category}+${practiceKey}`, 15),
+        overview: generatePracticeString(category, i, 15),
+        index: i,
       });
     }
 
-    menu.push({ category, description, items });
+    menu.push({ category: name, description: category.description, items });
   }
 
   return menu;

@@ -1,4 +1,4 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
 export class MenuItem {
@@ -10,6 +10,9 @@ export class MenuItem {
 
   @Field({ nullable: true })
   overview: string;
+
+  @Field(() => Int)
+  index: number;
 }
 
 @ObjectType()
