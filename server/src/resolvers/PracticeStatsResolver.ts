@@ -1,6 +1,6 @@
 import calculatePracticeScore from "../utilities/calculatePracticeScore";
 import { Arg, Ctx, Query, Resolver } from "type-graphql";
-import GraphqlContext from "../types/GraphqlContext";
+import GraphqlContext from "../types/graphqlContext";
 import getUserFromCookie from "../utilities/auth/getUserFromCookie";
 import PracticeStatsResponse, {
   PracticeStat,

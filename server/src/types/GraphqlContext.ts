@@ -1,8 +1,8 @@
-import {Request, Response} from 'express';
+import { Request, Response } from "express";
 
-interface GraphqlContext{
-  res: Response,
-  req: Request,
-}
+type graphqlContext = {
+  res: Response;
+  req: Request;
+};
 
-export default GraphqlContext
+export default graphqlContext;

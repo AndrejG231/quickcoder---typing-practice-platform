@@ -1,4 +1,4 @@
-import RecentPracticeStats from "src/types/RecentPracticeStats";
+import RecentPracticeStats from "src/types/recentPracticeStats";
 import Practices from "../entities/Practices";
 
 interface calcPracticeScore {

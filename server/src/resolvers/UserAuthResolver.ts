@@ -17,7 +17,7 @@ import createAuthCookie from "../utilities/auth/createAuthCookie";
 //Objects//
 ///////////
 
-import GraphqlContext from "../types/GraphqlContext";
+import GraphqlContext from "../types/graphqlContext";
 
 import Users from "../entities/Users";
 

@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import RecentPracticeStats from "../../types/RecentPracticeStats";
+import RecentPracticeStats from "../../types/recentPracticeStats";
 import Practices from "../../entities/Practices";
 
 interface getRecentPractice {

@@ -2,7 +2,7 @@ import { Arg, Ctx, Int, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 
 //types
-import GraphqlContext from "../types/GraphqlContext";
+import GraphqlContext from "../types/graphqlContext";
 import Practices from "../entities/Practices";
 import PracticeInfoResponse from "../types/responses/PracticeInfoResponse";
 import ActionResponse from "../types/responses/ActionResponse";
@@ -34,13 +34,14 @@ class PracticeResolver {
           user_id: -1,
           practice_name: practiceName,
           string: generatePracticeString(practiceName, length),
+          created_at: new Date().getSeconds(),
         })
-        .returning("*")
         .execute();
 
-      res.cookie(`@p${new Date().getTime()}`, practice.raw[0].id, {
+      res.cookie(`@p${new Date().getTime()}`, practice.generatedMaps[0].id, {
         expires: new Date("Tue, 19 Jan 2038 03:14:07 GMT"),
       });
+
 
       return {
         result: generateResponse(
@@ -48,7 +49,7 @@ class PracticeResolver {
           "getPracticesObject_practice_created",
           "en"
         ),
-        practice: practice.raw[0],
+        practice: practice.generatedMaps[0],
       };
     }
     //signed User
@@ -60,9 +61,10 @@ class PracticeResolver {
         user_id: user.id,
         practice_name: practiceName,
         string: generatePracticeString(practiceName, length),
+        created_at: new Date().getSeconds(),
       })
-      .returning("*")
       .execute();
+
 
     return {
       result: generateResponse(
@@ -70,7 +72,7 @@ class PracticeResolver {
         "getPracticesObject_practice_created",
         "en"
       ),
-      practice: practice.raw[0],
+      practice: practice.generatedMaps[0],
     };
   }
   @Mutation(() => ActionResponse)

@@ -1,4 +1,4 @@
-const topWords = [
+[
   "be",
   "and",
   "of",
@@ -302,7 +302,7 @@ const topWords = [
   "once",
   "white",
   "least",
-  "president ",
+  "president",
   "learn",
   "real",
   "change",
@@ -998,7 +998,5 @@ const topWords = [
   "instead",
   "improve",
   "stuff",
-  "claim",
-];
-
-export default topWords;
+  "claim"
+]
