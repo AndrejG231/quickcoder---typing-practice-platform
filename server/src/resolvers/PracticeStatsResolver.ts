@@ -4,7 +4,7 @@ import GraphqlContext from "../types/graphqlContext";
 import getUserFromCookie from "../utilities/auth/getUserFromCookie";
 import PracticeStatsResponse, {
   PracticeStat,
-} from "../types/responses/PracticeScoreResponse";
+} from "../types/responses/practiceScoreResponse";
 import generateResponse from "../utilities/generateResponse";
 import getRecentPracticeStats from "../utilities/practices/getRecentPractices";
 import { getConnection } from "typeorm";

@@ -1,6 +1,6 @@
 import practices from "../../data/practices";
 import generatePracticeString from "./generatePracticeString";
-import { MenuItem } from "../../types/responses/MenuResponse";
+import { MenuItem } from "../../types/responses/menuResponse";
 
 const generateMenu = () => {
   const menu = [];

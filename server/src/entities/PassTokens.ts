@@ -25,9 +25,6 @@ class PassTokens extends BaseEntity {
   @Column()
   expires_at!: Date;
 
-  @Column()
-  client_info!: string;
-
   @Field(() => Int)
   @Column()
   created_at!: number;

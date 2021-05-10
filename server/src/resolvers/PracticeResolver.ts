@@ -5,8 +5,8 @@ import { getConnection } from "typeorm";
 import GraphqlContext from "../types/graphqlContext";
 import Practices from "../entities/Practices";
 import PracticeInfoResponse from "../types/responses/PracticeInfoResponse";
-import ActionResponse from "../types/responses/ActionResponse";
-import PracticeUpdateFields from "../types/arguments/PracticeUpdateFields";
+import ActionResponse from "../types/responses/actionResponse";
+import PracticeUpdateFields from "../types/arguments/practiceUpdateFields";
 
 //utilities
 import generateResponse from "../utilities/generateResponse";

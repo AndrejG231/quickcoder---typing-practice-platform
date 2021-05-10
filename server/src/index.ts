@@ -9,7 +9,7 @@ import express from "express";
 
 import enviromental from "./enviromental";
 import * as entities from "./entities";
-import UserAuthResolver from "./resolvers/UserAuthResolver";
+import UserAuthResolver from "./resolvers/AuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
 import PracticeResolver from "./resolvers/PracticeResolver";
 import PracticeStatsResolver from "./resolvers/PracticeStatsResolver";

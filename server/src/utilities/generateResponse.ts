@@ -1,5 +1,5 @@
 import messages from "../data/messages";
-import ActionResponse from "../types/responses/ActionResponse";
+import ActionResponse from "../types/responses/actionResponse";
 
 const generateResponse = (success: boolean, key: string): ActionResponse => {
   return {

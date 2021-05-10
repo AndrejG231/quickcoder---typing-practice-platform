@@ -1,5 +1,5 @@
 import { Field, Float, Int, ObjectType } from "type-graphql";
-import ActionResponse from "./ActionResponse";
+import ActionResponse from "./actionResponse";
 
 @ObjectType()
 export class PracticeStat {

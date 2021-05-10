@@ -1,6 +1,6 @@
 import { Request } from "express";
 import getCookieValue from "../getCookieValue";
-import UserInfoResponse from "src/types/responses/UserInfoResponse";
+import UserInfoResponse from "src/types/responses/userInfoResponse";
 import generateResponse from "../generateResponse";
 import Users from "../../entities/Users";
 import { verify } from "jsonwebtoken";

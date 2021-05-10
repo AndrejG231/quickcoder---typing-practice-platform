@@ -1,5 +1,5 @@
 import zxcvbn from "zxcvbn";
-import ActionResponse from "../../types/responses/ActionResponse";
+import ActionResponse from "../../types/responses/actionResponse";
 import generateResponse from "../generateResponse";
 
 interface validPassword {

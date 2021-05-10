@@ -4,12 +4,12 @@ import { Request } from "express";
 import { verify } from "jsonwebtoken";
 import Users from "../../entities/Users";
 import LangList from "../../lang/typesLangList";
-import UserInfoResponse from "src/types/responses/UserInfoResponse";
+import UserInfoResponse from "src/types/responses/userInfoResponse";
 
 import dlog from "../../development/dlog";
 
 interface valUserFromCookie {
-  (req: Request, lang: LangList): Promise<UserInfoResponse>;
+  (req: Request): Promise<UserInfoResponse>;
 }
 
 const validateUserFromCookie: valUserFromCookie = async (req, lang) => {

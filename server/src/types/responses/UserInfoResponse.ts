@@ -1,6 +1,6 @@
 import { ObjectType, Field}  from "type-graphql";
 import Users from "../../entities/Users";
-import ActionResponse from "./ActionResponse";
+import ActionResponse from "./actionResponse";
 
 @ObjectType()
 class UserInfoResponse{

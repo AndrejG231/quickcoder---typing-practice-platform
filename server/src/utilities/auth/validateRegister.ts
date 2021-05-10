@@ -4,8 +4,8 @@ import LangList from "../../lang/typesLangList";
 
 import User from "../../entities/Users";
 
-import ActionResponse from "../../types/responses/ActionResponse";
-import RegisterInput from "../../types/arguments/RegisterInput";
+import ActionResponse from "../../types/responses/actionResponse";
+import RegisterInput from "../../types/arguments/registerInput";
 
 import generateResponse from "../generateResponse";
 import checkPasswordStrength from "./checkPasswordStrength";
