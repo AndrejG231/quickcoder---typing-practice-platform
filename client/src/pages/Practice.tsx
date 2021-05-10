@@ -35,8 +35,6 @@ const Practice: React.FC<PracticeProps> = ({}) => {
 
   const [updatePractice] = [(op: any) => null];
 
-  const loadPractice = async () => {};
-
   const handleKeyPress = (e: KeyboardEvent) => {};
 
   const handleUpdatePractice = async () => {};

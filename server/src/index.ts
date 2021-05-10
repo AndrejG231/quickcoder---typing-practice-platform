@@ -1,81 +1,59 @@
-require("dotenv").config();
+import "dotenv/config";
 import "reflect-metadata";
 import cors from "cors";
 
-import { createConnection, getConnection } from "typeorm";
+import { createConnection, ConnectionOptions } from "typeorm";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 
-///////////
-// FILES //
-///////////
-
-//==>Config
-import { SERVER_PORT, PG_SETTING } from "./config";
-//==>Entities
-import Users from "./entities/Users";
-import PassTokens from "./entities/PassTokens";
-import Practices from "./entities/Practices";
-//==>Resolvers
+import enviromental from "./enviromental";
+import * as entities from "./entities";
 import UserAuthResolver from "./resolvers/UserAuthResolver";
 import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
 import PracticeResolver from "./resolvers/PracticeResolver";
 import PracticeStatsResolver from "./resolvers/PracticeStatsResolver";
 import MenuResolver from "./resolvers/MenuResolver";
-import { DevelopmentUserResolver } from "./development/DevelopmentResolver";
-//==>Typess";
 
-//==>Test
-// import runTest from "./tests/test";
+const resolvers: [Function, ...Function[]] = [
+  UserAuthResolver,
+  ForgotPasswordResolver,
+  PracticeResolver,
+  MenuResolver,
+  PracticeStatsResolver,
+];
+
+const connectionOptions: ConnectionOptions = {
+  type: "postgres",
+  host: enviromental.database_host,
+  username: enviromental.database_username,
+  database: enviromental.database_name,
+  password: enviromental.database_password,
+  port: ~~enviromental.database_port,
+  logging: true,
+  synchronize: true,
+  entities: Object.values(entities),
+};
 
 const main = async () => {
-  const entities = [Users, PassTokens, Practices];
-  const resolvers: [Function, ...Function[]] = [
-    UserAuthResolver,
-    ForgotPasswordResolver,
-    PracticeResolver,
-    MenuResolver,
-    PracticeStatsResolver,
-    /* DEV ONLY */ DevelopmentUserResolver,
-  ];
+  await createConnection(connectionOptions);
 
-  /////////
-  //SETUP//
-  /////////
+  const app = express();
 
-  await createConnection({ ...PG_SETTING, entities: entities } as any);
-
-  // await getConnection().createQueryBuilder().delete().from(Users).execute();
-
-  const server = express();
-
-  server.use(
+  app.use(
     cors({
       credentials: true,
       origin: "http://localhost:3000",
     })
   );
 
-  const apolloServer = new ApolloServer({
+  new ApolloServer({
     schema: await buildSchema({ resolvers: resolvers }),
-    context: ({ req, res }) => ({ req, res }),
-  });
+    context: ({ req, res }) => ({ req, res, enviromental }),
+  }).applyMiddleware({ app, cors: false });
 
-  apolloServer.applyMiddleware({ app: server, cors: false });
-
-  /////////
-  //TESTS//
-  /////////
-
-  // runTest("", () => re.test(stg));
-
-  ////////////////
-  //SERVER START//
-  ////////////////
-
-  server.listen(SERVER_PORT, () => {
-    console.log("Server Started on localhost:", SERVER_PORT);
+  app.listen(~~enviromental.server_port, () => {
+    console.log("Server Started on localhost:");
   });
 };
 

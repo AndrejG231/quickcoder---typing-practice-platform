@@ -17,7 +17,7 @@ class PracticeStats {
     @Arg("practiceName") practiceName: string,
     @Ctx() { req }: GraphqlContext
   ) {
-    const userData = await getUserFromCookie(req, "en");
+    const userData = await getUserFromCookie(req);
 
     if (!userData.user) {
       return {
@@ -53,7 +53,7 @@ class PracticeStats {
     }
 
     return {
-      response: generateResponse(true, "practiceStats_stats_retrieved", "en"),
+      response: generateResponse(true, "practiceStats_stats_retrieved"),
       stats: [
         {
           ...practiceScore,
@@ -65,7 +65,7 @@ class PracticeStats {
   }
   @Query(() => PracticeStatsResponse)
   async getUserStats(@Ctx() { req }: GraphqlContext) {
-    const userData = await getUserFromCookie(req, "en");
+    const userData = await getUserFromCookie(req);
 
     if (userData.user?.id === undefined) {
       return {
@@ -94,7 +94,7 @@ class PracticeStats {
     }
 
     return {
-      response: generateResponse(true, "practiceStats_stats_retrieved", "en"),
+      response: generateResponse(true, "practiceStats_stats_retrieved"),
       stats: stats,
     };
   }
