@@ -1,10 +1,12 @@
 import argon2 from "argon2";
 import { Request } from "express";
-import { Users } from "src/entities";
-import checkPasswordStrength from "src/utilities/auth/checkPasswordStrength";
-import getUserFromCookie from "src/utilities/auth/getUserFromCookie";
-import generateResponse from "src/utilities/generateResponse";
 import { getConnection } from "typeorm";
+import { Users } from "../../entities";
+import {
+  checkPasswordStrength,
+  getUserFromCookie,
+  generateResponse,
+} from "../../utilities/";
 
 const changeKnownPassword = async (
   originalPassword: string,

@@ -1,4 +1,4 @@
-import practices from "../../data/practices";
+import practices from "../data/practices";
 
 const generatePracticeString = (
   category: string,

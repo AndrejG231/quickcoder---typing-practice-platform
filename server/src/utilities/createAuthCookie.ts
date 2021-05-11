@@ -1,6 +1,6 @@
 import { sign } from "jsonwebtoken";
 import { Response } from "express";
-import Users from "src/entities/Users";
+import { Users } from "../entities/";
 
 interface createAuthCookie {
   (res: Response, user: Users): boolean;

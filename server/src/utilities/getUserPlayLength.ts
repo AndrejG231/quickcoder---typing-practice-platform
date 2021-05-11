@@ -1,4 +1,4 @@
-import Practices from "../../entities/Practices";
+import { Practices } from "../entities/";
 import { getConnection } from "typeorm";
 
 interface userPlayLength {

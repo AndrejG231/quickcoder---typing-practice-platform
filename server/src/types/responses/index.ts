@@ -1,5 +1,5 @@
 export { default as actionResponse } from "./actionResponse";
-export { default as menuResponse } from "./menuResponse";
+export { MenuItem, default as menuResponse } from "./menuResponse";
 export { default as practiceInfoResponse } from "./practiceInfoResponse";
 export {
   PracticeStat,

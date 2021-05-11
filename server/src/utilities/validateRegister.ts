@@ -1,55 +1,49 @@
 import { validate } from "email-validator";
+import { Users } from "../entities/";
+import { actionResponse } from "../types/responses/";
+import { registerInput } from "../types/arguments/";
 
-import LangList from "../../lang/typesLangList";
-
-import User from "../../entities/Users";
-
-import ActionResponse from "../../types/responses/actionResponse";
-import RegisterInput from "../../types/arguments/registerInput";
-
-import generateResponse from "../generateResponse";
-import checkPasswordStrength from "./checkPasswordStrength";
+import { generateResponse, checkPasswordStrength } from "./";
 
 interface validateReg {
-  (credentials: RegisterInput, lang: LangList): Promise<
-  ActionResponse | undefined>;
+  (credentials: registerInput): Promise<actionResponse | undefined>;
 }
 
-const validateRegister: validateReg = async (credentials, lang) => {
+const validateRegister: validateReg = async (credentials) => {
   //----username validation----//
   const usernameCharTest = /^[a-zA-Z1-9]+$/.test(credentials.username);
   if (!usernameCharTest) {
-    return generateResponse(false, "register_username_specialCharacters", lang)
+    return generateResponse(false, "register_username_specialCharacters");
   }
 
   const usernameLength = credentials.username.length > 3;
-  if(!usernameLength){
-    return generateResponse(false, "register_username_length", lang)
+  if (!usernameLength) {
+    return generateResponse(false, "register_username_length");
   }
 
   //----email validation----//
   if (!validate(credentials.email)) {
-    return generateResponse(false, "register_email_invalid", lang)
+    return generateResponse(false, "register_email_invalid");
   }
 
   //----Unique credentials----//
-  let isEqual: User | undefined = await User.findOne({
+  let isEqual: Users | undefined = await Users.findOne({
     where: { username: credentials.username },
   });
 
   if (isEqual) {
-    return generateResponse(false, "register_username_exists", lang)
+    return generateResponse(false, "register_username_exists");
   }
 
-  isEqual = await User.findOne({ where: { email: credentials.email } });
+  isEqual = await Users.findOne({ where: { email: credentials.email } });
 
   if (isEqual) {
-    return generateResponse(false, "register_email_exists", lang)
+    return generateResponse(false, "register_email_exists");
   }
 
-  const weakPass = checkPasswordStrength(credentials.password, lang)
-  
-  if(weakPass !== false){
+  const weakPass = checkPasswordStrength(credentials.password);
+
+  if (weakPass !== false) {
     return weakPass;
   }
 

@@ -1,7 +1,6 @@
 import argon2 from "argon2";
 import { PassTokens, Users } from "src/entities";
-import checkPasswordStrength from "src/utilities/auth/checkPasswordStrength";
-import generateResponse from "src/utilities/generateResponse";
+import { checkPasswordStrength, generateResponse } from "../../utilities/";
 import { getConnection } from "typeorm";
 
 const changeForgottenPassword = async (token: string, newPassword: string) => {

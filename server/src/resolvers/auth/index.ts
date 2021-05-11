@@ -15,18 +15,21 @@ import { graphqlContext } from "../../types";
 class AuthResolver {
   @Mutation(() => actionResponse)
   async register(@Arg("credentials") credentials: registerInput) {
-    return await register(credentials);
+    const response = await register(credentials);
+    return response;
   }
   @Mutation(() => actionResponse)
   async login(
     @Arg("credentials") credentials: loginInput,
     @Ctx() { res }: graphqlContext
   ) {
-    return await login(credentials, res);
+    const response = await login(credentials, res);
+    return response;
   }
   @Query(() => userInfoResponse)
   async getSignedUser(@Ctx() { req, res }: graphqlContext) {
-    return await getSignedUser(res, req);
+    const response = await getSignedUser(res, req);
+    return response;
   }
   @Mutation(() => actionResponse)
   async changeKnownPassword(
@@ -34,7 +37,12 @@ class AuthResolver {
     @Arg("newPassword") newPassword: string,
     @Ctx() { req }: graphqlContext
   ) {
-    return await changeKnownPassword(originalPassword, newPassword, req);
+    const response = await changeKnownPassword(
+      originalPassword,
+      newPassword,
+      req
+    );
+    return response;
   }
   @Mutation(() => Boolean)
   logout(@Ctx() { res }: graphqlContext) {
@@ -43,14 +51,16 @@ class AuthResolver {
   }
   @Mutation(() => actionResponse)
   async retrievePasswordToken(@Arg("email") email: string) {
-    return await retrievePasswordToken(email);
+    const response = await retrievePasswordToken(email);
+    return response;
   }
   @Mutation(() => actionResponse)
   async changeForgottenPassword(
     @Arg("token") token: string,
     @Arg("newPassword") newPassword: string
   ) {
-    return await changeForgottenPassword(token, newPassword);
+    const response = await changeForgottenPassword(token, newPassword);
+    return response;
   }
 }
 

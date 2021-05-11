@@ -1,8 +1,8 @@
-import RecentPracticeStats from "src/types/recentPracticeStats";
-import Practices from "../entities/Practices";
+import { recentPracticeStats } from "../types/";
+import { Practices } from "../entities/";
 
 interface calcPracticeScore {
-  (practice: Practices | RecentPracticeStats): {
+  (practice: Practices | recentPracticeStats): {
     score: number;
     cpm: number;
     error_rate: number;

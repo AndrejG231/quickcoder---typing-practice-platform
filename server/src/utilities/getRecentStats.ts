@@ -1,28 +1,34 @@
 import { getConnection } from "typeorm";
 import { recentPracticeStats } from "../types";
-import Practices from "../entities/Practices";
+import { Practices } from "../entities/";
 
 interface getRecentPractice {
-  (userId: number, practiceName: string): Promise<recentPracticeStats>;
+  (
+    userId: number,
+    category: string,
+    index: number
+  ): Promise<recentPracticeStats>;
 }
 
 const getRecentPracticeStats: getRecentPractice = async (
   userId,
-  practiceName
+  category,
+  index
 ) => {
   const practices = await getConnection()
     .createQueryBuilder()
     .select("*")
     .from(Practices, "practice")
     .where(
-      "user_id = :userId AND practice_name = :practiceName AND is_finished = true",
+      "user_id = :userId AND category=:category AND practice_index=:practice_index AND is_finished = true",
       {
         userId: userId,
-        practiceName: practiceName,
+        category: category,
+        practice_index: index,
       }
     )
     .orderBy("created_at", "DESC")
-    .limit(20)
+    .limit(10)
     .execute();
 
   const result = {

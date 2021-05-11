@@ -1,5 +1,4 @@
-import PassTokens from "../entities/PassTokens";
-import Users from "../entities/Users";
+import { PassTokens, Users } from "../entities/";
 import { getConnection, InsertResult } from "typeorm";
 import add from "date-fns/add";
 

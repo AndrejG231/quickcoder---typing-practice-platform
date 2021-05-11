@@ -1,11 +1,10 @@
+import argon2 from "argon2";
 import { Response } from "express";
 import { Users } from "src/entities";
-import argon2 from "argon2";
-import LoginInput from "src/types/arguments/LoginInput";
-import createAuthCookie from "src/utilities/auth/createAuthCookie";
-import generateResponse from "src/utilities/generateResponse";
+import { loginInput } from "../../types/arguments/";
+import { createAuthCookie, generateResponse } from "../../utilities/";
 
-const login = async (credentials: LoginInput, res: Response) => {
+const login = async (credentials: loginInput, res: Response) => {
   //resolve user
   const credType = credentials.identification.includes("@")
     ? "email"
