@@ -16,7 +16,10 @@ export class PracticeStat {
   length: number;
 
   @Field({ nullable: true })
-  name: string;
+  category: string;
+
+  @Field(() => Int, { nullable: true })
+  practice_index: number;
 }
 
 @ObjectType()
