@@ -8,7 +8,7 @@ import {
 import { practiceUpdateFields } from "../../types/arguments";
 import { graphqlContext } from "../../types";
 
-import { menu } from "../../utilities/practice";
+import { menu } from "../../utilities/";
 
 import createPractice from "./createPractice";
 import updatePractice from "./updatePractice";

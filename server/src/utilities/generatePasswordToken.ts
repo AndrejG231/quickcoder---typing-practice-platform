@@ -1,15 +1,13 @@
-import PassTokens from "../../entities/PassTokens";
-import Users from "../../entities/Users";
+import PassTokens from "../entities/PassTokens";
+import Users from "../entities/Users";
 import { getConnection, InsertResult } from "typeorm";
 import add from "date-fns/add";
 
 interface genPassRetrieveToken {
-  (user: Users ): Promise<InsertResult>;
+  (user: Users): Promise<InsertResult>;
 }
 
-const generatePasswordRetrieveToken: genPassRetrieveToken = async (
-  user,
-) => {
+const generatePasswordRetrieveToken: genPassRetrieveToken = async (user) => {
   const expirationTime = add(new Date(), { minutes: 15 });
 
   const token = await getConnection()

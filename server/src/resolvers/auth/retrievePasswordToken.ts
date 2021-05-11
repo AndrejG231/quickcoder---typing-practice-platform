@@ -1,7 +1,9 @@
-import { Users } from "src/entities";
-import generatePasswordRetrieveToken from "src/utilities/auth/generatePasswordToken";
-import generateResponse from "src/utilities/generateResponse";
-import sendMail from "src/utilities/sendMail";
+import { Users } from "../../entities";
+import {
+  generatePasswordToken,
+  generateResponse,
+  sendMail,
+} from "../../utilities/";
 
 const retrievePasswordToken = async (email: string) => {
   const user = await Users.findOne({ email: email });
@@ -10,7 +12,7 @@ const retrievePasswordToken = async (email: string) => {
     return generateResponse(false, "retrievePassword_email_notFound");
   }
 
-  const token = await generatePasswordRetrieveToken(user);
+  const token = await generatePasswordToken(user);
 
   if (!token) {
     return generateResponse(false, "retrievePassword_server_unknownError");

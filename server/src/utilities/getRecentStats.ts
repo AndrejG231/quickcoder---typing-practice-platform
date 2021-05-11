@@ -1,6 +1,6 @@
 import { getConnection } from "typeorm";
-import { recentPracticeStats } from "../../types";
-import Practices from "../../entities/Practices";
+import { recentPracticeStats } from "../types";
+import Practices from "../entities/Practices";
 
 interface getRecentPractice {
   (userId: number, practiceName: string): Promise<recentPracticeStats>;

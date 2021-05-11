@@ -1,8 +1,8 @@
 import { Request } from "express";
-import getCookieValue from "../getCookieValue";
-import UserInfoResponse from "src/types/responses/userInfoResponse";
-import generateResponse from "../generateResponse";
-import Users from "../../entities/Users";
+import getCookieValue from "./getCookieValue";
+import UserInfoResponse from "../types/responses/userInfoResponse";
+import generateResponse from "./generateResponse";
+import Users from "../entities/Users";
 import { verify } from "jsonwebtoken";
 
 const getUserFromCookie = async (req: Request): Promise<UserInfoResponse> => {

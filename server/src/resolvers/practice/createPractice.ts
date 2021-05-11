@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { getConnection } from "typeorm";
 import { Practices } from "../../entities";
-import { validateUserFromCookie } from "../../utilities/auth";
-import { generateResponse } from "../../utilities";
-import { generatePracticeString } from "../../utilities/practice";
+import {
+  validateUserFromCookie,
+  generateResponse,
+  generatePracticeString,
+} from "../../utilities";
 
 const createPractice = async (
   category: string,
