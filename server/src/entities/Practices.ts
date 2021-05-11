@@ -10,7 +10,11 @@ class Practices extends BaseEntity {
 
   @Field()
   @Column()
-  practice_name!: string;
+  category!: string;
+
+  @Field()
+  @Column()
+  practice_index!: number;
 
   @Field()
   @Column()

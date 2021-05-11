@@ -1,5 +1,5 @@
 import { Users } from "src/entities";
-import generatePasswordRetrieveToken from "src/utilities/auth/generatePasswordRetrieveToken";
+import generatePasswordRetrieveToken from "src/utilities/auth/generatePasswordToken";
 import generateResponse from "src/utilities/generateResponse";
 import sendMail from "src/utilities/sendMail";
 

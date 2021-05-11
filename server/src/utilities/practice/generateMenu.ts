@@ -2,7 +2,7 @@ import practices from "../../data/practices";
 import generatePracticeString from "./generatePracticeString";
 import { MenuItem } from "../../types/responses/menuResponse";
 
-const generateMenu = () => {
+export const generateMenu = () => {
   const menu = [];
 
   for (const [name, category] of Object.entries(practices)) {
@@ -13,7 +13,7 @@ const generateMenu = () => {
       items.push({
         name: practice.name,
         description: practice.desc,
-        overview: generatePracticeString(category, i, 15),
+        overview: generatePracticeString(name, i, 15),
         index: i,
       });
     }
@@ -24,6 +24,6 @@ const generateMenu = () => {
   return menu;
 };
 
-const Menu = generateMenu();
+const menu = generateMenu();
 
-export default Menu;
+export default menu;

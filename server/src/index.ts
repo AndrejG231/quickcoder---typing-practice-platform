@@ -9,19 +9,7 @@ import express from "express";
 
 import enviromental from "./enviromental";
 import * as entities from "./entities";
-import UserAuthResolver from "./resolvers/AuthResolver";
-import ForgotPasswordResolver from "./resolvers/ForgotPasswordResolver";
-import PracticeResolver from "./resolvers/PracticeResolver";
-import PracticeStatsResolver from "./resolvers/PracticeStatsResolver";
-import MenuResolver from "./resolvers/MenuResolver";
-
-const resolvers: [Function, ...Function[]] = [
-  UserAuthResolver,
-  ForgotPasswordResolver,
-  PracticeResolver,
-  MenuResolver,
-  PracticeStatsResolver,
-];
+import resolvers from "./resolvers";
 
 const connectionOptions: ConnectionOptions = {
   type: "postgres",
@@ -48,7 +36,9 @@ const main = async () => {
   );
 
   new ApolloServer({
-    schema: await buildSchema({ resolvers: resolvers }),
+    schema: await buildSchema({
+      resolvers: resolvers,
+    }),
     context: ({ req, res }) => ({ req, res, enviromental }),
   }).applyMiddleware({ app, cors: false });
 

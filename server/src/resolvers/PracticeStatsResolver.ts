@@ -6,7 +6,7 @@ import PracticeStatsResponse, {
   PracticeStat,
 } from "../types/responses/practiceScoreResponse";
 import generateResponse from "../utilities/generateResponse";
-import getRecentPracticeStats from "../utilities/practices/getRecentPractices";
+import getRecentPracticeStats from "../utilities/practice/getRecentPractices";
 import { getConnection } from "typeorm";
 import Practices from "../entities/Practices";
 
