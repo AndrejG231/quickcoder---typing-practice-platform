@@ -26,6 +26,7 @@
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
+    "postgres": "^1.0.2",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.30",

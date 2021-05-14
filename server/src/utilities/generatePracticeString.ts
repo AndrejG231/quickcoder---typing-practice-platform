@@ -8,10 +8,10 @@ const generatePracticeString = (
   let practiceString = "";
 
   while (practiceString.length < length) {
+    const items = practices[category].items[practiceIndex].parts;
+
     practiceString +=
-      practices[category].items[practiceIndex].parts[
-        Math.floor(Math.random() * practices[category].items.length)
-      ].trim() + " ";
+      items[Math.floor(Math.random() * items.length)].trim() + " ";
   }
 
   return practiceString.slice(0, length);

@@ -1,5 +1,5 @@
-import { Users } from "src/entities";
-import RegisterInput from "src/types/arguments/registerInput";
+import { Users } from "../../entities";
+import RegisterInput from "../../types/arguments/registerInput";
 import { generateResponse, validateRegister } from "../../utilities/";
 import { getConnection } from "typeorm";
 import argon2 from "argon2";

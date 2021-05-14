@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-import { PassTokens, Users } from "src/entities";
+import { PassTokens, Users } from "../../entities";
 import { checkPasswordStrength, generateResponse } from "../../utilities/";
 import { getConnection } from "typeorm";
 

@@ -1,6 +1,6 @@
 import argon2 from "argon2";
 import { Response } from "express";
-import { Users } from "src/entities";
+import { Users } from "../../entities";
 import { loginInput } from "../../types/arguments/";
 import { createAuthCookie, generateResponse } from "../../utilities/";
 

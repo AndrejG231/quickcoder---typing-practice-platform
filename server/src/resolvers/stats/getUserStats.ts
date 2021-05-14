@@ -1,5 +1,5 @@
 import { Request } from "express";
-import getRecentPracticeStats from "src/utilities/getRecentStats";
+import { getRecentStats } from "../../utilities/";
 import { getConnection } from "typeorm";
 import { Practices } from "../../entities";
 import { PracticeStat } from "../../types/responses";
@@ -29,7 +29,7 @@ const getUserStats = async (req: Request) => {
 
   for (let i = 0; i < stats.length; i++) {
     if (stats[i].length >= 500) {
-      const practiceData = await getRecentPracticeStats(
+      const practiceData = await getRecentStats(
         userData.user.id,
         stats[i].category,
         stats[i].practice_index

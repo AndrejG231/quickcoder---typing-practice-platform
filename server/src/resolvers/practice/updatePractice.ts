@@ -1,5 +1,5 @@
-import { Practices } from "src/entities";
-import { generateResponse } from "src/utilities";
+import { Practices } from "../../entities";
+import { generateResponse } from "../../utilities";
 import { getConnection } from "typeorm";
 import { practiceUpdateFields } from "../../types/arguments";
 
