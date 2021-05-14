@@ -48,9 +48,11 @@ const createPractice = async (
     .values({
       user_id: user.id,
       category: category,
-      index: index,
+      index: 0,
+      practice_index: index,
       string: generatePracticeString(category, index, length),
     })
+    .returning("*")
     .execute();
 
   return {
