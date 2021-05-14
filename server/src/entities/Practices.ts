@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
 
 @ObjectType()
@@ -44,9 +44,13 @@ class Practices extends BaseEntity {
   @Column()
   user_id!: number;
 
-  @Field(() => Int)
-  @Column()
-  created_at!: number;
+  @Field(() => String)
+  @CreateDateColumn()
+  createdAt = Date;
+
+  @Field(() => String)
+  @UpdateDateColumn()
+  updatedAt = Date;
 }
 
 export default Practices;

@@ -43,7 +43,7 @@ const main = async () => {
   }).applyMiddleware({ app, cors: false });
 
   app.listen(~~enviromental.server_port, () => {
-    console.log("Server Started on localhost:");
+    console.log("Server Started on localhost: ", enviromental.server_port);
   });
 };
 

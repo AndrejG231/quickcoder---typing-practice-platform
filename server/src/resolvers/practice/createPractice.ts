@@ -28,7 +28,6 @@ const createPractice = async (
         category: category,
         practice_index: index,
         string: generatePracticeString(category, index, length),
-        created_at: new Date().getSeconds(),
       })
       .execute();
 
@@ -51,7 +50,6 @@ const createPractice = async (
       category: category,
       index: index,
       string: generatePracticeString(category, index, length),
-      created_at: new Date().getSeconds(),
     })
     .execute();
 

@@ -1,10 +1,12 @@
-import { Field, Int } from "type-graphql";
+import { Field } from "type-graphql";
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   Generated,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @Entity("passtokens")
@@ -25,9 +27,13 @@ class PassTokens extends BaseEntity {
   @Column()
   expires_at!: Date;
 
-  @Field(() => Int)
-  @Column()
-  created_at!: number;
+  @Field(() => String)
+  @CreateDateColumn()
+  createdAt = Date;
+
+  @Field(() => String)
+  @UpdateDateColumn()
+  updatedAt = Date;
 }
 
 export default PassTokens;
