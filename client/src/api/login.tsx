@@ -5,7 +5,6 @@ const loginMutation = `
   mutation login($credentials: LoginInput!) {
     login(credentials: $credentials) {
       info
-      action
       success
       message
     }

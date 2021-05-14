@@ -15,7 +15,6 @@ export const userInfoQuery = `
       }
       error {
         success
-        action
         info
         message
       }

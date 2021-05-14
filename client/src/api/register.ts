@@ -1,11 +1,10 @@
 import { api, serverError } from "../static";
-import { formError, userInfo, actionResponse } from "../types";
+import { formError, actionResponse } from "../types";
 
 const registerMutation = `
   mutation Register($credentials: RegisterInput!) {
     register(credentials: $credentials) {
       success
-      action
       info
       message
     }
@@ -36,7 +35,6 @@ const register = async ({
     });
 
     const result: actionResponse = data.data.data.register;
-
 
     if (result?.success) {
       onSuccess();

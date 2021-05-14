@@ -23,7 +23,7 @@ const rdxProps = (state: reduxStore) => {
     : "";
   return {
     length: state.practiceSelection.length,
-    selectionString: `${category}+${practiceName}`,
+    selectionString: `c:${category}/i:${practiceName}`,
     practiceName,
   };
 };
@@ -52,7 +52,7 @@ const PracticeSettings: FC<props> = ({
       </LengthSelection>
       {practiceName ? (
         <StartButton
-          onClick={() => nav.push(`/practice/p=${selectionString}/l=${length}`)}
+          onClick={() => nav.push(`/practice/c=${selectionString}/l=${length}`)}
         >
           Start
         </StartButton>

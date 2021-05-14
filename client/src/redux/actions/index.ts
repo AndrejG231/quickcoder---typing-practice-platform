@@ -1,5 +1,6 @@
 export { default as animateIn } from "./animateIn";
 export { default as animateOut } from "./animateOut";
+export { default as closeGlobalMessage } from "./closeGlobalMessage";
 export { default as loadMenu } from "./loadMenu";
 export { default as resetPractice } from "./resetPractice";
 export { default as selectCategory } from "./selectCategory";

@@ -13,7 +13,7 @@ import {
 } from "./header/";
 
 interface HeaderProps {
-  onScreen: boolean;
+  isOnScreen: boolean;
   username: string;
   onUserClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onTitleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -21,12 +21,12 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({
   username,
-  onScreen,
+  isOnScreen,
   onUserClick,
   onTitleClick,
 }) => {
   return (
-    <ArrowsWrapper isOnScreen={onScreen}>
+    <ArrowsWrapper isOnScreen={isOnScreen}>
       <TitleArrow onClick={onTitleClick}>
         <HeaderTitle>QuickCoder</HeaderTitle>
         <TitleUnderline margin />

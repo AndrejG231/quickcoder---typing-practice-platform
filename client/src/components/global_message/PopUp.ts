@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface props {
-  onScreen: boolean;
+  isOnScreen: boolean;
 }
 
 const PopUp = styled.div`
@@ -22,8 +22,8 @@ const PopUp = styled.div`
     height: 120px;
     padding: 10px;
   }
-  ${({ onScreen }: props) =>
-    `transform: translateY(${onScreen ? 0 : "140px"})`};
+  ${({ isOnScreen }: props) =>
+    `transform: translateY(${isOnScreen ? 0 : "180px"})`};
 `;
 
 export default PopUp;

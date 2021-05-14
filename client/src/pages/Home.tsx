@@ -33,7 +33,7 @@ const rdxState = (state: reduxStore) => {
     userInfo: state.authentication.user,
     awaitingAuth: state.authentication.awaitingAuth,
     isModalOpened: state.animations.modal,
-    onScreen: state.animations.home,
+    isOnScreen: state.animations.home,
   };
 };
 
@@ -63,7 +63,7 @@ const Home: React.FC<props> = ({
   awaitingAuth,
   isModalOpened,
   closeModal,
-  onScreen,
+  isOnScreen,
   animateOut,
   animateIn,
   setAuthRefreshed,
@@ -126,7 +126,7 @@ const Home: React.FC<props> = ({
   return (
     <HomeContainer>
       <Header
-        onScreen={onScreen}
+        isOnScreen={isOnScreen}
         onUserClick={() => {
           navigation.push("/home/profile/");
         }}
@@ -139,7 +139,7 @@ const Home: React.FC<props> = ({
             : "GUEST"
         }`}
       />
-      <NavWrapper isOnScreen={onScreen}>
+      <NavWrapper isOnScreen={isOnScreen}>
         <ClippedButton onClick={() => null}>
           <MenuItem>Typing test</MenuItem>
         </ClippedButton>
@@ -153,13 +153,13 @@ const Home: React.FC<props> = ({
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
       {userInfo?.username ? (
-        <UserButtonWrapper isOnScreen={onScreen}>
+        <UserButtonWrapper isOnScreen={isOnScreen}>
           <ArrowButton width={100} onClick={userLogout} left>
             <UserAction>Logout</UserAction>
           </ArrowButton>
         </UserButtonWrapper>
       ) : (
-        <UserButtonWrapper isOnScreen={onScreen}>
+        <UserButtonWrapper isOnScreen={isOnScreen}>
           <ArrowButton
             width={130}
             onClick={() => navigation.push("/home/signup/")}
