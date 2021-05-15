@@ -1,56 +1,52 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
+import { reduxStore } from "../../types";
 
-import FormattedPracticeString from "./FormattedPracticeString";
+import {
+  TextArea,
+  Text,
+  Cursor,
+  Done,
+  Comming,
+  Error,
+  Current,
+} from "./textline/";
 
-//types
-// import { Errors } from "../../types/practice/PracticeT";
-// import { ReduxState } from "../../types/reduxStore";
-
-//styles
-
-const rdxProps = () => {
-  return {
-    // index: state.Practice.index, string: state.Practice.string,
-    // errors: state.Practice.errors,
-    // offset: state.PracticeOffset,
-  };
-};
+const rdxProps = (state: reduxStore) => ({
+  practice: state.practice,
+});
 
 const withRedux = connect(rdxProps, () => ({}));
 
-interface TextAreaProps {
-  index: number;
-  string: string;
-  offset: number;
-  // errors: Errors;
-}
+type props = ConnectedProps<typeof withRedux>;
 
-const TextLine: React.FC<TextAreaProps> = ({
-  index,
-  string,
-  offset,
-  // errors,
-}) => {
+const TextLine: React.FC<props> = ({ practice }) => {
   let lastError = 0;
+  if (!practice) {
+    return <div>Error...</div>;
+  }
+  console.log(practice);
   return (
-    <div className="textLine-container">
-      {/* <div className="textLine-text-container">
-        <div
-          className="textLine-string"
-          style={{ transform: `translateX(-${offset}px)` }}
-        >
-          <FormattedPracticeString
-            errors={errors}
-            string={string}
-            index={index}
-          />
-        </div>
-      </div>
-      <div className="textLine-cover left" />
-      <div className="textLine-cover right" />
-      <div className="textLine-marker">^</div> */}
-    </div>
+    <TextArea>
+      <Text offset={practice.index ?? 0}>
+        {Object.keys(practice?.errors).map((errIndex, i) => {
+          const prevError = lastError;
+          lastError = ~~errIndex;
+          return (
+            <Done>
+              {practice.string.slice(prevError, lastError)}
+              <Error>{practice.errors[lastError]}</Error>
+            </Done>
+          );
+        })}
+        <Done>{practice.string.slice(lastError, practice.index)}</Done>
+        <Current>{practice.string[practice.index]}</Current>
+        <Comming>
+          {practice.string.slice(practice.index + 1, practice.string.length)}
+        </Comming>
+      </Text>
+      <Cursor>^</Cursor>
+    </TextArea>
   );
 };
 

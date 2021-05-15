@@ -48,7 +48,10 @@ const createPractice = async ({
     const result = data.data.data.createPractice;
 
     if (result?.result?.success) {
-      onSuccess(result.practice);
+      onSuccess({
+        ...result.practice,
+        errors: JSON.parse(result.practice.errors),
+      });
     } else {
       onError();
     }
