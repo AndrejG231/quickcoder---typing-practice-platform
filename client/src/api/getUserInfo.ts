@@ -1,7 +1,7 @@
 import { actionResponse, userInfo } from "../types";
 import { api } from "../static";
 
-export const userInfoQuery = `
+const userInfoQuery = `
   query getSignedUser {
     getSignedUser{
       user {

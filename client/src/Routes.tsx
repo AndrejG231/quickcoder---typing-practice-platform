@@ -40,7 +40,7 @@ const Routes: React.FC = () => {
       />
       <Route
         exact
-        path="/practice/c=:category/i=:index/l=:practiceLength"
+        path="/practice/c=:category/i=:index/l=:length"
         component={() => <Practice />}
       />
       <Route

@@ -1,7 +1,7 @@
 import { api } from "../static";
 import { practiceMenu } from "../types/";
 
-export const userInfoQuery = `
+const userInfoQuery = `
   query getMenu {
     getMenu {
       category

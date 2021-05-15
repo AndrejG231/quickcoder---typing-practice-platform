@@ -29,6 +29,7 @@ const createPractice = async (
         practice_index: index,
         string: generatePracticeString(category, index, length),
       })
+      .returning("*")
       .execute();
 
     res.cookie(`@p${new Date().getTime()}`, practice.generatedMaps[0].id, {
