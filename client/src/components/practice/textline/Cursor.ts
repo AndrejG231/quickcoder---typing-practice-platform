@@ -7,7 +7,6 @@ const Cursor = styled.p`
     bottom: -30px;
     font-size: 30px;
     font-weight: 800;
-    background: green;
   `}
 `;
 

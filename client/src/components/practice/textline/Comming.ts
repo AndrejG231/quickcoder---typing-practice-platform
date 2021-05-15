@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const Coming = styled.span`
   ${({ theme }) => `
-    color: ${theme.colors.w3};
+    color: ${theme.colors.w2};
+    font-weight: 400;
   `}
 `;
 

@@ -12,7 +12,10 @@ const Text = styled.div`
     line-height: 80px;
     font-size: 35px;
     font-family: monospace;
-    transform: translateX(-${17.5 * offset}px);
+    transition: 0.1s all linear;
+    white-space: pre;
+    transform: translateX(-${19.243 * offset}px);
+    position: absolute;
   `};
 `;
 
