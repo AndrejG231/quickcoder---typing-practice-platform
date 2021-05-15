@@ -10,6 +10,7 @@ export const userInfoQuery = `
         name
         description
         overview
+        index
       }
     }
   } 

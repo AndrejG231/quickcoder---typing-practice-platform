@@ -26,11 +26,11 @@ interface PracticeProps {}
 const Practice: React.FC<PracticeProps> = ({}) => {
   const navigator = useHistory();
   const {
-    practiceCode,
-    practiceLength,
+    category,
+    index,
   }: {
-    practiceCode: string;
-    practiceLength: string;
+    category: string;
+    index: string;
   } = useParams();
 
   const [updatePractice] = [(op: any) => null];

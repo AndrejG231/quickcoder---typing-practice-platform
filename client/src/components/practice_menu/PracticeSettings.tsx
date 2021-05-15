@@ -18,13 +18,15 @@ const rdxProps = (state: reduxStore) => {
     state.practiceMenu.length > 0
       ? state.practiceMenu[state.practiceSelection.selectedCategory].category
       : "";
-  const practiceName = state.practiceSelection.selectedPractice
-    ? state.practiceSelection.selectedPractice.name
+  const practice = state.practiceSelection.selectedPractice
+    ? state.practiceSelection.selectedPractice
     : "";
   return {
     length: state.practiceSelection.length,
-    selectionString: `c:${category}/i:${practiceName}`,
-    practiceName,
+    selectionString:
+      category && practice ? `c=${category}/i=${practice.index}` : "",
+    category,
+    practice,
   };
 };
 
@@ -37,10 +39,11 @@ const withRedux = connect(rdxProps, rdxDispatch);
 type props = ConnectedProps<typeof withRedux>;
 
 const PracticeSettings: FC<props> = ({
+  category,
+  practice,
   length,
   setLength,
   selectionString,
-  practiceName,
 }) => {
   const nav = useHistory();
   return (
@@ -50,9 +53,9 @@ const PracticeSettings: FC<props> = ({
         <LengthDisplay>{length}</LengthDisplay>
         <LengthIncreaseButton size={22} onClick={() => setLength(1)} />
       </LengthSelection>
-      {practiceName ? (
+      {selectionString ? (
         <StartButton
-          onClick={() => nav.push(`/practice/c=${selectionString}/l=${length}`)}
+          onClick={() => nav.push(`/practice/${selectionString}/l=${length}`)}
         >
           Start
         </StartButton>
