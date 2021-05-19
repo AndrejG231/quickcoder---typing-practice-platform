@@ -1,9 +1,20 @@
 # QuickCoder.com
 Fullstack app focused on typing practice.
 
-## Version 1:
-Working authentication, typing sessions, score validation.    
-### Stack:
-- React, Sass StyleSheets, Apollo Client, Redux
-- TypeGraphql, Typeorm, JWT, PostgreSQL
+## Version 2:
+- typescript
+- react/Create react app
+- redux
+- styled-components
+- axios
+- express/apollo-server-express
+- typegraphql
+- typeorm
+- postgres
+
+#### Changes from previous versions:
+- **API/FETCHING** - Migrated from apollo-client to axios => better interaction with redux, faster development
+- **STYLES** - Sass stylesheets replaced with Styled Components => improved conditional/prop styles, cleaner code structure
+- **RESOLVERS** - Separated files for every mutation/query.
+- **CODE ASPECT** - Multiple code refractors, index files, better folder structure
 
