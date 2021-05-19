@@ -5,8 +5,11 @@ import { connect, ConnectedProps } from "react-redux";
 import { practiceObject, reduxStore, schemeCharacters } from "../types";
 import { setPractice } from "../redux/actions";
 import { createPractice } from "../api";
-import { Wrapper, Textline } from "../components/practice";
-import { HandlePracticeProgress } from "../utilites";
+
+import { Wrapper, Textline, Keyboard } from "../components/practice";
+import { handlePracticeProgress } from "../utilites";
+
+import {us} from "../static/layouts";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
@@ -37,7 +40,12 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
     console.log(practice?.errors_count, practice?.errors);
     if (practice) {
       setPractice(
-        HandlePracticeProgress(event.key as schemeCharacters, practice)
+        handlePracticeProgress(
+          event.key as schemeCharacters,
+          practice,
+          () => null,
+          () => null
+        )
       );
     }
   };
@@ -52,7 +60,7 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
         onError: () => null,
       });
     }
-  }, []);
+  }, [practice]);
 
   useEffect(() => {
     document.addEventListener("keypress", handleKeyPress);
@@ -66,6 +74,7 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
   return (
     <Wrapper>
       <Textline />
+      <Keyboard layout={us} next={practice.string[practice.index + 1]}/>
       {/* <FingerIndex width={window.innerWidth > 1580 ? 1000 : 800} />
       <TextLine />
       <KeyBoard

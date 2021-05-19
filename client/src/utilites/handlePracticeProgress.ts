@@ -1,8 +1,10 @@
 import { practiceObject, schemeCharacters } from "../types";
 
-const HandlePracticeProgress = (
+const handlePracticeProgress = (
   keyPressed: schemeCharacters,
-  state: practiceObject
+  state: practiceObject,
+  update: (practice: practiceObject) => void,
+  onfinish: () => void
 ): practiceObject => {
   //matched case
   if (keyPressed === state.string[state.index]) {
@@ -46,4 +48,4 @@ const HandlePracticeProgress = (
   };
 };
 
-export default HandlePracticeProgress;
+export default handlePracticeProgress;

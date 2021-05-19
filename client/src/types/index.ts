@@ -10,3 +10,5 @@ export type { default as practiceItem } from "./practiceItem";
 export type { default as practiceMenu } from "./practiceMenu";
 export type { default as practiceObject } from "./practiceObject";
 export type { default as reduxStore } from "./reduxStore";
+export type { default as keyboardLayout } from "./keyboardLayout";
+export type { default as keyboardMap } from "./keyboardMap";
