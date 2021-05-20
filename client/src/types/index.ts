@@ -12,3 +12,4 @@ export type { default as practiceObject } from "./practiceObject";
 export type { default as reduxStore } from "./reduxStore";
 export type { default as keyboardLayout } from "./keyboardLayout";
 export type { default as keyboardMap } from "./keyboardMap";
+export type { default as fingerKeys } from "./fingerKeys";

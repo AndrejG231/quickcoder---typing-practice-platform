@@ -1,34 +1,20 @@
-import { schemeCharacters } from ".";
+import { schemeCharacters, fingerKeys } from ".";
+
+type rows = "r1" | "r2" | "r3" | "r4" | "r5";
 
 type keyboardLayout = {
-  r1: ({
-    char: schemeCharacters;
-    ratio?: undefined;
-  } | {
-    char: schemeCharacters;
-    ratio: number;
-  })[];
-  r2: ({
-    char: schemeCharacters;
-    ratio: number;
-  } | {
-    char: schemeCharacters;
-    ratio?: undefined;
-  })[];
-  r3: ({
-    char: schemeCharacters;
-    ratio: number;
-  } | {
-    char: schemeCharacters;
-    ratio?: undefined;
-  })[];
-  r4: ({
-    char: schemeCharacters;
-    ratio: number;
-  } | {
-    char: schemeCharacters;
-    ratio?: undefined;
-  })[];
-}
+  [key in rows]: (
+    | {
+        finger: fingerKeys;
+        char: schemeCharacters;
+        ratio?: undefined;
+      }
+    | {
+        finger: fingerKeys;
+        char: schemeCharacters;
+        ratio: number;
+      }
+  )[];
+};
 
 export default keyboardLayout;

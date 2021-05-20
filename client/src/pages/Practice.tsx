@@ -9,7 +9,7 @@ import { createPractice } from "../api";
 import { Wrapper, Textline, Keyboard } from "../components/practice";
 import { handlePracticeProgress } from "../utilites";
 
-import {us} from "../static/layouts";
+import { us } from "../static/layouts";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
@@ -37,7 +37,6 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
   } = useParams();
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    console.log(practice?.errors_count, practice?.errors);
     if (practice) {
       setPractice(
         handlePracticeProgress(
@@ -74,7 +73,7 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
   return (
     <Wrapper>
       <Textline />
-      <Keyboard layout={us} next={practice.string[practice.index + 1]}/>
+      <Keyboard keyboard={"us"} next={practice.string[practice.index]} />
       {/* <FingerIndex width={window.innerWidth > 1580 ? 1000 : 800} />
       <TextLine />
       <KeyBoard
