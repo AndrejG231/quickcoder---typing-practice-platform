@@ -1,49 +1,30 @@
-import React from "react";
-// import { ColorScheme } from "../../static/contents_keyboard/";
+import React, { FC } from "react";
+import { keyColors } from "../../static";
+import { schemeCharacters } from "../../types";
+import { useNextColors } from "../../utilites";
 
-interface FingerIndexPorps {
-  className?: string;
-  width: number;
+import { FiContainer, FingerTag } from "./finger_index";
+
+interface props {
+  next: string;
+  layout: string;
 }
 
-export const FingerIndex: React.FC<FingerIndexPorps> = ({
-  width,
-  className = "",
-}) => {
+const FingerIndex: FC<props> = ({ next, layout }) => {
+  const nextColors = useNextColors(layout, next as schemeCharacters);
+
   return (
-    <div
-      className={`fingerIndex-container ${className}`}
-      style={{ width: width }}
-    >
-      {/* <div className="fingerIndex-hand left">
-        <div className="finger" style={{ background: ColorScheme["L1"] }}>
-          Pinky
-        </div>
-        <div className="finger" style={{ background: ColorScheme["L2"] }}>
-          Ring
-        </div>
-        <div className="finger" style={{ background: ColorScheme["L3"] }}>
-          Middle
-        </div>
-        <div className="finger" style={{ background: ColorScheme["L4"] }}>
-          Index
-        </div>
-      </div>
-      <div className="fingerIndex-hand right">
-        <div className="finger" style={{ background: ColorScheme["R1"] }}>
-          Pinky
-        </div>
-        <div className="finger" style={{ background: ColorScheme["R2"] }}>
-          Ring
-        </div>
-        <div className="finger" style={{ background: ColorScheme["R3"] }}>
-          Middle
-        </div>
-        <div className="finger" style={{ background: ColorScheme["R4"] }}>
-          Index
-        </div>
-      </div> */}
-    </div>
+    <FiContainer>
+      {Object.entries(keyColors).map(([key, color], index) => (
+        <FingerTag
+          key={index}
+          color={color}
+          highlight={nextColors.indexOf(key) > -1}
+        >
+          {key}
+        </FingerTag>
+      ))}
+    </FiContainer>
   );
 };
 

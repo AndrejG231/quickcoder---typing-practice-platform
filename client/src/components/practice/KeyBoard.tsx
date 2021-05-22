@@ -9,7 +9,7 @@ import keymaps from "../../static/keymaps";
 
 interface props {
   keyboard: string;
-  next: string;
+  next: schemeCharacters;
 }
 
 const Keyboard: FC<props> = ({ keyboard, next }) => {
@@ -25,11 +25,7 @@ const Keyboard: FC<props> = ({ keyboard, next }) => {
                 <Key
                   ratio={key.ratio}
                   key={10 * i}
-                  selected={
-                    keymaps[keyboard][next as schemeCharacters].indexOf(
-                      key.char
-                    ) > -1
-                  }
+                  selected={keymaps[keyboard][next].indexOf(key.char) > -1}
                   color={keyColors[key.finger]}
                 >
                   {key.char}

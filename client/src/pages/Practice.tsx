@@ -10,6 +10,7 @@ import { Wrapper, Textline, Keyboard } from "../components/practice";
 import { handlePracticeProgress } from "../utilites";
 
 import { us } from "../static/layouts";
+import FingerIndex from "../components/practice/FingerIndex";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
@@ -72,8 +73,12 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
 
   return (
     <Wrapper>
+      <FingerIndex layout={"us"} next={practice.string[practice.index] as c} />
       <Textline />
-      <Keyboard keyboard={"us"} next={practice.string[practice.index]} />
+      <Keyboard
+        keyboard={"us"}
+        next={practice.string[practice.index] as schemeCharacters}
+      />
       {/* <FingerIndex width={window.innerWidth > 1580 ? 1000 : 800} />
       <TextLine />
       <KeyBoard
