@@ -6,7 +6,7 @@ import { useNextColors } from "../../utilites";
 import { FiContainer, FingerTag } from "./finger_index";
 
 interface props {
-  next: string;
+  next: schemeCharacters;
   layout: string;
 }
 
