@@ -41,6 +41,8 @@ const Stats: FC<props> = ({ practice }) => {
             ((new Date().getTime() - practice.start_time) / 60000)
         )}
       </Value>
+      <Name index={6}>Last Error:</Name>
+      <Value index={6}>{practice.last_error}</Value>
     </StatContainer>
   );
 };

@@ -80,6 +80,7 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
       <Keyboard
         keyboard={"us"}
         next={practice.string[practice.index] as schemeCharacters}
+        lastError={practice.last_error as schemeCharacters}
       />
       <Stats practice={practice} />
     </Wrapper>

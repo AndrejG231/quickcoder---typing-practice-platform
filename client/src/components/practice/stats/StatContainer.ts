@@ -7,9 +7,9 @@ const StatContainer = styled.div`
      align-items: center;
      background: ${theme.colors.b4};
      grid-template: 
-       "title1 title2 title3 title4 title5" 1fr
-       "value1 value2 value3 value4 value5" 1fr
-       / 1fr 1fr 1fr 1fr 1fr;
+       "title1 title2 title3 title4 title5 title6" 1fr
+       "value1 value2 value3 value4 value5 value6" 1fr
+       / 1fr 1fr 1fr 1fr 1fr 1fr;
     color: ${theme.colors.w5};
     text-align: center;
     border-radius: 20px;

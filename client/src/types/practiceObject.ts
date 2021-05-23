@@ -10,6 +10,7 @@ type practiceObject = {
   is_active: boolean;
   is_finished: boolean;
   start_time: number;
+  time_spent: number;
 };
 
 export default practiceObject;

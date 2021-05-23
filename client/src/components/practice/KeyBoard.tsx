@@ -10,9 +10,10 @@ import keymaps from "../../static/keymaps";
 interface props {
   keyboard: string;
   next: schemeCharacters;
+  lastError: schemeCharacters;
 }
 
-const Keyboard: FC<props> = ({ keyboard, next }) => {
+const Keyboard: FC<props> = ({ keyboard, next, lastError }) => {
   const layout = layouts[keyboard];
 
   return (
@@ -27,6 +28,7 @@ const Keyboard: FC<props> = ({ keyboard, next }) => {
                   key={10 * i}
                   selected={keymaps[keyboard][next].indexOf(key.char) > -1}
                   color={keyColors[key.finger]}
+                  error={keymaps[keyboard][lastError].indexOf(key.char) > -1}
                 >
                   {key.char}
                 </Key>

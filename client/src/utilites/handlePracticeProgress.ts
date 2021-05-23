@@ -4,27 +4,35 @@ const handlePracticeProgress = (
   keyPressed: schemeCharacters,
   state: practiceObject,
   update: (practice: practiceObject) => void,
-  onfinish: () => void
+  onFinish: (practice: practiceObject) => void
 ): practiceObject => {
   //matched case
   if (keyPressed === state.string[state.index]) {
     const newIndex = state.index + 1;
     //Finished pracice
     if (newIndex === state.string.length) {
-      return {
+      const newPractice: practiceObject = {
         ...state,
         is_active: false,
         is_finished: true,
-        index: newIndex,
         last_error: "",
+        time_spent: new Date().getTime() - state.start_time,
+        start_time: -1,
       };
+
+      onFinish({
+        ...newPractice,
+        index: newIndex,
+      });
+
+      return newPractice;
     }
     //Continue practice
     return {
       ...state,
       index: newIndex,
       last_error: "",
-      start_time: state.index === 0 ? new Date().getTime() : state.start_time,
+      start_time: state.index > 0 ? new Date().getTime() : state.start_time,
     };
   }
   // bad key case
