@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { keyColors } from "../../static";
-import { schemeCharacters } from "../../types";
+import { fingerKeys, schemeCharacters } from "../../types";
 import { useNextColors } from "../../utilites";
 
 import { FiContainer, FingerTag } from "./finger_index";
@@ -15,15 +15,17 @@ const FingerIndex: FC<props> = ({ next, layout }) => {
 
   return (
     <FiContainer>
-      {Object.entries(keyColors).map(([key, color], index) => (
-        <FingerTag
-          key={index}
-          color={color}
-          highlight={nextColors.indexOf(key) > -1}
-        >
-          {key}
-        </FingerTag>
-      ))}
+      {["l1", "l2", "l3", "l4", "space", "r4", "r3", "r2", "r1"].map(
+        (key, index) => (
+          <FingerTag
+            key={index}
+            color={keyColors[key as fingerKeys]}
+            highlight={nextColors.indexOf(key) > -1}
+          >
+            {key}
+          </FingerTag>
+        )
+      )}
     </FiContainer>
   );
 };

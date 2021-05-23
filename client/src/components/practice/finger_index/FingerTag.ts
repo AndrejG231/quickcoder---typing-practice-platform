@@ -19,6 +19,9 @@ const FingerTag = styled.div`
     font-size: 15px;
     line-height: 40px;
     text-align: center;
+    text-transform: capitalize;
+    color: ${theme.colors.b5};
+    font-weight: 600;
   `}
 `;
 

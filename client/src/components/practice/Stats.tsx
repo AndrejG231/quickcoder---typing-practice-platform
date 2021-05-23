@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { practiceObject } from "../../types";
 import { Name, StatContainer, Value } from "./stats/";
 import { msToTime } from "../../utilites";
@@ -8,6 +8,13 @@ interface props {
 }
 
 const Stats: FC<props> = ({ practice }) => {
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date().getTime()), 100);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <StatContainer>
       <Name index={1}>Time:</Name>
@@ -22,7 +29,10 @@ const Stats: FC<props> = ({ practice }) => {
       <Value index={3}>{Object.keys(practice.errors).length}</Value>
       <Name index={4}>Error rate:</Name>
       <Value index={4}>
-        {(Object.keys(practice.errors).length / practice.index) * 100}%
+        {((Object.keys(practice.errors).length / practice.index) * 100).toFixed(
+          2
+        )}
+        %
       </Value>
       <Name index={5}>CPM:</Name>
       <Value index={5}>
