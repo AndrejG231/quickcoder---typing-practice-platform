@@ -4,7 +4,7 @@ import { updatePractice } from "../api";
 const handlePracticeProgress = (
   keyPressed: schemeCharacters,
   state: practiceObject,
-  onFinish: (practice: practiceObject) => void
+  onFinish: () => void
 ): practiceObject => {
   //matched case
   if (keyPressed === state.string[state.index]) {
@@ -12,21 +12,27 @@ const handlePracticeProgress = (
     //Finished pracice
 
     if (newIndex === state.string.length) {
-      const newPractice: practiceObject = {
-        ...state,
-        is_active: false,
-        is_finished: true,
-        last_error: "",
-        time_spent: new Date().getTime() - state.start_time,
-        start_time: -1,
-      };
-
-      onFinish({
-        ...newPractice,
-        index: newIndex,
+      updatePractice({
+        practiceUpdateFields: {
+          errors: JSON.stringify(state.errors),
+          errors_count: state.errors_count,
+          index: newIndex,
+          is_finished: true,
+          time_spent:
+            state.time_spent + new Date().getTime() - state.start_time,
+        },
+        id: state.id,
       });
 
-      return newPractice;
+      onFinish();
+
+      return {
+        ...state,
+        index: state.index,
+        last_error: "",
+        time_spent: state.time_spent + new Date().getTime() - state.start_time,
+        start_time: new Date().getTime(),
+      };
     }
     //Continue practice
     if (newIndex % 50 === 0 && newIndex > 49 && state.start_time) {
@@ -47,7 +53,7 @@ const handlePracticeProgress = (
         index: newIndex,
         last_error: "",
         time_spent: state.time_spent + new Date().getTime() - state.start_time,
-        start_time: new Date().getTime(),
+        start_time: 0,
       };
     }
 

@@ -41,10 +41,8 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
   const handleKeyPress = (event: KeyboardEvent) => {
     if (practice) {
       setPractice(
-        handlePracticeProgress(
-          event.key as schemeCharacters,
-          practice,
-          () => null
+        handlePracticeProgress(event.key as schemeCharacters, practice, () =>
+          navigator.push(`/practice/finished/id=${practice.id}`)
         )
       );
     }
