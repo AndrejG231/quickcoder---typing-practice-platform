@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { practiceObject, reduxStore, schemeCharacters } from "../types";
 import { setPractice } from "../redux/actions";
-import { createPractice } from "../api";
+import { loadPractice } from "../api";
 
 import { Wrapper, Textline, Keyboard, Stats } from "../components/practice";
 import { handlePracticeProgress } from "../utilites";
@@ -26,15 +26,17 @@ type props = ConnectedProps<typeof withRedux> & {};
 const Practice: React.FC<props> = ({ practice, setPractice }) => {
   const navigator = useHistory();
 
-  const {
-    category,
-    index,
-    length,
-  }: {
-    category: string;
-    index: string;
-    length: string;
-  } = useParams();
+  const { id }: { id: string } = useParams();
+
+  useEffect(() => {
+    if (practice?.id !== ~~id) {
+      loadPractice({
+        id: ~~id,
+        onSuccess: (pract: practiceObject) => setPractice(pract),
+        onError: () => null,
+      });
+    }
+  }, [practice, id]);
 
   const handleKeyPress = (event: KeyboardEvent) => {
     if (practice) {
@@ -42,7 +44,6 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
         handlePracticeProgress(
           event.key as schemeCharacters,
           practice,
-          () => null,
           () => null
         )
       );
@@ -50,23 +51,11 @@ const Practice: React.FC<props> = ({ practice, setPractice }) => {
   };
 
   useEffect(() => {
-    if (!practice) {
-      createPractice({
-        category,
-        index: ~~index,
-        length: ~~length,
-        onSuccess: setPractice,
-        onError: () => null,
-      });
-    }
-  }, [practice]);
-
-  useEffect(() => {
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);
   });
 
-  if (!practice) {
+  if (!practice || practice?.id !== ~~id) {
     return <div>Loading....</div>;
   }
 

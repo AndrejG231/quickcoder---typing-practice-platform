@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
+import CreatePractice from "./pages/CreatePractice";
 import PracticeSummary from "./pages/PracticeSummary";
 
 //modals
@@ -40,7 +41,12 @@ const Routes: React.FC = () => {
       />
       <Route
         exact
-        path="/practice/c=:category/i=:index/l=:length"
+        path="/create_practice/c=:category/i=:index/l=:length"
+        component={() => <CreatePractice />}
+      />
+      <Route
+        exact
+        path="/practice/in_progress/id=:id/"
         component={() => <Practice />}
       />
       <Route

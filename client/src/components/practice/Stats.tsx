@@ -15,14 +15,16 @@ const Stats: FC<props> = ({ practice }) => {
     return () => clearInterval(timer);
   }, []);
 
+  const totalTimeSpend = practice.start_time
+    ? new Date().getTime() - practice.start_time + practice.time_spent
+    : practice.time_spent;
+
+  console.log(practice);
+
   return (
     <StatContainer>
       <Name index={1}>Time:</Name>
-      <Value index={1}>
-        {practice.index > 0
-          ? msToTime(new Date().getTime() - practice.start_time)
-          : "00:00:00"}
-      </Value>
+      <Value index={1}>{msToTime(totalTimeSpend)}</Value>
       <Name index={2}>Characters:</Name>
       <Value index={2}>{practice.index}</Value>
       <Name index={3}>Errors:</Name>
@@ -36,10 +38,7 @@ const Stats: FC<props> = ({ practice }) => {
       </Value>
       <Name index={5}>CPM:</Name>
       <Value index={5}>
-        {Math.round(
-          practice.index /
-            ((new Date().getTime() - practice.start_time) / 60000)
-        )}
+        {Math.round(practice.index / (totalTimeSpend / 60000))}
       </Value>
       <Name index={6}>Last Error:</Name>
       <Value index={6}>{practice.last_error}</Value>

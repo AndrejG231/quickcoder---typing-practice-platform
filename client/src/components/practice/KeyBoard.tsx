@@ -28,7 +28,11 @@ const Keyboard: FC<props> = ({ keyboard, next, lastError }) => {
                   key={10 * i}
                   selected={keymaps[keyboard][next].indexOf(key.char) > -1}
                   color={keyColors[key.finger]}
-                  error={keymaps[keyboard][lastError].indexOf(key.char) > -1}
+                  error={
+                    lastError
+                      ? keymaps[keyboard][lastError].indexOf(key.char) > -1
+                      : false
+                  }
                 >
                   {key.char}
                 </Key>

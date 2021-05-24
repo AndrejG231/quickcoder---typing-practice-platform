@@ -1,52 +1,49 @@
 import { api } from "../static";
 import { practiceObject } from "../types/";
 
-const createPracticeMutation = `
-  mutation createPractice($length:Int!, $category:String!, $index:Int!){
-    createPractice(length:$length, category:$category, index:$index){
-      result{
+const loadPracticeQuery = `
+  query getPractice($id: Int!) {
+    getPractice(id: $id) {
+      result {
         success
         info
         message
       }
-      practice{
+
+      practice {
         id
         category
+        practice_index
         string
         index
-        practice_index
         errors_count
         errors
         time_spent
         is_finished
+        user_id
       }
     }
   }
 `;
 
-type createPracticeOptions = {
-  category: string;
-  index: number;
-  length: number;
+type loadPracticeOptions = {
+  id: number;
   onSuccess: (practice: practiceObject) => void;
   onError: () => void;
 };
 
-const createPractice = async ({
-  category,
-  index,
-  length,
+const loadPractice = async ({
+  id,
   onSuccess,
   onError,
-}: createPracticeOptions) => {
+}: loadPracticeOptions) => {
   try {
     const data = await api.post("", {
-      query: createPracticeMutation,
-      variables: { category, index, length },
+      query: loadPracticeQuery,
+      variables: { id },
     });
 
-    const result = data.data.data.createPractice;
-    
+    const result = data.data.data.getPractice;
 
     if (result?.result?.success) {
       onSuccess({
@@ -61,4 +58,4 @@ const createPractice = async ({
   }
 };
 
-export default createPractice;
+export default loadPractice;

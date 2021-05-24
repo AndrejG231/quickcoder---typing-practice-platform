@@ -55,7 +55,9 @@ const PracticeSettings: FC<props> = ({
       </LengthSelection>
       {selectionString ? (
         <StartButton
-          onClick={() => nav.push(`/practice/${selectionString}/l=${length}`)}
+          onClick={() =>
+            nav.push(`/create_practice/${selectionString}/l=${length}`)
+          }
         >
           Start
         </StartButton>
