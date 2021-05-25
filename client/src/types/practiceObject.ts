@@ -5,6 +5,8 @@ type practiceObject = {
   string: string;
   id: number;
   last_error: characterScheme;
+  category: string;
+  practice_index: number;
   errors: { [key in string]: string };
   errors_count: number;
   is_active: boolean;

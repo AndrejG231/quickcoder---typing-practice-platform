@@ -33,7 +33,8 @@ const ArrowButton = styled.div`
     width: ${w}px;
     height: ${h}px;
     cursor: pointer;
-    margin-left: auto;
+    ${left ? "margin-left: auto;" : ""}
+    ${right ? "margin-right: auto;" : ""}
     background: ${theme.colors.b4};
     clip-path: polygon(${left ? leftClip : right ? rightClip : ""});
     ${theme.centerContent};

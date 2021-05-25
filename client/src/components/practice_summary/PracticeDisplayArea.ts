@@ -11,6 +11,9 @@ const PracticeDisplayArea = styled.div`
   color: ${theme.colors.b5};
   font-family: 'Times New Roman', serif;
   font-size: 46px;
+  border: 7px solid ${theme.colors.b5};
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
   `}
 `;
 
