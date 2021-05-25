@@ -70,7 +70,9 @@ const PracticeSummary: FC<props> = ({ practice, setPractice }) => {
         <ArrowButton
           width={160}
           onClick={() =>
-            nav.push(`/leaderboard/c=${practice.category}/i=${practice.practice_index}/`)
+            nav.push(
+              `/leaderboard/c=${practice.category}/i=${practice.practice_index}/`
+            )
           }
         >
           Leaderboard

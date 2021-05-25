@@ -14,6 +14,7 @@ const StatContainer = styled.div`
     ${
       column
         ? `grid-template: 
+            "title0 value0" 1fr
             "title1 value1" 1fr
             "title2 value2" 1fr
             "title3 value3" 1fr
@@ -22,9 +23,9 @@ const StatContainer = styled.div`
               / 1fr 1fr;
             height: 100%;`
         : `grid-template: 
-            "title1 title2 title3 title4 title5 title6" 1fr
-            "value1 value2 value3 value4 value5 value6" 1fr
-              / 1fr 1fr 1fr 1fr 1fr 1fr;
+            "title0 title1 title2 title3 title4 title5 title6" 1fr
+            "value0 value1 value2 value3 value4 value5 value6" 1fr
+              / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
           padding: 20px;
           width: 800px;`
     }

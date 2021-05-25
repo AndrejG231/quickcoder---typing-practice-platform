@@ -35,6 +35,8 @@ const CreatePractice: FC<props> = ({ setPractice }) => {
     nav.push(`/practice/in_progress/id=${practice.id}/`);
   };
 
+  console.log(nav);
+
   useEffect(() => {
     createPractice({
       category,

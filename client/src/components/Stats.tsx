@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { practiceObject } from "../types";
 import { Name, StatContainer, Value } from "./stats/";
-import { msToTime } from "../utilites";
+import { calculatePracticeScore, msToTime } from "../utilites";
 
 interface props {
   practice: practiceObject;
@@ -31,6 +31,10 @@ const Stats: FC<props> = ({ practice, noTimer, column }) => {
 
   return (
     <StatContainer column={!!column}>
+      <Name index={0}>Score:</Name>
+      <Value index={0}>
+        {calculatePracticeScore(practice.index, errorRate, totalTimeSpend)}
+      </Value>
       <Name index={1}>Time:</Name>
       <Value index={1}>{msToTime(totalTimeSpend)}</Value>
       <Name index={2}>Characters:</Name>
