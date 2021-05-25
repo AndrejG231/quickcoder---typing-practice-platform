@@ -5,3 +5,4 @@ export { default as Modal } from "./Modal";
 export { default as NeglectBackground } from "./NeglectBackground";
 export { default as Screen } from "./Screen";
 export { default as TitleText } from "./TitleText";
+export { default as Stats } from "./Stats";

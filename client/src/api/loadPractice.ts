@@ -45,6 +45,8 @@ const loadPractice = async ({
 
     const result = data.data.data.getPractice;
 
+    console.log(result);
+
     if (result?.result?.success) {
       onSuccess({
         ...result.practice,
