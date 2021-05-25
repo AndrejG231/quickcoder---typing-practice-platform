@@ -7,12 +7,18 @@ const defaultState = {
   selectedCategory: 0,
   lengthIndex: 2,
   length: 500,
+  loading: false,
+  error: false,
 };
 
 const practiceSelection: reducer = (state = defaultState, action) => {
   switch (action.type) {
     case "practiceSelect/setselect":
-      return { ...state, selectedPractice: action.selected };
+      return {
+        ...state,
+        error: false,
+        selectedPractice: action.selected,
+      };
 
     case "practiceSelect/setlen":
       let length = state.lengthIndex + action.len;
@@ -23,15 +29,31 @@ const practiceSelection: reducer = (state = defaultState, action) => {
         length = 6;
       }
 
-      return { ...state, lengthIndex: length, length: lengths[length] };
+      return {
+        ...state,
+        error: false,
+        lengthIndex: length,
+        length: lengths[length],
+      };
 
     case "practiceSelect/selectCategory":
       return {
         ...state,
+        error: false,
         selectedPractice: null,
         selectedCategory: action.selected,
       };
 
+    case "practiceSelect/setErrors":
+      return {
+        ...state,
+        error: action.toggle,
+      };
+    case "practiceSelect/setLoading":
+      return {
+        ...state,
+        loading: action.toggle,
+      };
     default:
       return state;
   }

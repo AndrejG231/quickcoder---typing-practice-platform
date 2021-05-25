@@ -5,7 +5,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
-import CreatePractice from "./pages/CreatePractice";
 import PracticeSummary from "./pages/PracticeSummary";
 
 //modals
@@ -38,11 +37,6 @@ const Routes: React.FC = () => {
         exact
         path="/home/change_known_password/"
         component={() => <ChangeKnownPassword />}
-      />
-      <Route
-        exact
-        path="/create_practice/c=:category/i=:index/l=:length"
-        component={() => <CreatePractice />}
       />
       <Route
         exact

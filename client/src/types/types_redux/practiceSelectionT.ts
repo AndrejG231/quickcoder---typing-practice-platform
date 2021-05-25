@@ -5,6 +5,8 @@ export type practiceSelection = {
   selectedCategory: number;
   lengthIndex: number;
   length: number;
+  error: boolean;
+  loading: boolean;
 };
 
 export type action =
@@ -19,6 +21,14 @@ export type action =
   | {
       type: "practiceSelect/selectCategory";
       selected: number;
+    }
+  | {
+      type: "practiceSelect/setLoading";
+      toggle: boolean;
+    }
+  | {
+      type: "practiceSelect/setErrors";
+      toggle: boolean;
     };
 
 export type reducer = {

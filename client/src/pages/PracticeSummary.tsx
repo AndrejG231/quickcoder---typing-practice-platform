@@ -4,8 +4,8 @@ import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router";
 
 import { reduxStore, practiceObject } from "../types";
-import { loadPractice } from "../api";
-import { setPractice } from "../redux/actions";
+import { createPractice, loadPractice } from "../api";
+import { setGlobalMessage, setPractice } from "../redux/actions";
 
 import {
   PsGrid,
@@ -51,17 +51,29 @@ const PracticeSummary: FC<props> = ({ practice, setPractice }) => {
     return <div>Loading...</div>;
   }
 
+  const restartPractice = () => {
+    if (practice) {
+      nav.push("/loading_screen/");
+      createPractice({
+        category: practice.category,
+        index: practice.index,
+        length: practice.string.length,
+        onSuccess: (practice: practiceObject) => {
+          setPractice(practice);
+          nav.push(`/practice/in_progress/id=${practice.id}/`);
+        },
+        onError: () => {
+          nav.push(`/home/`);
+          setGlobalMessage("Could not recreate practice session.");
+        },
+      });
+    }
+  };
+
   return (
     <PsGrid>
       <NavBar>
-        <ArrowButton
-          width={160}
-          onClick={() =>
-            nav.push(
-              `/create_practice/c=${practice.category}/i=${practice.practice_index}/l=${practice.string.length}`
-            )
-          }
-        >
+        <ArrowButton width={160} onClick={restartPractice}>
           Restart
         </ArrowButton>
         <ArrowButton width={160} onClick={() => nav.push(`/practice_menu/`)}>
