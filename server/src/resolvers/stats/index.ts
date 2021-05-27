@@ -1,11 +1,13 @@
 import { Arg, Ctx, Int, Query, Resolver } from "type-graphql";
 
-import { practiceLeaderboardResponse, practiceScoreResponse, PracticeStat } from "../../types/responses";
+import {
+  practiceLeaderboardResponse,
+  practiceScoreResponse,
+} from "../../types/responses";
 import { graphqlContext } from "../../types/";
 import getPracticeStats from "./getPracticeStats";
 import practiceLeaderboard from "./practiceLeaderboard";
 import getUserStats from "./getUserStats";
-import { Practices } from "../../entities";
 
 @Resolver()
 class PracticeStats {

@@ -29,12 +29,12 @@ const getUserStats = async (req: Request) => {
 
   for (let i = 0; i < stats.length; i++) {
     if (stats[i].length >= 500) {
-      const practiceData = await getRecentStats(
+      const {errors_count, time_spent, index} = await getRecentStats(
         userData.user.id,
         stats[i].category,
         stats[i].practice_index
       );
-      stats[i] = { ...stats[i], ...calculatePracticeScore(practiceData) };
+      stats[i] = { ...stats[i], ...calculatePracticeScore({errors_count, time_spent, index}) };
     } else {
       stats[i] = { ...stats[i], score: 0, cpm: 0, error_rate: 0 };
     }

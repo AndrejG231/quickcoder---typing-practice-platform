@@ -1,8 +1,5 @@
-import { recentPracticeStats } from "../types/";
-import { Practices } from "../entities/";
-
 interface calcPracticeScore {
-  (practice: Practices | recentPracticeStats): {
+  (stats: { index: number; time_spent: number; errors_count: number }): {
     score: number;
     cpm: number;
     errors_rate: number;
@@ -21,9 +18,9 @@ interface calcPracticeScore {
 
  */
 
-const calculatePracticeScore: calcPracticeScore = (practice) => {
-  const cpm = practice.index / (practice.time_spent / 60000);
-  const errRate = (Object.keys(JSON.parse(practice.errors)).length / practice.index) * 100;
+const calculatePracticeScore: calcPracticeScore = (stats) => {
+  const cpm = stats.index / (stats.time_spent / 60000);
+  const errRate = (stats.errors_count / (stats.index - 1)) * 100;
 
   const errQ = (1 / 26) * (26 - errRate);
   const cpmQ = (1 / 300) * (cpm - 50);
@@ -31,7 +28,7 @@ const calculatePracticeScore: calcPracticeScore = (practice) => {
   return {
     score: Math.round(Math.max(1000 * errQ * cpmQ, 0)),
     cpm: Math.round(cpm),
-    errors_rate: parseFloat(errRate.toFixed(2)),
+    errors_rate: errRate,
   };
 };
 

@@ -11,6 +11,9 @@ const updatePractice = async (
     let isFinished = false;
     let stats = { score: 0, cpm: 0, errors_rate: 0 };
 
+    const { index, time_spent } = practiceUpdateFields;
+    const errors_count = JSON.parse(practiceUpdateFields.errors || "{}");
+
     const practice: Practices[] = await getConnection()
       .createQueryBuilder()
       .select("*")
@@ -18,19 +21,23 @@ const updatePractice = async (
       .where("id=:id", { id: practiceId })
       .execute();
 
-      console.log(practice);
+    console.log("typecheck\n");
+    console.log(index, practice[0].string.length);
+    console.log(typeof errors_count, " object");
+    console.log(typeof time_spent, " number");
 
-    if (practiceUpdateFields.index === practice[0].string.length ) {
+    if (
+      index === practice[0].string.length &&
+      typeof errors_count === "object" &&
+      typeof time_spent === "number"
+    ) {
       isFinished = true;
       stats = calculatePracticeScore({
-        index: practiceUpdateFields.index,
-        errors: practiceUpdateFields.errors || "",
-        time_spent: practiceUpdateFields.time_spent || 0,
+        index,
+        errors_count: Object.keys(errors_count).length,
+        time_spent,
       });
     }
-
-    console.log(practiceUpdateFields.index, practice[0].string.length);
-    console.log("STATS:  ____", stats);
 
     await getConnection()
       .createQueryBuilder()

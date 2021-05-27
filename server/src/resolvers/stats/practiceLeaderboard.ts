@@ -1,8 +1,5 @@
 import { Practices, Users } from "../../entities";
-import {
-  practiceLeaderboardResponse,
-  PracticeStat,
-} from "../../types/responses";
+import { practiceLeaderboardResponse } from "../../types/responses";
 import { getConnection } from "typeorm";
 
 const practiceLeaderboard = async (

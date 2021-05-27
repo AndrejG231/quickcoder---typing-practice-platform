@@ -56,7 +56,7 @@ class Practices extends BaseEntity {
   cpm: number;
 
   @Field(() => Float)
-  @Column({ default: 0 })
+  @Column({ type: "float", default: 0 })
   errors_rate: number;
 
   @Field(() => String)
