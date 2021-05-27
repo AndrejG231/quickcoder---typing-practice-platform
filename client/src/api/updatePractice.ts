@@ -39,7 +39,6 @@ const updatePractice = async ({
 
     if (!result?.success) {
       console.log("Failed to update current practice sessoin.");
-      console.log(result);
     }
   } catch (error) {
     console.log(error);

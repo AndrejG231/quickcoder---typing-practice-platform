@@ -41,7 +41,7 @@ const TextLine: React.FC<props> = ({ practice }) => {
             const prevError = lastError;
             lastError = ~~errIndex;
             return (
-              <Done>
+              <Done key={i}>
                 {practice.string.slice(prevError, lastError)}
                 <Error>{practice.errors[lastError]}</Error>
               </Done>
