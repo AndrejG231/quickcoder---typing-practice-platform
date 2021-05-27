@@ -1,9 +1,11 @@
 import { Arg, Ctx, Int, Query, Resolver } from "type-graphql";
 
-import { practiceScoreResponse } from "../../types/responses";
+import { practiceLeaderboardResponse, practiceScoreResponse, PracticeStat } from "../../types/responses";
 import { graphqlContext } from "../../types/";
 import getPracticeStats from "./getPracticeStats";
+import practiceLeaderboard from "./practiceLeaderboard";
 import getUserStats from "./getUserStats";
+import { Practices } from "../../entities";
 
 @Resolver()
 class PracticeStats {
@@ -18,6 +20,13 @@ class PracticeStats {
   @Query(() => practiceScoreResponse)
   async getUserStats(@Ctx() { req }: graphqlContext) {
     return await getUserStats(req);
+  }
+  @Query(() => [practiceLeaderboardResponse])
+  async practiceLeaderboard(
+    @Arg("category") category: string,
+    @Arg("index", () => Int) index: number
+  ) {
+    return await practiceLeaderboard(category, index);
   }
 }
 

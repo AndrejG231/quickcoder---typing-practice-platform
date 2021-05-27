@@ -5,7 +5,7 @@ interface calcPracticeScore {
   (practice: Practices | recentPracticeStats): {
     score: number;
     cpm: number;
-    error_rate: number;
+    errors_rate: number;
   };
 }
 
@@ -31,7 +31,7 @@ const calculatePracticeScore: calcPracticeScore = (practice) => {
   return {
     score: Math.round(Math.max(1000 * errQ * cpmQ, 0)),
     cpm: Math.round(cpm),
-    error_rate: parseFloat(errRate.toFixed(2)),
+    errors_rate: parseFloat(errRate.toFixed(2)),
   };
 };
 

@@ -7,7 +7,7 @@ interface getRecentPractice {
     userId: number,
     category: string,
     index: number
-  ): Promise<recentPracticeStats>;
+  ): Promise<recentPracticeStats>
 }
 
 const getRecentPracticeStats: getRecentPractice = async (

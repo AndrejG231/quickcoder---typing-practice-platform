@@ -6,3 +6,4 @@ export {
   default as practiceScoreResponse,
 } from "./practiceScoreResponse";
 export { default as userInfoResponse } from "./userInfoResponse";
+export { default as practiceLeaderboardResponse } from "./practiceLeaderboardResponse";

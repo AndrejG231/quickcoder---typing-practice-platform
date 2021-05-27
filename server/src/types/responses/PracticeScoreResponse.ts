@@ -20,6 +20,9 @@ export class PracticeStat {
 
   @Field(() => Int, { nullable: true })
   practice_index: number;
+
+  @Field(() => Int, { nullable: true })
+  user_name: string;
 }
 
 @ObjectType()

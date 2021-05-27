@@ -29,7 +29,6 @@ const updatePractice = async ({
   practiceId,
 }: updatePracticeOptions) => {
   try {
-    console.log(practiceUpdateFields);
     const data = await api.post("", {
       query: updatePracticeQuery,
       variables: { practiceUpdateFields, practiceId },
