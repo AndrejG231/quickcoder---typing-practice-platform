@@ -5,9 +5,6 @@ class PracticeUpdateFields {
   @Field(() => Int, { nullable: true })
   index?: number;
 
-  @Field(() => Int, { nullable: true })
-  errors_count?: number;
-
   @Field({ nullable: true })
   errors?: string;
 

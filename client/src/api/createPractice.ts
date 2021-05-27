@@ -15,7 +15,6 @@ const createPracticeMutation = `
         string
         index
         practice_index
-        errors_count
         errors
         time_spent
         is_finished
@@ -40,13 +39,13 @@ const createPractice = async ({
   onError,
 }: createPracticeOptions) => {
   try {
+    console.log(category, index, length);
     const data = await api.post("", {
       query: createPracticeMutation,
       variables: { category, index, length },
     });
 
-    const result = data.data.data.createPractice;
-    
+    const result = data.data?.data?.createPractice;
 
     if (result?.result?.success) {
       onSuccess({

@@ -8,7 +8,6 @@ type practiceObject = {
   category: string;
   practice_index: number;
   errors: { [key in string]: string };
-  errors_count: number;
   is_active: boolean;
   is_finished: boolean;
   start_time: number;

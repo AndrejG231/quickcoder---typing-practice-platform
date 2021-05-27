@@ -30,7 +30,12 @@ const TextLine: React.FC<props> = ({ practice }) => {
 
   return (
     <TextArea>
-      <ErrorsShift errors={practice.errors_count}>
+      <ErrorsShift
+        errors={Object.values(practice.errors).reduce(
+          (acc, val) => acc + val.length,
+          0
+        )}
+      >
         <Text offset={practice.index}>
           {Object.keys(practice?.errors).map((errIndex, i) => {
             const prevError = lastError;

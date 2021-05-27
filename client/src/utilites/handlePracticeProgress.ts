@@ -15,13 +15,12 @@ const handlePracticeProgress = (
       updatePractice({
         practiceUpdateFields: {
           errors: JSON.stringify(state.errors),
-          errors_count: state.errors_count,
           index: newIndex,
           is_finished: true,
           time_spent:
             state.time_spent + new Date().getTime() - state.start_time,
         },
-        id: state.id,
+        practiceId: state.id,
       });
 
       onFinish();
@@ -39,13 +38,12 @@ const handlePracticeProgress = (
       updatePractice({
         practiceUpdateFields: {
           errors: JSON.stringify(state.errors),
-          errors_count: state.errors_count,
           index: newIndex,
           is_finished: false,
           time_spent:
             state.time_spent + new Date().getTime() - state.start_time,
         },
-        id: state.id,
+        practiceId: state.id,
       });
 
       return {
@@ -81,7 +79,6 @@ const handlePracticeProgress = (
       [state.index]: newErrors,
     },
     last_error: keyPressed,
-    errors_count: state.errors_count + 1,
   };
 };
 

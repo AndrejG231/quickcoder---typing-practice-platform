@@ -16,7 +16,6 @@ const loadPracticeQuery = `
         practice_index
         string
         index
-        errors_count
         errors
         time_spent
         is_finished

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router";
@@ -25,6 +25,7 @@ const rdxProps = (state: reduxStore) => {
 const rdxDispatch = (dispatch: Dispatch) => {
   return {
     setPractice: (practice: practiceObject) => dispatch(setPractice(practice)),
+    setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
   };
 };
 
@@ -32,9 +33,14 @@ const withRedux = connect(rdxProps, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const PracticeSummary: FC<props> = ({ practice, setPractice }) => {
+const PracticeSummary: FC<props> = ({
+  practice,
+  setPractice,
+  setGlobalMessage,
+}) => {
   const { id }: { id: string } = useParams();
   const nav = useHistory();
+  const [loading, setLoading] = useState(false);
   let lastError = 0;
 
   useEffect(() => {
@@ -53,14 +59,14 @@ const PracticeSummary: FC<props> = ({ practice, setPractice }) => {
 
   const restartPractice = () => {
     if (practice) {
-      nav.push("/loading_screen/");
+      setLoading(true);
       createPractice({
         category: practice.category,
-        index: practice.index,
+        index: practice.practice_index,
         length: practice.string.length,
-        onSuccess: (practice: practiceObject) => {
-          setPractice(practice);
-          nav.push(`/practice/in_progress/id=${practice.id}/`);
+        onSuccess: (newPractice: practiceObject) => {
+          setPractice(newPractice);
+          nav.push(`/practice/in_progress/id=${newPractice.id}/`);
         },
         onError: () => {
           nav.push(`/home/`);
@@ -73,8 +79,11 @@ const PracticeSummary: FC<props> = ({ practice, setPractice }) => {
   return (
     <PsGrid>
       <NavBar>
-        <ArrowButton width={160} onClick={restartPractice}>
-          Restart
+        <ArrowButton
+          width={160}
+          onClick={loading ? () => null : restartPractice}
+        >
+          {loading ? "Loading.." : "Restart"}
         </ArrowButton>
         <ArrowButton width={160} onClick={() => nav.push(`/practice_menu/`)}>
           New practice

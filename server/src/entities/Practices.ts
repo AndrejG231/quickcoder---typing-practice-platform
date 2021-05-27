@@ -25,10 +25,6 @@ class Practices extends BaseEntity {
   index!: number;
 
   @Field()
-  @Column({ default: 0 })
-  errors_count!: number;
-
-  @Field()
   @Column({ default: "{}" })
   errors!: string;
 

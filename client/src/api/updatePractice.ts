@@ -17,27 +17,27 @@ const updatePracticeQuery = `mutation updatePractice(
 type updatePracticeOptions = {
   practiceUpdateFields: {
     index?: number;
-    errors_count?: number;
     errors?: string;
     is_finished?: boolean;
     time_spent?: number;
   };
-  id: number;
+  practiceId: number;
 };
 
 const updatePractice = async ({
   practiceUpdateFields,
-  id,
+  practiceId,
 }: updatePracticeOptions) => {
   try {
+    console.log(practiceUpdateFields);
     const data = await api.post("", {
       query: updatePracticeQuery,
-      variables: { practiceUpdateFields, id },
+      variables: { practiceUpdateFields, practiceId },
     });
 
     const result = data.data.data.updatePractice;
 
-    if (!result?.result?.success) {
+    if (!result?.success) {
       console.log("Failed to update current practice sessoin.");
       console.log(result);
     }
