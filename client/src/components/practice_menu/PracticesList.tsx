@@ -57,27 +57,27 @@ const PracticesList: FC<props> = ({
       <CategoryDescription>
         {menu[selectedCategory].description}
       </CategoryDescription>
-      <CategoryItems>
-        {menu[selectedCategory].items.map((item, index) => {
-          const isSelected = item === selectedPractice;
-          return (
-            <PracticeItem key={index} isSelected={isSelected}>
-              <PracticeItemTitle>{item.name}</PracticeItemTitle>
-              <PracticeItemDescription>
-                {item.description}
-              </PracticeItemDescription>
-              {isSelected ? null : (
-                <PracticeSelectIcon
-                  size="60px"
-                  onClick={() => selectPractice(item)}
-                />
-              )}
-            </PracticeItem>
-          );
-        })}
-      </CategoryItems>
-      <ItemsFade top />
-      <ItemsFade bottom />
+        <CategoryItems>
+          {menu[selectedCategory].items.map((item, index) => {
+            const isSelected = item === selectedPractice;
+            return (
+              <PracticeItem key={index} isSelected={isSelected}>
+                <PracticeItemTitle>{item.name}</PracticeItemTitle>
+                <PracticeItemDescription>
+                  {item.description}
+                </PracticeItemDescription>
+                {isSelected ? null : (
+                  <PracticeSelectIcon
+                    size="60px"
+                    onClick={() => selectPractice(item)}
+                  />
+                )}
+              </PracticeItem>
+            );
+          })}
+        </CategoryItems>
+        <ItemsFade top />
+        <ItemsFade bottom />
     </PracticesWrapper>
   );
 };

@@ -23,7 +23,7 @@ const ItemsFade = styled.div`
     ${
       bottom
         ? `
-          bottom: 10px;
+          bottom: 0px;
           background: linear-gradient( 0deg, ${theme.colors.b3} 20%, rgba(0,0,0,0) 100%);
         `
         : ""
