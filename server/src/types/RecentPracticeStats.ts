@@ -1,5 +1,5 @@
 type recentPracticeStats = {
-  errors_count: number;
+  errors: string;
   index: number;
   time_spent: number;
 };

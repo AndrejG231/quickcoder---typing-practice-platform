@@ -23,7 +23,7 @@ interface calcPracticeScore {
 
 const calculatePracticeScore: calcPracticeScore = (practice) => {
   const cpm = practice.index / (practice.time_spent / 60000);
-  const errRate = (practice.errors_count / practice.index) * 100;
+  const errRate = (Object.keys(JSON.parse(practice.errors)).length / practice.index) * 100;
 
   const errQ = (1 / 26) * (26 - errRate);
   const cpmQ = (1 / 300) * (cpm - 50);
