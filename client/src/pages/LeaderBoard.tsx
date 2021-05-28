@@ -40,6 +40,8 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
     setLeaderboard(leaderboard);
   };
 
+  console.log(leaderboard);
+
   useEffect(() => {
     if (!leaderboard) {
       loadLeaderBoard();

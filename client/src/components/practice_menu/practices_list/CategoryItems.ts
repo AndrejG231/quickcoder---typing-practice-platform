@@ -3,7 +3,9 @@ import styled from "styled-components";
 const CategoryItems = styled.div`
   ${({ theme }) => `
   background: ${theme.colors.b3};
-  height: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  height: calc(100% - 60px);
   overflow: auto;
   display: flex;
   flex-direction: column;

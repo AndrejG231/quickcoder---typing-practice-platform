@@ -20,7 +20,7 @@ const getLeaderBoard = async (index: number, category: string) => {
       variables: { index, category },
     });
 
-    if (result.data?.data?.practiceLeaderboard.length > 1) {
+    if (result.data?.data?.practiceLeaderboard.length > 0) {
       return result.data.data.practiceLeaderboard as leaderboardItem[];
     }
 

@@ -5,10 +5,13 @@ interface props {
   isSelected: boolean;
 }
 
-const PracticeItem = styled.div`
-  ${({ theme, isSelected }: props) => `
+const PracticeItem = styled.div.attrs<props>(({ isSelected, theme }) => ({
+  style: {
+    border: `2px solid ${theme.colors[isSelected ? "w5" : "b4"]}`,
+  },
+}))`
+  ${({ theme }: props) => `
     background: ${theme.colors.b2};
-    border: 2px solid ${theme.colors[isSelected ? "w5" : "b4"]};
     width: 80%;
     height: 100px;
     margin: 10px;
