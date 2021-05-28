@@ -8,3 +8,4 @@ export { default as PracticeItemDescription } from "./PracticeItemDescription";
 export { default as PracticeItemTitle } from "./PracticeItemTitle";
 export { default as PracticesWrapper } from "./PracticesWrapper";
 export { default as PracticeSelectIcon } from "./PracticeSelectIcon";
+export { default as ItemsContainer } from "./ItemsContainer";
