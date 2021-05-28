@@ -24,17 +24,16 @@ const Stats: FC<props> = ({ practice, noTimer, column }) => {
       ? new Date().getTime() - practice.start_time + practice.time_spent
       : practice.time_spent;
 
-  const errorRate =
-    (Object.keys(practice.errors).length / practice.index) * 100;
-
-  const cpm = Math.round(practice.index / (totalTimeSpend / 60000));
+  const { cpm, errors_rate, score } = calculatePracticeScore(
+    practice.index,
+    Object.keys(practice.errors).length,
+    totalTimeSpend
+  );
 
   return (
     <StatContainer column={!!column}>
       <Name index={0}>Score:</Name>
-      <Value index={0}>
-        {calculatePracticeScore(practice.index, errorRate, totalTimeSpend)}
-      </Value>
+      <Value index={0}>{score || 0}</Value>
       <Name index={1}>Time:</Name>
       <Value index={1}>{msToTime(totalTimeSpend)}</Value>
       <Name index={2}>Characters:</Name>
@@ -42,7 +41,7 @@ const Stats: FC<props> = ({ practice, noTimer, column }) => {
       <Name index={3}>Errors:</Name>
       <Value index={3}>{Object.keys(practice.errors).length}</Value>
       <Name index={4}>Error rate:</Name>
-      <Value index={4}>{errorRate ? errorRate.toFixed(2) : 0}%</Value>
+      <Value index={4}>{errors_rate ? errors_rate.toFixed(2) : 0}%</Value>
       <Name index={5}>CPM:</Name>
       <Value index={5}>{cpm || 0}</Value>
       {!column ? <Name index={6}>Last Error:</Name> : null}

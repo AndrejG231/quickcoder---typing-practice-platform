@@ -20,7 +20,7 @@ interface calcPracticeScore {
 
 const calculatePracticeScore: calcPracticeScore = (stats) => {
   const cpm = stats.index / (stats.time_spent / 60000);
-  const errRate = (stats.errors_count / (stats.index - 1)) * 100;
+  const errRate = (stats.errors_count / stats.index) * 100;
 
   const errQ = (1 / 26) * (26 - errRate);
   const cpmQ = (1 / 300) * (cpm - 50);
