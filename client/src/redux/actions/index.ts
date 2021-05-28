@@ -10,7 +10,6 @@ export { default as setGlobalMessage } from "./setGlobalMessage";
 export { default as setPractice } from "./setPractice";
 export { default as setUserInfo } from "./setUserInfo";
 export { default as setUsersPracticeStat } from "./setUsersPracticeStat";
-export { default as setLeaderBoard } from "./setLeaderBoard";
 export { default as toggleAuthRefresh } from "./toggleAuthRefresh";
 export { default as toggleSelectionError } from "./toggleSelectionError";
 export { default as toggleSelectionLoading } from "./toggleSelectionLoading";

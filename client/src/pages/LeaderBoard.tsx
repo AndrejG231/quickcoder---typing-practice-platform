@@ -1,13 +1,9 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { leaderboardItem, practiceItem, reduxStore } from "../types";
-import {
-  setLeaderBoard,
-  selectCategory,
-  selectPractice,
-} from "../redux/actions";
+import { selectCategory, selectPractice } from "../redux/actions";
 import { getLeaderBoard } from "../api";
 
 import { getCategoryIndex } from "../utilites";
@@ -20,8 +16,6 @@ const rdxProps = (state: reduxStore) => ({
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  setLeaderBoard: (category: string, index: number, items: leaderboardItem[]) =>
-    dispatch(setLeaderBoard(category, index, items)),
   selectPractice: (category: number, practice: practiceItem) => {
     dispatch(selectCategory(category));
     dispatch(selectPractice(practice));
@@ -32,35 +26,27 @@ const withRedux = connect(rdxProps, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const LeaderBoard: FC<props> = ({
-  setLeaderBoard,
-  menu,
-  selectPractice,
-}) => {
+const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
   const { index, category }: { index: string; category: string } = useParams();
   const categoryIndex = getCategoryIndex(category, menu);
   const selectionPractice = menu
     ? menu[categoryIndex || 0].items[~~index]
     : null;
   const nav = useHistory();
+  const [leaderboard, setLeaderboard] = useState<leaderboardItem[] | null>();
 
-  console.log(category);
+  const loadLeaderBoard = async () => {
+    const leaderboard = await getLeaderBoard(~~index, category);
+    setLeaderboard(leaderboard);
+  };
 
   useEffect(() => {
-    if (
-      leaderboard.current?.index !== ~~index &&
-      leaderboard.current?.category !== category
-    ) {
-      getLeaderBoard({
-        index: ~~index,
-        category,
-        onSuccess: setLeaderBoard,
-        onError: () => null,
-      });
+    if (!leaderboard) {
+      loadLeaderBoard();
     }
-  }, []);
+  }, [leaderboard, loadLeaderBoard]);
 
-  if (!leaderboard.items) {
+  if (!leaderboard) {
     return <div>Loading...</div>;
   }
 
@@ -96,7 +82,7 @@ const LeaderBoard: FC<props> = ({
           </Row>
         </thead>
         <tbody>
-          {leaderboard.items.map((item, index) => (
+          {leaderboard.map((item, index) => (
             <Row key={index}>
               <Field>{index}</Field>
               <Field>{item.score}</Field>

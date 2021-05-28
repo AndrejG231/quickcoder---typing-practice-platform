@@ -13,19 +13,7 @@ const getLeaderBoardQuery = `
   }
 `;
 
-type getLeaderBoardOptions = {
-  index: number;
-  category: string;
-  onSuccess: (category: string, index: number, items: leaderboardItem[]) => any;
-  onError: () => void;
-};
-
-const getLeaderBoard = async ({
-  index,
-  category,
-  onSuccess,
-  onError,
-}: getLeaderBoardOptions) => {
+const getLeaderBoard = async (index: number, category: string) => {
   try {
     const result = await api.post("", {
       query: getLeaderBoardQuery,
@@ -33,13 +21,13 @@ const getLeaderBoard = async ({
     });
 
     if (result.data?.data?.practiceLeaderboard.length > 1) {
-      onSuccess(category, index, result.data.data.practiceLeaderboard);
-    } else {
-      onError();
+      return result.data.data.practiceLeaderboard as leaderboardItem[];
     }
+
+    return null;
   } catch (err) {
     console.log(err);
-    onError();
+    return null;
   }
 };
 
