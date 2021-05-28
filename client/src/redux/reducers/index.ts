@@ -5,4 +5,3 @@ export { default as practice } from "./practice";
 export { default as practiceMenu } from "./practiceMenu";
 export { default as practiceSelection } from "./practiceSelection";
 export { default as userPracticeStats } from "./userPracticeStats";
-export { default as leaderBoard } from "./leaderBoard";

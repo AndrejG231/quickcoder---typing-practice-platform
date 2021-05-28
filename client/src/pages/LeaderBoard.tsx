@@ -16,7 +16,6 @@ import { Board, Row, Field, Column } from "../components/leaderboard";
 import { NavBar, ArrowButton, Wrapper } from "../components";
 
 const rdxProps = (state: reduxStore) => ({
-  leaderboard: state.leaderBoard,
   menu: state.practiceMenu,
 });
 
@@ -34,7 +33,6 @@ const withRedux = connect(rdxProps, rdxDispatch);
 type props = ConnectedProps<typeof withRedux>;
 
 const LeaderBoard: FC<props> = ({
-  leaderboard,
   setLeaderBoard,
   menu,
   selectPractice,
