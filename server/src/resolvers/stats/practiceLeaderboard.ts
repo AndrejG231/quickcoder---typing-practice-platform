@@ -19,6 +19,8 @@ const practiceLeaderboard = async (
         is_finished: true,
       }
     )
+    .limit(10)
+    .orderBy("score", "DESC")
     .execute();
 
   console.log(queryResults);

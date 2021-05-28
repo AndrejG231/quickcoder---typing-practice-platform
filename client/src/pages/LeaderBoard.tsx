@@ -84,7 +84,7 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
         <tbody>
           {leaderboard.map((item, index) => (
             <Row key={index}>
-              <Field>{index}</Field>
+              <Field>{index + 1}</Field>
               <Field>{item.score}</Field>
               <Field>{item.cpm}</Field>
               <Field>{item.errors_rate.toFixed(2)} %</Field>
