@@ -6,3 +6,5 @@ export { default as NeglectBackground } from "./NeglectBackground";
 export { default as Screen } from "./Screen";
 export { default as TitleText } from "./TitleText";
 export { default as Stats } from "./Stats";
+export { default as NavBar } from "./NavBar";
+export { default as Wrapper } from "./Wrapper";

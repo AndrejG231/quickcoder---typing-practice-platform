@@ -6,8 +6,8 @@ import { practiceObject, reduxStore, schemeCharacters } from "../types";
 import { setPractice } from "../redux/actions";
 import { loadPractice } from "../api";
 
-import { Wrapper, Textline, Keyboard } from "../components/practice";
-import { Stats } from "../components/";
+import { Textline, Keyboard } from "../components/practice";
+import { Wrapper, Stats } from "../components/";
 import { handlePracticeProgress } from "../utilites";
 
 import FingerIndex from "../components/practice/FingerIndex";

@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
 import PracticeSummary from "./pages/PracticeSummary";
+import LeaderBoard from "./pages/LeaderBoard";
 
 //modals
 import Login from "./modals/Login";
@@ -47,6 +48,11 @@ const Routes: React.FC = () => {
         exact
         path="/practice/finished/id=:id"
         component={() => <PracticeSummary />}
+      />
+      <Route
+        exact
+        path="/leaderboard/c=:category/i=:index/"
+        component={() => <LeaderBoard />}
       />
       <Route exact path="/practice_menu/" component={() => <PracticeMenu />} />
     </BrowserRouter>

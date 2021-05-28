@@ -9,11 +9,11 @@ import { setGlobalMessage, setPractice } from "../redux/actions";
 
 import {
   PsGrid,
-  NavBar,
   StatPanel,
   PracticeDisplayArea,
   PracticeString,
 } from "../components/practice_summary";
+import {NavBar} from "../components/"
 import { Stats, ArrowButton } from "../components/";
 
 const rdxProps = (state: reduxStore) => {
