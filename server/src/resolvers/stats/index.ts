@@ -5,19 +5,19 @@ import {
   practiceScoreResponse,
 } from "../../types/responses";
 import { graphqlContext } from "../../types/";
-import getPracticeStats from "./getPracticeStats";
+import getUserPracticeStats from "./getUserPracticeStats";
 import practiceLeaderboard from "./practiceLeaderboard";
 import getUserStats from "./getUserStats";
 
 @Resolver()
 class PracticeStats {
-  @Query(() => practiceScoreResponse)
-  async getPracticeStats(
+  @Query(() => practiceLeaderboardResponse)
+  async getUserPracticeStats(
     @Arg("category") category: string,
     @Arg("practiceIndex", () => Int) practiceIndex: number,
     @Ctx() { req }: graphqlContext
   ) {
-    return await getPracticeStats(category, practiceIndex, req);
+    return await getUserPracticeStats(category, practiceIndex, req);
   }
   @Query(() => practiceScoreResponse)
   async getUserStats(@Ctx() { req }: graphqlContext) {
