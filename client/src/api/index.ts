@@ -7,3 +7,4 @@ export { default as loadPractice } from "./loadPractice";
 export { default as logout } from "./logout";
 export { default as register } from "./register";
 export { default as updatePractice } from "./updatePractice";
+export { default as getUserPracticeStats } from "./getUserPracticeStats";
