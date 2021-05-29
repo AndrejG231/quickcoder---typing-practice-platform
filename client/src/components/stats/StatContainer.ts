@@ -21,7 +21,7 @@ const columnSmallTemp = `
     "title0 value0 title1 value1" 1fr
     "title2 value2 title3 value3" 1fr
     "title4 value4 title5 value5" 1fr
-    /1fr 1fr 1fr
+    /1fr 1fr 1fr 1fr
 `;
 
 const rowTemp = `

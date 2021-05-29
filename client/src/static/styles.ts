@@ -24,6 +24,7 @@ export const theme = {
     justify-content: center;
     align-items: center;
   `,
+  width: 21,
 };
 
 export const GlobalStyles = createGlobalStyle`

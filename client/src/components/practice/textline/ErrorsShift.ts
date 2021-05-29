@@ -4,9 +4,9 @@ interface props {
   errors: number;
 }
 
-const ErrorShift = styled.div.attrs<props>(({ errors }) => ({
+const ErrorShift = styled.div.attrs<props>(({ errors, theme }) => ({
   style: {
-    transform: `translateX(${-19.243 * errors}px)`,
+    transform: `translateX(${-1 * theme.width * errors}px)`,
   },
 }))<props>`
   width: 100%;

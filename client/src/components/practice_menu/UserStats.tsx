@@ -10,7 +10,7 @@ const rdxProps = (state: reduxStore) => ({
   category:
     state.practiceMenu[state.practiceSelection.selectedCategory].category,
   menu: state.practiceMenu,
-  index: state.practiceSelection.selectedPractice?.index,
+  practiceIndex: state.practiceSelection.selectedPractice?.index,
   stats: state.userPracticeStats,
 });
 
@@ -24,44 +24,45 @@ const withRedux = connect(rdxProps, rdxDispatch);
 type props = ConnectedProps<typeof withRedux>;
 
 const UserStats: FC<props> = ({
+  practiceIndex,
   category,
   menu,
-  index,
   stats,
   updateStats,
 }) => {
+  let displayStats = {
+    cpm: 0,
+    index: 0,
+    score: 0,
+    errors_rate: 0,
+  };
+
   useEffect(() => {
-    if (category && menu && typeof index === "number") {
+    if (category && menu && typeof practiceIndex === "number") {
       const getStats = () =>
         getUserPracticeStats({
           category,
-          practiceIndex: index,
+          practiceIndex,
           onSuccess: updateStats,
           onError: () => null,
         });
       if (stats[category]) {
-        if (!stats[category][index]) {
+        if (!stats[category][practiceIndex]) {
           getStats();
         }
       } else {
         getStats();
       }
     }
-  }, [category, menu, index, stats, updateStats]);
+  }, [category, menu, practiceIndex, stats, updateStats]);
 
-  if (!menu || !stats[category]) {
-    return <div>Loading..</div>;
+  if (menu && stats[category] && typeof practiceIndex === "number") {
+    if (stats[category][practiceIndex]) {
+      displayStats = stats[category][practiceIndex] || displayStats;
+    }
   }
 
-  if (typeof index !== "number") {
-    return <div></div>;
-  }
-
-  return (
-    <UserStatsWrapper>
-      {JSON.stringify(stats[category][index])}
-    </UserStatsWrapper>
-  );
+  return <UserStatsWrapper></UserStatsWrapper>;
 };
 
 export default withRedux(UserStats);
