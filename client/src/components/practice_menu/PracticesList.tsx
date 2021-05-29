@@ -15,6 +15,7 @@ import {
   ItemsFade,
   ItemsContainer,
   PracticesWrapper,
+  OverflowContainer,
 } from "./practices_list";
 
 const rdxProps = (state: reduxStore) => ({
@@ -59,25 +60,27 @@ const PracticesList: FC<props> = ({
         {menu[selectedCategory].description}
       </CategoryDescription>
       <ItemsContainer>
-        <CategoryItems>
-          {menu[selectedCategory].items.map((item, index) => {
-            const isSelected = item === selectedPractice;
-            return (
-              <PracticeItem key={index} isSelected={isSelected}>
-                <PracticeItemTitle>{item.name}</PracticeItemTitle>
-                <PracticeItemDescription>
-                  {item.description}
-                </PracticeItemDescription>
-                {isSelected ? null : (
-                  <PracticeSelectIcon
-                    size="60px"
-                    onClick={() => selectPractice(item)}
-                  />
-                )}
-              </PracticeItem>
-            );
-          })}
-        </CategoryItems>
+        <OverflowContainer>
+          <CategoryItems>
+            {menu[selectedCategory].items.map((item, index) => {
+              const isSelected = item === selectedPractice;
+              return (
+                <PracticeItem key={index} isSelected={isSelected}>
+                  <PracticeItemTitle>{item.name}</PracticeItemTitle>
+                  <PracticeItemDescription>
+                    {item.description}
+                  </PracticeItemDescription>
+                  {isSelected ? null : (
+                    <PracticeSelectIcon
+                      size="60px"
+                      onClick={() => selectPractice(item)}
+                    />
+                  )}
+                </PracticeItem>
+              );
+            })}
+          </CategoryItems>
+        </OverflowContainer>
         <ItemsFade top />
         <ItemsFade bottom />
       </ItemsContainer>
