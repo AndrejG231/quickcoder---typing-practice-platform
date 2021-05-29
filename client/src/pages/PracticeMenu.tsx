@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { loadMenu, selectPractice } from "../redux/actions";
 import { practiceItem, reduxStore } from "../types";
-import { getMenu } from "../api";
 import { practiceMenu } from "../types/";
 import {
   MenuWrapper,
@@ -14,39 +13,16 @@ import {
 const rdxProps = (state: reduxStore) => {
   return {
     menu: state.practiceMenu,
-    selectedPractice: state.practiceSelection.selectedPractice,
   };
 };
 
-const rdxDispatch = (dispatch: any) => {
-  return {
-    setMenu: (menu: practiceMenu) => dispatch(loadMenu(menu)),
-    selectPractice: (practice: practiceItem) =>
-      dispatch(selectPractice(practice)),
-  };
-};
+const rdxDispatch = (dispatch: any) => ({});
 
 const withRedux = connect(rdxProps, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const PracticeMenu: React.FC<props> = ({
-  menu,
-  setMenu,
-  selectPractice,
-  selectedPractice,
-}) => {
-  useEffect(() => {
-    if (!menu) {
-      getMenu({
-        onSuccess: (menu) => {
-          setMenu(menu);
-        },
-        onError: () => null,
-      });
-    }
-  }, [menu]);
-
+const PracticeMenu: React.FC<props> = ({ menu }) => {
   if (!menu) {
     return <div>Loading...</div>;
   }

@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Dispatch } from "redux";
+import { connect, ConnectedProps } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
+
+import { loadMenu, setGlobalMessage } from "./redux/actions";
+import { practiceMenu } from "./types";
+import { getMenu } from "./api";
 
 //pages
 import Home from "./pages/Home";
@@ -15,8 +21,37 @@ import Profile from "./modals/Profile";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 import ChangeKnownPassword from "./modals/ChangeKnownPassword";
+import { reduxStore } from "./types";
 
-const Routes: React.FC = () => {
+const rdxProps = (state: reduxStore) => ({
+  menu: state.practiceMenu,
+});
+
+const rdxDispatch = (dispatch: Dispatch) => ({
+  setMenu: (menu: practiceMenu) => dispatch(loadMenu(menu)),
+  setPopUp: (message: string) => dispatch(setGlobalMessage(message)),
+});
+
+const withRedux = connect(rdxProps, rdxDispatch);
+
+type props = ConnectedProps<typeof withRedux>;
+
+const Routes: React.FC<props> = ({ menu, setMenu, setPopUp }) => {
+  // Global data fetching - menu
+  useEffect(() => {
+    if (!menu) {
+      getMenu({
+        onSuccess: (menu) => {
+          setMenu(menu);
+        },
+        onError: () =>
+          setPopUp(
+            "Error: could not load neccessary data. Try refreshing page to fix this problem."
+          ),
+      });
+    }
+  }, [menu]);
+
   return (
     <BrowserRouter>
       <Route exact path="/" component={() => <Home />} />
@@ -59,4 +94,4 @@ const Routes: React.FC = () => {
   );
 };
 
-export default Routes;
+export default withRedux(Routes);
