@@ -15,6 +15,10 @@ const LengthDecreaseButton = styled(Minus)`
       background: ${theme.colors.b3};
       color: ${theme.colors.w5};
     }
+    @media screen and (max-height: 800px){
+      height: 27px;
+      width: 27px;
+    }
   `}
 `;
 

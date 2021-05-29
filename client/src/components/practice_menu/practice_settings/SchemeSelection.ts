@@ -11,6 +11,11 @@ const SchemeSelection = styled.select`
   &:focus{
     outline: none;
   }
+  @media screen and (max-height: 800px){
+    height: 28px;
+    font-size: 18px;
+    margin: 5px 0;
+  }
 `;
 
 export default SchemeSelection;

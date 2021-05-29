@@ -8,9 +8,14 @@ const StartButton = styled.button`
     width: 90%;
     font-size: 18px;
     cursor: pointer;
+    margin-top: 20px;
     &:hover{
         background: ${theme.colors.w3};
         color: ${theme.colors.b5};
+    }
+    @media screen and (max-width: 800px){
+      height: 30px;
+      margin-bottom: 10px;
     }
   `}
 `;

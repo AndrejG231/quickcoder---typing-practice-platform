@@ -10,6 +10,11 @@ const LengthDisplay = styled.p`
     font-size: 24px;
     padding-top: 3px;
     margin: 0px 20px;
+    @media screen and (max-height: 800px){
+      height: 25px;
+      font-size: 18px;
+      line-height: 25px;
+    }
   `}
 `;
 

@@ -10,9 +10,9 @@ const MenuWrapper = styled.div`
     /60% 40%;
   @media screen and (max-width: 700px) {
     grid-template:
-      "menu" 80%
+      "menu" 65%
       "scores" 0%
-      "settings" 20%
+      "settings" 35%
       / 100%;
   }
 `;

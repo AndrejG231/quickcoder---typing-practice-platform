@@ -7,6 +7,9 @@ const SelectionLabel = styled.label`
   font-size: 26px;
   text-align: center;
   text-decoration: underline;
+  @media screen and (max-height: 800px){
+    font-size: 18px;
+  }
 `;
 
 export default SelectionLabel;
