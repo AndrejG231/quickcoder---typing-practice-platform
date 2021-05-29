@@ -13,7 +13,7 @@ import {
   PracticeDisplayArea,
   PracticeString,
 } from "../components/practice_summary";
-import {NavBar} from "../components/"
+import { NavBar } from "../components/";
 import { Stats, ArrowButton } from "../components/";
 
 const rdxProps = (state: reduxStore) => {
@@ -106,7 +106,7 @@ const PracticeSummary: FC<props> = ({
         </ArrowButton>
       </NavBar>
       <StatPanel>
-        <Stats practice={practice} noTimer column />
+        <Stats practice={practice} noTimer noLastError column />
       </StatPanel>
       <PracticeDisplayArea>
         {Object.keys(practice.errors).map((errIndex, i) => {

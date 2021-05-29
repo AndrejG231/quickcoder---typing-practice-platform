@@ -10,6 +10,9 @@ const PracticeString = styled.span`
     color: ${theme.colors.b5};
     font-family: 'Times New Roman', serif;
     font-size: 46px;
+    @media screen and (max-width: 800px){
+      font-size: 30px;
+    }
     ${
       error
         ? `

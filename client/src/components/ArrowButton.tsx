@@ -47,6 +47,9 @@ const ArrowButton = styled.div`
       clip-path: none;
       margin: 0;
     }
+    @media screen and (max-width: 800px){
+      font-size: 14px;
+    }
   `;
   }}
 `;

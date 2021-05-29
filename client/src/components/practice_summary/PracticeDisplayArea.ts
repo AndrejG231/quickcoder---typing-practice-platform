@@ -14,6 +14,14 @@ const PracticeDisplayArea = styled.div`
   border: 7px solid ${theme.colors.b5};
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  @media screen and (max-width: 800px){
+    width: (100% - 10px);
+    margin: 10px 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0;
+    padding: 0 10px;
+  }
   `}
 `;
 

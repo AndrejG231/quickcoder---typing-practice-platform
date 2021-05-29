@@ -6,10 +6,11 @@ import { calculatePracticeScore, msToTime } from "../utilites";
 interface props {
   practice: practiceObject;
   noTimer?: boolean;
+  noLastError?: boolean;
   column?: boolean;
 }
 
-const Stats: FC<props> = ({ practice, noTimer, column }) => {
+const Stats: FC<props> = ({ practice, noTimer, column, noLastError }) => {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -18,7 +19,6 @@ const Stats: FC<props> = ({ practice, noTimer, column }) => {
       return () => clearInterval(timer);
     }
   }, [noTimer, setTime]);
-
   const totalTimeSpend =
     practice.start_time && !noTimer
       ? new Date().getTime() - practice.start_time + practice.time_spent
@@ -44,8 +44,8 @@ const Stats: FC<props> = ({ practice, noTimer, column }) => {
       <Value index={4}>{errors_rate ? errors_rate.toFixed(2) : 0}%</Value>
       <Name index={5}>CPM:</Name>
       <Value index={5}>{cpm || 0}</Value>
-      {!column ? <Name index={6}>Last Error:</Name> : null}
-      {!column ? <Value index={6}>{practice.last_error}</Value> : null}
+      {!noLastError ? <Name index={6}>Last Error:</Name> : null}
+      {!noLastError ? <Value index={6}>{practice.last_error}</Value> : null}
     </StatContainer>
   );
 };
