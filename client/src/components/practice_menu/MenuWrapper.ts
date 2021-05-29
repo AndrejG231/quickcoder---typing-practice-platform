@@ -12,7 +12,7 @@ const MenuWrapper = styled.div`
     grid-template:
       "menu" 80%
       "scores" 0%
-      "settings"40% 
+      "settings" 20%
       / 100%;
   }
 `;

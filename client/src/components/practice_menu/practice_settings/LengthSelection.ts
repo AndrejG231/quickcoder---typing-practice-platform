@@ -5,7 +5,6 @@ const LengthSelection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin: auto;
   margin-top: 15px;
 `;
 

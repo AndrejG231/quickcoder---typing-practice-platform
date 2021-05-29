@@ -17,7 +17,10 @@ import {
   LengthSelection,
   SettingsWrapper,
   StartButton,
+  SchemeSelection,
+  SelectionLabel,
 } from "./practice_settings";
+import { Wrapper } from "../";
 
 const rdxProps = (state: reduxStore) => {
   const category =
@@ -79,6 +82,15 @@ const PracticeSettings: FC<props> = ({
   };
   return (
     <SettingsWrapper>
+      <SelectionLabel htmlFor="scheme">Keyboard scheme:</SelectionLabel>
+      <SchemeSelection
+        name="scheme"
+        onChange={(event) => console.log(event.target.value)}
+        defaultValue="en-us"
+      >
+        <option value="en-us"> EN - US </option>
+      </SchemeSelection>
+      <SelectionLabel>Length:</SelectionLabel>
       <LengthSelection>
         <LengthDecreaseButton size={22} onClick={() => setLength(-1)} />
         <LengthDisplay>{length}</LengthDisplay>
