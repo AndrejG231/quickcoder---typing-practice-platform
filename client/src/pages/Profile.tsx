@@ -1,21 +1,10 @@
 import React, { FC } from "react";
-import { Dispatch } from "redux";
-import { connect, ConnectedProps } from "react-redux";
-import { reduxStore } from "../types";
 import { Route, useHistory } from "react-router";
 
-import { Routes, ProfileGrid } from "../components/profile";
+import { Routes, ProfileGrid, Overview } from "../components/profile";
 import { ArrowButton, NavBar } from "../components/";
 
-const rdxProps = (state: reduxStore) => ({});
-
-const rdxDispatch = (dispatch: Dispatch) => ({});
-
-const withRedux = connect(rdxProps, rdxDispatch);
-
-type props = ConnectedProps<typeof withRedux>;
-
-const Profile: FC<props> = () => {
+const Profile: FC = () => {
   const nav = useHistory();
   return (
     <ProfileGrid>
@@ -33,14 +22,12 @@ const Profile: FC<props> = () => {
         <ArrowButton onClick={() => nav.push("/profile/settings/")}>
           Settings
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/home/")}>
-          Home
-        </ArrowButton>
+        <ArrowButton onClick={() => nav.push("/home/")}>Home</ArrowButton>
       </NavBar>
       {/* Nested routes */}
       <Routes>
         <Route path="/profile/overview/">
-          <div>Overview</div>
+          <Overview />
         </Route>
         <Route path="/profile/history/">
           <div>History</div>
@@ -56,4 +43,4 @@ const Profile: FC<props> = () => {
   );
 };
 
-export default withRedux(Profile);
+export default Profile;
