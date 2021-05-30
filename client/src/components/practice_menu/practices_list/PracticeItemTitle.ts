@@ -6,6 +6,9 @@ const PracticeItemTitle = styled.h3`
   font-size: 24px;
   transform: translateY(10px);
   color: ${({ theme }) => theme.colors.w5};
+  @media screen and (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export default PracticeItemTitle;

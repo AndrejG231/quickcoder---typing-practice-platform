@@ -12,6 +12,9 @@ const CategoryDescription = styled.p`
   padding-bottom: 5px;
   border: 2px solid black;
   border-radius: 5px;
+  @media screen and (max-width: 800px){
+    font-size: 12px;
+  }
 `};
 `;
 

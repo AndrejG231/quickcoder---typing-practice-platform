@@ -26,6 +26,9 @@ const CategoryButton = styled.button`
   z-index: 20;
   color: ${theme.colors.w5};
   text-transform: capitalize;
+  @media screen and (max-width: 700px){
+    font-size: 12px;
+  }
 `}
 `;
 

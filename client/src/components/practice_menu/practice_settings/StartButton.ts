@@ -15,7 +15,7 @@ const StartButton = styled.button`
     }
     @media screen and (max-width: 800px){
       height: 30px;
-      margin-bottom: 10px;
+      margin-top: 0;
     }
   `}
 `;

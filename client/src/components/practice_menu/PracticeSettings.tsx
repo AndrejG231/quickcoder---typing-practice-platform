@@ -105,6 +105,9 @@ const PracticeSettings: FC<props> = ({
       ) : (
         <StartButton>Select practice first..</StartButton>
       )}
+      <StartButton onClick={() => (!loading ? nav.push("/home/") : null)}>
+        Go back home..
+      </StartButton>
     </SettingsWrapper>
   );
 };
