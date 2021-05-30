@@ -8,6 +8,7 @@ const UserStats = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
 `;
 
 export default UserStats;
