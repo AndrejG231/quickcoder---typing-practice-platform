@@ -12,7 +12,7 @@ const CategoryDescription = styled.p`
   padding-bottom: 5px;
   border: 2px solid black;
   border-radius: 5px;
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 700px){
     font-size: 12px;
   }
 `};

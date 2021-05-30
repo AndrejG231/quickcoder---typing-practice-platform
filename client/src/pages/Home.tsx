@@ -71,6 +71,7 @@ const Home: React.FC<props> = ({
   //Fetch user when awaiting auth
   useEffect(() => {
     if (awaitingAuth) {
+      // TODO: reset user practice stats
       getUserInfo({
         onSuccess: (userInfo) => {
           setUserInfo(userInfo);
@@ -86,7 +87,7 @@ const Home: React.FC<props> = ({
 
   //Home screen animation handler
   useEffect(() => {
-    animateIn();
+    setTimeout(() => animateIn(), 10);
     return () => {
       animateOut();
     };
@@ -130,9 +131,7 @@ const Home: React.FC<props> = ({
       {/* Top header bar */}
       <Header
         isOnScreen={isOnScreen}
-        onUserClick={() => {
-          navigation.push("/home/profile/");
-        }}
+        onUserClick={() => (userInfo ? redirect("/profile/overview/") : null)}
         onTitleClick={goHome}
         username={`${
           userInfo?.username
@@ -151,11 +150,21 @@ const Home: React.FC<props> = ({
         <ClippedButton onClick={() => redirect("/practice_menu/")}>
           <MenuItem>Practice</MenuItem>
         </ClippedButton>
-        <ClippedButton onClick={() => null}>
+        <ClippedButton
+          onClick={() => {
+            userInfo
+              ? redirect("/profile/overview/")
+              : navigation.push("/home/login/");
+          }}
+        >
+          <MenuItem>Profile</MenuItem>
+        </ClippedButton>
+        <ClippedButton onClick={() => redirect("/profile/settings/")}>
           <MenuItem>Settings</MenuItem>
         </ClippedButton>
-        <ClippedButton onClick={() => null}></ClippedButton>
-        <ClippedButton onClick={() => null}></ClippedButton>
+        <ClippedButton onClick={() => null}>
+          <MenuItem>Contribute</MenuItem>
+        </ClippedButton>
       </NavWrapper>
 
       {/* Right side authentication navigation */}

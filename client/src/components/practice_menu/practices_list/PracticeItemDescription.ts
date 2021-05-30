@@ -7,7 +7,7 @@ const PracticeItemDescription = styled.p`
   transform: translateY(-8px);
   @media screen and (max-width: 700px) {
     font-size: 12px;
-    margin-left: 10px;
+    margin-left: 10px;    
     width: 100px;
   }
 `;

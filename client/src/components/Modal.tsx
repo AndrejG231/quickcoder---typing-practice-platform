@@ -34,7 +34,7 @@ const Modal: FC<props> = ({ children, animateIn, animateOut, isOnScreen }) => {
   const nav = useHistory();
 
   useEffect(() => {
-    animateIn();
+    setTimeout(() => animateIn(), 10);
     return () => {
       animateOut();
     };
