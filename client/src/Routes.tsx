@@ -10,6 +10,7 @@ import { reduxStore } from "./types";
 
 //pages
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
 import PracticeSummary from "./pages/PracticeSummary";
@@ -55,6 +56,7 @@ const Routes: React.FC<props> = ({ menu, setMenu, setPopUp }) => {
     <BrowserRouter>
       <Route exact path="/" component={() => <Home />} />
       <Route path="/home/" component={() => <Home />} />
+      <Route path="/profile/" component={() => <Profile />} />
       <Route exact path="/home/login/" component={() => <Login />} />
       <Route exact path="/home/signup/" component={() => <Register />} />
       <Route

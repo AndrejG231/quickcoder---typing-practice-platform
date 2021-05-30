@@ -9,6 +9,7 @@ const NavBar = styled.div`
   overflow: auto;
   background: ${theme.colors.b3};
   margin-bottom: 10px;
+  height: 100%;
   `}
 `;
 
