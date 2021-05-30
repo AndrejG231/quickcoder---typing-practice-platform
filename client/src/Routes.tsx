@@ -6,6 +6,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { loadMenu, setGlobalMessage } from "./redux/actions";
 import { practiceMenu } from "./types";
 import { getMenu } from "./api";
+import { reduxStore } from "./types";
 
 //pages
 import Home from "./pages/Home";
@@ -17,11 +18,9 @@ import LeaderBoard from "./pages/LeaderBoard";
 //modals
 import Login from "./modals/Login";
 import Register from "./modals/Register";
-import Profile from "./modals/Profile";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 import ChangeKnownPassword from "./modals/ChangeKnownPassword";
-import { reduxStore } from "./types";
 
 const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
@@ -56,7 +55,6 @@ const Routes: React.FC<props> = ({ menu, setMenu, setPopUp }) => {
     <BrowserRouter>
       <Route exact path="/" component={() => <Home />} />
       <Route path="/home/" component={() => <Home />} />
-      <Route exact path="/home/profile/" component={() => <Profile />} />
       <Route exact path="/home/login/" component={() => <Login />} />
       <Route exact path="/home/signup/" component={() => <Register />} />
       <Route

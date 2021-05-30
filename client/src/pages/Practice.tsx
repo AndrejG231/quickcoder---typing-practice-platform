@@ -6,11 +6,9 @@ import { practiceObject, reduxStore, schemeCharacters } from "../types";
 import { setPractice, removeUserPracticeStat } from "../redux/actions";
 import { loadPractice } from "../api";
 
-import { Textline, Keyboard } from "../components/practice";
+import { Textline, Keyboard, FingerIndex } from "../components/practice";
 import { Wrapper, Stats } from "../components/";
 import { handlePracticeProgress } from "../utilites";
-
-import FingerIndex from "../components/practice/FingerIndex";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
@@ -31,6 +29,7 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
 
   const { id }: { id: string } = useParams();
 
+  //Load practice if current loaded practice is different or not loaded
   useEffect(() => {
     if (practice?.id !== ~~id) {
       loadPractice({
@@ -41,6 +40,7 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
     }
   }, [practice, id]);
 
+  //Update practice by evaulating keypress handler
   const handleKeyPress = (event: KeyboardEvent) => {
     if (practice) {
       setPractice(
@@ -52,11 +52,13 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
     }
   };
 
+  //Keypress event listener
   useEffect(() => {
     document.addEventListener("keypress", handleKeyPress);
     return () => document.removeEventListener("keypress", handleKeyPress);
   });
 
+  //Loading screen while practice is not loaded or different
   if (!practice || practice?.id !== ~~id) {
     return <div>Loading....</div>;
   }
@@ -67,7 +69,7 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
         layout={"us"}
         next={practice.string[practice.index] as schemeCharacters}
       />
-      <Textline />
+      <Textline practice={practice} />
       <Keyboard
         keyboard={"us"}
         next={practice.string[practice.index] as schemeCharacters}

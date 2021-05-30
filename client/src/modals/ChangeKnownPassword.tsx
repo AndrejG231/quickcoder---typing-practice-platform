@@ -3,8 +3,9 @@ import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup, useErrors } from "../utilites";
+import { useErrors } from "../utilites";
 import { animateOut } from "../redux/actions/";
+import { inputData } from "../types";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
@@ -16,12 +17,20 @@ type props = ConnectedProps<typeof withRedux>;
 
 const ChangeTokenPassword: FC<props> = ({ closeModal }) => {
   const [errors, setErrors] = useErrors();
-  const [inputData, setInputData] = useState(
-    createInputGroup(
-      ["password", "new password", "repeat new password"],
-      ["password", "password", "password"]
-    )
-  );
+  const [inputData, setInputData] = useState<inputData>({
+    password: {
+      type: "password",
+      value: "",
+    },
+    "new password": {
+      type: "password",
+      value: "",
+    },
+    "repeat new password": {
+      type: "password",
+      value: "",
+    },
+  });
 
   const submitForm = () => {};
 

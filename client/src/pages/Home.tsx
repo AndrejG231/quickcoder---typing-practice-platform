@@ -3,7 +3,6 @@ import { Dispatch } from "redux";
 import { useHistory } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 
-//Components
 import {
   Header,
   ClippedButton,
@@ -21,13 +20,12 @@ import {
   animateIn,
   animateOut,
   setUserInfo,
+  setGlobalMessage,
   toggleAuthRefresh,
 } from "../redux/actions/";
 
 import { getUserInfo, logout } from "../api/";
-import setGlobalMessage from "../redux/actions/setGlobalMessage";
 
-//Redux
 const rdxState = (state: reduxStore) => {
   return {
     userInfo: state.authentication.user,
@@ -70,6 +68,7 @@ const Home: React.FC<props> = ({
 }) => {
   const navigation = useHistory();
 
+  //Fetch user when awaiting auth
   useEffect(() => {
     if (awaitingAuth) {
       getUserInfo({
@@ -85,14 +84,15 @@ const Home: React.FC<props> = ({
     }
   }, [awaitingAuth, setUserInfo]);
 
+  //Home screen animation handler
   useEffect(() => {
-    //Animation
     animateIn();
     return () => {
       animateOut();
     };
   }, [animateIn, animateOut]);
 
+  //Routing function that provides quitting animation before rerouting
   const redirect = (to: string) => {
     if (isModalOpened) {
       closeModal();
@@ -104,6 +104,7 @@ const Home: React.FC<props> = ({
     }
   };
 
+  //Logout handler
   const userLogout = () => {
     logout({
       onSuccess: () => {
@@ -114,6 +115,7 @@ const Home: React.FC<props> = ({
     });
   };
 
+  //When home screen modal is opened, animates it out before rerouting to main page
   const goHome = () => {
     if (isModalOpened) {
       closeModal();
@@ -125,6 +127,7 @@ const Home: React.FC<props> = ({
 
   return (
     <HomeContainer>
+      {/* Top header bar */}
       <Header
         isOnScreen={isOnScreen}
         onUserClick={() => {
@@ -139,6 +142,8 @@ const Home: React.FC<props> = ({
             : "GUEST"
         }`}
       />
+
+      {/* Leftside navigation */}
       <NavWrapper isOnScreen={isOnScreen}>
         <ClippedButton onClick={() => null}>
           <MenuItem>Typing test</MenuItem>
@@ -152,6 +157,8 @@ const Home: React.FC<props> = ({
         <ClippedButton onClick={() => null}></ClippedButton>
         <ClippedButton onClick={() => null}></ClippedButton>
       </NavWrapper>
+
+      {/* Right side authentication navigation */}
       {userInfo?.username ? (
         <UserButtonWrapper isOnScreen={isOnScreen}>
           <ArrowButton width={100} onClick={userLogout} left>
@@ -176,6 +183,8 @@ const Home: React.FC<props> = ({
           </ArrowButton>
         </UserButtonWrapper>
       )}
+
+      {/* TODO: Space for ads container */}
     </HomeContainer>
   );
 };

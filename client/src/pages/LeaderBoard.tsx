@@ -28,20 +28,24 @@ type props = ConnectedProps<typeof withRedux>;
 
 const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
   const { index, category }: { index: string; category: string } = useParams();
+
   const categoryIndex = getCategoryIndex(category, menu);
+
   const selectionPractice = menu
     ? menu[categoryIndex || 0].items[~~index]
     : null;
+
   const nav = useHistory();
+
   const [leaderboard, setLeaderboard] = useState<leaderboardItem[] | null>();
 
+  //Fetching leaderboard and loading it to state handler
   const loadLeaderBoard = async () => {
     const leaderboard = await getLeaderBoard(~~index, category);
     setLeaderboard(leaderboard);
   };
 
-  console.log(leaderboard);
-
+  //Fetch leaderboard
   useEffect(() => {
     if (!leaderboard) {
       loadLeaderBoard();
@@ -54,24 +58,28 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
 
   return (
     <Wrapper>
+      {/* Navigation  */}
       <NavBar>
-        {categoryIndex && selectionPractice ? (
-          <ArrowButton
-            onClick={() => {
-              nav.push("/practice_menu/");
+        <ArrowButton
+          /* If neccessarry data is loaded already, selects practice
+           of current leaderboard before going to menu */
+          onClick={() => {
+            if (
+              menu &&
+              typeof categoryIndex === "number" &&
+              selectionPractice
+            ) {
               selectPractice(categoryIndex, selectionPractice);
-            }}
-          >
-            New practice
-          </ArrowButton>
-        ) : (
-          <ArrowButton onClick={() => nav.push("/practice_menu/")}>
-            Practice Menu
-          </ArrowButton>
-        )}
+            }
+            nav.push("/practice_menu/");
+          }}
+        >
+          New practice
+        </ArrowButton>
         <ArrowButton onClick={() => nav.push("/home/")}>Home</ArrowButton>
         <ArrowButton onClick={() => nav.push("/profile/")}>Profile</ArrowButton>
       </NavBar>
+      {/* Leaderboard data table */}
       <Board>
         <thead>
           <Row>

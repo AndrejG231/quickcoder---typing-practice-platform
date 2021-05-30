@@ -13,8 +13,10 @@ import { setUsersPracticeStat } from "../../redux/actions";
 import { getUserPracticeStats } from "../../api";
 
 const rdxProps = (state: reduxStore) => ({
-  category:
-    state.practiceMenu[state.practiceSelection.selectedCategory].category,
+  category: state.practiceMenu
+    ? state.practiceMenu[state.practiceSelection.selectedCategory].category
+    : null,
+  // Resolve category name from practice menu and category index
   menu: state.practiceMenu,
   practiceIndex: state.practiceSelection.selectedPractice?.index,
   stats: state.userPracticeStats,
@@ -36,6 +38,7 @@ const UserStats: FC<props> = ({
   stats,
   updateStats,
 }) => {
+  // Default stats displayed
   let displayStats = {
     cpm: 0,
     index: 0,
@@ -43,6 +46,7 @@ const UserStats: FC<props> = ({
     errors_rate: 0,
   };
 
+  // Load stats for current practice if there are not in stats state
   useEffect(() => {
     if (category && menu && typeof practiceIndex === "number") {
       const getStats = () =>
@@ -62,12 +66,19 @@ const UserStats: FC<props> = ({
     }
   }, [category, menu, practiceIndex, stats, updateStats]);
 
-  if (menu && stats[category] && typeof practiceIndex === "number") {
+  // if loaded successfully replace default stats with loaded stats
+  if (
+    menu &&
+    category &&
+    stats[category] &&
+    typeof practiceIndex === "number"
+  ) {
     if (stats[category][practiceIndex]) {
       displayStats = stats[category][practiceIndex] || displayStats;
     }
   }
 
+  // Calculate barfill sizes from stats
   const barSizes = {
     score: Math.min(100, (displayStats.score / 1200) * 100),
     cpm: Math.min(100, (displayStats.cpm / 440) * 100),

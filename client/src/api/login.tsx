@@ -1,5 +1,5 @@
 import { formError, actionResponse } from "../types";
-import { api, serverError } from "../static";
+import { api } from "../static";
 
 const loginMutation = `
   mutation login($credentials: LoginInput!) {
@@ -31,7 +31,6 @@ const login = async ({ credentials, onSuccess, setErrors }: loginOptions) => {
 
     const result: actionResponse = data.data.data.login;
 
-
     if (result?.success) {
       onSuccess();
     } else {
@@ -42,7 +41,10 @@ const login = async ({ credentials, onSuccess, setErrors }: loginOptions) => {
       setErrors(error);
     }
   } catch (error) {
-    setErrors(serverError);
+    setErrors({
+      field: "global",
+      value: "Couldn't connect to the server.",
+    });
   }
 };
 

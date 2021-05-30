@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
-import { createInputGroup, useErrors } from "../utilites";
+import { useErrors } from "../utilites";
 import { login } from "../api/";
 import {
   animateOut,
@@ -11,6 +11,7 @@ import {
   setGlobalMessage,
 } from "../redux/actions/";
 import { useHistory } from "react-router";
+import { inputData } from "../types";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
@@ -25,9 +26,10 @@ type props = ConnectedProps<typeof withRedux>;
 const Login: FC<props> = ({ closeModal, refreshAuth, setGlobalMessage }) => {
   const nav = useHistory();
   const [errors, setErrors] = useErrors();
-  const [inputData, setInputData] = useState(
-    createInputGroup(["username or email", "password"], ["text", "password"])
-  );
+  const [inputData, setInputData] = useState<inputData>({
+    "username or email": { type: "text", value: "" },
+    password: { type: "password", value: "" },
+  });
 
   const submitForm = () => {
     login({

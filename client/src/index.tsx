@@ -13,7 +13,7 @@ ReactDOM.render(
   <Provider store={reduxStore}>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Screen>
+      <Screen /*hidden overflow container */>
         <Routes />
         <GlobalMessage />
       </Screen>

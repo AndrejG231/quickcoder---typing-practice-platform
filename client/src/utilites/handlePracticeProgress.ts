@@ -6,11 +6,14 @@ const handlePracticeProgress = (
   state: practiceObject,
   onFinish: () => void
 ): practiceObject => {
-  //matched case
+  /* 
+  good keypress handling
+  => increase index, remove "last error"
+  */
+
+  /* When practice is finished, update practice to server and fire "onFinish" function */
   if (keyPressed === state.string[state.index]) {
     const newIndex = state.index + 1;
-    //Finished pracice
-
     if (newIndex === state.string.length) {
       updatePractice({
         practiceUpdateFields: {
@@ -33,7 +36,8 @@ const handlePracticeProgress = (
         start_time: new Date().getTime(),
       };
     }
-    //Continue practice
+
+    /* Every 50 characters, update practice to server, save time spent and return new start time */
     if (newIndex % 50 === 0 && newIndex > 49 && state.start_time) {
       updatePractice({
         practiceUpdateFields: {
@@ -60,18 +64,26 @@ const handlePracticeProgress = (
       index: newIndex,
       last_error: "",
       start_time: state.start_time ? state.start_time : new Date().getTime(),
+      // If there is not start time setup yet, add there new time
+      // => Timer not starting until first keypress
     };
   }
-  // bad key case
+
+  /*
+  bad keypress handling
+  */
+
   let newErrors: string;
   const currentErrors = state.errors[state.index];
 
+  // Join errors if existing on current index
   if (typeof currentErrors === "string") {
     newErrors = currentErrors + keyPressed;
   } else {
     newErrors = keyPressed;
   }
 
+  // practice with updated errors
   return {
     ...state,
     errors: {

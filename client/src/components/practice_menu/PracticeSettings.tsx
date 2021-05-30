@@ -20,18 +20,17 @@ import {
   SchemeSelection,
   SelectionLabel,
 } from "./practice_settings";
-import { Wrapper } from "../";
 
 const rdxProps = (state: reduxStore) => {
   const category =
+    // selected category name from menu and selected category index
     state.practiceMenu.length > 0
       ? state.practiceMenu[state.practiceSelection.selectedCategory].category
       : "";
-  const practice = state.practiceSelection.selectedPractice;
   return {
     length: state.practiceSelection.length,
     category,
-    practice,
+    practice: state.practiceSelection.selectedPractice,
     error: state.practiceSelection.error,
     loading: state.practiceSelection.loading,
   };
@@ -60,9 +59,10 @@ const PracticeSettings: FC<props> = ({
 }) => {
   const nav = useHistory();
 
+  // Create practice, save it to state and reroute to practice session page handler
   const startPractice = () => {
     if (practice && category) {
-      setLoading(true);
+      setLoading(true); //To prevent multiple request afer one not finished
       createPractice({
         category,
         index: practice.index,
@@ -82,20 +82,20 @@ const PracticeSettings: FC<props> = ({
   };
   return (
     <SettingsWrapper>
+      {/* Keyboard scheme selection */}
+      {/* TODO: Load scheme from server, and add available schemes per practice */}
       <SelectionLabel htmlFor="scheme">Keyboard scheme:</SelectionLabel>
-      <SchemeSelection
-        name="scheme"
-        onChange={(event) => console.log(event.target.value)}
-        defaultValue="en-us"
-      >
+      <SchemeSelection name="scheme" defaultValue="en-us">
         <option value="en-us"> EN - US </option>
       </SchemeSelection>
+      {/* Length selection */}
       <SelectionLabel>Length:</SelectionLabel>
       <LengthSelection>
         <LengthDecreaseButton size={22} onClick={() => setLength(-1)} />
         <LengthDisplay>{length}</LengthDisplay>
         <LengthIncreaseButton size={22} onClick={() => setLength(1)} />
       </LengthSelection>
+      {/* Start button - do nothing when loading or error */}
       {error ? (
         <StartButton>Error..</StartButton>
       ) : loading ? (

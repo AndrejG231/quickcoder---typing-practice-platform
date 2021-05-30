@@ -1,6 +1,5 @@
 import React from "react";
-import { connect, ConnectedProps } from "react-redux";
-import { reduxStore } from "../../types";
+import { practiceObject } from "../../types";
 
 import {
   TextArea,
@@ -13,30 +12,26 @@ import {
   ErrorsShift,
 } from "./textline/";
 
-const rdxProps = (state: reduxStore) => ({
-  practice: state.practice,
-});
-
-const withRedux = connect(rdxProps, () => ({}));
-
-type props = ConnectedProps<typeof withRedux>;
+interface props {
+  practice: practiceObject;
+}
 
 const TextLine: React.FC<props> = ({ practice }) => {
+  //place for last error position on text mapping
   let lastError = 0;
-
-  if (!practice) {
-    return <div>Error...</div>;
-  }
 
   return (
     <TextArea>
+      {/* When errors added, text line moves without transition, appears unchanged */}
       <ErrorsShift
         errors={Object.values(practice.errors).reduce(
           (acc, val) => acc + val.length,
           0
         )}
       >
+        {/* On successful keypress, textline smoothly moves to next characters */}
         <Text offset={practice.index}>
+          {/* Mapping practice string and errors into textline */}
           {Object.keys(practice?.errors).map((errIndex, i) => {
             const prevError = lastError;
             lastError = ~~errIndex;
@@ -54,9 +49,10 @@ const TextLine: React.FC<props> = ({ practice }) => {
           </Comming>
         </Text>
       </ErrorsShift>
+      {/* Pointer to next character */}
       <Cursor>^</Cursor>
     </TextArea>
   );
 };
 
-export default withRedux(TextLine);
+export default TextLine;

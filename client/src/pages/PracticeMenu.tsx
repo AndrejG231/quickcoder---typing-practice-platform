@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { loadMenu, selectPractice } from "../redux/actions";
-import { practiceItem, reduxStore } from "../types";
-import { practiceMenu } from "../types/";
+import { reduxStore } from "../types";
 import {
   MenuWrapper,
   PracticesList,

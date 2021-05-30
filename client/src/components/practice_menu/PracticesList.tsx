@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { selectCategory, selectPractice } from "../../redux/actions";
-import { practiceItem, practiceMenu, reduxStore } from "../../types";
+import { practiceItem, reduxStore } from "../../types";
 import {
   CategoriesBar,
   CategoryButton,
@@ -43,6 +43,7 @@ const PracticesList: FC<props> = ({
 }) => {
   return (
     <PracticesWrapper>
+      {/* Mapped categories from menu, selection handler */}
       <CategoriesBar>
         {menu.map((category, index) => {
           return (
@@ -59,8 +60,11 @@ const PracticesList: FC<props> = ({
       <CategoryDescription>
         {menu[selectedCategory].description}
       </CategoryDescription>
+      {/* Container to hold overflow container and item faders at absolute position */}
       <ItemsContainer>
+        {/* Container to provide scroll and items padding */}
         <OverflowContainer>
+          {/* Mapped practices from menu and selection handling */}
           <CategoryItems>
             {menu[selectedCategory].items.map((item, index) => {
               const isSelected = item === selectedPractice;
@@ -81,6 +85,7 @@ const PracticesList: FC<props> = ({
             })}
           </CategoryItems>
         </OverflowContainer>
+        {/* Item faders - smooth items appearing and disappearing */}
         <ItemsFade top />
         <ItemsFade bottom />
       </ItemsContainer>

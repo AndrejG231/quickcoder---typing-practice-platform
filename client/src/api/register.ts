@@ -1,4 +1,4 @@
-import { api, serverError } from "../static";
+import { api } from "../static";
 import { formError, actionResponse } from "../types";
 
 const registerMutation = `
@@ -46,7 +46,10 @@ const register = async ({
       setErrors(error);
     }
   } catch (error) {
-    setErrors(serverError);
+    setErrors({
+      field: "global",
+      value: "Couldn't connect to the server.",
+    });
   }
 };
 

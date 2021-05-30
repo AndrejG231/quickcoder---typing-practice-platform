@@ -1,6 +1,6 @@
 import react, { FC } from "react";
 
-import { keyboardLayout, schemeCharacters } from "../../types";
+import { schemeCharacters } from "../../types";
 import { keyColors } from "../../static";
 import { KeysContainer, KeysRow, Key } from "./keyboard/";
 
@@ -14,9 +14,12 @@ interface props {
 }
 
 const Keyboard: FC<props> = ({ keyboard, next, lastError }) => {
+  // Get selected layout
+  // TODO: load layots from server
   const layout = layouts[keyboard];
 
   return (
+    // Map selected layout into visual keyboard
     <KeysContainer>
       {Object.values(layout).map((row, index) => {
         return (
