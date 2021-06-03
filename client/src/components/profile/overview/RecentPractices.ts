@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 const RecentPractices = styled.div`
   grid-area: recent;
-  margin-top: 140px;
-  margin-bottom: 100px;
+  margin-top: 100px;
   padding: 10px;
   width: calc(100% - 20px);
-  height: calc(100% - 270px);
+  height: calc(100% - 120px);
   display: grid;
   grid-template:
     "cpm0 cpm1 cpm2" 50%

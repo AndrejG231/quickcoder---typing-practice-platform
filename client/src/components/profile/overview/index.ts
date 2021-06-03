@@ -10,4 +10,3 @@ export { default as RecentPractices } from "./RecentPractices";
 export { default as RecentPracticeName } from "./RecentPracticeName";
 export { default as RecentStatsMainLine } from "./RecentStatsMainLine";
 export { default as RecenetPracticeCategory } from "./RecentPracticeCategory";
-export { default as RecentPracticeScore } from "./RecentPracticeScore";

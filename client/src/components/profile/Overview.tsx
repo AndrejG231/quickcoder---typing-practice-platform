@@ -14,7 +14,6 @@ import {
   RecentStatsMainLine,
   PracticeBar,
   PracticeBarValue,
-  RecentPracticeScore,
 } from "./overview/";
 import RecentPracticeCategory from "./overview/RecentPracticeCategory";
 
@@ -54,8 +53,8 @@ const Overview: FC<props> = () => {
       {/* Stats and its visuals of last 3 finished practices */}
       <RecentPractices>
         <RecentStatsMainLine />
-        <PracticeBar index={0} value={100} cpm>
-          <RecentPracticeName>
+        <PracticeBar index={0} value={7} cpm>
+          <RecentPracticeName value={7}>
             Practice Name top 100 word
             <br />
             <RecentPracticeCategory>(category)</RecentPracticeCategory>
@@ -64,11 +63,9 @@ const Overview: FC<props> = () => {
         </PracticeBar>
         <PracticeBar index={0} value={100} error>
           <PracticeBarValue error>2.54</PracticeBarValue>
-          <RecentPracticeScore>1293</RecentPracticeScore>
         </PracticeBar>
-        <RecentPracticeScore>1209</RecentPracticeScore>
         <PracticeBar index={1} value={45} cpm>
-          <RecentPracticeName>
+          <RecentPracticeName value={45}>
             Practice Name
             <br />
             <RecentPracticeCategory>(category)</RecentPracticeCategory>
@@ -77,7 +74,7 @@ const Overview: FC<props> = () => {
         <PracticeBar index={1} value={45} error></PracticeBar>
 
         <PracticeBar index={2} value={45} cpm>
-          <RecentPracticeName>
+          <RecentPracticeName value={45}>
             Practice Name
             <br />
             <RecentPracticeCategory>(category)</RecentPracticeCategory>
