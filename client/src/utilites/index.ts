@@ -12,3 +12,6 @@ export { default as calculatePracticeScore } from "./calculatePracticeScore";
 
 export { default as getCategoryIndex } from "./getCategoryIndex";
 // Returns index of category from category name and practice menu
+
+export { default as statColorSwitch } from "./statColorSwitch";
+// Returns desired color based on stat success %

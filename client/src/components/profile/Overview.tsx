@@ -10,7 +10,13 @@ import {
   OverviewGrid,
   UserName,
   RecentPractices,
+  RecentPracticeName,
+  RecentStatsMainLine,
+  PracticeBar,
+  PracticeBarValue,
+  RecentPracticeScore,
 } from "./overview/";
+import RecentPracticeCategory from "./overview/RecentPracticeCategory";
 
 const rdxProps = (state: reduxStore) => ({});
 
@@ -23,6 +29,7 @@ const Overview: FC<props> = () => {
     <OverviewGrid>
       <UserName>Username</UserName>
       <Stats>
+        {/* Average user's overall stats */}
         <StatPair>
           <StatValue>1401</StatValue>
           <StatName>Average score</StatName>
@@ -44,7 +51,40 @@ const Overview: FC<props> = () => {
           <StatName>Minutes spent</StatName>
         </StatPair>
       </Stats>
-      <RecentPractices></RecentPractices>
+      {/* Stats and its visuals of last 3 finished practices */}
+      <RecentPractices>
+        <RecentStatsMainLine />
+        <PracticeBar index={0} value={100} cpm>
+          <RecentPracticeName>
+            Practice Name top 100 word
+            <br />
+            <RecentPracticeCategory>(category)</RecentPracticeCategory>
+          </RecentPracticeName>
+          <PracticeBarValue cpm>354</PracticeBarValue>
+        </PracticeBar>
+        <PracticeBar index={0} value={100} error>
+          <PracticeBarValue error>2.54</PracticeBarValue>
+          <RecentPracticeScore>1293</RecentPracticeScore>
+        </PracticeBar>
+        <RecentPracticeScore>1209</RecentPracticeScore>
+        <PracticeBar index={1} value={45} cpm>
+          <RecentPracticeName>
+            Practice Name
+            <br />
+            <RecentPracticeCategory>(category)</RecentPracticeCategory>
+          </RecentPracticeName>
+        </PracticeBar>
+        <PracticeBar index={1} value={45} error></PracticeBar>
+
+        <PracticeBar index={2} value={45} cpm>
+          <RecentPracticeName>
+            Practice Name
+            <br />
+            <RecentPracticeCategory>(category)</RecentPracticeCategory>
+          </RecentPracticeName>
+        </PracticeBar>
+        <PracticeBar index={2} value={45} error></PracticeBar>
+      </RecentPractices>
     </OverviewGrid>
   );
 };
