@@ -1,7 +1,7 @@
 import messages from "../data/messages";
-import { actionResponse } from "../types/responses/";
+import { ActionResponse } from "../types/";
 
-const generateResponse = (success: boolean, key: string): actionResponse => {
+const generateResponse = (success: boolean, key: string): ActionResponse => {
   return {
     success: success,
     info: key,

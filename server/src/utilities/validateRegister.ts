@@ -1,12 +1,11 @@
 import { validate } from "email-validator";
 import { Users } from "../entities/";
-import { actionResponse } from "../types/responses/";
-import { registerInput } from "../types/arguments/";
+import { ActionResponse, RegisterInput } from "../types/";
 
 import { generateResponse, checkPasswordStrength } from "./";
 
 interface validateReg {
-  (credentials: registerInput): Promise<actionResponse | undefined>;
+  (credentials: RegisterInput): Promise<ActionResponse | undefined>;
 }
 
 const validateRegister: validateReg = async (credentials) => {

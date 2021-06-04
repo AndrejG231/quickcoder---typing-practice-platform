@@ -1,11 +1,11 @@
 import { Practices, Users } from "../../entities";
-import { practiceLeaderboardResponse } from "../../types/responses";
+import { PracticeLeaderboardResponse } from "../../types/";
 import { getConnection } from "typeorm";
 
 const practiceLeaderboard = async (
   category: string,
   index: number
-): Promise<practiceLeaderboardResponse[]> => {
+): Promise<PracticeLeaderboardResponse[]> => {
   const queryResults = await getConnection()
     .createQueryBuilder()
     .select("*")

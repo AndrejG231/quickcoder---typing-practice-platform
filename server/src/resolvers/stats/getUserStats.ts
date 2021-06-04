@@ -2,7 +2,7 @@ import { Request } from "express";
 import { getRecentStats } from "../../utilities/";
 import { getConnection } from "typeorm";
 import { Practices } from "../../entities";
-import { PracticeStat } from "../../types/responses";
+import { PracticeStat } from "../../types/";
 import {
   calculatePracticeScore,
   generateResponse,
@@ -29,12 +29,15 @@ const getUserStats = async (req: Request) => {
 
   for (let i = 0; i < stats.length; i++) {
     if (stats[i].length >= 500) {
-      const {errors_count, time_spent, index} = await getRecentStats(
+      const { errors_count, time_spent, index } = await getRecentStats(
         userData.user.id,
         stats[i].category,
         stats[i].practice_index
       );
-      stats[i] = { ...stats[i], ...calculatePracticeScore({errors_count, time_spent, index}) };
+      stats[i] = {
+        ...stats[i],
+        ...calculatePracticeScore({ errors_count, time_spent, index }),
+      };
     } else {
       stats[i] = { ...stats[i], score: 0, cpm: 0, error_rate: 0 };
     }

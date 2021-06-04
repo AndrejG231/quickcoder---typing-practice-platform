@@ -1,5 +1,5 @@
 import { ObjectType, Field}  from "type-graphql";
-import Users from "../../entities/Users";
+import Users from "../entities/Users";
 import ActionResponse from "./actionResponse";
 
 @ObjectType()

@@ -1,11 +1,11 @@
 import { Practices } from "../../entities";
 import { calculatePracticeScore, generateResponse } from "../../utilities";
 import { getConnection } from "typeorm";
-import { practiceUpdateFields } from "../../types/arguments";
+import { PracticeUpdateFields } from "../../types/";
 
 const updatePractice = async (
   practiceId: number,
-  practiceUpdateFields: practiceUpdateFields
+  practiceUpdateFields: PracticeUpdateFields
 ) => {
   try {
     let isFinished = false;

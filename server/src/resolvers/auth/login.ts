@@ -1,10 +1,10 @@
 import argon2 from "argon2";
 import { Response } from "express";
 import { Users } from "../../entities";
-import { loginInput } from "../../types/arguments/";
+import { LoginInput } from "../../types/";
 import { createAuthCookie, generateResponse } from "../../utilities/";
 
-const login = async (credentials: loginInput, res: Response) => {
+const login = async (credentials: LoginInput, res: Response) => {
   //resolve user
   const credType = credentials.identification.includes("@")
     ? "email"

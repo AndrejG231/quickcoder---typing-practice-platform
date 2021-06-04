@@ -1,29 +1,29 @@
 import { Arg, Ctx, Int, Query, Resolver } from "type-graphql";
 
 import {
-  practiceLeaderboardResponse,
-  practiceScoreResponse,
-} from "../../types/responses";
-import { graphqlContext } from "../../types/";
+  GraphqlContext,
+  PracticeStatsResponse,
+  PracticeLeaderboardResponse,
+} from "../../types/";
 import getUserPracticeStats from "./getUserPracticeStats";
 import practiceLeaderboard from "./practiceLeaderboard";
 import getUserStats from "./getUserStats";
 
 @Resolver()
 class PracticeStats {
-  @Query(() => practiceLeaderboardResponse)
+  @Query(() => PracticeLeaderboardResponse)
   async getUserPracticeStats(
     @Arg("category") category: string,
     @Arg("practiceIndex", () => Int) practiceIndex: number,
-    @Ctx() { req }: graphqlContext
+    @Ctx() { req }: GraphqlContext
   ) {
     return await getUserPracticeStats(category, practiceIndex, req);
   }
-  @Query(() => practiceScoreResponse)
-  async getUserStats(@Ctx() { req }: graphqlContext) {
+  @Query(() => PracticeStatsResponse)
+  async getUserStats(@Ctx() { req }: GraphqlContext) {
     return await getUserStats(req);
   }
-  @Query(() => [practiceLeaderboardResponse])
+  @Query(() => [PracticeLeaderboardResponse])
   async practiceLeaderboard(
     @Arg("category") category: string,
     @Arg("index", () => Int) index: number

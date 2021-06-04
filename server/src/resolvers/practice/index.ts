@@ -1,12 +1,12 @@
 import { Arg, Ctx, Int, Mutation, Query, Resolver } from "type-graphql";
 
 import {
-  actionResponse,
-  practiceInfoResponse,
-  menuResponse,
-} from "../../types/responses";
-import { practiceUpdateFields } from "../../types/arguments";
-import { graphqlContext } from "../../types";
+  ActionResponse,
+  PracticeInfoResponse,
+  MenuResponse,
+  GraphqlContext,
+  PracticeUpdateFields,
+} from "../../types/";
 
 import { menu } from "../../utilities/";
 
@@ -17,32 +17,32 @@ import getPractice from "./getPractice";
 
 @Resolver()
 class PracticeResolver {
-  @Mutation(() => practiceInfoResponse)
+  @Mutation(() => PracticeInfoResponse)
   async createPractice(
     @Arg("category", () => String) category: string,
     @Arg("index", () => Int) index: number,
     @Arg("length", () => Int) length: number,
-    @Ctx() { req, res }: graphqlContext
+    @Ctx() { req, res }: GraphqlContext
   ) {
     return await createPractice(category, index, length, req, res);
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async updatePractice(
     @Arg("practiceId", () => Int) practiceId: number,
-    @Arg("practiceUpdateFields", () => practiceUpdateFields)
-    practiceUpdateFields: practiceUpdateFields
+    @Arg("practiceUpdateFields", () => PracticeUpdateFields)
+    practiceUpdateFields: PracticeUpdateFields
   ) {
     return await updatePractice(practiceId, practiceUpdateFields);
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async deletePractice(@Arg("practiceId", () => Int) practiceId: number) {
     return await deletePractice(practiceId);
   }
-  @Query(() => practiceInfoResponse)
+  @Query(() => PracticeInfoResponse)
   async getPractice(@Arg("id", () => Int) id: number) {
     return await getPractice(id);
   }
-  @Query(() => [menuResponse])
+  @Query(() => [MenuResponse])
   async getMenu() {
     return menu;
   }

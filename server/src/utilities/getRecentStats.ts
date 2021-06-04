@@ -1,5 +1,5 @@
 import { getConnection } from "typeorm";
-import { recentPracticeStats } from "../types";
+import { RecentPracticeStats } from "../types";
 import { Practices } from "../entities/";
 
 interface getRecentPractice {
@@ -7,7 +7,7 @@ interface getRecentPractice {
     userId: number,
     category: string,
     index: number
-  ): Promise<recentPracticeStats>
+  ): Promise<RecentPracticeStats>
 }
 
 const getRecentPracticeStats: getRecentPractice = async (

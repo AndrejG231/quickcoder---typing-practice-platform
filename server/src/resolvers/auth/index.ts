@@ -7,35 +7,39 @@ import changeKnownPassword from "./changeKnownPassword";
 import retrievePasswordToken from "./retrievePasswordToken";
 import changeForgottenPassword from "./changeForgottenPassword";
 
-import { loginInput, registerInput } from "../../types/arguments/";
-import { actionResponse, userInfoResponse } from "../../types/responses";
-import { graphqlContext } from "../../types";
+import {
+  LoginInput,
+  RegisterInput,
+  ActionResponse,
+  UserInfoResponse,
+  GraphqlContext,
+} from "../../types";
 
 @Resolver()
 class AuthResolver {
-  @Mutation(() => actionResponse)
-  async register(@Arg("credentials") credentials: registerInput) {
+  @Mutation(() => ActionResponse)
+  async register(@Arg("credentials") credentials: RegisterInput) {
     const response = await register(credentials);
     return response;
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async login(
-    @Arg("credentials") credentials: loginInput,
-    @Ctx() { res }: graphqlContext
+    @Arg("credentials") credentials: LoginInput,
+    @Ctx() { res }: GraphqlContext
   ) {
     const response = await login(credentials, res);
     return response;
   }
-  @Query(() => userInfoResponse)
-  async getSignedUser(@Ctx() { req, res }: graphqlContext) {
+  @Query(() => UserInfoResponse)
+  async getSignedUser(@Ctx() { req, res }: GraphqlContext) {
     const response = await getSignedUser(res, req);
     return response;
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async changeKnownPassword(
     @Arg("orginalPassword") originalPassword: string,
     @Arg("newPassword") newPassword: string,
-    @Ctx() { req }: graphqlContext
+    @Ctx() { req }: GraphqlContext
   ) {
     const response = await changeKnownPassword(
       originalPassword,
@@ -45,16 +49,16 @@ class AuthResolver {
     return response;
   }
   @Mutation(() => Boolean)
-  logout(@Ctx() { res }: graphqlContext) {
+  logout(@Ctx() { res }: GraphqlContext) {
     res.clearCookie(process.env.COOKIE_NAME!);
     return true;
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async retrievePasswordToken(@Arg("email") email: string) {
     const response = await retrievePasswordToken(email);
     return response;
   }
-  @Mutation(() => actionResponse)
+  @Mutation(() => ActionResponse)
   async changeForgottenPassword(
     @Arg("token") token: string,
     @Arg("newPassword") newPassword: string

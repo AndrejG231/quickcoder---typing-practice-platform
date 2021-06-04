@@ -1,5 +1,4 @@
-import { Field, Float, Int, ObjectType } from "type-graphql";
-import ActionResponse from "./actionResponse";
+import { ObjectType, Field, Int, Float } from "type-graphql";
 
 @ObjectType()
 export class PracticeStat {
@@ -25,13 +24,4 @@ export class PracticeStat {
   user_name: string;
 }
 
-@ObjectType()
-class PracticeStatsResponse {
-  @Field(() => ActionResponse)
-  response: ActionResponse;
-
-  @Field(() => [PracticeStat], { nullable: true })
-  stats?: PracticeStat[];
-}
-
-export default PracticeStatsResponse;
+export default PracticeStat;

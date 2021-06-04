@@ -1,19 +1,5 @@
 import { ObjectType, Field, Int } from "type-graphql";
-
-@ObjectType()
-export class MenuItem {
-  @Field()
-  name: string;
-
-  @Field()
-  description: string;
-
-  @Field({ nullable: true })
-  overview: string;
-
-  @Field(() => Int)
-  index: number;
-}
+import { MenuItem } from "./";
 
 @ObjectType()
 class MenuResponse {

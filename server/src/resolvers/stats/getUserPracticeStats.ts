@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { practiceLeaderboardResponse } from "src/types/responses";
+import { PracticeLeaderboardResponse } from "../../types/";
 import { getConnection } from "typeorm";
 import { Practices } from "../../entities";
 
@@ -9,7 +9,7 @@ const getPracticeStats = async (
   category: string,
   index: number,
   req: Request
-): Promise<practiceLeaderboardResponse> => {
+): Promise<PracticeLeaderboardResponse> => {
   const userData = await getUserFromCookie(req);
 
   if (!userData.user) {

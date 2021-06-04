@@ -2,10 +2,10 @@ import { generateResponse, getCookieValue } from "./";
 import { Request } from "express";
 import { verify } from "jsonwebtoken";
 import { Users } from "../entities/";
-import { userInfoResponse } from "../types/responses/";
+import { UserInfoResponse } from "../types/";
 
 interface valUserFromCookie {
-  (req: Request): Promise<userInfoResponse>;
+  (req: Request): Promise<UserInfoResponse>;
 }
 
 const validateUserFromCookie: valUserFromCookie = async (req) => {

@@ -1,9 +1,9 @@
 import zxcvbn from "zxcvbn";
-import { actionResponse } from "../types/responses/";
+import { ActionResponse } from "../types/";
 import { generateResponse } from "./";
 
 interface validPassword {
-  (password: string, variant?: "new"): false | actionResponse;
+  (password: string, variant?: "new"): false | ActionResponse;
 }
 
 const checkPasswordStrength: validPassword = (password, variant) => {

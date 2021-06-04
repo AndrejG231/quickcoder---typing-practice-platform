@@ -1,11 +1,11 @@
 import { Request } from "express";
 import getCookieValue from "./getCookieValue";
-import { userInfoResponse } from "../types/responses/";
+import { UserInfoResponse } from "../types/";
 import { generateResponse } from "./";
 import { Users } from "../entities/";
 import { verify } from "jsonwebtoken";
 
-const getUserFromCookie = async (req: Request): Promise<userInfoResponse> => {
+const getUserFromCookie = async (req: Request): Promise<UserInfoResponse> => {
   if (!req.headers.cookie) {
     return {
       error: generateResponse(false, "getUserInfo_cookies_notFound"),
