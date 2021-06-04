@@ -46,6 +46,8 @@ const messages: { [message in string]: string } = {
     "Successfuly updated practice session.",
   updatePracticeObject_practice_failed: "Failed to update practice session",
   practiceStats_stats_retrieved: "Successfully received users practice stats",
+  // PROFILE STATS //
+  profile_overview_retrieved: "Successfully retrieved users profile overview",
 };
 
 export default messages;

@@ -1,6 +1,9 @@
 export { default as ActionResponse } from "./actionResponse";
 // Success-Info-Message response type
 
+export { default as AverageUserStats } from "./averageUserStats";
+// user average stats type for profile overview query
+
 export { default as GraphqlContext } from "./graphqlContext";
 
 export { default as LoginInput } from "./loginInput";
@@ -25,6 +28,9 @@ export { default as PracticeStatsResponse } from "./practiceStatsResponse";
 
 export { default as PracticeUpdateFields } from "./practiceUpdateFields";
 // input fields for update practice mutation
+
+export { default as ProfileOverviewResponse } from "./profileOverviewResponse";
+// response for profile overview => ActionResponse, AverageUserStats, PracticeStats
 
 export type { default as RecentPracticeStats } from "./recentPracticeStats";
 // getRecentStats utility output type
