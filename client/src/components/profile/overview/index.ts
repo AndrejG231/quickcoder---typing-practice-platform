@@ -27,5 +27,5 @@ export { default as RecentPracticeName } from "./RecentPracticeName";
 export { default as RecentStatsMainLine } from "./RecentStatsMainLine";
 // Middle line on recent practices
 
-export { default as RecenetPracticeCategory } from "./RecentPracticeCategory";
+export { default as RecentPracticeCategory } from "./RecentPracticeCategory";
 // Span element for smaller text in RecentPracticeName

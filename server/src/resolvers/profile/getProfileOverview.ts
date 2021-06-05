@@ -34,7 +34,7 @@ const getProfileOverview = async (
   const lastPractices = await getConnection()
     .createQueryBuilder()
     .select(
-      `score, errors_rate, cpm, index as length, category, practice_index`
+      `score, errors_rate as error_rate, cpm, index as length, category, practice_index`
     )
     .from(Practices, "practices")
     .where("is_finished=:is_finished AND user_id=:user_id", {

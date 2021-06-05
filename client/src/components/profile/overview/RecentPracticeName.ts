@@ -7,6 +7,7 @@ const RecentPracticeName = styled.p<{ value: number }>`
   width: 100%;
   max-width: 100%;
   text-align: center;
+  text-transform: capitalize;
   color: ${({ theme }) => theme.colors.w5};
   bottom: ${({ value }) =>
     value > 10 ? "calc(100% + 20px)" : "calc(100% + 65px)"};

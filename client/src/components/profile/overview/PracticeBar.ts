@@ -13,7 +13,7 @@ const PracticeBar = styled.div<props>`
   ${({ value, index, theme, cpm, error }) => {
     return `
     position: relative;
-    background: ${statColorSwitch(value, !!error)};
+    background: ${statColorSwitch(value)};
     min-height: ${value}%;
     max-height: ${value}%;
     min-width: 50%;

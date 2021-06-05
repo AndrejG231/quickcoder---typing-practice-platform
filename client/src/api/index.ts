@@ -8,3 +8,4 @@ export { default as logout } from "./logout";
 export { default as register } from "./register";
 export { default as updatePractice } from "./updatePractice";
 export { default as getUserPracticeStats } from "./getUserPracticeStats";
+export { default as getProfileOverview } from "./getProfileOverview";

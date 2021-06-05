@@ -13,7 +13,7 @@ type userProfileOverview = {
     category: string;
     practice_index: number;
     length: number;
-  };
+  }[];
 };
 
 export default userProfileOverview;
