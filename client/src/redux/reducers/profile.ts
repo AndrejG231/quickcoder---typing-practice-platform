@@ -12,6 +12,15 @@ const profile: reducer = (state = defaultState, action) => {
         overview: action.overview,
       };
 
+    case "profile/resetOverview":
+      return {
+        ...state,
+        overview: defaultState.overview,
+      };
+
+    case "profile/resetAll":
+      return defaultState;
+
     default:
       return state;
   }

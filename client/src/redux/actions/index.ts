@@ -4,6 +4,7 @@ export { default as closeGlobalMessage } from "./closeGlobalMessage";
 export { default as loadMenu } from "./loadMenu";
 export { default as removeUserPracticeStat } from "./removeUserPracticeStat";
 export { default as resetPractice } from "./resetPractice";
+export { default as resetProfile } from "./resetProfile";
 export { default as selectCategory } from "./selectCategory";
 export { default as selectPractice } from "./selectPractice";
 export { default as selectPracticeLength } from "./selectPracticeLength";

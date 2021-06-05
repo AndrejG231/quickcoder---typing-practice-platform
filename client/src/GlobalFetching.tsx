@@ -55,7 +55,6 @@ const GlobalFetching: FC<props> = ({
   //Fetch user when awaiting auth
   useEffect(() => {
     if (awaitingAuth) {
-      // TODO: reset user practice stats
       getUserInfo({
         onSuccess: (userInfo) => {
           setUserInfo(userInfo);

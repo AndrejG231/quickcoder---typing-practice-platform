@@ -9,13 +9,17 @@ import {
   animateOut,
   toggleAuthRefresh,
   setGlobalMessage,
+  resetProfile,
 } from "../redux/actions/";
 import { useHistory } from "react-router";
 import { inputData } from "../types";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
-  refreshAuth: () => dispatch(toggleAuthRefresh(true)),
+  refreshAuth: () => {
+    dispatch(toggleAuthRefresh(true));
+    dispatch(resetProfile("all"));
+  },
   setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
 });
 

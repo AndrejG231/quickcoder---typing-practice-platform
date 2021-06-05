@@ -19,6 +19,7 @@ import { reduxStore } from "../types";
 import {
   animateIn,
   animateOut,
+  resetProfile,
   setGlobalMessage,
   toggleAuthRefresh,
 } from "../redux/actions/";
@@ -36,7 +37,10 @@ const rdxState = (state: reduxStore) => {
 const rdxDispatch = (dispatch: Dispatch) => {
   return {
     setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
-    refreshAuth: () => dispatch(toggleAuthRefresh(true)),
+    refreshAuth: () => {
+      dispatch(toggleAuthRefresh(true));
+      dispatch(resetProfile("all"));
+    },
     closeModal: () => dispatch(animateOut("modal")),
     animateOut: () => dispatch(animateOut("home")),
     animateIn: () => dispatch(animateIn("home")),
