@@ -14,22 +14,20 @@ import {
 } from "../components/home/";
 import { ArrowButton } from "../components/";
 
-import { reduxStore, userInfo } from "../types";
+import { reduxStore } from "../types";
 
 import {
   animateIn,
   animateOut,
-  setUserInfo,
   setGlobalMessage,
   toggleAuthRefresh,
 } from "../redux/actions/";
 
-import { getUserInfo, logout } from "../api/";
+import { logout } from "../api/";
 
 const rdxState = (state: reduxStore) => {
   return {
     userInfo: state.authentication.user,
-    awaitingAuth: state.authentication.awaitingAuth,
     isModalOpened: state.animations.modal,
     isOnScreen: state.animations.home,
   };
@@ -38,11 +36,7 @@ const rdxState = (state: reduxStore) => {
 const rdxDispatch = (dispatch: Dispatch) => {
   return {
     setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
-    setAuthRefreshed: () => dispatch(toggleAuthRefresh(false)),
     refreshAuth: () => dispatch(toggleAuthRefresh(true)),
-    setUserInfo: (user: userInfo | null) => {
-      dispatch(setUserInfo(user));
-    },
     closeModal: () => dispatch(animateOut("modal")),
     animateOut: () => dispatch(animateOut("home")),
     animateIn: () => dispatch(animateIn("home")),
@@ -57,33 +51,13 @@ const Home: React.FC<props> = ({
   setGlobalMessage,
   refreshAuth,
   userInfo,
-  setUserInfo,
-  awaitingAuth,
   isModalOpened,
   closeModal,
   isOnScreen,
   animateOut,
   animateIn,
-  setAuthRefreshed,
 }) => {
   const navigation = useHistory();
-
-  //Fetch user when awaiting auth
-  useEffect(() => {
-    if (awaitingAuth) {
-      // TODO: reset user practice stats
-      getUserInfo({
-        onSuccess: (userInfo) => {
-          setUserInfo(userInfo);
-          setAuthRefreshed();
-        },
-        onError: () => {
-          setUserInfo(null);
-          setAuthRefreshed();
-        },
-      });
-    }
-  }, [awaitingAuth, setUserInfo]);
 
   //Home screen animation handler
   useEffect(() => {

@@ -27,31 +27,7 @@ const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
 });
 
-const rdxDispatch = (dispatch: Dispatch) => ({
-  setMenu: (menu: practiceMenu) => dispatch(loadMenu(menu)),
-  setPopUp: (message: string) => dispatch(setGlobalMessage(message)),
-});
-
-const withRedux = connect(rdxProps, rdxDispatch);
-
-type props = ConnectedProps<typeof withRedux>;
-
-const Routes: React.FC<props> = ({ menu, setMenu, setPopUp }) => {
-  // Global data fetching - menu
-  useEffect(() => {
-    if (!menu) {
-      getMenu({
-        onSuccess: (menu) => {
-          setMenu(menu);
-        },
-        onError: () =>
-          setPopUp(
-            "Error: could not load neccessary data. Try refreshing page to fix this problem."
-          ),
-      });
-    }
-  }, [menu]);
-
+const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Route exact path="/" component={() => <Home />} />
@@ -94,4 +70,4 @@ const Routes: React.FC<props> = ({ menu, setMenu, setPopUp }) => {
   );
 };
 
-export default withRedux(Routes);
+export default Routes;
