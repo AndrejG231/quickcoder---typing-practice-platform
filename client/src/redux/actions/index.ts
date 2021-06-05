@@ -9,6 +9,7 @@ export { default as selectPractice } from "./selectPractice";
 export { default as selectPracticeLength } from "./selectPracticeLength";
 export { default as setGlobalMessage } from "./setGlobalMessage";
 export { default as setPractice } from "./setPractice";
+export { default as setProfileOverview } from "./setProfileOverview";
 export { default as setUserInfo } from "./setUserInfo";
 export { default as setUsersPracticeStat } from "./setUsersPracticeStat";
 export { default as toggleAuthRefresh } from "./toggleAuthRefresh";

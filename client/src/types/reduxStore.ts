@@ -5,6 +5,7 @@ import { practiceSelection } from "./types_redux/practiceSelectionT";
 import { practice } from "./types_redux/practiceT";
 import { practiceMenu } from "./types_redux/practiceMenuT";
 import { userPracticeStats } from "./types_redux/userPracticeStatsT";
+import { profile } from "./types_redux/profileT";
 
 type reduxStore = {
   animations: animations;
@@ -14,6 +15,7 @@ type reduxStore = {
   practice: practice;
   practiceMenu: practiceMenu;
   userPracticeStats: userPracticeStats;
+  profile: profile;
 };
 
 export default reduxStore;

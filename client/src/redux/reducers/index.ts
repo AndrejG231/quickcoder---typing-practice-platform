@@ -17,5 +17,8 @@ export { default as practiceSelection } from "./practiceSelection";
 // Handles category, practice index, length selection
 // TODO: Keyboard scheme selection
 
+export { default as profile } from "./profile";
+// Provides profile information state and refetching after practice
+
 export { default as userPracticeStats } from "./userPracticeStats";
 // Stores average user practice stats for practice menu
