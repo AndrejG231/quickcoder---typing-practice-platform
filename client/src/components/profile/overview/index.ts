@@ -29,3 +29,6 @@ export { default as RecentStatsMainLine } from "./RecentStatsMainLine";
 
 export { default as RecentPracticeCategory } from "./RecentPracticeCategory";
 // Span element for smaller text in RecentPracticeName
+
+export { default as RecentStatsIndex } from "./RecentStatsIndex";
+// p element with absolute positioning for CPM and ERROR RATE, title on left side

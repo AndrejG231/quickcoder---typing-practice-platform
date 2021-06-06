@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const RecentPractices = styled.div`
+  position: relative;
   grid-area: recent;
   margin-top: 120px;
   padding: 10px;

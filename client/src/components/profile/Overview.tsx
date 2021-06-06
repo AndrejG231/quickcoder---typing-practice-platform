@@ -16,6 +16,7 @@ import {
   PracticeBar,
   PracticeBarValue,
   RecentPracticeCategory,
+  RecentStatsIndex,
 } from "./overview/";
 import { getProfileOverview } from "../../api";
 import { getCategoryIndex } from "../../utilites";
@@ -89,6 +90,8 @@ const Overview: FC<props> = ({
       {/* Stats and its visuals of last 5 finished practices */}
       <RecentPractices>
         <RecentStatsMainLine />
+        <RecentStatsIndex>CPM</RecentStatsIndex>
+        <RecentStatsIndex error>Error Rate</RecentStatsIndex>
         {lastPractices.map((item, index) => {
           // Bar sizes calculations
           const cpm = Math.min(100, (item.cpm / 440) * 100);
