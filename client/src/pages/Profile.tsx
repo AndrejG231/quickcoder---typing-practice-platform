@@ -10,16 +10,28 @@ const Profile: FC = () => {
     <ProfileGrid>
       {/* Navigation */}
       <NavBar>
-        <ArrowButton onClick={() => nav.push("/profile/")}>
+        <ArrowButton
+          onClick={() => nav.push("/profile/")}
+          selected={nav.location.pathname === "/profile/"}
+        >
           Overview
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/profile/history/")}>
+        <ArrowButton
+          onClick={() => nav.push("/profile/history/")}
+          selected={nav.location.pathname.includes("history")}
+        >
           History
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/profile/unfinished/")}>
+        <ArrowButton
+          onClick={() => nav.push("/profile/unfinished/")}
+          selected={nav.location.pathname.includes("unfinished")}
+        >
           Unfinished
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/profile/settings/")}>
+        <ArrowButton
+          onClick={() => nav.push("/profile/settings/")}
+          selected={nav.location.pathname.includes("settings")}
+        >
           Settings
         </ArrowButton>
         <ArrowButton onClick={() => nav.push("/home/")}>Home</ArrowButton>

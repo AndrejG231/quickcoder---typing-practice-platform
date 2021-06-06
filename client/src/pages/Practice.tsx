@@ -73,6 +73,10 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
     return <div>Loading....</div>;
   }
 
+  if (practice?.is_finished) {
+    return <div>Erorr: this practice is finished.</div>;
+  }
+
   return (
     <Wrapper>
       <FingerIndex

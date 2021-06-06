@@ -8,7 +8,7 @@ import { getLeaderBoard } from "../api";
 
 import { getCategoryIndex } from "../utilites";
 
-import { Board, Row, Field, Column } from "../components/leaderboard";
+import { Board, Row, Field, Column, LbGrid } from "../components/leaderboard";
 import { NavBar, ArrowButton, Wrapper } from "../components";
 
 const rdxProps = (state: reduxStore) => ({
@@ -57,7 +57,7 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
   }
 
   return (
-    <Wrapper>
+    <LbGrid>
       {/* Navigation  */}
       <NavBar>
         <ArrowButton
@@ -104,7 +104,7 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
           ))}
         </tbody>
       </Board>
-    </Wrapper>
+    </LbGrid>
   );
 };
 
