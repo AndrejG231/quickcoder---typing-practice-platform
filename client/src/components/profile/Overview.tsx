@@ -86,7 +86,7 @@ const Overview: FC<props> = ({
           <StatName>Minutes spent</StatName>
         </StatPair>
       </Stats>
-      {/* Stats and its visuals of last 3 finished practices */}
+      {/* Stats and its visuals of last 5 finished practices */}
       <RecentPractices>
         <RecentStatsMainLine />
         {lastPractices.map((item, index) => {
@@ -101,6 +101,7 @@ const Overview: FC<props> = ({
           const practiceName =
             menu[categoryIndex!].items[item.practice_index].name;
 
+          // Mapped cpm and error bars for each practice
           return [
             <PracticeBar key={index} index={index} value={cpm} cpm>
               <RecentPracticeName value={cpm}>
@@ -113,29 +114,12 @@ const Overview: FC<props> = ({
               <PracticeBarValue cpm>{item.cpm}</PracticeBarValue>
             </PracticeBar>,
             <PracticeBar key={10 * index} index={index} value={errors} error>
-              <PracticeBarValue error>{item.error_rate}</PracticeBarValue>
+              <PracticeBarValue error>
+                {item.error_rate.toFixed(2)}
+              </PracticeBarValue>
             </PracticeBar>,
           ];
         })}
-
-        {/*
-        <PracticeBar index={1} value={45} cpm>
-          <RecentPracticeName value={45}>
-            Practice Name
-            <br />
-            <RecentPracticeCategory>(category)</RecentPracticeCategory>
-          </RecentPracticeName>
-        </PracticeBar>
-        <PracticeBar index={1} value={45} error></PracticeBar>
-
-        <PracticeBar index={2} value={45} cpm>
-          <RecentPracticeName value={45}>
-            Practice Name
-            <br />
-            <RecentPracticeCategory>(category)</RecentPracticeCategory>
-          </RecentPracticeName>
-        </PracticeBar>
-        <PracticeBar index={2} value={45} error></PracticeBar> */}
       </RecentPractices>
     </OverviewGrid>
   );

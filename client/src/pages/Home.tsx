@@ -109,7 +109,7 @@ const Home: React.FC<props> = ({
       {/* Top header bar */}
       <Header
         isOnScreen={isOnScreen}
-        onUserClick={() => (userInfo ? redirect("/profile/overview/") : null)}
+        onUserClick={() => (userInfo ? redirect("/profile/") : null)}
         onTitleClick={goHome}
         username={`${
           userInfo?.username
@@ -131,7 +131,7 @@ const Home: React.FC<props> = ({
         <ClippedButton
           onClick={() => {
             userInfo
-              ? redirect("/profile/overview/")
+              ? redirect("/profile/")
               : navigation.push("/home/login/");
           }}
         >

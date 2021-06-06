@@ -10,7 +10,7 @@ const Profile: FC = () => {
     <ProfileGrid>
       {/* Navigation */}
       <NavBar>
-        <ArrowButton onClick={() => nav.push("/profile/overview/")}>
+        <ArrowButton onClick={() => nav.push("/profile/")}>
           Overview
         </ArrowButton>
         <ArrowButton onClick={() => nav.push("/profile/history/")}>
@@ -26,7 +26,7 @@ const Profile: FC = () => {
       </NavBar>
       {/* Nested routes */}
       <Routes>
-        <Route path="/profile/overview/">
+        <Route exact path="/profile/">
           <Overview />
         </Route>
         <Route path="/profile/history/">

@@ -3,7 +3,11 @@ import { Dispatch } from "redux";
 import { useHistory, useParams } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { practiceObject, reduxStore, schemeCharacters } from "../types";
-import { setPractice, removeUserPracticeStat } from "../redux/actions";
+import {
+  setPractice,
+  removeUserPracticeStat,
+  resetProfile,
+} from "../redux/actions";
 import { loadPractice } from "../api";
 
 import { Textline, Keyboard, FingerIndex } from "../components/practice";
@@ -16,8 +20,10 @@ const rdxProps = (state: reduxStore) => ({
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   setPractice: (practice: practiceObject) => dispatch(setPractice(practice)),
-  refreshStats: (category: string, index: number) =>
-    dispatch(removeUserPracticeStat(category, index)),
+  refreshStats: (category: string, index: number) => {
+    dispatch(removeUserPracticeStat(category, index));
+    dispatch(resetProfile("overview"));
+  },
 });
 
 const withRedux = connect(rdxProps, rdxDispatch);
@@ -44,9 +50,13 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
   const handleKeyPress = (event: KeyboardEvent) => {
     if (practice) {
       setPractice(
-        handlePracticeProgress(event.key as schemeCharacters, practice, () => {
-          refreshStats(practice.category, practice.practice_index);
-          navigator.push(`/practice/finished/id=${practice.id}`);
+        handlePracticeProgress({
+          keyPressed: event.key as schemeCharacters,
+          state: practice,
+          onFinish: () => {
+            refreshStats(practice.category, practice.practice_index);
+            navigator.push(`/practice/finished/id=${practice.id}`);
+          },
         })
       );
     }

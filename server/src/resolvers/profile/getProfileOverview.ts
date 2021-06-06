@@ -41,8 +41,8 @@ const getProfileOverview = async (
       user_id: user.id,
       is_finished: true,
     })
-    .orderBy("created_at", "ASC")
-    .limit(3)
+    .orderBy("created_at", "DESC")
+    .limit(5)
     .execute();
 
   const results = {

@@ -1,11 +1,15 @@
 import { practiceObject, schemeCharacters } from "../types";
 import { updatePractice } from "../api";
 
-const handlePracticeProgress = (
-  keyPressed: schemeCharacters,
-  state: practiceObject,
-  onFinish: () => void
-): practiceObject => {
+const handlePracticeProgress = ({
+  keyPressed,
+  state,
+  onFinish,
+}: {
+  keyPressed: schemeCharacters;
+  state: practiceObject;
+  onFinish: () => void;
+}): practiceObject => {
   /* 
   good keypress handling
   => increase index, remove "last error"
