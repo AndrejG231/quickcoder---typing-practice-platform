@@ -32,6 +32,9 @@ export { default as PracticeUpdateFields } from "./practiceUpdateFields";
 export { default as ProfileOverviewResponse } from "./profileOverviewResponse";
 // response for profile overview => ActionResponse, AverageUserStats, PracticeStats
 
+export { default as ProfileHistoryResponse } from "./profileHistoryResponse";
+// response for profile history => ActionResponse, Recent practices and total practices count
+
 export type { default as RecentPracticeStats } from "./recentPracticeStats";
 // getRecentStats utility output type
 

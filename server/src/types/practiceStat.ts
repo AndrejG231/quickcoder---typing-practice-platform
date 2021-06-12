@@ -22,6 +22,12 @@ export class PracticeStat {
 
   @Field(() => Int, { nullable: true })
   user_name: string;
+
+  @Field(() => Int, { nullable: true })
+  id: number;
+
+  @Field({ nullable: true })
+  created_at: Date;
 }
 
 export default PracticeStat;

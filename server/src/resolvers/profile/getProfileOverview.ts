@@ -6,7 +6,7 @@ import { Practices } from "../../entities";
 
 const getProfileOverview = async (
   req: Request
-): Promise<ProfileOverviewResponse | number> => {
+): Promise<ProfileOverviewResponse> => {
   const { user, error } = await getUserFromCookie(req);
 
   if (!user) {
