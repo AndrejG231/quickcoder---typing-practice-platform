@@ -1,7 +1,9 @@
-import { userProfileOverview } from "../";
+import { userPracticeHistory, userProfileOverview } from "../";
 
 export type profile = {
   overview: userProfileOverview | null;
+  history: userPracticeHistory | null;
+  awaitingHistoryUpdate: boolean;
 };
 
 export type action =
@@ -14,6 +16,17 @@ export type action =
     }
   | {
       type: "profile/resetAll";
+    }
+  | {
+      type: "profile/loadHistory";
+      history: userPracticeHistory;
+    }
+  | {
+      type: "profile/updateHistory";
+      history: userPracticeHistory;
+    }
+  | {
+      type: "profile/resetHistory";
     };
 
 export type reducer = {
