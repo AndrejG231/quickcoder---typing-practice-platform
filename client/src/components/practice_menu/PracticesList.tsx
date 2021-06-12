@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { selectCategory, selectPractice } from "../../redux/actions";
-import { practiceItem, reduxStore } from "../../types";
+import { practiceMenuItem, reduxStore } from "../../types";
 import {
   CategoriesBar,
   CategoryButton,
@@ -26,7 +26,7 @@ const rdxProps = (state: reduxStore) => ({
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   selectCategory: (category: number) => dispatch(selectCategory(category)),
-  selectPractice: (practice: practiceItem) =>
+  selectPractice: (practice: practiceMenuItem) =>
     dispatch(selectPractice(practice)),
 });
 

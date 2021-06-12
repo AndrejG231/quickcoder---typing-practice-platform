@@ -1,7 +1,7 @@
-import { practiceItem } from "../";
+import { practiceMenuItem } from "../";
 
 export type practiceSelection = {
-  selectedPractice: practiceItem | null;
+  selectedPractice: practiceMenuItem | null;
   selectedCategory: number;
   lengthIndex: number;
   length: number;
@@ -16,7 +16,7 @@ export type action =
     }
   | {
       type: "practiceSelect/setselect";
-      selected: practiceItem;
+      selected: practiceMenuItem;
     }
   | {
       type: "practiceSelect/selectCategory";

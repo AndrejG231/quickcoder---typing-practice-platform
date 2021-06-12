@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { leaderboardItem, practiceItem, reduxStore } from "../types";
+import { leaderboardItem, practiceMenuItem, reduxStore } from "../types";
 import { selectCategory, selectPractice } from "../redux/actions";
 import { getLeaderBoard } from "../api";
 
@@ -16,7 +16,7 @@ const rdxProps = (state: reduxStore) => ({
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  selectPractice: (category: number, practice: practiceItem) => {
+  selectPractice: (category: number, practice: practiceMenuItem) => {
     dispatch(selectCategory(category));
     dispatch(selectPractice(practice));
   },
