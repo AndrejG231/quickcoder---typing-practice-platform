@@ -7,6 +7,7 @@ import {
   setPractice,
   removeUserPracticeStat,
   resetProfile,
+  togglePracticeHistoryRefresh,
 } from "../redux/actions";
 import { loadPractice } from "../api";
 
@@ -22,6 +23,7 @@ const rdxDispatch = (dispatch: Dispatch) => ({
   setPractice: (practice: practiceObject) => dispatch(setPractice(practice)),
   refreshStats: (category: string, index: number) => {
     dispatch(removeUserPracticeStat(category, index));
+    dispatch(togglePracticeHistoryRefresh(true));
     dispatch(resetProfile("overview"));
   },
 });

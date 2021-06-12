@@ -53,7 +53,7 @@ const PracticeSummary: FC<props> = ({
     }
   }, [practice, id]);
 
-  if (!practice) {
+  if (!practice || practice?.id !== ~~id) {
     return <div>Loading...</div>;
   }
 

@@ -27,6 +27,10 @@ export type action =
     }
   | {
       type: "profile/resetHistory";
+    }
+  | {
+      type: "profile/toggleHistoryRefresh";
+      refresh: boolean;
     };
 
 export type reducer = {

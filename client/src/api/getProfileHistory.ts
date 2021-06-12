@@ -44,7 +44,9 @@ const getProfileOverview = async ({
     });
 
     const data: userPracticeHistory & { result: actionResponse } =
-      queryResult.data.data?.getProfileOverview;
+      queryResult.data.data?.getProfileHistory;
+
+    console.log(data);
 
     if (!data) {
       return onError();

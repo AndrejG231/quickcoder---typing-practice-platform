@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import { Dispatch } from "redux";
-import { connect, ConnectedProps } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
-
-import { loadMenu, setGlobalMessage } from "./redux/actions";
-import { practiceMenu } from "./types";
-import { getMenu } from "./api";
-import { reduxStore } from "./types";
 
 //pages
 import Home from "./pages/Home";
@@ -22,10 +15,6 @@ import Register from "./modals/Register";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 import ChangeKnownPassword from "./modals/ChangeKnownPassword";
-
-const rdxProps = (state: reduxStore) => ({
-  menu: state.practiceMenu,
-});
 
 const Routes: React.FC = () => {
   return (

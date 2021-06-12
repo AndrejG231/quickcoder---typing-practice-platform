@@ -116,7 +116,12 @@ const Overview: FC<props> = ({
               </RecentPracticeName>
               <PracticeBarValue cpm>{item.cpm}</PracticeBarValue>
             </PracticeBar>,
-            <PracticeBar key={10 * index} index={index} value={errors} error>
+            <PracticeBar
+              key={10 * index + 1}
+              index={index}
+              value={errors}
+              error
+            >
               <PracticeBarValue error>
                 {item.error_rate.toFixed(2)}
               </PracticeBarValue>

@@ -29,15 +29,36 @@ const profile: reducer = (state = defaultState, action) => {
       };
 
     case "profile/updateHistory":
+      if (!state.history?.lastPractices.length) {
+        return {
+          ...state,
+          history: action.history,
+          awaitingHistoryUpdate: false,
+        };
+      }
+
       return {
         ...state,
-        history: { ...action.history, ...state.history },
+        history: {
+          lastPractices: [
+            ...action.history.lastPractices,
+            ...state.history.lastPractices,
+          ],
+          totalCount: action.history.totalCount,
+        },
+        awaitingHistoryUpdate: false,
       };
 
     case "profile/resetHistory":
       return {
         ...state,
         history: null,
+      };
+
+    case "profile/toggleHistoryRefresh":
+      return {
+        ...state,
+        awaitingHistoryUpdate: action.refresh,
       };
 
     // Defaults //
