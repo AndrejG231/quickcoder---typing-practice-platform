@@ -1,3 +1,5 @@
+import { practiceInfo } from ".";
+
 type userProfileOverview = {
   averageStats: {
     averageScore: number;
@@ -6,14 +8,7 @@ type userProfileOverview = {
     totalLength: number;
     finishedTimeSpent: number;
   };
-  lastPractices: {
-    score: number;
-    error_rate: number;
-    cpm: number;
-    category: string;
-    practice_index: number;
-    length: number;
-  }[];
+  lastPractices: practiceInfo[];
 };
 
 export default userProfileOverview;

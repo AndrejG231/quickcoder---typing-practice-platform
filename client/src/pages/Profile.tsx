@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Route, useHistory } from "react-router";
 
-import { Routes, ProfileGrid, Overview } from "../components/profile";
+import { Routes, ProfileGrid, Overview, History } from "../components/profile";
 import { ArrowButton, NavBar } from "../components/";
 
 const Profile: FC = () => {
@@ -42,7 +42,7 @@ const Profile: FC = () => {
           <Overview />
         </Route>
         <Route path="/profile/history/">
-          <div>History</div>
+          <History />
         </Route>
         <Route path="/profile/unfinished/">
           <div>Unfinished</div>

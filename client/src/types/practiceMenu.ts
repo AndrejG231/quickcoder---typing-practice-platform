@@ -1,4 +1,4 @@
-import practiceItem from "./practiceItem";
+import practiceItem from "./practiceMenuItem";
 
 type practiceMenu = {
   category: string;
