@@ -82,8 +82,8 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
   return (
     <Wrapper>
       <FingerIndex
-        layout={"us"}
-        next={practice.string[practice.index] as schemeCharacters}
+      // layout={"us"}
+      // next={practice.string[practice.index] as schemeCharacters}
       />
       <Textline practice={practice} />
       <Keyboard
