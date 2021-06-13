@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Items = styled.div`
   grid-area: items;
-  overflow-y: auto;
+  overflow-y: scroll;
   border: 3px solid black;
   border-bottom: 0px;
   border-right: 0px;
