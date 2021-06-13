@@ -35,8 +35,11 @@ class PracticeResolver {
     return await updatePractice(practiceId, practiceUpdateFields);
   }
   @Mutation(() => ActionResponse)
-  async deletePractice(@Arg("practiceId", () => Int) practiceId: number) {
-    return await deletePractice(practiceId);
+  async deletePractice(
+    @Arg("practiceId", () => Int) practiceId: number,
+    @Ctx() { req }: GraphqlContext
+  ) {
+    return await deletePractice(req, practiceId);
   }
   @Query(() => PracticeInfoResponse)
   async getPractice(@Arg("id", () => Int) id: number) {

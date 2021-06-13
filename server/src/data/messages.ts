@@ -49,6 +49,8 @@ const messages: { [message in string]: string } = {
   // PROFILE STATS //
   profile_overview_retrieved: "Successfully retrieved users profile overview",
   profile_history_retrieved: "Successfully retrieved users profile history",
+  unfinishedPractices_profile_retrieved:
+    "Successfully retrieved unfinished practices",
 };
 
 export default messages;

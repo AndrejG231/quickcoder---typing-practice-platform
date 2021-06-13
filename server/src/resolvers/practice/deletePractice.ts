@@ -1,14 +1,34 @@
-import { generateResponse } from "../../utilities";
+import { Request } from "express";
+import { generateResponse, validateUserFromCookie } from "../../utilities";
 import { Practices } from "../../entities";
+import { getConnection } from "typeorm";
+import { ActionResponse } from "../../types";
 
-const deletePractice = async (practiceId: number) => {
-  try {
-    await Practices.delete({ id: practiceId });
-    return generateResponse(true, "updatePracticeObject_practice_updated");
-  } catch (error) {
-    console.log(error);
-    return generateResponse(false, "updatePracticeObject_practice_failed");
+const deletePractice = async (
+  req: Request,
+  practiceId: number
+): Promise<ActionResponse> => {
+  const { user, error } = await validateUserFromCookie(req);
+
+  if (!user) {
+    return error!;
   }
+
+  const deleteResults = await getConnection()
+    .createQueryBuilder()
+    .delete()
+    .from(Practices, "practices")
+    .where("user_id = :user_id AND id = :id", {
+      id: practiceId,
+      user_id: user.id,
+    })
+    .execute();
+
+  if (deleteResults.affected) {
+    return generateResponse(true, "updatePracticeObject_practice_updated");
+  }
+
+  return generateResponse(false, "updatePracticeObject_practice_failed");
 };
 
 export default deletePractice;

@@ -43,3 +43,9 @@ export { default as RegisterInput } from "./registerInput";
 
 export { default as UserInfoResponse } from "./userInfoResponse";
 // response types with user information for client => ActionResponse and Users entity
+
+export { default as UnfinishedPracticeInfo } from "./unfinishedPracticeInfo";
+// practice object type for data of unfinished practice
+
+export { default as UnfinishedPracticesResponse } from "./unfinishedPracticesResponse";
+// response type for unfinished practices list query

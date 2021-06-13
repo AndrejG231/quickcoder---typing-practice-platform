@@ -14,12 +14,6 @@ const getProfileHistory = async (
     return { result: error! };
   }
 
-  const practicesCount = await getConnection()
-    .createQueryBuilder()
-    .select(`COUNT(*) as "totalCount"`)
-    .from(Practices, "practices")
-    .execute();
-
   if (lastDate) {
     //   When practices already loaded - update with recent practices since last date
     const queryResults = await getConnection()
@@ -37,7 +31,6 @@ const getProfileHistory = async (
 
     return {
       lastPractices: queryResults.slice(0, -1),
-      ...practicesCount[0],
       result: generateResponse(true, "profile_history_retrieved"),
     };
   } else {

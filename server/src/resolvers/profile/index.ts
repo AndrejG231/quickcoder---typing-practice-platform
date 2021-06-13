@@ -1,12 +1,15 @@
+import { Arg, Ctx, Int, Query, Resolver } from "type-graphql";
+
 import {
   GraphqlContext,
   ProfileHistoryResponse,
   ProfileOverviewResponse,
+  UnfinishedPracticesResponse,
 } from "../../types";
-import { Arg, Ctx, Int, Query, Resolver } from "type-graphql";
 
 import getProfileOverview from "./getProfileOverview";
 import getProfileHistory from "./getProfileHistory";
+import getUnfinishedPractices from "./getUnfinishedPractices";
 
 @Resolver()
 class ProfileResolver {
@@ -20,6 +23,10 @@ class ProfileResolver {
     @Arg("lastDate", { nullable: true }) lastDate?: Date
   ) {
     return await getProfileHistory(req, lastDate);
+  }
+  @Query(() => UnfinishedPracticesResponse)
+  async getUnfinishedPractices(@Ctx() { req }: GraphqlContext) {
+    return await getUnfinishedPractices(req);
   }
 }
 
