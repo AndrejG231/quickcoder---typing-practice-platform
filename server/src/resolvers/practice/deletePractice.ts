@@ -18,9 +18,10 @@ const deletePractice = async (
     .createQueryBuilder()
     .delete()
     .from(Practices, "practices")
-    .where("user_id = :user_id AND id = :id", {
+    .where("user_id = :user_id AND id = :id AND is_finished = :is_finished", {
       id: practiceId,
       user_id: user.id,
+      is_finished: false,
     })
     .execute();
 

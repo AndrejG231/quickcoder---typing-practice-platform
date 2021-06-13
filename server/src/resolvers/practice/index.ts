@@ -14,6 +14,7 @@ import createPractice from "./createPractice";
 import updatePractice from "./updatePractice";
 import deletePractice from "./deletePractice";
 import getPractice from "./getPractice";
+import removeAllUnfinished from "./removeAllUnfinished";
 
 @Resolver()
 class PracticeResolver {
@@ -46,8 +47,12 @@ class PracticeResolver {
     return await getPractice(id);
   }
   @Query(() => [MenuResponse])
-  async getMenu() {
+  getMenu() {
     return menu;
+  }
+  @Mutation(() => ActionResponse)
+  async removeAllUnfinished(@Ctx() { req }: GraphqlContext) {
+    return await removeAllUnfinished(req);
   }
 }
 

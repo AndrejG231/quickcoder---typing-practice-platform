@@ -46,6 +46,10 @@ const messages: { [message in string]: string } = {
     "Successfuly updated practice session.",
   updatePracticeObject_practice_failed: "Failed to update practice session",
   practiceStats_stats_retrieved: "Successfully received users practice stats",
+  clearUnfinishedPractices_practices_cleared:
+    "Successfuly cleared unfinished practices",
+  clearUnfinishedPractices_practices_failed:
+    "Failed to clear unfinished practices",
   // PROFILE STATS //
   profile_overview_retrieved: "Successfully retrieved users profile overview",
   profile_history_retrieved: "Successfully retrieved users profile history",
