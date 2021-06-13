@@ -6,11 +6,12 @@ interface props {
   left?: boolean;
   right?: boolean;
   selected?: boolean;
+  relative?: boolean;
   theme: any;
 }
 
 const ArrowButton = styled.div`
-  ${({ width, height, left, right, selected, theme }: props) => {
+  ${({ width, height, left, right, selected, theme, relative }: props) => {
     const w = width ?? 120;
     const h = height ?? 60;
 
@@ -34,6 +35,7 @@ const ArrowButton = styled.div`
     width: ${w}px;
     height: ${h}px;
     cursor: pointer;
+    ${relative ? "position: relative;" : ""}
     ${selected ? "text-decoration: underline;" : ""}
     ${left ? "margin-left: auto;" : ""}
     ${right ? "margin-right: auto;" : ""}

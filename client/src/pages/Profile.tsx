@@ -1,11 +1,29 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Route, useHistory } from "react-router";
 
-import { Routes, ProfileGrid, Overview, History } from "../components/profile";
+import {
+  Routes,
+  ProfileGrid,
+  Overview,
+  History,
+  UnfinishedCount,
+} from "../components/profile";
 import { ArrowButton, NavBar } from "../components/";
+import { getUnfinishedPracticesCount } from "../api";
 
 const Profile: FC = () => {
   const nav = useHistory();
+  const [unfinishedCount, setUnfinishedCount] = useState(0);
+
+  useEffect(() => {
+    if (unfinishedCount < 1) {
+      getUnfinishedPracticesCount({
+        onSuccess: setUnfinishedCount,
+        onError: () => null,
+      });
+    }
+  }, [unfinishedCount, setUnfinishedCount]);
+
   return (
     <ProfileGrid>
       {/* Navigation */}
@@ -23,9 +41,14 @@ const Profile: FC = () => {
           History
         </ArrowButton>
         <ArrowButton
+          relative
           onClick={() => nav.push("/profile/unfinished/")}
           selected={nav.location.pathname.includes("unfinished")}
         >
+          {/* Count of unfinished practices, displayed if there are any */}
+          {unfinishedCount ? (
+            <UnfinishedCount>{unfinishedCount}</UnfinishedCount>
+          ) : null}
           Unfinished
         </ArrowButton>
         <ArrowButton

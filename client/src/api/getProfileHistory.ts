@@ -19,7 +19,6 @@ query getProfileHistory($lastDate: DateTime) {
       message
       info
     }
-    totalCount
   }
 }
 `;
