@@ -10,6 +10,7 @@ import {
 import getProfileOverview from "./getProfileOverview";
 import getProfileHistory from "./getProfileHistory";
 import getUnfinishedPractices from "./getUnfinishedPractices";
+import getUnfinishedCount from "./getUnfinishedCount";
 
 @Resolver()
 class ProfileResolver {
@@ -27,6 +28,10 @@ class ProfileResolver {
   @Query(() => UnfinishedPracticesResponse)
   async getUnfinishedPractices(@Ctx() { req }: GraphqlContext) {
     return await getUnfinishedPractices(req);
+  }
+  @Query(() => Int)
+  async getUnfinishedCount(@Ctx() { req }: GraphqlContext) {
+    return await getUnfinishedCount(req);
   }
 }
 
