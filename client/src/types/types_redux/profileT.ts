@@ -1,8 +1,14 @@
-import { userPracticeHistory, userProfileOverview } from "../";
+import {
+  unfinishedPractice,
+  userPracticeHistory,
+  userProfileOverview,
+} from "../";
 
 export type profile = {
   overview: userProfileOverview | null;
   history: userPracticeHistory | null;
+  unfinished: unfinishedPractice[];
+  unfinishedCount: number;
   awaitingHistoryUpdate: boolean;
 };
 
@@ -31,6 +37,14 @@ export type action =
   | {
       type: "profile/toggleHistoryRefresh";
       refresh: boolean;
+    }
+  | {
+      type: "profile/setUnfinished";
+      practices: unfinishedPractice[];
+    }
+  | {
+      type: "profile/setUnfinishedCount";
+      count: number;
     };
 
 export type reducer = {

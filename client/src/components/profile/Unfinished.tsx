@@ -3,9 +3,9 @@ import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router";
 
-import { reduxStore, userPracticeHistory } from "../../types";
-import { setProfileHistory } from "../../redux/actions";
-import { getProfileHistory } from "../../api";
+import { reduxStore, unfinishedPractice } from "../../types";
+import { setUnfinishedPractices } from "../../redux/actions";
+import { getUnfinishedPractices } from "../../api";
 import {
   HistoryGrid,
   Indexes,
@@ -17,60 +17,59 @@ import {
 } from "./history/";
 
 const rdxState = (state: reduxStore) => ({
-  history: state.profile.history,
-  awaitingUpdate: state.profile.awaitingHistoryUpdate,
+  unfinishedPractices: state.profile.unfinished,
+  unfinishedCount: state.profile.unfinishedCount,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  updateHistory: (type: "load" | "update", history: userPracticeHistory) =>
-    dispatch(setProfileHistory(history, type)),
+  setUnfinished: (practices: unfinishedPractice[]) =>
+    dispatch(setUnfinishedPractices(practices)),
 });
 
 const withRedux = connect(rdxState, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
+const Unfinished: FC<props> = ({
+  unfinishedPractices,
+  setUnfinished,
+  unfinishedCount,
+}) => {
   const nav = useHistory();
 
-  // History fetching
   useEffect(() => {
-    if (!history) {
-      // Fetch whole history on first load
-      getProfileHistory({
-        type: "load",
-        onError: () => console.log("error"),
-        onSuccess: updateHistory,
-      });
-    } else if (awaitingUpdate) {
-      // Fetch additional practices after history update
-      getProfileHistory({
-        type: "update",
-        onError: () => console.log("error"),
-        onSuccess: updateHistory,
-        lastDate: history.lastPractices[0].created_at,
+    if (unfinishedPractices.length < unfinishedCount) {
+      getUnfinishedPractices({
+        onSuccess: (practices) => {
+          setUnfinished(practices);
+        },
+        onError: () => null,
       });
     }
-  }, [awaitingUpdate, history, updateHistory]);
+  }, [unfinishedCount, unfinishedPractices]);
 
-  if (!history) {
-    return <div>Loading...</div>;
+  if (unfinishedCount === 0) {
+    return <div>No unfinished practices...</div>;
+  }
+
+  if (unfinishedCount > unfinishedPractices.length) {
+    return <div>Loading....</div>;
   }
 
   return (
     <HistoryGrid>
       <Items>
         <ItemList>
-          {history.lastPractices.map((item, index) => (
+          {unfinishedPractices.map((item, index) => (
             <ItemRow key={index}>
               <ItemInfoText darken>
                 {new Date(item.created_at).toLocaleString("uk-en")}
               </ItemInfoText>
               <ItemInfoText>{item.category}</ItemInfoText>
               <ItemInfoText darken>Top 200 English words</ItemInfoText>
-              <ItemInfoText>{item.score}</ItemInfoText>
-              <ItemInfoText darken>{item.cpm}</ItemInfoText>
-              <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
+              {/* <ItemInfoText>{item.score}</ItemInfoText> */}
+              <ItemInfoText darken>{item.completion}</ItemInfoText>
+              {/* <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText> */}
               <ItemInfoText darken>{item.length}</ItemInfoText>
               <SummaryLinkButton
                 onClick={() => nav.push(`/practice/finished/id=${item.id}/`)}
@@ -101,4 +100,4 @@ const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
   );
 };
 
-export default withRedux(History);
+export default withRedux(Unfinished);

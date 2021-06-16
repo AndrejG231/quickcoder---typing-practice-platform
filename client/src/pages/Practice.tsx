@@ -8,6 +8,8 @@ import {
   removeUserPracticeStat,
   resetProfile,
   togglePracticeHistoryRefresh,
+  setUnfinishedPracticesCount,
+  setUnfinishedPractices,
 } from "../redux/actions";
 import { loadPractice } from "../api";
 
@@ -17,6 +19,7 @@ import { handlePracticeProgress } from "../utilites";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
+  unfinished: state.profile.unfinished.length + state.profile.unfinishedCount,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -26,19 +29,34 @@ const rdxDispatch = (dispatch: Dispatch) => ({
     dispatch(togglePracticeHistoryRefresh(true));
     dispatch(resetProfile("overview"));
   },
+  refreshUnfinished: () => {
+    dispatch(setUnfinishedPracticesCount(0));
+    dispatch(setUnfinishedPractices([]));
+  },
 });
 
 const withRedux = connect(rdxProps, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux> & {};
 
-const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
+const Practice: React.FC<props> = ({
+  practice,
+  setPractice,
+  refreshStats,
+  unfinished,
+  refreshUnfinished,
+}) => {
   const navigator = useHistory();
 
   const { id }: { id: string } = useParams();
 
   //Load practice if current loaded practice is different or not loaded
   useEffect(() => {
+    // In case of practice was left in progress force unfinished practices refetching
+    if (unfinished) {
+      refreshUnfinished();
+    }
+    // In case of current practice in memory not same as one we try to practice for - fetch selected practice
     if (practice?.id !== ~~id) {
       loadPractice({
         id: ~~id,
@@ -56,6 +74,9 @@ const Practice: React.FC<props> = ({ practice, setPractice, refreshStats }) => {
           keyPressed: event.key as schemeCharacters,
           state: practice,
           onFinish: () => {
+            // force profile overview refetch
+            // new history item fetching
+            // fetch new stats for current category+practice on next menu load
             refreshStats(practice.category, practice.practice_index);
             navigator.push(`/practice/finished/id=${practice.id}`);
           },

@@ -3,6 +3,8 @@ import { reducer } from "../../types/types_redux/profileT";
 const defaultState = {
   overview: null,
   history: null,
+  unfinishedCount: 0,
+  unfinished: [],
   awaitingHistoryUpdate: false,
 };
 
@@ -44,7 +46,6 @@ const profile: reducer = (state = defaultState, action) => {
             ...action.history.lastPractices,
             ...state.history.lastPractices,
           ],
-          totalCount: action.history.totalCount,
         },
         awaitingHistoryUpdate: false,
       };
@@ -60,6 +61,12 @@ const profile: reducer = (state = defaultState, action) => {
         ...state,
         awaitingHistoryUpdate: action.refresh,
       };
+
+    case "profile/setUnfinishedCount":
+      return { ...state, unfinishedCount: action.count };
+
+    case "profile/setUnfinished":
+      return { ...state, unfinished: action.practices };
 
     // Defaults //
     case "profile/resetAll":

@@ -45,16 +45,14 @@ const getProfileOverview = async ({
     const data: userPracticeHistory & { result: actionResponse } =
       queryResult.data.data?.getProfileHistory;
 
-    console.log(data);
-
     if (!data) {
       return onError();
     }
 
-    const { lastPractices, totalCount, result } = data;
+    const { lastPractices, result } = data;
 
     if (lastPractices.length > 0 && result.success === true) {
-      return onSuccess(type, { lastPractices, totalCount });
+      return onSuccess(type, { lastPractices });
     }
 
     onError();

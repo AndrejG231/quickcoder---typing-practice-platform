@@ -10,4 +10,5 @@ export { default as updatePractice } from "./updatePractice";
 export { default as getUserPracticeStats } from "./getUserPracticeStats";
 export { default as getProfileOverview } from "./getProfileOverview";
 export { default as getProfileHistory } from "./getProfileHistory";
+export { default as getUnfinishedPractices } from "./getUnfinishedPractices";
 export { default as getUnfinishedPracticesCount } from "./getUnfinishedPracticesCount";

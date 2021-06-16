@@ -16,3 +16,4 @@ export type { default as fingerKeys } from "./fingerKeys";
 export type { default as userProfileOverview } from "./userProfileOverview";
 export type { default as userPracticeHistory } from "./userPracticeHistory";
 export type { default as practiceInfo } from "./practiceInfo";
+export type { default as unfinishedPractice } from "./unfinishedPractice";

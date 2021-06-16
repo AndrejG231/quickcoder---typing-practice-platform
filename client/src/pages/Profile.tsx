@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
+import { Dispatch } from "redux";
+import { connect, ConnectedProps } from "react-redux";
 import { Route, useHistory } from "react-router";
 
 import {
@@ -6,14 +8,29 @@ import {
   ProfileGrid,
   Overview,
   History,
+  Unfinished,
   UnfinishedCount,
 } from "../components/profile";
 import { ArrowButton, NavBar } from "../components/";
 import { getUnfinishedPracticesCount } from "../api";
+import { reduxStore } from "../types";
+import { setUnfinishedPracticesCount } from "../redux/actions";
 
-const Profile: FC = () => {
+const rdxProps = (state: reduxStore) => ({
+  unfinishedCount: state.profile.unfinishedCount,
+});
+
+const rdxDispatch = (dispatch: Dispatch) => ({
+  setUnfinishedCount: (count: number) =>
+    dispatch(setUnfinishedPracticesCount(count)),
+});
+
+const withRedux = connect(rdxProps, rdxDispatch);
+
+type props = ConnectedProps<typeof withRedux>;
+
+const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
   const nav = useHistory();
-  const [unfinishedCount, setUnfinishedCount] = useState(0);
 
   useEffect(() => {
     if (unfinishedCount < 1) {
@@ -68,7 +85,7 @@ const Profile: FC = () => {
           <History />
         </Route>
         <Route path="/profile/unfinished/">
-          <div>Unfinished</div>
+          <Unfinished />
         </Route>
         <Route path="/profile/settings/">
           <div>Settings</div>
@@ -78,4 +95,4 @@ const Profile: FC = () => {
   );
 };
 
-export default Profile;
+export default withRedux(Profile);

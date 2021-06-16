@@ -5,8 +5,6 @@ const setProfileHistory = (
   history: userPracticeHistory,
   type: "update" | "load"
 ): action => {
-  console.log("UPDATING HISTORY");
-  console.log(history);
   return {
     type: type === "update" ? "profile/updateHistory" : "profile/loadHistory",
     history,
