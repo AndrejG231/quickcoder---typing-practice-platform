@@ -120,12 +120,16 @@ const Unfinished: FC<props> = ({
                 <ItemInfoText darken>
                   {menu[categoryIndex!].items[item.practice_index].name}
                 </ItemInfoText>
-                <ItemInfoText>{item.completion}</ItemInfoText>
+                <ItemInfoText>{item.completion}%</ItemInfoText>
                 <ItemInfoText darken>{item.length}</ItemInfoText>
                 <DeleteButton
                   onClick={() => doDeletePractice(item.id, index)}
                 />
-                <ContinueButton />
+                <ContinueButton
+                  onClick={() =>
+                    nav.push(`/practice/in_progress/id=${item.id}/`)
+                  }
+                />
               </ItemRow>
             );
           })}
