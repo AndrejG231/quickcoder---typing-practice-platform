@@ -23,7 +23,7 @@ query getUnfinishedPractices {
 
 type unfinishedPracticeOptions = {
   onSuccess: (practices: unfinishedPractice[]) => void;
-  onError: () => void;
+  onError: (message: string) => void;
 };
 
 const getUnfinishedPractices = async ({
@@ -45,10 +45,10 @@ const getUnfinishedPractices = async ({
       return onSuccess(practices?.length ? practices : []);
     }
 
-    onError();
+    onError(result.message);
   } catch (error) {
     console.log(error);
-    onError();
+    onError(error);
   }
 };
 

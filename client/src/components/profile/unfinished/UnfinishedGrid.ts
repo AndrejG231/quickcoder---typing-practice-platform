@@ -7,7 +7,7 @@ const UnfinishedGrid = styled.div`
   display: grid;
   grid-template:
     "delete" 60px
-    "items" 1fr
+    "items" calc(100vh - 200px)
     "pages" 60px
     /100%;
 `;

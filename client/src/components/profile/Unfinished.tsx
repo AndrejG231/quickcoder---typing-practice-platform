@@ -4,8 +4,16 @@ import { connect, ConnectedProps } from "react-redux";
 import { useHistory } from "react-router";
 
 import { reduxStore, unfinishedPractice } from "../../types";
-import { setUnfinishedPractices } from "../../redux/actions";
-import { getUnfinishedPractices } from "../../api";
+import {
+  setGlobalMessage,
+  setUnfinishedPractices,
+  setUnfinishedPracticesCount,
+} from "../../redux/actions";
+import {
+  deleteAllUnfinishedPractices,
+  deletePractice,
+  getUnfinishedPractices,
+} from "../../api";
 import {
   ItemInfoText,
   ItemList,
@@ -29,6 +37,9 @@ const rdxState = (state: reduxStore) => ({
 const rdxDispatch = (dispatch: Dispatch) => ({
   setUnfinished: (practices: unfinishedPractice[]) =>
     dispatch(setUnfinishedPractices(practices)),
+  setGlobalMsg: (message: string) => dispatch(setGlobalMessage(message)),
+  setUnfinishedCount: (count: number) =>
+    dispatch(setUnfinishedPracticesCount(count)),
 });
 
 const withRedux = connect(rdxState, rdxDispatch);
@@ -37,21 +48,50 @@ type props = ConnectedProps<typeof withRedux>;
 const Unfinished: FC<props> = ({
   unfinishedPractices,
   setUnfinished,
+  setUnfinishedCount,
+  setGlobalMsg,
   unfinishedCount,
 }) => {
   const nav = useHistory();
   const template = `2fr 2fr 2fr 1fr 1fr 1fr 1fr`;
 
+  // Fetching unfinished practices when counts do not match or there are no unfinished practices loaded
   useEffect(() => {
     if (unfinishedPractices.length < unfinishedCount) {
       getUnfinishedPractices({
         onSuccess: (practices) => {
           setUnfinished(practices);
         },
-        onError: () => null,
+        onError: setGlobalMsg,
       });
     }
   }, [unfinishedCount, unfinishedPractices]);
+
+  // delete unfinished practice handler
+  const doDeletePractice = (id: number, index: number) => {
+    deletePractice({
+      id,
+      onSuccess: () => {
+        setUnfinished([
+          ...unfinishedPractices.slice(0, index),
+          ...unfinishedPractices.slice(index + 1),
+        ]);
+        setUnfinishedCount(unfinishedCount - 1);
+      },
+      onError: () => setGlobalMsg,
+    });
+  };
+
+  // delete all unfinished practice handler
+  const doDeleteAll = () => {
+    deleteAllUnfinishedPractices({
+      onSuccess: () => {
+        setUnfinished([]);
+        setUnfinishedCount(0);
+      },
+      onError: () => setGlobalMsg,
+    });
+  };
 
   if (unfinishedCount === 0) {
     return <div>No unfinished practices...</div>;
@@ -63,7 +103,7 @@ const Unfinished: FC<props> = ({
 
   return (
     <UnfinishedGrid>
-      <DeleteAllButton />
+      <DeleteAllButton onClick={doDeleteAll} />
       <Items>
         <ItemList>
           {unfinishedPractices.map((item, index) => (
@@ -75,7 +115,7 @@ const Unfinished: FC<props> = ({
               <ItemInfoText darken>Top 200 English words</ItemInfoText>
               <ItemInfoText>{item.completion}</ItemInfoText>
               <ItemInfoText darken>{item.length}</ItemInfoText>
-              <DeleteButton />
+              <DeleteButton onClick={() => doDeletePractice(item.id, index)} />
               <ContinueButton />
             </ItemRow>
           ))}

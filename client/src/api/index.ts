@@ -12,3 +12,5 @@ export { default as getProfileOverview } from "./getProfileOverview";
 export { default as getProfileHistory } from "./getProfileHistory";
 export { default as getUnfinishedPractices } from "./getUnfinishedPractices";
 export { default as getUnfinishedPracticesCount } from "./getUnfinishedPracticesCount";
+export { default as deletePractice } from "./deletePractice";
+export { default as deleteAllUnfinishedPractices } from "./deleteAllUnfinishedPractices";
