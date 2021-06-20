@@ -15,10 +15,12 @@ import {
   Items,
   SummaryLinkButton,
 } from "./history/";
+import { getCategoryIndex } from "../../utilites";
 
 const rdxState = (state: reduxStore) => ({
   history: state.profile.history,
   awaitingUpdate: state.profile.awaitingHistoryUpdate,
+  menu: state.practiceMenu,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -30,7 +32,12 @@ const withRedux = connect(rdxState, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
+const History: FC<props> = ({
+  awaitingUpdate,
+  history,
+  updateHistory,
+  menu,
+}) => {
   const nav = useHistory();
   const template = "2fr 2fr 2fr 1fr 1fr 1fr 1fr 1fr";
 
@@ -62,22 +69,27 @@ const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
     <HistoryGrid>
       <Items>
         <ItemList>
-          {history.lastPractices.map((item, index) => (
-            <ItemRow key={index} template={template}>
-              <ItemInfoText darken>
-                {new Date(item.created_at).toLocaleString("uk-en")}
-              </ItemInfoText>
-              <ItemInfoText>{item.category}</ItemInfoText>
-              <ItemInfoText darken>Top 200 English words</ItemInfoText>
-              <ItemInfoText>{item.score}</ItemInfoText>
-              <ItemInfoText darken>{item.cpm}</ItemInfoText>
-              <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
-              <ItemInfoText darken>{item.length}</ItemInfoText>
-              <SummaryLinkButton
-                onClick={() => nav.push(`/practice/finished/id=${item.id}/`)}
-              />
-            </ItemRow>
-          ))}
+          {history.lastPractices.map((item, index) => {
+            const categoryIndex = getCategoryIndex(item.category, menu);
+            return (
+              <ItemRow key={index} template={template}>
+                <ItemInfoText darken>
+                  {new Date(item.created_at).toLocaleString("uk-en")}
+                </ItemInfoText>
+                <ItemInfoText>
+                  {menu[categoryIndex!].items[item.practice_index].name}
+                </ItemInfoText>
+                <ItemInfoText darken>Top 200 English words</ItemInfoText>
+                <ItemInfoText>{item.score}</ItemInfoText>
+                <ItemInfoText darken>{item.cpm}</ItemInfoText>
+                <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
+                <ItemInfoText darken>{item.length}</ItemInfoText>
+                <SummaryLinkButton
+                  onClick={() => nav.push(`/practice/finished/id=${item.id}/`)}
+                />
+              </ItemRow>
+            );
+          })}
         </ItemList>
       </Items>
       <Indexes template={template}>

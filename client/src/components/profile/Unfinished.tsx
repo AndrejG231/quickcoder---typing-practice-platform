@@ -28,10 +28,12 @@ import {
   DeleteButton,
   UnfinishedGrid,
 } from "./unfinished/";
+import { getCategoryIndex } from "../../utilites";
 
 const rdxState = (state: reduxStore) => ({
   unfinishedPractices: state.profile.unfinished,
   unfinishedCount: state.profile.unfinishedCount,
+  menu: state.practiceMenu,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -46,6 +48,7 @@ const withRedux = connect(rdxState, rdxDispatch);
 type props = ConnectedProps<typeof withRedux>;
 
 const Unfinished: FC<props> = ({
+  menu,
   unfinishedPractices,
   setUnfinished,
   setUnfinishedCount,
@@ -106,19 +109,26 @@ const Unfinished: FC<props> = ({
       <DeleteAllButton onClick={doDeleteAll} />
       <Items>
         <ItemList>
-          {unfinishedPractices.map((item, index) => (
-            <ItemRow key={index} template={template}>
-              <ItemInfoText darken>
-                {new Date(item.created_at).toLocaleString("uk-en")}
-              </ItemInfoText>
-              <ItemInfoText>{item.category}</ItemInfoText>
-              <ItemInfoText darken>Top 200 English words</ItemInfoText>
-              <ItemInfoText>{item.completion}</ItemInfoText>
-              <ItemInfoText darken>{item.length}</ItemInfoText>
-              <DeleteButton onClick={() => doDeletePractice(item.id, index)} />
-              <ContinueButton />
-            </ItemRow>
-          ))}
+          {unfinishedPractices.map((item, index) => {
+            const categoryIndex = getCategoryIndex(item.category, menu);
+            return (
+              <ItemRow key={index} template={template}>
+                <ItemInfoText darken>
+                  {new Date(item.created_at).toLocaleString("uk-en")}
+                </ItemInfoText>
+                <ItemInfoText>{item.category}</ItemInfoText>
+                <ItemInfoText darken>
+                  {menu[categoryIndex!].items[item.practice_index].name}
+                </ItemInfoText>
+                <ItemInfoText>{item.completion}</ItemInfoText>
+                <ItemInfoText darken>{item.length}</ItemInfoText>
+                <DeleteButton
+                  onClick={() => doDeletePractice(item.id, index)}
+                />
+                <ContinueButton />
+              </ItemRow>
+            );
+          })}
         </ItemList>
       </Items>
       <Indexes template={template}>
