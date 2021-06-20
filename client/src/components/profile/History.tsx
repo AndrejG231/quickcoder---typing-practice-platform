@@ -32,6 +32,7 @@ type props = ConnectedProps<typeof withRedux>;
 
 const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
   const nav = useHistory();
+  const template = "2fr 2fr 2fr 1fr 1fr 1fr 1fr 1fr";
 
   // History fetching
   useEffect(() => {
@@ -62,7 +63,7 @@ const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
       <Items>
         <ItemList>
           {history.lastPractices.map((item, index) => (
-            <ItemRow key={index}>
+            <ItemRow key={index} template={template}>
               <ItemInfoText darken>
                 {new Date(item.created_at).toLocaleString("uk-en")}
               </ItemInfoText>
@@ -79,7 +80,7 @@ const History: FC<props> = ({ awaitingUpdate, history, updateHistory }) => {
           ))}
         </ItemList>
       </Items>
-      <Indexes>
+      <Indexes template={template}>
         <ItemInfoText index darken>
           Time of practice
         </ItemInfoText>

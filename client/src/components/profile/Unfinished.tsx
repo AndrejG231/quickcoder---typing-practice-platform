@@ -7,14 +7,19 @@ import { reduxStore, unfinishedPractice } from "../../types";
 import { setUnfinishedPractices } from "../../redux/actions";
 import { getUnfinishedPractices } from "../../api";
 import {
-  HistoryGrid,
-  Indexes,
   ItemInfoText,
   ItemList,
   ItemRow,
   Items,
+  Indexes,
   SummaryLinkButton,
 } from "./history/";
+import {
+  ContinueButton,
+  DeleteAllButton,
+  DeleteButton,
+  UnfinishedGrid,
+} from "./unfinished/";
 
 const rdxState = (state: reduxStore) => ({
   unfinishedPractices: state.profile.unfinished,
@@ -27,7 +32,6 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 });
 
 const withRedux = connect(rdxState, rdxDispatch);
-
 type props = ConnectedProps<typeof withRedux>;
 
 const Unfinished: FC<props> = ({
@@ -36,6 +40,7 @@ const Unfinished: FC<props> = ({
   unfinishedCount,
 }) => {
   const nav = useHistory();
+  const template = `2fr 2fr 2fr 1fr 1fr 1fr 1fr`;
 
   useEffect(() => {
     if (unfinishedPractices.length < unfinishedCount) {
@@ -57,28 +62,26 @@ const Unfinished: FC<props> = ({
   }
 
   return (
-    <HistoryGrid>
+    <UnfinishedGrid>
+      <DeleteAllButton />
       <Items>
         <ItemList>
           {unfinishedPractices.map((item, index) => (
-            <ItemRow key={index}>
+            <ItemRow key={index} template={template}>
               <ItemInfoText darken>
                 {new Date(item.created_at).toLocaleString("uk-en")}
               </ItemInfoText>
               <ItemInfoText>{item.category}</ItemInfoText>
               <ItemInfoText darken>Top 200 English words</ItemInfoText>
-              {/* <ItemInfoText>{item.score}</ItemInfoText> */}
-              <ItemInfoText darken>{item.completion}</ItemInfoText>
-              {/* <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText> */}
+              <ItemInfoText>{item.completion}</ItemInfoText>
               <ItemInfoText darken>{item.length}</ItemInfoText>
-              <SummaryLinkButton
-                onClick={() => nav.push(`/practice/finished/id=${item.id}/`)}
-              />
+              <DeleteButton />
+              <ContinueButton />
             </ItemRow>
           ))}
         </ItemList>
       </Items>
-      <Indexes>
+      <Indexes template={template}>
         <ItemInfoText index darken>
           Time of practice
         </ItemInfoText>
@@ -86,17 +89,16 @@ const Unfinished: FC<props> = ({
         <ItemInfoText index darken>
           Name
         </ItemInfoText>
-        <ItemInfoText index>Score</ItemInfoText>
-        <ItemInfoText index darken>
-          Cpm
-        </ItemInfoText>
-        <ItemInfoText index>Errors %</ItemInfoText>
+        <ItemInfoText index>Completion</ItemInfoText>
         <ItemInfoText index darken>
           Length
         </ItemInfoText>
-        <ItemInfoText index>Details</ItemInfoText>
+        <ItemInfoText index>Remove</ItemInfoText>
+        <ItemInfoText index darken>
+          Continue
+        </ItemInfoText>
       </Indexes>
-    </HistoryGrid>
+    </UnfinishedGrid>
   );
 };
 
