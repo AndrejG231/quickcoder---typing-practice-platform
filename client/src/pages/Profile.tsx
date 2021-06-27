@@ -10,6 +10,7 @@ import {
   History,
   Unfinished,
   UnfinishedCount,
+  Settings,
 } from "../components/profile";
 import { ArrowButton, NavBar } from "../components/";
 import { getUnfinishedPracticesCount } from "../api";
@@ -31,6 +32,12 @@ type props = ConnectedProps<typeof withRedux>;
 
 const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
   const nav = useHistory();
+  const [route, setRoute] = useState<string>(nav.location.pathname);
+
+  const redirect = (path: string) => {
+    nav.push(path);
+    setRoute(path);
+  };
 
   useEffect(() => {
     if (unfinishedCount < 1) {
@@ -46,21 +53,21 @@ const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
       {/* Navigation */}
       <NavBar>
         <ArrowButton
-          onClick={() => nav.push("/profile/")}
-          selected={nav.location.pathname === "/profile/"}
+          onClick={() => redirect("/profile/")}
+          selected={route === "/profile/"}
         >
           Overview
         </ArrowButton>
         <ArrowButton
-          onClick={() => nav.push("/profile/history/")}
-          selected={nav.location.pathname.includes("history")}
+          onClick={() => redirect("/profile/history/")}
+          selected={route.includes("history")}
         >
           History
         </ArrowButton>
         <ArrowButton
           relative
-          onClick={() => nav.push("/profile/unfinished/")}
-          selected={nav.location.pathname.includes("unfinished")}
+          onClick={() => redirect("/profile/unfinished/")}
+          selected={route.includes("unfinished")}
         >
           {/* Count of unfinished practices, displayed if there are any */}
           {unfinishedCount ? (
@@ -69,12 +76,12 @@ const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
           Unfinished
         </ArrowButton>
         <ArrowButton
-          onClick={() => nav.push("/profile/settings/")}
-          selected={nav.location.pathname.includes("settings")}
+          onClick={() => redirect("/profile/settings/")}
+          selected={route.includes("settings")}
         >
           Settings
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/home/")}>Home</ArrowButton>
+        <ArrowButton onClick={() => redirect("/home/")}>Home</ArrowButton>
       </NavBar>
       {/* Nested routes */}
       <Routes>
@@ -88,7 +95,7 @@ const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
           <Unfinished />
         </Route>
         <Route path="/profile/settings/">
-          <div>Settings</div>
+          <Settings />
         </Route>
       </Routes>
     </ProfileGrid>

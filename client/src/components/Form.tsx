@@ -28,10 +28,12 @@ const Form: FC<InputGroupProps> = ({
   submitFunction,
   page,
   errors,
+  centered,
 }) => {
   let isErrorDisplayed = false;
   return (
     <FormContainer
+      centered={centered}
       onSubmit={(e) => {
         e.preventDefault();
         submitFunction();
