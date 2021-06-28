@@ -13,6 +13,7 @@ const changeKnownPassword = async (
   newPassword: string,
   req: Request
 ) => {
+  // validate user
   const validUserInfo = await getUserFromCookie(req);
 
   if (!validUserInfo.user) {
@@ -28,12 +29,15 @@ const changeKnownPassword = async (
     return generateResponse(false, "login_password_invalid");
   }
 
+  // Check new password strength
+
   const weakPassword = checkPasswordStrength(newPassword, "new");
 
   if (weakPassword) {
     return weakPassword;
   }
 
+  // Update new password and logout from all devices
   const hashedNewPassword = await argon2.hash(newPassword);
 
   await getConnection()

@@ -6,6 +6,8 @@ import getSignedUser from "./getSignedUser";
 import changeKnownPassword from "./changeKnownPassword";
 import retrievePasswordToken from "./retrievePasswordToken";
 import changeForgottenPassword from "./changeForgottenPassword";
+import changeEmail from "./changeEmail";
+import changeUsername from "./changeUsername";
 
 import {
   LoginInput,
@@ -64,6 +66,22 @@ class AuthResolver {
     @Arg("newPassword") newPassword: string
   ) {
     const response = await changeForgottenPassword(token, newPassword);
+    return response;
+  }
+  @Mutation(() => ActionResponse)
+  async changeUsername(
+    @Arg("newUsername") newUsername: string,
+    @Ctx() { req }: GraphqlContext
+  ) {
+    const response = await changeUsername(req, newUsername);
+    return response;
+  }
+  @Mutation(() => ActionResponse)
+  async changeEmail(
+    @Arg("newEmail") newEmail: string,
+    @Ctx() { req }: GraphqlContext
+  ) {
+    const response = await changeEmail(req, newEmail);
     return response;
   }
 }
