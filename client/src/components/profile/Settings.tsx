@@ -8,26 +8,44 @@ import {
   SettingsNavigator,
   SectionSplitter,
   SectionTitle,
+  DeleteAccountButton,
 } from "./settings/";
 import { Form } from "../";
 import { inputData } from "../../types";
 import { useErrors } from "../../utilites";
 
-const Settings: FC = () => {
-  const [changeEmailData, setChangeEmailData] = useState<inputData>({
+// Default form input type and values object for settings
+const defaultData: { [key in string]: inputData } = {
+  changeEmail: {
     "new email": { type: "email", value: "" },
     password: { type: "password", value: "" },
-  })
-  const [changeEmailErrors, setChangeEmailErrors] = useErrors()
-  const [changeUsernameData, setChangeUsernameData] = useState<inputData>({
+  },
+  changeUsername: {
     "new username": { type: "text", value: "" },
     " password": { type: "password", value: "" },
-  });
-  const [changePasswordData, setChangePasswordData] = useState<inputData>({
+  },
+  changePassword: {
     "new password": { type: "password", value: "" },
     "repeat new password": { type: "password", value: "" },
     "previous password": { type: "password", value: "" },
-  });
+  },
+};
+
+const Settings: FC = () => {
+  const [changeEmailData, setChangeEmailData] = useState(
+    defaultData.changeEmail
+  );
+  const [changeUsernameData, setChangeUsernameData] = useState(
+    defaultData.changeUsername
+  );
+  const [changePasswordData, setChangePasswordData] = useState(
+    defaultData.changePassword
+  );
+
+  const [changeEmailErrors, setChangeEmailErrors] = useErrors();
+  const [changeUsernameErrors, setChangeUsernameErrors] = useErrors();
+  const [changePasswordErrors, setChangePasswordErrors] = useErrors();
+
   const nav = useHistory();
   return (
     <SettingsGrid>
@@ -58,7 +76,7 @@ const Settings: FC = () => {
             page="change"
             data={changeUsernameData}
             setData={setChangeUsernameData}
-            errors={{ field: "", value: "" }}
+            errors={changeUsernameErrors}
             submitFunction={console.log}
             centered
           />
@@ -69,7 +87,7 @@ const Settings: FC = () => {
             page="change"
             data={changeEmailData}
             setData={setChangeEmailData}
-            errors={{ field: "", value: "" }}
+            errors={changeEmailErrors}
             submitFunction={console.log}
             centered
           />
@@ -80,11 +98,14 @@ const Settings: FC = () => {
             page="change"
             data={changePasswordData}
             setData={setChangePasswordData}
-            errors={{ field: "", value: "" }}
+            errors={changePasswordErrors}
             submitFunction={console.log}
             centered
           />
           {/* Delete account */}
+          <SectionSplitter />
+          <SectionTitle>Delete Account</SectionTitle>
+          <DeleteAccountButton />
         </Route>
         {/* Practice preferences */}
         <Route path={"/profile/settings/practice_prefs/"}>

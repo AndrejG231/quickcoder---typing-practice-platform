@@ -20,6 +20,7 @@ interface InputGroupProps {
   submitFunction: () => void;
   page: string;
   errors: formError;
+  centered?: boolean;
 }
 
 const Form: FC<InputGroupProps> = ({
