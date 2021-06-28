@@ -32,6 +32,7 @@ const defaultData: { [key in string]: inputData } = {
 };
 
 const Settings: FC = () => {
+  // Inputs and input errors
   const [changeEmailData, setChangeEmailData] = useState(
     defaultData.changeEmail
   );
@@ -45,6 +46,17 @@ const Settings: FC = () => {
   const [changeEmailErrors, setChangeEmailErrors] = useErrors();
   const [changeUsernameErrors, setChangeUsernameErrors] = useErrors();
   const [changePasswordErrors, setChangePasswordErrors] = useErrors();
+
+  // Request handlers
+
+  const handleChangeEmail = () => null;
+  // Request => setEmailErros || setSuccessPopUp + refetch UserInfo
+
+  const handleChangeUsername = () => null;
+  // Request => setUsernameErrors || setSuccessPopUp + refetch UserInfo
+
+  const handleChangePassword = () => null;
+  // Request => setChangePasswordErrors || clear user info, GOTO login, setSuccessPopUP, ask for login
 
   const nav = useHistory();
   return (
@@ -77,18 +89,19 @@ const Settings: FC = () => {
             data={changeUsernameData}
             setData={setChangeUsernameData}
             errors={changeUsernameErrors}
-            submitFunction={console.log}
+            submitFunction={handleChangeUsername}
             centered
           />
           {/* Change email */}
           <SectionSplitter />
+          dle
           <SectionTitle>Change email</SectionTitle>
           <Form
             page="change"
             data={changeEmailData}
             setData={setChangeEmailData}
             errors={changeEmailErrors}
-            submitFunction={console.log}
+            submitFunction={handleChangeEmail}
             centered
           />
           {/* Change password */}
@@ -99,7 +112,7 @@ const Settings: FC = () => {
             data={changePasswordData}
             setData={setChangePasswordData}
             errors={changePasswordErrors}
-            submitFunction={console.log}
+            submitFunction={handleChangePassword}
             centered
           />
           {/* Delete account */}
