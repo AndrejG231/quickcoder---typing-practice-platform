@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Users } from "src/entities";
+import { Users } from "../../entities";
 import { getConnection } from "typeorm";
 import { ActionResponse } from "../../types";
 import { validateUserFromCookie } from "../../utilities";

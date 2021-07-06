@@ -16,12 +16,6 @@ const checkPasswordStrength: validPassword = (password, variant) => {
     return generateResponse(false, `${action}_weak`);
   }
 
-  const passwordCharTest = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)?/.test(password);
-
-  if (!passwordCharTest) {
-    return generateResponse(false, `${action}_noInclude`);
-  }
-
   return false;
 };
 
