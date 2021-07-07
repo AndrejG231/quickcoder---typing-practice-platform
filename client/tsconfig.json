@@ -8,7 +8,7 @@
             "ESNext"
         ],
         "jsx": "react-jsx",
-        "noEmit": true,
+        "noEmit": false,
         "isolatedModules": true,
         "esModuleInterop": true,
         "strict": true,

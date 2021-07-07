@@ -4,7 +4,9 @@
   "description": "Client side of quickcoder.com app.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack server --config config/webpack.config.js --open"
+    "dev": "webpack serve --config config/webpack.config.js --env mode=dev --open",
+    "build": "webpack --config config/webpack.config.js --env mode=prod",
+    "lint": "eslint --config config/eslint.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,21 +19,41 @@
   },
   "homepage": "https://github.com/AndrejG231/QuickCoder.com#readme",
   "dependencies": {
+    "@styled-icons/boxicons-regular": "^10.34.0",
+    "axios": "^0.21.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.1.0",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/react": "^17.0.13",
     "@types/react-dom": "^17.0.8",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/redux": "^3.6.0",
+    "@types/styled-components": "^5.1.11",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
     "babel-loader": "^8.2.2",
+    "eslint": "^7.30.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.2",
+    "react-refresh": "^0.10.0",
+    "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",
     "webpack": "^5.42.1",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   }
 }
