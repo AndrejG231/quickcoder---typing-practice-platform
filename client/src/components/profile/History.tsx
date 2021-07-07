@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 import { reduxStore, userPracticeHistory } from "../../types";
 import { setProfileHistory } from "../../redux/actions";

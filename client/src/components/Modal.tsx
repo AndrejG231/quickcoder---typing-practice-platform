@@ -1,6 +1,6 @@
 import React, { FC, ReactChild, useEffect } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { animateIn, animateOut } from "../redux/actions/";
 import { reduxStore } from "../types/";

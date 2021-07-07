@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 import { leaderboardItem, practiceMenuItem, reduxStore } from "../types";
 import { selectCategory, selectPractice } from "../redux/actions";
 import { getLeaderBoard } from "../api";

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
-import { Route, useHistory } from "react-router";
+import { Route, useHistory } from "react-router-dom";
 
 import {
   Routes,

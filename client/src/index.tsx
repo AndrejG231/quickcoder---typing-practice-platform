@@ -1,4 +1,3 @@
-import "dotenv/config";
 import ReactDOM from "react-dom";
 
 import { ThemeProvider } from "styled-components";

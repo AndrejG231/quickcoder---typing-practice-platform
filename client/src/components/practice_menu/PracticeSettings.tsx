@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { Dispatch } from "redux";
 import { createPractice } from "../../api";
 import {

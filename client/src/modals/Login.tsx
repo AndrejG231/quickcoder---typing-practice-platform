@@ -11,7 +11,7 @@ import {
   setGlobalMessage,
   resetProfile,
 } from "../redux/actions/";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { inputData } from "../types";
 
 const rdxDispatch = (dispatch: Dispatch) => ({

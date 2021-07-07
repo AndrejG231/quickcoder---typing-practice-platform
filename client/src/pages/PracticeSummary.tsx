@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams } from "react-router-dom";
 
 import { reduxStore, practiceObject } from "../types";
 import { createPractice, loadPractice } from "../api";

@@ -5,7 +5,7 @@ import { Dispatch } from "redux";
 import { Modal, Form } from "../components";
 import { useErrors } from "../utilites";
 import { animateOut, setGlobalMessage } from "../redux/actions/";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { register } from "../api/";
 import { inputData } from "../types";
 
