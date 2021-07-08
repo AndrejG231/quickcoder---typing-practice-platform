@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -9,7 +9,7 @@ import { getLeaderBoard } from "../api";
 import { getCategoryIndex } from "../utilites";
 
 import { Board, Row, Field, Column, LbGrid } from "../components/leaderboard";
-import { NavBar, ArrowButton, Wrapper } from "../components";
+import { NavBar, ArrowButton } from "../components";
 
 const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
@@ -40,10 +40,10 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
   const [leaderboard, setLeaderboard] = useState<leaderboardItem[] | null>();
 
   //Fetching leaderboard and loading it to state handler
-  const loadLeaderBoard = async () => {
-    const leaderboard = await getLeaderBoard(~~index, category);
-    setLeaderboard(leaderboard);
-  };
+  const loadLeaderBoard = useCallback(async () => {
+    const leaderBoard = await getLeaderBoard(~~index, category);
+    setLeaderboard(leaderBoard);
+  }, [setLeaderboard, index, category]);
 
   //Fetch leaderboard
   useEffect(() => {

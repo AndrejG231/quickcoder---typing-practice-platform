@@ -4,7 +4,6 @@ import { statColorSwitch } from "../../../utilites";
 interface props {
   value: number;
   index: number;
-  theme: any;
   cpm?: boolean;
   error?: boolean;
 }

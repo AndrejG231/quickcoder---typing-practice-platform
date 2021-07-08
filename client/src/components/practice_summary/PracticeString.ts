@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 interface props {
   error?: boolean;
-  theme: any;
 }
 
-const PracticeString = styled.span`
-  ${({ theme, error }: props) => `
+const PracticeString = styled.span<props>`
+  ${({ theme, error }) => `
     color: ${theme.colors.b5};
     font-family: 'Times New Roman', serif;
     font-size: 46px;

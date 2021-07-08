@@ -3,10 +3,9 @@ import { statColorSwitch } from "../../../utilites";
 
 interface props {
   width: number;
-  theme: any;
 }
 
-const DrawBar = styled.div.attrs<props>(({ width, theme }) => {
+const DrawBar = styled.div.attrs<props>(({ width }) => {
   const color = statColorSwitch(width);
 
   return {

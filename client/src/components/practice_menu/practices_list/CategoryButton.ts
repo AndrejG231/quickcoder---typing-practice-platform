@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 interface props {
   isSelected?: boolean;
-  theme: any;
 }
 
-const CategoryButton = styled.button`
-  ${({ isSelected, theme }: props) => `
+const CategoryButton = styled.button<props>`
+  ${({ isSelected, theme }) => `
   background: ${theme.colors.b2};
   border: 0px;
   border-radius: 8px;

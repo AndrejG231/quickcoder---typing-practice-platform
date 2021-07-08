@@ -51,7 +51,7 @@ const Overview: FC<props> = ({
         },
       });
     }
-  }, [overview]);
+  }, [overview, setProfileOverview]);
 
   if (!overview || !menu) {
     return <div>Loading..</div>;

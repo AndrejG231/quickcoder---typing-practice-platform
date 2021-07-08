@@ -3,11 +3,10 @@ import styled from "styled-components";
 interface props {
   top?: boolean;
   bottom?: boolean;
-  theme: any;
 }
 
-const ItemsFade = styled.div`
-  ${({ theme, top, bottom }: props) => `
+const ItemsFade = styled.div<props>`
+  ${({ theme, top, bottom }) => `
     position: absolute;
     height: 70px;
     width: 100%;

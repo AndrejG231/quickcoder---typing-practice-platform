@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { theme } from "../../../static";
 
 interface props {
-  theme: any;
   offset: number;
 }
 
@@ -10,8 +8,8 @@ const Text = styled.div.attrs<props>(({ offset, theme }) => ({
   style: {
     transform: `translateX(-${theme.width * offset}px)`,
   },
-}))`
-  ${({ theme }: props) => `
+}))<props>`
+  ${({ theme }) => `
     color: ${theme.colors.w3};
     line-height: 80px;
     font-size: 35px;

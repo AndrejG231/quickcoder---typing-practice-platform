@@ -37,7 +37,7 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 
 const withRedux = connect(rdxProps, rdxDispatch);
 
-type props = ConnectedProps<typeof withRedux> & {};
+type props = ConnectedProps<typeof withRedux>;
 
 const Practice: React.FC<props> = ({
   practice,
@@ -64,7 +64,7 @@ const Practice: React.FC<props> = ({
         onError: () => null,
       });
     }
-  }, [practice, id]);
+  }, [unfinished, practice, id, refreshUnfinished, setPractice]);
 
   //Update practice by evaulating keypress handler
   const handleKeyPress = (event: KeyboardEvent) => {

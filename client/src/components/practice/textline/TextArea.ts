@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
-interface props {
-  theme: any;
-}
-
 const TextArea = styled.div`
-  ${({ theme }: props) => `
+  ${({ theme }) => `
     width: 100%;
     background: ${theme.colors.b5};
     text-align: left;

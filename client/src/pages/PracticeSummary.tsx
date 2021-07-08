@@ -13,8 +13,7 @@ import {
   PracticeDisplayArea,
   PracticeString,
 } from "../components/practice_summary";
-import { NavBar } from "../components/";
-import { Stats, ArrowButton } from "../components/";
+import { Stats, ArrowButton, NavBar } from "../components/";
 
 const rdxProps = (state: reduxStore) => {
   return {
@@ -51,7 +50,7 @@ const PracticeSummary: FC<props> = ({
         onError: () => null,
       });
     }
-  }, [practice, id]);
+  }, [practice, id, setPractice]);
 
   if (!practice || practice?.id !== ~~id) {
     return <div>Loading...</div>;
@@ -113,7 +112,7 @@ const PracticeSummary: FC<props> = ({
           const prevError = lastError;
           lastError = ~~errIndex;
           return (
-            <PracticeString>
+            <PracticeString key={i}>
               {practice.string.slice(prevError, lastError)}
               <PracticeString error>
                 {practice.errors[lastError]}

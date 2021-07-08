@@ -1,16 +1,16 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 
 import { Modal, Form } from "../components";
 import { useErrors } from "../utilites";
-import { animateOut, setGlobalMessage } from "../redux/actions/";
+import { setGlobalMessage } from "../redux/actions/";
 import { useHistory } from "react-router-dom";
 import { register } from "../api/";
 import { inputData } from "../types";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
-  closeModal: () => dispatch(animateOut("modal")),
+  // closeModal: () => dispatch(animateOut("modal")),
   setGlobalMessage: (message: string) => dispatch(setGlobalMessage(message)),
 });
 
@@ -18,7 +18,7 @@ const withRedux = connect(() => ({}), rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const Register: FC<props> = ({ closeModal, setGlobalMessage }) => {
+const Register: FC<props> = ({ setGlobalMessage }) => {
   const nav = useHistory();
   const [inputData, setInputData] = useState<inputData>({
     username: {

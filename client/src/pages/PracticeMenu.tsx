@@ -14,7 +14,7 @@ const rdxProps = (state: reduxStore) => {
   };
 };
 
-const rdxDispatch = (dispatch: any) => ({});
+const rdxDispatch = () => ({});
 
 const withRedux = connect(rdxProps, rdxDispatch);
 

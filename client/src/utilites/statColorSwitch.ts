@@ -1,4 +1,4 @@
-const statColorSwitch = (width: number, reversed: boolean = false): string => {
+const statColorSwitch = (width: number, reversed = false): string => {
   if (reversed) {
     width = 100 - width;
   }

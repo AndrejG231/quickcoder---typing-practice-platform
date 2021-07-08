@@ -14,14 +14,7 @@ import {
   deletePractice,
   getUnfinishedPractices,
 } from "../../api";
-import {
-  ItemInfoText,
-  ItemList,
-  ItemRow,
-  Items,
-  Indexes,
-  SummaryLinkButton,
-} from "./history/";
+import { ItemInfoText, ItemList, ItemRow, Items, Indexes } from "./history/";
 import {
   ContinueButton,
   DeleteAllButton,
@@ -68,7 +61,7 @@ const Unfinished: FC<props> = ({
         onError: setGlobalMsg,
       });
     }
-  }, [unfinishedCount, unfinishedPractices]);
+  }, [unfinishedCount, unfinishedPractices, setGlobalMsg]);
 
   // delete unfinished practice handler
   const doDeletePractice = (id: number, index: number) => {

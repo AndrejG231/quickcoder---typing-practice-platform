@@ -2,11 +2,10 @@ import styled from "styled-components";
 
 interface props {
   isOnScreen?: boolean;
-  theme: any;
 }
 
-const ModalWrapper = styled.div`
-  ${({ isOnScreen, theme }: props) => {
+const ModalWrapper = styled.div<props>`
+  ${({ isOnScreen, theme }) => {
     return `
         position: fixed;
         top: 10px;

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 interface props {
-  theme: any;
   column: boolean;
 }
 
@@ -31,8 +30,8 @@ const rowTemp = `
       / 1fr 1fr 1fr 1fr 1fr 1fr 1fr
 `;
 
-const StatContainer = styled.div`
-  ${({ theme, column }: props) => `
+const StatContainer = styled.div<props>`
+  ${({ theme, column }) => `
     display: grid;
     align-items: center;
     background: ${theme.colors.b4};

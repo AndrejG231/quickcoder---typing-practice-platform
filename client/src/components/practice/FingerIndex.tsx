@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import { keyColors } from "../../static";
-import keymaps from "../../static/keymaps";
-import layouts from "../../static/layouts";
-import { fingerKeys, schemeCharacters } from "../../types";
+// import keymaps from "../../static/keymaps";
+// import layouts from "../../static/layouts";
+import { fingerKeys /* schemeCharacters */ } from "../../types";
 
 import { FiContainer, FingerTag } from "./finger_index";
 

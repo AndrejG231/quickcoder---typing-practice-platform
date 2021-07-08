@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 interface props {
-  theme: any;
   isSelected: boolean;
 }
 
@@ -9,8 +8,8 @@ const PracticeItem = styled.div.attrs<props>(({ isSelected, theme }) => ({
   style: {
     border: `2px solid ${theme.colors[isSelected ? "w5" : "b4"]}`,
   },
-}))`
-  ${({ theme }: props) => `
+}))<props>`
+  ${({ theme }) => `
     background: ${theme.colors.b2};
     width: 80%;
     height: 100px;

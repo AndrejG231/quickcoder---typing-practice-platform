@@ -3,11 +3,10 @@ import styled from "styled-components";
 interface props {
   color: string;
   highlight: boolean;
-  theme: any;
 }
 
-const FingerTag = styled.div`
-  ${({ color, highlight, theme }: props) => `
+const FingerTag = styled.div<props>`
+  ${({ color, highlight, theme }) => `
     width: 60px;
     height: 40px;
     background: ${color};

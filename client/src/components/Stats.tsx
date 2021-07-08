@@ -11,7 +11,7 @@ interface props {
 }
 
 const Stats: FC<props> = ({ practice, noTimer, column, noLastError }) => {
-  const [time, setTime] = useState(0);
+  const [_, setTime] = useState(0);
 
   useEffect(() => {
     if (!noTimer) {
@@ -19,6 +19,7 @@ const Stats: FC<props> = ({ practice, noTimer, column, noLastError }) => {
       return () => clearInterval(timer);
     }
   }, [noTimer, setTime]);
+
   const totalTimeSpend =
     practice.start_time && !noTimer
       ? new Date().getTime() - practice.start_time + practice.time_spent

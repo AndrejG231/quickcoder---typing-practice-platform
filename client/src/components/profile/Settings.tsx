@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
-import { ArrowButton } from "..";
+import { ArrowButton, Form } from "..";
 
 import {
   SettingsGrid,
@@ -8,9 +8,7 @@ import {
   SettingsNavigator,
   SectionSplitter,
   SectionTitle,
-  DeleteAccountButton,
 } from "./settings/";
-import { Form } from "../";
 import { inputData } from "../../types";
 import { useErrors } from "../../utilites";
 
@@ -29,6 +27,9 @@ const defaultData: { [key in string]: inputData } = {
     "repeat new password": { type: "password", value: "" },
     "previous password": { type: "password", value: "" },
   },
+  deleteAccount: {
+    "current password": { type: "password", value: "" },
+  },
 };
 
 const Settings: FC = () => {
@@ -42,14 +43,18 @@ const Settings: FC = () => {
   const [changePasswordData, setChangePasswordData] = useState(
     defaultData.changePassword
   );
+  const [deleteAccountData, setDeleteAccountData] = useState(
+    defaultData.deleteAccount
+  );
 
   const [changeEmailErrors, setChangeEmailErrors] = useErrors();
   const [changeUsernameErrors, setChangeUsernameErrors] = useErrors();
   const [changePasswordErrors, setChangePasswordErrors] = useErrors();
+  const [deleteAccountErrors, setDeleteAccountErrors] = useErrors();
 
   // Request handlers
 
-  const handleChangeEmail = () => null;
+  const handleChangeEmail = () => {};
   // Request => setEmailErros || setSuccessPopUp + refetch UserInfo
 
   const handleChangeUsername = () => null;
@@ -57,6 +62,8 @@ const Settings: FC = () => {
 
   const handleChangePassword = () => null;
   // Request => setChangePasswordErrors || clear user info, GOTO login, setSuccessPopUP, ask for login
+
+  const handleAccountDelete = () => null;
 
   const nav = useHistory();
   return (
@@ -118,10 +125,18 @@ const Settings: FC = () => {
           {/* Delete account */}
           <SectionSplitter />
           <SectionTitle>Delete Account</SectionTitle>
-          <DeleteAccountButton />
+          <Form
+            page="delete"
+            data={deleteAccountData}
+            errors={deleteAccountErrors}
+            setData={setDeleteAccountData}
+            submitFunction={handleAccountDelete}
+            centered
+          />
         </Route>
         {/* Practice preferences */}
         <Route path={"/profile/settings/practice_prefs/"}>
+          {/* Language */}
           {/* Prefered keyboard layout */}
           {/* Show finger indexes */}
           {/* Show keyboard visuals*/}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 //pages
@@ -14,7 +14,6 @@ import Login from "./modals/Login";
 import Register from "./modals/Register";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
-import ChangeKnownPassword from "./modals/ChangeKnownPassword";
 
 const Routes: React.FC = () => {
   return (
@@ -33,11 +32,6 @@ const Routes: React.FC = () => {
         exact
         path="/home/change_password_w_token/:token/"
         component={() => <ChangeTokenPassword />}
-      />
-      <Route
-        exact
-        path="/home/change_known_password/"
-        component={() => <ChangeKnownPassword />}
       />
       <Route
         exact

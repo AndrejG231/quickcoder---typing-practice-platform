@@ -1,5 +1,4 @@
 const path = require("path");
-const htmlWebpackPlugin = require("html-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const mode = process.env.mode;
 
@@ -8,7 +7,7 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
-  devServer: { contentBase: path.join(__dirname, "..", "./src") },
+  devServer: { contentBase: path.join(__dirname, "..", "./src"), port: 3000 },
   module: {
     rules: [
       // JavaScript loader

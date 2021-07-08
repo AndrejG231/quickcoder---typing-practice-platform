@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 interface props {
-  theme: any;
   selected: boolean;
   color: string;
   error?: boolean;
@@ -10,8 +9,8 @@ interface props {
 
 const size = 25;
 
-const Key = styled.div`
-  ${({ theme, selected, color, error, ratio = 1 }: props) => `
+const Key = styled.div<props>`
+  ${({ theme, selected, color, error, ratio = 1 }) => `
     height: ${size}px;
     width: ${ratio * size}px;
     background: ${

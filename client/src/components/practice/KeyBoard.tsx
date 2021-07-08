@@ -1,4 +1,4 @@
-import react, { FC } from "react";
+import React, { FC } from "react";
 
 import { schemeCharacters } from "../../types";
 import { keyColors } from "../../static";
