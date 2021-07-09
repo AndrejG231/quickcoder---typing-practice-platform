@@ -5,6 +5,7 @@ module.exports = {
   mode: "development",
   devServer: {
     hot: true,
+    historyApiFallback: true,
   },
   devtool: "cheap-module-source-map",
   plugins: [
