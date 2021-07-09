@@ -14,6 +14,7 @@ import {
   PracticeString,
 } from "../components/practice_summary";
 import { Stats, ArrowButton, NavBar } from "../components/";
+import { routes } from "../static";
 
 const rdxProps = (state: reduxStore) => {
   return {
@@ -65,10 +66,10 @@ const PracticeSummary: FC<props> = ({
         length: practice.string.length,
         onSuccess: (newPractice: practiceObject) => {
           setPractice(newPractice);
-          nav.push(`/practice/in_progress/id=${newPractice.id}/`);
+          nav.push(routes.runningPractice(practice.id));
         },
         onError: () => {
-          nav.push(`/home/`);
+          nav.push(routes.home);
           setGlobalMessage("Could not recreate practice session.");
         },
       });
@@ -84,23 +85,23 @@ const PracticeSummary: FC<props> = ({
         >
           {loading ? "Loading.." : "Restart"}
         </ArrowButton>
-        <ArrowButton width={160} onClick={() => nav.push(`/practice_menu/`)}>
+        <ArrowButton width={160} onClick={() => nav.push(routes.practiceMenu)}>
           New practice
         </ArrowButton>
         <ArrowButton
           width={160}
           onClick={() =>
             nav.push(
-              `/leaderboard/c=${practice.category}/i=${practice.practice_index}/`
+              routes.leaderBoard(practice.category, practice.practice_index)
             )
           }
         >
           Leaderboard
         </ArrowButton>
-        <ArrowButton width={160} onClick={() => nav.push(`/profile/`)}>
+        <ArrowButton width={160} onClick={() => nav.push(routes.profile)}>
           Profile
         </ArrowButton>
-        <ArrowButton width={160} onClick={() => nav.push(`/home/`)}>
+        <ArrowButton width={160} onClick={() => nav.push(routes.home)}>
           Home
         </ArrowButton>
       </NavBar>

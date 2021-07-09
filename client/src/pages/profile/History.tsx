@@ -14,8 +14,9 @@ import {
   ItemRow,
   Items,
   SummaryLinkButton,
-} from "./history/";
+} from "../../components/profile/history";
 import { getCategoryIndex } from "../../utilites";
+import { routes } from "../../static";
 
 const rdxState = (state: reduxStore) => ({
   history: state.profile.history,
@@ -85,7 +86,7 @@ const History: FC<props> = ({
                 <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
                 <ItemInfoText darken>{item.length}</ItemInfoText>
                 <SummaryLinkButton
-                  onClick={() => nav.push(`/practice/finished/id=${item.id}/`)}
+                  onClick={() => nav.push(routes.finishedPractice(item.id))}
                 />
               </ItemRow>
             );

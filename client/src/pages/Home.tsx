@@ -25,6 +25,7 @@ import {
 } from "../redux/actions/";
 
 import { logout } from "../api/";
+import { routes } from "../static";
 
 const rdxState = (state: reduxStore) => {
   return {
@@ -98,9 +99,9 @@ const Home: React.FC<props> = ({
   const goHome = () => {
     if (isModalOpened) {
       closeModal();
-      setTimeout(() => navigation.push("/home/"), 500);
+      setTimeout(() => navigation.push(routes.home), 500);
     } else {
-      navigation.push("/home/");
+      navigation.push(routes.home);
     }
   };
 
@@ -109,7 +110,7 @@ const Home: React.FC<props> = ({
       {/* Top header bar */}
       <Header
         isOnScreen={isOnScreen}
-        onUserClick={() => (userInfo ? redirect("/profile/") : null)}
+        onUserClick={() => (userInfo ? redirect(routes.profile) : null)}
         onTitleClick={goHome}
         username={`${
           userInfo?.username
@@ -125,19 +126,17 @@ const Home: React.FC<props> = ({
         <ClippedButton onClick={() => null}>
           <MenuItem>Typing test</MenuItem>
         </ClippedButton>
-        <ClippedButton onClick={() => redirect("/practice_menu/")}>
+        <ClippedButton onClick={() => redirect(routes.practiceMenu)}>
           <MenuItem>Practice</MenuItem>
         </ClippedButton>
         <ClippedButton
           onClick={() => {
-            userInfo
-              ? redirect("/profile/")
-              : navigation.push("/home/login/");
+            userInfo ? redirect(routes.profile) : navigation.push(routes.login);
           }}
         >
           <MenuItem>Profile</MenuItem>
         </ClippedButton>
-        <ClippedButton onClick={() => redirect("/profile/settings/")}>
+        <ClippedButton onClick={() => redirect(routes.settings)}>
           <MenuItem>Settings</MenuItem>
         </ClippedButton>
         <ClippedButton onClick={() => null}>
@@ -156,14 +155,14 @@ const Home: React.FC<props> = ({
         <UserButtonWrapper isOnScreen={isOnScreen}>
           <ArrowButton
             width={130}
-            onClick={() => navigation.push("/home/signup/")}
+            onClick={() => navigation.push(routes.register)}
             left
           >
             <UserAction>Sign Up</UserAction>
           </ArrowButton>
           <ArrowButton
             width={100}
-            onClick={() => navigation.push("/home/login/")}
+            onClick={() => navigation.push(routes.login)}
             left
           >
             <UserAction>Login</UserAction>

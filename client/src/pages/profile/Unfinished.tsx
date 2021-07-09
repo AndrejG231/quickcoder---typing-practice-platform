@@ -14,14 +14,21 @@ import {
   deletePractice,
   getUnfinishedPractices,
 } from "../../api";
-import { ItemInfoText, ItemList, ItemRow, Items, Indexes } from "./history/";
+import {
+  ItemInfoText,
+  ItemList,
+  ItemRow,
+  Items,
+  Indexes,
+} from "../../components/profile/history/";
 import {
   ContinueButton,
   DeleteAllButton,
   DeleteButton,
   UnfinishedGrid,
-} from "./unfinished/";
+} from "../../components/profile/unfinished/";
 import { getCategoryIndex } from "../../utilites";
+import { routes } from "../../static";
 
 const rdxState = (state: reduxStore) => ({
   unfinishedPractices: state.profile.unfinished,
@@ -119,9 +126,7 @@ const Unfinished: FC<props> = ({
                   onClick={() => doDeletePractice(item.id, index)}
                 />
                 <ContinueButton
-                  onClick={() =>
-                    nav.push(`/practice/in_progress/id=${item.id}/`)
-                  }
+                  onClick={() => nav.push(routes.runningPractice(item.id))}
                 />
               </ItemRow>
             );

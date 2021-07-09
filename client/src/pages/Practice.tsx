@@ -16,6 +16,7 @@ import { loadPractice } from "../api";
 import { Textline, Keyboard, FingerIndex } from "../components/practice";
 import { Wrapper, Stats } from "../components/";
 import { handlePracticeProgress } from "../utilites";
+import { routes } from "../static";
 
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
@@ -78,7 +79,7 @@ const Practice: React.FC<props> = ({
             // new history item fetching
             // fetch new stats for current category+practice on next menu load
             refreshStats(practice.category, practice.practice_index);
-            navigator.push(`/practice/finished/id=${practice.id}`);
+            navigator.push(routes.finishedPractice(practice.id));
           },
         })
       );

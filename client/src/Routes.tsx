@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
+import { routes } from "./static";
+
 //pages
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/Profile";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
 import PracticeSummary from "./pages/PracticeSummary";
@@ -18,37 +20,41 @@ import ChangeTokenPassword from "./modals/ChangeTokenPassword";
 const Routes: React.FC = () => {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={() => <Home />} />
-      <Route path="/home/" component={() => <Home />} />
-      <Route path="/profile/" component={() => <Profile />} />
-      <Route exact path="/home/login/" component={() => <Login />} />
-      <Route exact path="/home/signup/" component={() => <Register />} />
+      <Route exact path={routes.default} component={() => <Home />} />
+      <Route path={routes.home} component={() => <Home />} />
+      <Route path={routes.profile} component={() => <Profile />} />
+      <Route exact path={routes.login} component={() => <Login />} />
+      <Route exact path={routes.register} component={() => <Register />} />
       <Route
         exact
-        path="/home/forgot_password/"
+        path={routes.recoverPass}
         component={() => <ForgotPassword />}
       />
       <Route
         exact
-        path="/home/change_password_w_token/:token/"
+        path={routes.recoverPassWithToken(":token")}
         component={() => <ChangeTokenPassword />}
       />
       <Route
         exact
-        path="/practice/in_progress/id=:id/"
+        path={routes.runningPractice(":id")}
         component={() => <Practice />}
       />
       <Route
         exact
-        path="/practice/finished/id=:id"
+        path={routes.finishedPractice(":id")}
         component={() => <PracticeSummary />}
       />
       <Route
         exact
-        path="/leaderboard/c=:category/i=:index/"
+        path={routes.leaderBoard(":category", ":index")}
         component={() => <LeaderBoard />}
       />
-      <Route exact path="/practice_menu/" component={() => <PracticeMenu />} />
+      <Route
+        exact
+        path={routes.practiceMenu}
+        component={() => <PracticeMenu />}
+      />
     </BrowserRouter>
   );
 };

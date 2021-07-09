@@ -8,6 +8,7 @@ import { setGlobalMessage } from "../redux/actions/";
 import { useHistory } from "react-router-dom";
 import { register } from "../api/";
 import { inputData } from "../types";
+import { routes } from "../static";
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   // closeModal: () => dispatch(animateOut("modal")),
@@ -46,7 +47,7 @@ const Register: FC<props> = ({ setGlobalMessage }) => {
       },
       onSuccess: () => {
         setGlobalMessage("Successfully created account! Please log in.");
-        nav.push("/home/login/");
+        nav.push(routes.login);
       },
       setErrors: setErrors,
     });

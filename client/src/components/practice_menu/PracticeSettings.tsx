@@ -21,6 +21,8 @@ import {
   SelectionLabel,
 } from "./practice_settings";
 
+import { routes } from "../../static";
+
 const rdxProps = (state: reduxStore) => {
   const category =
     // selected category name from menu and selected category index
@@ -71,7 +73,7 @@ const PracticeSettings: FC<props> = ({
           setPractice(practice);
           setLoading(false);
           setError(false);
-          nav.push(`/practice/in_progress/id=${practice.id}/`);
+          nav.push(routes.runningPractice(practice.id));
         },
         onError: () => {
           setLoading(false);
@@ -105,7 +107,7 @@ const PracticeSettings: FC<props> = ({
       ) : (
         <StartButton>Select practice first..</StartButton>
       )}
-      <StartButton onClick={() => (!loading ? nav.push("/home/") : null)}>
+      <StartButton onClick={() => (!loading ? nav.push(routes.home) : null)}>
         Go back home..
       </StartButton>
     </SettingsWrapper>

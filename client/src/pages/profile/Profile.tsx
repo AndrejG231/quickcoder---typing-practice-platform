@@ -3,19 +3,18 @@ import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 
-import {
-  Routes,
-  ProfileGrid,
-  Overview,
-  History,
-  Unfinished,
-  UnfinishedCount,
-  Settings,
-} from "../components/profile";
-import { ArrowButton, NavBar } from "../components/";
-import { getUnfinishedPracticesCount } from "../api";
-import { reduxStore } from "../types";
-import { setUnfinishedPracticesCount } from "../redux/actions";
+import { routes } from "../../static";
+
+import { Routes, ProfileGrid, UnfinishedCount } from "../../components/profile";
+import { ArrowButton, NavBar } from "../../components";
+import { getUnfinishedPracticesCount } from "../../api";
+import { reduxStore } from "../../types";
+import { setUnfinishedPracticesCount } from "../../redux/actions";
+
+// SubRoutes
+import Overview from "./Overview";
+import History from "./History";
+import Unfinished from "./Unfinished";
 
 const rdxProps = (state: reduxStore) => ({
   unfinishedCount: state.profile.unfinishedCount,
@@ -53,21 +52,21 @@ const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
       {/* Navigation */}
       <NavBar>
         <ArrowButton
-          onClick={() => redirect("/profile/")}
-          selected={route === "/profile/"}
+          onClick={() => redirect(routes.profile)}
+          selected={route === routes.profile}
         >
           Overview
         </ArrowButton>
         <ArrowButton
-          onClick={() => redirect("/profile/history/")}
-          selected={route.includes("history")}
+          onClick={() => redirect(routes.profileHistory)}
+          selected={route === routes.profileHistory}
         >
           History
         </ArrowButton>
         <ArrowButton
           relative
-          onClick={() => redirect("/profile/unfinished/")}
-          selected={route.includes("unfinished")}
+          onClick={() => redirect(routes.profileUnfinished)}
+          selected={route === routes.profileUnfinished}
         >
           {/* Count of unfinished practices, displayed if there are any */}
           {unfinishedCount ? (
@@ -75,27 +74,19 @@ const Profile: FC<props> = ({ setUnfinishedCount, unfinishedCount }) => {
           ) : null}
           Unfinished
         </ArrowButton>
-        <ArrowButton
-          onClick={() => redirect("/profile/settings/")}
-          selected={route.includes("settings")}
-        >
-          Settings
-        </ArrowButton>
-        <ArrowButton onClick={() => redirect("/home/")}>Home</ArrowButton>
+
+        <ArrowButton onClick={() => redirect(routes.home)}>Home</ArrowButton>
       </NavBar>
       {/* Nested routes */}
       <Routes>
-        <Route exact path="/profile/">
+        <Route exact path={routes.profile}>
           <Overview />
         </Route>
-        <Route path="/profile/history/">
+        <Route path={routes.profileHistory}>
           <History />
         </Route>
-        <Route path="/profile/unfinished/">
+        <Route path={routes.profileUnfinished}>
           <Unfinished />
-        </Route>
-        <Route path="/profile/settings/">
-          <Settings />
         </Route>
       </Routes>
     </ProfileGrid>

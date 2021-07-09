@@ -17,7 +17,7 @@ import {
   PracticeBarValue,
   RecentPracticeCategory,
   RecentStatsIndex,
-} from "./overview/";
+} from "../../components/profile/overview/";
 import { getProfileOverview } from "../../api";
 import { getCategoryIndex } from "../../utilites";
 

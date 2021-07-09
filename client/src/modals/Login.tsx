@@ -14,6 +14,8 @@ import {
 import { useHistory } from "react-router-dom";
 import { inputData } from "../types";
 
+import { routes } from "../static";
+
 const rdxDispatch = (dispatch: Dispatch) => ({
   closeModal: () => dispatch(animateOut("modal")),
   refreshAuth: () => {
@@ -45,7 +47,7 @@ const Login: FC<props> = ({ closeModal, refreshAuth, setGlobalMessage }) => {
         closeModal();
         refreshAuth();
         setTimeout(() => {
-          nav.push("/home/");
+          nav.push(routes.home);
           setGlobalMessage("Successfully logged in!");
         }, 400);
       },

@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
-import { ArrowButton, Form } from "..";
+import { ArrowButton, Form } from "../components";
 
 import {
   SettingsGrid,
@@ -8,9 +8,10 @@ import {
   SettingsNavigator,
   SectionSplitter,
   SectionTitle,
-} from "./settings/";
-import { inputData } from "../../types";
-import { useErrors } from "../../utilites";
+} from "../components/profile/settings";
+import { routes } from "../static";
+import { inputData } from "../types";
+import { useErrors } from "../utilites";
 
 // Default form input type and values object for settings
 const defaultData: { [key in string]: inputData } = {
@@ -72,7 +73,7 @@ const Settings: FC = () => {
       <SettingsNavigator>
         <ArrowButton
           width={220}
-          onClick={() => nav.push("/profile/settings/")}
+          onClick={() => nav.push(routes.settings)}
           right
         >
           Account
@@ -80,14 +81,14 @@ const Settings: FC = () => {
         <ArrowButton
           width={220}
           right
-          onClick={() => nav.push("/profile/settings/practice_prefs/")}
+          onClick={() => nav.push(routes.practicePreferences)}
         >
           Practice preferences
         </ArrowButton>
       </SettingsNavigator>
       <SettingsArea>
         {/* Account settings */}
-        <Route exact path={"/profile/settings/"}>
+        <Route exact path={routes.settings}>
           {/* Change username */}
           <SectionSplitter />
           <SectionTitle>Change username</SectionTitle>
@@ -135,7 +136,7 @@ const Settings: FC = () => {
           />
         </Route>
         {/* Practice preferences */}
-        <Route path={"/profile/settings/practice_prefs/"}>
+        <Route path={routes.practicePreferences}>
           {/* Language */}
           {/* Prefered keyboard layout */}
           {/* Show finger indexes */}

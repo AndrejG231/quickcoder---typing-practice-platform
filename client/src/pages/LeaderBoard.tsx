@@ -10,6 +10,7 @@ import { getCategoryIndex } from "../utilites";
 
 import { Board, Row, Field, Column, LbGrid } from "../components/leaderboard";
 import { NavBar, ArrowButton } from "../components";
+import { routes } from "../static";
 
 const rdxProps = (state: reduxStore) => ({
   menu: state.practiceMenu,
@@ -76,8 +77,10 @@ const LeaderBoard: FC<props> = ({ menu, selectPractice }) => {
         >
           New practice
         </ArrowButton>
-        <ArrowButton onClick={() => nav.push("/home/")}>Home</ArrowButton>
-        <ArrowButton onClick={() => nav.push("/profile/")}>Profile</ArrowButton>
+        <ArrowButton onClick={() => nav.push(routes.home)}>Home</ArrowButton>
+        <ArrowButton onClick={() => nav.push(routes.profile)}>
+          Profile
+        </ArrowButton>
       </NavBar>
       {/* Leaderboard data table */}
       <Board>
