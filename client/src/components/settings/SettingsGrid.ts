@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SettingsGrid = styled.div`
   height: 100%;
-  max-height: calc(100vh - 60px);
+  max-height: 100vh;
   width: 100%;
   display: grid;
   grid-template:

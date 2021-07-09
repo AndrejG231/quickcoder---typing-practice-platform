@@ -114,7 +114,7 @@ const Home: React.FC<props> = ({
         onTitleClick={goHome}
         username={`${
           userInfo?.username
-            ? userInfo.username.length > 7
+            ? userInfo.username.length > 9
               ? userInfo.username.slice(0, 7) + "..."
               : userInfo.username
             : "GUEST"

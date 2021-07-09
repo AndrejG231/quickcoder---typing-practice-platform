@@ -16,6 +16,7 @@ import Login from "./modals/Login";
 import Register from "./modals/Register";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
+import Settings from "./pages/Settings";
 
 const Routes: React.FC = () => {
   return (
@@ -55,6 +56,7 @@ const Routes: React.FC = () => {
         path={routes.practiceMenu}
         component={() => <PracticeMenu />}
       />
+      <Route exact path={routes.settings} component={() => <Settings />} />
     </BrowserRouter>
   );
 };

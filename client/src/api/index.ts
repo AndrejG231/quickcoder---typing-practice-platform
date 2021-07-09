@@ -14,3 +14,7 @@ export { default as getUnfinishedPractices } from "./getUnfinishedPractices";
 export { default as getUnfinishedPracticesCount } from "./getUnfinishedPracticesCount";
 export { default as deletePractice } from "./deletePractice";
 export { default as deleteAllUnfinishedPractices } from "./deleteAllUnfinishedPractices";
+export { default as changeEmail } from "./changeEmail";
+export { default as changeUsername } from "./changeUsername";
+export { default as changePassword } from "./changePassword";
+export { default as deleteAccount } from "./deleteAccont";
