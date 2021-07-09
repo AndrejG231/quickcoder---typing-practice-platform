@@ -1,18 +1,25 @@
+import argon2 from "argon2";
 import { Request } from "express";
 import { Users } from "../../entities";
 import { getConnection } from "typeorm";
 import { ActionResponse } from "../../types";
-import { validateUserFromCookie } from "../../utilities";
+import { generateResponse, validateUserFromCookie } from "../../utilities";
 
 const changeUsername = async (
   req: Request,
-  newUsername: string
+  newUsername: string,
+  password: string
 ): Promise<ActionResponse> => {
   //  Validate user
   const { user, error } = await validateUserFromCookie(req);
 
   if (!user) {
     return error!;
+  }
+
+  const authorized = await argon2.verify(user.password, password);
+  if (!authorized) {
+    return generateResponse(false, "login_password_invalid");
   }
 
   // Check if new username is free
@@ -23,7 +30,9 @@ const changeUsername = async (
     .where("username=:username", { username: newUsername })
     .execute();
 
-  if (count) {
+  console.log(count);
+
+  if (count > 0) {
     return {
       success: false,
       info: "changeUsername_username_alreadyUsed",

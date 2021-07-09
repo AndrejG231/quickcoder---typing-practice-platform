@@ -1,18 +1,25 @@
+import argon2 from "argon2";
 import { Request } from "express";
-import { validateUserFromCookie } from "../../utilities";
+import { generateResponse, validateUserFromCookie } from "../../utilities";
 import { getConnection } from "typeorm";
 import { ActionResponse } from "../../types";
 import { Users } from "../../entities";
 
 const changeEmail = async (
   req: Request,
-  newEmail: string
+  newEmail: string,
+  password: string
 ): Promise<ActionResponse> => {
   //  Validate user
   const { user, error } = await validateUserFromCookie(req);
 
   if (!user) {
     return error!;
+  }
+
+  const authorized = await argon2.verify(user.password, password);
+  if (!authorized) {
+    return generateResponse(false, "login_password_invalid");
   }
 
   // Check if new email is free
@@ -23,7 +30,7 @@ const changeEmail = async (
     .where("email=:email", { email: newEmail })
     .execute();
 
-  if (count) {
+  if (count > 0) {
     return {
       success: false,
       info: "changeEmail_email_used",
@@ -44,7 +51,7 @@ const changeEmail = async (
   if (updateResult.affected) {
     return {
       success: true,
-      info: "changeUsername_change_successful",
+      info: "changeEmail_change_successful",
       message: "Sucessfully changed username",
     };
   }
@@ -52,7 +59,7 @@ const changeEmail = async (
   // return error message in case of failed update
   return {
     success: false,
-    info: "changeUsername_unknow_errorOccured",
+    info: "changeEmail_unknown_errorOccured",
     message: "Unknown error occured.",
   };
 };

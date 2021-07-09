@@ -8,6 +8,7 @@ import retrievePasswordToken from "./retrievePasswordToken";
 import changeForgottenPassword from "./changeForgottenPassword";
 import changeEmail from "./changeEmail";
 import changeUsername from "./changeUsername";
+import deleteAccount from "./deleteAccount";
 
 import {
   LoginInput,
@@ -71,17 +72,27 @@ class AuthResolver {
   @Mutation(() => ActionResponse)
   async changeUsername(
     @Arg("newUsername") newUsername: string,
+    @Arg("password") password: string,
     @Ctx() { req }: GraphqlContext
   ) {
-    const response = await changeUsername(req, newUsername);
+    const response = await changeUsername(req, newUsername, password);
     return response;
   }
   @Mutation(() => ActionResponse)
   async changeEmail(
     @Arg("newEmail") newEmail: string,
+    @Arg("password") password: string,
     @Ctx() { req }: GraphqlContext
   ) {
-    const response = await changeEmail(req, newEmail);
+    const response = await changeEmail(req, newEmail, password);
+    return response;
+  }
+  @Mutation(() => ActionResponse)
+  async deleteAccount(
+    @Arg("password") password: string,
+    @Ctx() { req, res }: GraphqlContext
+  ) {
+    const response = await deleteAccount(res, req, password);
     return response;
   }
 }
