@@ -8,10 +8,10 @@ const SchemeSelection = styled.select`
   font-size: 22px;
   border: 3px solid black;
   cursor: pointer;
-  &:focus{
+  &:focus {
     outline: none;
   }
-  @media screen and (max-height: 800px){
+  @media screen and (max-height: 800px) {
     height: 28px;
     font-size: 18px;
     margin: 5px 0;

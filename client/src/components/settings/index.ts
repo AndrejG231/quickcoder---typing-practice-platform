@@ -4,3 +4,6 @@ export { default as SettingsArea } from "./SettingsArea";
 export { default as SectionSplitter } from "./SectionSplitter";
 export { default as SectionTitle } from "./SectionTitle";
 export { default as NavParameter } from "./NavParameter";
+export { default as SettingRow } from "./SettingRow";
+export { default as SettingLabel } from "./SettingLabel";
+export { default as BoxInput } from "./BoxInput";

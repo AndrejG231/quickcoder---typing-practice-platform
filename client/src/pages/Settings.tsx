@@ -12,10 +12,17 @@ import {
   SectionSplitter,
   SectionTitle,
   NavParameter,
+  SettingRow,
+  SettingLabel,
+  BoxInput,
 } from "../components/settings";
-import { setGlobalMessage, toggleAuthRefresh } from "../redux/actions";
+import {
+  setGlobalMessage,
+  setUserInfo,
+  toggleAuthRefresh,
+} from "../redux/actions";
 import { routes } from "../static";
-import { inputData } from "../types";
+import { inputData, reduxStore, userInfo } from "../types";
 import { useErrors } from "../utilites";
 import {
   changeEmail,
@@ -23,6 +30,7 @@ import {
   changePassword,
   deleteAccount,
 } from "../api";
+import { SchemeSelection } from "../components/practice_menu/practice_settings";
 
 // Default form input type and values object for settings
 const defaultData: { [key in string]: inputData } = {
@@ -47,11 +55,14 @@ const defaultData: { [key in string]: inputData } = {
 const defaultError = { field: "", value: "" };
 
 // Redux setup
-const rdxState = () => ({});
+const rdxState = (state: reduxStore) => ({
+  user: state.authentication.user,
+});
 
 const rdxDispatch = (dispatch: Dispatch) => ({
   refreshAuth: () => dispatch(toggleAuthRefresh(true)),
   popUp: (message: string) => dispatch(setGlobalMessage(message)),
+  setUserInfo: (user: userInfo) => dispatch(setUserInfo(user)),
 });
 
 const withRedux = connect(rdxState, rdxDispatch);
@@ -60,7 +71,7 @@ const withRedux = connect(rdxState, rdxDispatch);
 
 type props = ConnectedProps<typeof withRedux>;
 
-const Settings: FC<props> = ({ refreshAuth, popUp }) => {
+const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
   const nav = useHistory();
 
   // Settings section references
@@ -93,7 +104,7 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
 
   // Request handlers
 
-  const handleChangeUsername = () => {
+  const handleChangeUsername = useCallback(() => {
     changeUsername({
       onSuccess: () => {
         refreshAuth();
@@ -107,7 +118,7 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
         password: changeUsernameData.password.value,
       },
     });
-  };
+  }, [changeUsernameData]);
 
   const handleChangeEmail = () => {
     changeEmail({
@@ -165,9 +176,10 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
 
   // Other handlers
 
+  // When using settings navigation, provides rerouting before scrolling
   const scrollHref = async (
     type: "acc" | "pref",
-    to: RefObject<HTMLDivElement>
+    to?: RefObject<HTMLDivElement>
   ) => {
     const pathname =
       type === "acc" ? routes.settings : routes.practicePreferences;
@@ -177,11 +189,13 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
     }
 
     setTimeout(() => {
-      if (to.current) {
+      if (to?.current) {
         to.current.scrollIntoView({ behavior: "smooth" });
       }
     }, 25);
   };
+
+  // On practice preference change - handle change and server update
 
   return (
     <SettingsGrid>
@@ -213,6 +227,13 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
         >
           Practice preferences
         </ArrowButton>
+        <NavParameter onClick={() => scrollHref("pref")}>
+          Keyboard layout
+        </NavParameter>
+        <NavParameter onClick={() => scrollHref("pref")}>Language</NavParameter>
+        <NavParameter onClick={() => scrollHref("pref")}>
+          Display options
+        </NavParameter>
         <ArrowButton width={220} right onClick={() => nav.push(routes.home)}>
           Home
         </ArrowButton>
@@ -267,12 +288,38 @@ const Settings: FC<props> = ({ refreshAuth, popUp }) => {
         </Route>
         {/* Practice preferences */}
         <Route path={routes.practicePreferences}>
+          {/* Keyboard layout */}
+          <SettingRow>
+            <SettingLabel>Keyboard layout:</SettingLabel>
+            <SchemeSelection name="scheme" defaultValue="en-us">
+              <option value="en-us"> EN - US </option>
+            </SchemeSelection>
+          </SettingRow>
           {/* Language */}
-          {/* Prefered keyboard layout */}
+          <SettingRow>
+            <SettingLabel>Language:</SettingLabel>
+            <SchemeSelection name="scheme" defaultValue="en">
+              <option value="en">English</option>
+            </SchemeSelection>
+          </SettingRow>
+          <SettingRow>
+            <SectionTitle>Display options</SectionTitle>
+          </SettingRow>
           {/* Show finger indexes */}
+          <SettingRow>
+            <SettingLabel>Display finger indexes:</SettingLabel>
+            <BoxInput type="checkbox"></BoxInput>
+          </SettingRow>
           {/* Show keyboard visuals*/}
-          {/* Keyboard visual size */}
+          <SettingRow>
+            <SettingLabel>Display keyboard visuals:</SettingLabel>
+            <BoxInput type="checkbox"></BoxInput>
+          </SettingRow>
           {/* Enable practice animations */}
+          <SettingRow>
+            <SettingLabel>Enable practice animations</SettingLabel>
+            <BoxInput type="checkbox"></BoxInput>
+          </SettingRow>
         </Route>
       </SettingsArea>
     </SettingsGrid>
