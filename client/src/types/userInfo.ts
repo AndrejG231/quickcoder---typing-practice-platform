@@ -6,11 +6,10 @@ type userInfo = {
   created_at: string;
   // Options
   keyboard_layout: string;
-  color_scheme: string;
   keyboard_indexes: boolean;
   keyboard_visuals: boolean;
   keyboard_visual_size: 10;
-  animations: true;
+  animations: boolean;
 };
 
 export default userInfo;

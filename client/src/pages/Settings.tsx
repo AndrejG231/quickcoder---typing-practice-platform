@@ -29,6 +29,7 @@ import {
   changeUsername,
   changePassword,
   deleteAccount,
+  changeUserPreference,
 } from "../api";
 import { SchemeSelection } from "../components/practice_menu/practice_settings";
 
@@ -195,7 +196,23 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
     }, 25);
   };
 
+  // Updating state to prevent multiple clicks spamming
+  const [updating, setUpdating] = useState(false);
+
   // On practice preference change - handle change and server update
+  const togglePref = (pref: keyof userInfo) => {
+    if (!updating && user) {
+      changeUserPreference({
+        onSuccess: () => {
+          setUserInfo({ ...user, [pref]: !user[pref] });
+          setUpdating(false);
+        },
+        onError: () => setGlobalMessage("Failed to update preference."),
+        field: pref,
+        value: !user[pref],
+      });
+    }
+  };
 
   return (
     <SettingsGrid>
@@ -308,17 +325,26 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
           {/* Show finger indexes */}
           <SettingRow>
             <SettingLabel>Display finger indexes:</SettingLabel>
-            <BoxInput type="checkbox"></BoxInput>
+            <BoxInput
+              checked={user?.keyboard_indexes}
+              onChange={() => togglePref("keyboard_indexes")}
+            />
           </SettingRow>
           {/* Show keyboard visuals*/}
           <SettingRow>
             <SettingLabel>Display keyboard visuals:</SettingLabel>
-            <BoxInput type="checkbox"></BoxInput>
+            <BoxInput
+              checked={user?.keyboard_visuals}
+              onChange={() => togglePref("keyboard_visuals")}
+            />
           </SettingRow>
           {/* Enable practice animations */}
           <SettingRow>
             <SettingLabel>Enable practice animations</SettingLabel>
-            <BoxInput type="checkbox"></BoxInput>
+            <BoxInput
+              checked={user?.animations}
+              onChange={() => togglePref("animations")}
+            />
           </SettingRow>
         </Route>
       </SettingsArea>

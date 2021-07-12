@@ -10,8 +10,11 @@ const userInfoQuery = `
         email
         language
         keyboard_layout
-        color_scheme
         created_at
+        keyboard_indexes
+        keyboard_layout
+        keyboard_visuals
+        animations
       }
       error {
         success
