@@ -9,6 +9,7 @@ import changeForgottenPassword from "./changeForgottenPassword";
 import changeEmail from "./changeEmail";
 import changeUsername from "./changeUsername";
 import deleteAccount from "./deleteAccount";
+import changePreference from "./changePreference";
 
 import {
   LoginInput,
@@ -93,6 +94,21 @@ class AuthResolver {
     @Ctx() { req, res }: GraphqlContext
   ) {
     const response = await deleteAccount(res, req, password);
+    return response;
+  }
+  @Mutation(() => ActionResponse)
+  async changePreference(
+    @Arg("field") field: string,
+    @Arg("value", { nullable: true }) value: string,
+    @Arg("toggleTo", { nullable: true }) toggleTo: boolean,
+    @Ctx()
+    { req }: GraphqlContext
+  ) {
+    const response = await changePreference(
+      req,
+      field,
+      value ? value : toggleTo
+    );
     return response;
   }
 }

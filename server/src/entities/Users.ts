@@ -12,6 +12,7 @@ import {
 @ObjectType()
 @Entity()
 class Users extends BaseEntity {
+  // Main
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
@@ -27,18 +28,28 @@ class Users extends BaseEntity {
   @Column()
   password!: string;
 
+  // User preferences
   @Field()
   @Column({ default: "en" })
   language!: string;
 
   @Field()
-  @Column({ default: "US" })
+  @Column({ default: "en-us" })
   keyboard_layout!: string;
 
-  @Field()
-  @Column({ default: "dark" })
-  color_scheme!: string;
+  @Field({ nullable: true })
+  @Column({ default: true })
+  keyboard_indexes: boolean;
 
+  @Field({ nullable: true })
+  @Column({ default: true })
+  keyboard_visuals: boolean;
+
+  @Field({ nullable: true })
+  @Column({ default: true })
+  animations: boolean;
+
+  // Authentication
   @Column({ default: 0 })
   token_version!: number;
 
@@ -46,6 +57,7 @@ class Users extends BaseEntity {
   @Generated("uuid")
   secret: string;
 
+  // Dates generation
   @Field(() => String)
   @CreateDateColumn()
   created_at!: number;
