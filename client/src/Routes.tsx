@@ -56,7 +56,7 @@ const Routes: React.FC = () => {
         path={routes.practiceMenu}
         component={() => <PracticeMenu />}
       />
-      <Route exact path={routes.settings} component={() => <Settings />} />
+      <Route path={routes.settings} component={() => <Settings />} />
     </BrowserRouter>
   );
 };

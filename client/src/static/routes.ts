@@ -15,7 +15,7 @@ const routes = {
   profileUnfinished: "/profile/unfinished/",
   profileHistory: "/profile/history/",
   settings: "/settings/",
-  practicePreferences: "/practice_preferences/",
+  practicePreferences: "/settings/practice_preferences/",
 };
 
 export default routes;
