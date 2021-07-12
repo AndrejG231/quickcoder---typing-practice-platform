@@ -14,9 +14,10 @@ import {
 
 interface props {
   practice: practiceObject;
+  animations: boolean;
 }
 
-const TextLine: React.FC<props> = ({ practice }) => {
+const TextLine: React.FC<props> = ({ practice, animations }) => {
   //place for last error position on text mapping
   let lastError = 0;
 
@@ -30,7 +31,7 @@ const TextLine: React.FC<props> = ({ practice }) => {
         )}
       >
         {/* On successful keypress, textline smoothly moves to next characters */}
-        <Text offset={practice.index}>
+        <Text offset={practice.index} animation={animations}>
           {/* Mapping practice string and errors into textline */}
           {Object.keys(practice?.errors).map((errIndex, i) => {
             const prevError = lastError;

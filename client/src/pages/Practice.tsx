@@ -21,6 +21,7 @@ import { routes } from "../static";
 const rdxProps = (state: reduxStore) => ({
   practice: state.practice,
   unfinished: state.profile.unfinished.length + state.profile.unfinishedCount,
+  user: state.authentication.user,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -46,6 +47,7 @@ const Practice: React.FC<props> = ({
   refreshStats,
   unfinished,
   refreshUnfinished,
+  user,
 }) => {
   const navigator = useHistory();
 
@@ -103,16 +105,24 @@ const Practice: React.FC<props> = ({
 
   return (
     <Wrapper>
-      <FingerIndex
-      // layout={"us"}
-      // next={practice.string[practice.index] as schemeCharacters}
+      {(user ? user.keyboard_indexes : true) ? (
+        <FingerIndex
+
+        // layout={"us"}
+        // next={practice.string[practice.index] as schemeCharacters}
+        />
+      ) : null}
+      <Textline
+        practice={practice}
+        animations={user ? user.animations : true}
       />
-      <Textline practice={practice} />
-      <Keyboard
-        keyboard={"us"}
-        next={practice.string[practice.index] as schemeCharacters}
-        lastError={practice.last_error as schemeCharacters}
-      />
+      {(user ? user.keyboard_visuals : true) ? (
+        <Keyboard
+          keyboard={"us"}
+          next={practice.string[practice.index] as schemeCharacters}
+          lastError={practice.last_error as schemeCharacters}
+        />
+      ) : null}
       <Stats practice={practice} />
     </Wrapper>
   );

@@ -77,10 +77,10 @@ const History: FC<props> = ({
                 <ItemInfoText darken>
                   {new Date(item.created_at).toLocaleString("uk-en")}
                 </ItemInfoText>
-                <ItemInfoText>
+                <ItemInfoText>{menu[categoryIndex!].category}</ItemInfoText>
+                <ItemInfoText darken>
                   {menu[categoryIndex!].items[item.practice_index].name}
                 </ItemInfoText>
-                <ItemInfoText darken>Top 200 English words</ItemInfoText>
                 <ItemInfoText>{item.score}</ItemInfoText>
                 <ItemInfoText darken>{item.cpm}</ItemInfoText>
                 <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
