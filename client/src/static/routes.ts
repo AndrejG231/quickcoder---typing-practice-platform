@@ -16,6 +16,10 @@ const routes = {
   profileHistory: "/profile/history/",
   settings: "/settings/",
   practicePreferences: "/settings/practice_preferences/",
+  typingTest: "/typing_test/",
+  typingTestNotify: "/typing_test/notify/",
+  typingTestRun: "/typing_test/ongoing/",
+  typingTestFinished: `/typing_test/finished/`,
 };
 
 export default routes;

@@ -10,13 +10,14 @@ import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
 import PracticeSummary from "./pages/PracticeSummary";
 import LeaderBoard from "./pages/LeaderBoard";
+import TypingTest from "./pages/TypingTest";
+import Settings from "./pages/Settings";
 
 //modals
 import Login from "./modals/Login";
 import Register from "./modals/Register";
 import ForgotPassword from "./modals/ForgotPassword";
 import ChangeTokenPassword from "./modals/ChangeTokenPassword";
-import Settings from "./pages/Settings";
 
 const Routes: React.FC = () => {
   return (
@@ -57,6 +58,7 @@ const Routes: React.FC = () => {
         component={() => <PracticeMenu />}
       />
       <Route path={routes.settings} component={() => <Settings />} />
+      <Route path={routes.typingTest} component={() => <TypingTest />} />
     </BrowserRouter>
   );
 };

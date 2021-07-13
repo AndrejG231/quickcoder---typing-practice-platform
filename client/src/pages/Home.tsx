@@ -123,7 +123,7 @@ const Home: React.FC<props> = ({
 
       {/* Leftside navigation */}
       <NavWrapper isOnScreen={isOnScreen}>
-        <ClippedButton onClick={() => null}>
+        <ClippedButton onClick={() => redirect(routes.typingTestNotify)}>
           <MenuItem>Typing test</MenuItem>
         </ClippedButton>
         <ClippedButton onClick={() => redirect(routes.practiceMenu)}>
