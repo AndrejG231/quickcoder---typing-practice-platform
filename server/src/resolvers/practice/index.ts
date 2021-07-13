@@ -15,6 +15,7 @@ import updatePractice from "./updatePractice";
 import deletePractice from "./deletePractice";
 import getPractice from "./getPractice";
 import removeAllUnfinished from "./removeAllUnfinished";
+import createTypingTest from "./createTypingTest";
 
 @Resolver()
 class PracticeResolver {
@@ -53,6 +54,11 @@ class PracticeResolver {
   @Mutation(() => ActionResponse)
   async removeAllUnfinished(@Ctx() { req }: GraphqlContext) {
     return await removeAllUnfinished(req);
+  }
+  @Mutation(() => PracticeInfoResponse)
+  async createTypingTest(@Ctx() { req }: GraphqlContext) {
+    const response = await createTypingTest(req);
+    return response;
   }
 }
 

@@ -23,7 +23,7 @@ const getProfileHistory = async (
       )
       .from(Practices, "practices")
       .where(
-        `created_at > :lastDate AND user_id = :user_id AND is_finished = :isFinished`,
+        `created_at > :lastDate AND user_id = :user_id AND is_finished = :isFinished AND category != 'test'`,
         { lastDate, user_id: user.id, isFinished: true }
       )
       .orderBy("created_at", "DESC")
@@ -42,10 +42,13 @@ const getProfileHistory = async (
         "score as score, errors_rate as error_rate, cpm, index as length, category, practice_index, created_at, id"
       )
       .from(Practices, "practices")
-      .where(`user_id = :user_id AND is_finished = :isFinished`, {
-        user_id: user.id,
-        isFinished: true,
-      })
+      .where(
+        `user_id = :user_id AND is_finished = :isFinished AND category != 'test' `,
+        {
+          user_id: user.id,
+          isFinished: true,
+        }
+      )
       .orderBy("created_at", "DESC")
       .execute();
 

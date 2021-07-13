@@ -14,7 +14,7 @@ const getUnfinishedCount = async (req: Request): Promise<number> => {
     .createQueryBuilder()
     .select("COUNT(*) as count")
     .from(Practices, "practices")
-    .where("user_id = :user_id AND is_finished = :is_finished", {
+    .where("user_id = :user_id AND is_finished = :is_finished AND category != 'test'", {
       user_id: user.id,
       is_finished: false,
     })

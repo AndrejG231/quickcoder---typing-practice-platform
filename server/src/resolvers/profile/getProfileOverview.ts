@@ -25,10 +25,13 @@ const getProfileOverview = async (
       `
     )
     .from(Practices, "practices")
-    .where("is_finished=:is_finished AND user_id=:user_id", {
-      user_id: user.id,
-      is_finished: true,
-    })
+    .where(
+      "is_finished=:is_finished AND user_id=:user_id AND category != 'test'",
+      {
+        user_id: user.id,
+        is_finished: true,
+      }
+    )
     .execute();
 
   const lastPractices = await getConnection()
@@ -37,10 +40,13 @@ const getProfileOverview = async (
       `score, errors_rate as error_rate, cpm, index as length, category, practice_index`
     )
     .from(Practices, "practices")
-    .where("is_finished=:is_finished AND user_id=:user_id", {
-      user_id: user.id,
-      is_finished: true,
-    })
+    .where(
+      "is_finished=:is_finished AND user_id=:user_id AND category != 'test'",
+      {
+        user_id: user.id,
+        is_finished: true,
+      }
+    )
     .orderBy("created_at", "DESC")
     .limit(5)
     .execute();

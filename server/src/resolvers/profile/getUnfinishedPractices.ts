@@ -19,10 +19,13 @@ const getUnfinishedPractices = async (
       "created_at, id, category, practice_index, LENGTH(string) as length, (100 * index / length(string)) as completion"
     )
     .from(Practices, "practices")
-    .where(`user_id = :user_id AND is_finished = :isFinished`, {
-      user_id: user.id,
-      isFinished: false,
-    })
+    .where(
+      `user_id = :user_id AND is_finished = :isFinished  AND category != 'test'`,
+      {
+        user_id: user.id,
+        isFinished: false,
+      }
+    )
     .orderBy("created_at", "DESC")
     .execute();
 
