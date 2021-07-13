@@ -3,7 +3,7 @@ import { reactSnippets } from "../texts";
 const coding = [
   {
     name: "react snippets",
-    desc: "Most often used react commands.",
+    desc: "Common react code snippets and cheatsheets.",
     parts: reactSnippets,
   },
 ];

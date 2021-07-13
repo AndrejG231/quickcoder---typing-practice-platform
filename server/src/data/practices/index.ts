@@ -15,7 +15,8 @@ const practices: {
     items: englishWords,
   },
   coding: {
-    description: "Learn to code and practice typing popular code.",
+    description:
+      "Learn to code and practice typing popular programming languages.",
     items: coding,
   },
 };
