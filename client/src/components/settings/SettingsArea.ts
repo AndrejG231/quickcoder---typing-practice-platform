@@ -5,6 +5,7 @@ const SettingsArea = styled.div`
   height: 100%;
   grid-area: area;
   overflow-y: auto;
+  scroll-behavior: smooth;
 `;
 
 export default SettingsArea;

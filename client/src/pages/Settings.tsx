@@ -1,6 +1,6 @@
 import React, { FC, useState, useCallback, RefObject, useRef } from "react";
 import { Route, useHistory } from "react-router-dom";
-import { ArrowButton, Form } from "../components";
+import { ArrowButton, Form, NavBar } from "../components";
 
 import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
@@ -191,7 +191,8 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
 
     setTimeout(() => {
       if (to?.current) {
-        to.current.scrollIntoView({ behavior: "smooth" });
+        const par: any = to.current.parentNode;
+        par.scrollTop = to.current.offsetTop - 60;
       }
     }, 25);
   };
@@ -217,47 +218,41 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
   return (
     <SettingsGrid>
       {/* Navigation */}
-      <SettingsNavigator>
-        <ArrowButton
-          width={220}
-          onClick={() => nav.push(routes.settings)}
-          right
-        >
-          Account
-        </ArrowButton>
-        <NavParameter onClick={() => scrollHref("acc", changeUsernameRef)}>
-          Change Username
-        </NavParameter>
-        <NavParameter onClick={() => scrollHref("acc", changeEmailRef)}>
-          Change Email
-        </NavParameter>
-        <NavParameter onClick={() => scrollHref("acc", changePasswordRef)}>
-          Change Password
-        </NavParameter>
-        <NavParameter onClick={() => scrollHref("acc", deleteAccountRef)}>
-          Delete Account
-        </NavParameter>
-        <ArrowButton
-          width={220}
-          right
-          onClick={() => nav.push(routes.practicePreferences)}
-        >
-          Practice preferences
-        </ArrowButton>
-        <NavParameter onClick={() => scrollHref("pref")}>
-          Keyboard layout
-        </NavParameter>
-        <NavParameter onClick={() => scrollHref("pref")}>Language</NavParameter>
-        <NavParameter onClick={() => scrollHref("pref")}>
-          Display options
-        </NavParameter>
-        <ArrowButton width={220} right onClick={() => nav.push(routes.home)}>
-          Home
-        </ArrowButton>
-      </SettingsNavigator>
-      <SettingsArea>
-        {/* Account settings */}
-        <Route exact path={routes.settings}>
+      <Route exact path={routes.settings}>
+        <NavBar>
+          <ArrowButton
+            width={220}
+            onClick={() => nav.push(routes.settings)}
+            selected
+          >
+            Account
+          </ArrowButton>
+          <ArrowButton
+            width={220}
+            onClick={() => nav.push(routes.practicePreferences)}
+          >
+            Practice preferences
+          </ArrowButton>
+          <ArrowButton width={220} onClick={() => nav.push(routes.home)}>
+            Home
+          </ArrowButton>
+        </NavBar>
+        <SettingsNavigator>
+          <NavParameter onClick={() => scrollHref("acc", changeUsernameRef)}>
+            Change Username
+          </NavParameter>
+          <NavParameter onClick={() => scrollHref("acc", changeEmailRef)}>
+            Change Email
+          </NavParameter>
+          <NavParameter onClick={() => scrollHref("acc", changePasswordRef)}>
+            Change Password
+          </NavParameter>
+          <NavParameter onClick={() => scrollHref("acc", deleteAccountRef)}>
+            Delete Account
+          </NavParameter>
+        </SettingsNavigator>
+        <SettingsArea>
+          {/* Account settings */}
           {/* Change username */}
           <SectionSplitter ref={changeUsernameRef} />
           <SectionTitle>Change username</SectionTitle>
@@ -302,9 +297,37 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
             submitFunction={handleAccountDelete}
             centered
           />
-        </Route>
-        {/* Practice preferences */}
-        <Route path={routes.practicePreferences}>
+        </SettingsArea>
+      </Route>
+      <Route path={routes.practicePreferences}>
+        <NavBar>
+          <ArrowButton width={220} onClick={() => nav.push(routes.settings)}>
+            Account
+          </ArrowButton>
+          <ArrowButton
+            width={220}
+            onClick={() => nav.push(routes.practicePreferences)}
+            selected
+          >
+            Practice preferences
+          </ArrowButton>
+          <ArrowButton width={220} onClick={() => nav.push(routes.home)}>
+            Home
+          </ArrowButton>
+        </NavBar>
+        <SettingsNavigator>
+          <NavParameter onClick={() => scrollHref("pref")}>
+            Keyboard layout
+          </NavParameter>
+          <NavParameter onClick={() => scrollHref("pref")}>
+            Language
+          </NavParameter>
+          <NavParameter onClick={() => scrollHref("pref")}>
+            Display options
+          </NavParameter>
+        </SettingsNavigator>
+        <SettingsArea>
+          {/* Practice preferences */}
           {/* Keyboard layout */}
           <SettingRow>
             <SettingLabel>Keyboard layout:</SettingLabel>
@@ -346,8 +369,8 @@ const Settings: FC<props> = ({ refreshAuth, popUp, user, setUserInfo }) => {
               onChange={() => togglePref("animations")}
             />
           </SettingRow>
-        </Route>
-      </SettingsArea>
+        </SettingsArea>
+      </Route>
     </SettingsGrid>
   );
 };

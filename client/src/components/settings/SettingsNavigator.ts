@@ -3,7 +3,7 @@ import styled from "styled-components";
 const SettingsNavigator = styled.div`
   width: 100%;
   height: calc(100%-30px);
-  gird-area: nav;
+  gird-area: subnav;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

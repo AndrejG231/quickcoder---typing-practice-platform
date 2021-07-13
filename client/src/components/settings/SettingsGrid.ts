@@ -6,7 +6,8 @@ const SettingsGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template:
-    "nav area" 100%
+    "nav nav" 60px
+    "subnav area" 1fr
     /260px 1fr;
 `;
 
