@@ -5,10 +5,12 @@ const handlePracticeProgress = ({
   keyPressed,
   state,
   onFinish,
+  typingTest,
 }: {
   keyPressed: schemeCharacters;
   state: practiceObject;
   onFinish: () => void;
+  typingTest?: (practice: practiceObject) => void;
 }): practiceObject => {
   /* 
   good keypress handling
@@ -16,43 +18,53 @@ const handlePracticeProgress = ({
   */
 
   /* When practice is finished, update practice to server and fire "onFinish" function */
+  // Just fire onTestFinish when on typing test //
   if (keyPressed === state.string[state.index]) {
     const newIndex = state.index + 1;
     if (newIndex === state.string.length) {
-      updatePractice({
-        practiceUpdateFields: {
-          errors: JSON.stringify(state.errors),
-          index: newIndex,
-          is_finished: true,
-          time_spent:
-            state.time_spent + new Date().getTime() - state.start_time,
-        },
-        practiceId: state.id,
-      });
-
-      onFinish();
-
-      return {
+      const updatedPractice = {
         ...state,
         index: newIndex,
-        last_error: "",
         time_spent: state.time_spent + new Date().getTime() - state.start_time,
         start_time: new Date().getTime(),
       };
+
+      if (typingTest) {
+        typingTest(updatedPractice);
+        // Fire typing test finisher function if typing test on run
+      } else {
+        updatePractice({
+          practiceUpdateFields: {
+            errors: JSON.stringify(state.errors),
+            index: newIndex,
+            is_finished: true,
+            time_spent:
+              state.time_spent + new Date().getTime() - state.start_time,
+          },
+          practiceId: state.id,
+        });
+
+        onFinish();
+      }
+
+      return updatedPractice;
     }
 
     /* Every 50 characters, update practice to server, save time spent and return new start time */
-    if (newIndex % 50 === 0 && newIndex > 49 && state.start_time) {
-      updatePractice({
-        practiceUpdateFields: {
-          errors: JSON.stringify(state.errors),
-          index: newIndex,
-          is_finished: false,
-          time_spent:
-            state.time_spent + new Date().getTime() - state.start_time,
-        },
-        practiceId: state.id,
-      });
+    // Do not update typing test //
+    if (!typingTest) {
+      if (newIndex % 50 === 0 && newIndex > 49 && state.start_time) {
+        updatePractice({
+          practiceUpdateFields: {
+            errors: JSON.stringify(state.errors),
+            index: newIndex,
+            is_finished: false,
+            time_spent:
+              state.time_spent + new Date().getTime() - state.start_time,
+          },
+          practiceId: state.id,
+        });
+      }
 
       return {
         ...state,

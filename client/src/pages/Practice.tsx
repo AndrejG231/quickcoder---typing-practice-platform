@@ -39,7 +39,9 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 
 const withRedux = connect(rdxProps, rdxDispatch);
 
-type props = ConnectedProps<typeof withRedux>;
+type props = ConnectedProps<typeof withRedux> & {
+  typingTest?: (practice: practiceObject) => void;
+};
 
 const Practice: React.FC<props> = ({
   practice,
@@ -48,6 +50,7 @@ const Practice: React.FC<props> = ({
   unfinished,
   refreshUnfinished,
   user,
+  typingTest,
 }) => {
   const navigator = useHistory();
 
@@ -55,17 +58,20 @@ const Practice: React.FC<props> = ({
 
   //Load practice if current loaded practice is different or not loaded
   useEffect(() => {
-    // In case of practice was left in progress force unfinished practices refetching
-    if (unfinished) {
-      refreshUnfinished();
-    }
-    // In case of current practice in memory not same as one we try to practice for - fetch selected practice
-    if (practice?.id !== ~~id) {
-      loadPractice({
-        id: ~~id,
-        onSuccess: (pract: practiceObject) => setPractice(pract),
-        onError: () => null,
-      });
+    if (!typingTest) {
+      // None of these neccessery when processing typing test
+      // In case of practice was left in progress force unfinished practices refetching
+      if (unfinished) {
+        refreshUnfinished();
+      }
+      // In case of current practice in memory not same as one we try to practice for - fetch selected practice
+      if (practice?.id !== ~~id) {
+        loadPractice({
+          id: ~~id,
+          onSuccess: (pract: practiceObject) => setPractice(pract),
+          onError: () => null,
+        });
+      }
     }
   }, [unfinished, practice, id, refreshUnfinished, setPractice]);
 
@@ -80,9 +86,11 @@ const Practice: React.FC<props> = ({
             // force profile overview refetch
             // new history item fetching
             // fetch new stats for current category+practice on next menu load
-            refreshStats(practice.category, practice.practice_index);
             navigator.push(routes.finishedPractice(practice.id));
+            refreshStats(practice.category, practice.practice_index);
+            // This won't be fired on typing test finish
           },
+          typingTest,
         })
       );
     }
@@ -95,12 +103,31 @@ const Practice: React.FC<props> = ({
   });
 
   //Loading screen while practice is not loaded or different
-  if (!practice || practice?.id !== ~~id) {
-    return <div>Loading....</div>;
-  }
+  if (typingTest) {
+    if (!practice || practice.practice_index !== -1) {
+      return <div>Error: failed to create typing test</div>;
+    }
+  } else {
+    if (!practice || practice?.id !== ~~id) {
+      return <div>Loading....</div>;
+    }
 
-  if (practice?.is_finished) {
-    return <div>Erorr: this practice is finished.</div>;
+    if (practice?.is_finished) {
+      return <div>Erorr: this practice is finished.</div>;
+    }
+  }
+  // TODO: Add some more pleasing error screens
+
+  // No keyboard, stats or indexes for typing test
+  if (typingTest) {
+    return (
+      <Wrapper>
+        <Textline
+          practice={practice}
+          animations={user ? user.animations : true}
+        />
+      </Wrapper>
+    );
   }
 
   return (
