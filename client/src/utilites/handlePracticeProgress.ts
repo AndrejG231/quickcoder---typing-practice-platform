@@ -64,15 +64,16 @@ const handlePracticeProgress = ({
           },
           practiceId: state.id,
         });
-      }
 
-      return {
-        ...state,
-        index: newIndex,
-        last_error: "",
-        time_spent: state.time_spent + new Date().getTime() - state.start_time,
-        start_time: new Date().getTime(),
-      };
+        return {
+          ...state,
+          index: newIndex,
+          last_error: "",
+          time_spent:
+            state.time_spent + new Date().getTime() - state.start_time,
+          start_time: new Date().getTime(),
+        };
+      }
     }
 
     return {
