@@ -26,7 +26,7 @@ const getLeaderBoard = async (index: number, category: string) => {
 
     return null;
   } catch (err) {
-    console.log(err);
+    // TODO: get some error handling
     return null;
   }
 };

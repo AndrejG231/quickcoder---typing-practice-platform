@@ -26,7 +26,7 @@ const getUnfinishedPracticesCount = async ({
 
     onError();
   } catch (error) {
-    console.log(error);
+    onError()
   }
 };
 

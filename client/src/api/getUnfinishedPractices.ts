@@ -47,7 +47,6 @@ const getUnfinishedPractices = async ({
 
     onError(result.message);
   } catch (error) {
-    console.log(error);
     onError(error);
   }
 };

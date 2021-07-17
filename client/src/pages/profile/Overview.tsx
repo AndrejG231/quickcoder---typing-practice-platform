@@ -47,7 +47,7 @@ const Overview: FC<props> = ({
       getProfileOverview({
         onSuccess: setProfileOverview,
         onError: () => {
-          console.log("ERROR");
+          // TODO: handle error on wrong loading
         },
       });
     }

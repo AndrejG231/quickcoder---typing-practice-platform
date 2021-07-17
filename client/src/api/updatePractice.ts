@@ -37,10 +37,10 @@ const updatePractice = async ({
     const result = data.data.data.updatePractice;
 
     if (!result?.success) {
-      console.log("Failed to update current practice sessoin.");
+      // TODO: handle error
     }
   } catch (error) {
-    console.log(error);
+    // handle error
   }
 };
 

@@ -48,14 +48,14 @@ const History: FC<props> = ({
       // Fetch whole history on first load
       getProfileHistory({
         type: "load",
-        onError: () => console.log("error"),
+        onError: () => null, //TODO: handle error when fetching
         onSuccess: updateHistory,
       });
     } else if (awaitingUpdate) {
       // Fetch additional practices after history update
       getProfileHistory({
         type: "update",
-        onError: () => console.log("error"),
+        onError: () => null, //TODO: handle error when fetching
         onSuccess: updateHistory,
         lastDate: history.lastPractices[0].created_at,
       });

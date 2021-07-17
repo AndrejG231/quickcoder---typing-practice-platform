@@ -63,10 +63,8 @@ const getProfileOverview = async ({
       return onSuccess({ averageStats, lastPractices });
     }
 
-    console.log(result);
     onError();
   } catch (error) {
-    console.log(error);
     onError();
   }
 };

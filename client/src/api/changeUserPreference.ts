@@ -32,7 +32,6 @@ const changeUserPreference = async ({
           : { field, toggleTo: value },
     });
 
-    console.log(result);
 
     const data = result.data?.data?.changePreference;
 
