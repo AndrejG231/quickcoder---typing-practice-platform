@@ -18,7 +18,7 @@ const createTypingTest = async (req: Request) => {
       user_id: user.id,
       category: "test",
       index: 0,
-      practice_index: 0,
+      practice_index: -1,
       string: "Test", // Get test string
     })
     .returning("*")
