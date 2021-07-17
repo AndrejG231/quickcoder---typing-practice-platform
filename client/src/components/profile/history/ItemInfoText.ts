@@ -11,6 +11,7 @@ const ItemInfoText = styled.p<{ darken?: boolean; index?: boolean }>`
     margin: 0;
     padding: 0;
     text-transform: capitalize;
+    white-space: pre;
     ${
       darken
         ? `background: ${theme.colors.b4};`

@@ -40,7 +40,7 @@ const History: FC<props> = ({
   menu,
 }) => {
   const nav = useHistory();
-  const template = "2fr 2fr 2fr 1fr 1fr 1fr 1fr 1fr";
+  const template = "2fr 2fr 2.5fr 1fr 1fr 1fr 1fr 1fr";
 
   // History fetching
   useEffect(() => {

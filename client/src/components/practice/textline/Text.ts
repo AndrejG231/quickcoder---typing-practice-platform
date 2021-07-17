@@ -15,7 +15,7 @@ const Text = styled.div.attrs<props>(({ offset, theme }) => ({
     line-height: 80px;
     font-size: 35px;
     font-family: 'Source Code Pro', monospace;
-    ${animation ? `transition: 0.1s all linear` : ""};
+    ${animation ? `transition: 0.15s all linear` : ""};
     white-space: pre;
     position: absolute;
   `};
