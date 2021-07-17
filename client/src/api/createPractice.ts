@@ -39,7 +39,6 @@ const createPractice = async ({
   onError,
 }: createPracticeOptions) => {
   try {
-    console.log(category, index, length);
     const data = await api.post("", {
       query: createPracticeMutation,
       variables: { category, index, length },

@@ -45,7 +45,6 @@ const deleteAccount = async ({
       value: "Couldn't connect to the server.",
     });
   } catch (error) {
-    console.log(error);
     return setErrors({
       field: "global",
       value: "Couldn't connect to the server.",

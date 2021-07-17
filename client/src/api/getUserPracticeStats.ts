@@ -45,7 +45,6 @@ const getUserPracticeStats = async ({
       onError();
     }
   } catch (error) {
-    console.log(error);
     onError();
   }
 };

@@ -53,7 +53,6 @@ const TypingTest: FC<props> = ({ user, setPractice, resetPractice }) => {
   const finishTypingTest = (practice: practiceObject) => {
     resetPractice();
     nav.push(routes.typingTestFinished);
-    console.log(practice);
     // Finish test mutation
     //  Retrieve test info
   };

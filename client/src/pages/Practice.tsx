@@ -130,7 +130,6 @@ const Practice: React.FC<props> = ({
     );
   }
 
-  console.log(practice)
   return (
     <Wrapper>
       {(user ? user.keyboard_indexes : true) ? (

@@ -27,11 +27,8 @@ const deletePractice = async ({
 
     const result: actionResponse = queryResult.data?.data?.removeAllUnfinished;
 
-    console.log("DELETE ALL RESULT\n");
-    console.log(result);
 
     if (result?.success) {
-      console.log("SUCCESS");
       return onSuccess();
     }
 
