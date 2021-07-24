@@ -53,7 +53,6 @@ const finishTypingTest = async (
       .createQueryBuilder()
       .select("COUNT(*) as count")
       .from(Practices, "practices")
-      .where("score < :score", { score: stats.score })
       .execute();
 
     return {
