@@ -49,3 +49,9 @@ export { default as UnfinishedPracticeInfo } from "./unfinishedPracticeInfo";
 
 export { default as UnfinishedPracticesResponse } from "./unfinishedPracticesResponse";
 // response type for unfinished practices list query
+
+export { default as TypingTestResult } from "./TypingTestResult";
+// Typing test result object
+
+export { default as FinishTypingTestResponse } from "./finishTypingTestResponse";
+// Typing test mutation response => ActionResponse & TypingTestResult

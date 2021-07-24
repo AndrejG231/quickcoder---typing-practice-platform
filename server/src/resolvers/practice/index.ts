@@ -6,6 +6,7 @@ import {
   MenuResponse,
   GraphqlContext,
   PracticeUpdateFields,
+  FinishTypingTestResponse,
 } from "../../types/";
 
 import { menu } from "../../utilities/";
@@ -16,6 +17,7 @@ import deletePractice from "./deletePractice";
 import getPractice from "./getPractice";
 import removeAllUnfinished from "./removeAllUnfinished";
 import createTypingTest from "./createTypingTest";
+import finishTypingTest from "./finishTypingTest";
 
 @Resolver()
 class PracticeResolver {
@@ -58,6 +60,15 @@ class PracticeResolver {
   @Mutation(() => PracticeInfoResponse)
   async createTypingTest(@Ctx() { req }: GraphqlContext) {
     const response = await createTypingTest(req);
+    return response;
+  }
+  @Mutation(() => FinishTypingTestResponse)
+  async finishTypingTest(
+    @Arg("practiceId", () => Int) practiceId: number,
+    @Arg("practiceUpdateFields", () => PracticeUpdateFields)
+    practiceUpdateFields: PracticeUpdateFields
+  ) {
+    const response = await finishTypingTest(practiceId, practiceUpdateFields);
     return response;
   }
 }
