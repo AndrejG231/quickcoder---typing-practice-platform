@@ -83,7 +83,7 @@ const TypingTest: FC<props> = ({ user, setPractice, resetPractice }) => {
         <Practice typingTest={(practice) => handleFinishTypingTest(practice)} />
       </Route>
       <Route exact path={routes.typingTestFinished}>
-        <TestSummary data={JSON.stringify(resultData)} />
+        {resultData ? <TestSummary data={resultData} /> : <div>Loading..</div>}
       </Route>
     </>
   );

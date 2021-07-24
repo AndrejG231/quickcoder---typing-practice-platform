@@ -7,11 +7,13 @@ import {
   ButtonsRow,
   NotifyButton,
   NotifyText,
+  StatPair,
 } from "./";
 import { routes } from "../../static";
+import { finishedTestStats } from "../../types";
 
 interface props {
-  data: string;
+  data: finishedTestStats;
 }
 
 const TestSummary: FC<props> = ({ data }) => {
@@ -19,10 +21,26 @@ const TestSummary: FC<props> = ({ data }) => {
   return (
     <NotifyContainer>
       <NotifyTitle>RESULTS</NotifyTitle>
-      <NotifyText>
-        Here will be some of typing test summary from server
-        {data}
-      </NotifyText>
+      <StatPair>
+        <NotifyText>Score:</NotifyText>
+        <NotifyText big>{data.score}</NotifyText>
+      </StatPair>
+      <StatPair>
+        <NotifyText>CPM:</NotifyText>
+        <NotifyText big>{data.cpm}</NotifyText>
+      </StatPair>
+      <StatPair>
+        <NotifyText>Errors:</NotifyText>
+        <NotifyText big>{data.errors}</NotifyText>
+      </StatPair>
+      <StatPair>
+        <NotifyText>Errors rate:</NotifyText>
+        <NotifyText big>{data.errorRate}</NotifyText>
+      </StatPair>
+      <StatPair>
+        <NotifyText>Better than:</NotifyText>
+        <NotifyText big>{Math.round(data.betterThan * 100)}%</NotifyText>
+      </StatPair>
       <ButtonsRow>
         <NotifyButton onClick={() => nav.push(routes.typingTestNotify)} third>
           TRY AGAIN
