@@ -20,3 +20,4 @@ export { default as changePassword } from "./changePassword";
 export { default as deleteAccount } from "./deleteAccont";
 export { default as changeUserPreference } from "./changeUserPreference";
 export { default as createTypingTest } from "./createTypingTest";
+export { default as finishTypingTest } from "./finishTypingTest";

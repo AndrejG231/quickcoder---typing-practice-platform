@@ -21,12 +21,16 @@ const TestSummary: FC<props> = ({ data }) => {
       <NotifyTitle>RESULTS</NotifyTitle>
       <NotifyText>
         Here will be some of typing test summary from server
+        {data}
       </NotifyText>
       <ButtonsRow>
-        <NotifyButton onClick={() => nav.push(routes.typingTestNotify)}>
+        <NotifyButton onClick={() => nav.push(routes.typingTestNotify)} third>
           TRY AGAIN
         </NotifyButton>
-        <NotifyButton onClick={() => nav.push(routes.home)}>
+        <NotifyButton onClick={() => nav.push(routes.profileTests)} third>
+          STATS
+        </NotifyButton>
+        <NotifyButton onClick={() => nav.push(routes.home)} third>
           GO HOME
         </NotifyButton>
       </ButtonsRow>

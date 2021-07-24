@@ -4,11 +4,11 @@ import { connect, ConnectedProps } from "react-redux";
 import { Dispatch } from "redux";
 import { Route, useHistory } from "react-router-dom";
 
-import { practiceObject, reduxStore } from "../types";
+import { finishedTestStats, practiceObject, reduxStore } from "../types";
 import { routes } from "../static";
 import { Notification, TestSummary } from "../components/typing_test";
 import { resetPractice, setPractice } from "../redux/actions";
-import { createTypingTest } from "../api";
+import { createTypingTest, finishTypingTest } from "../api";
 import Practice from "./Practice";
 
 const stateToProps = (state: reduxStore) => {
@@ -31,6 +31,7 @@ type props = ConnectedProps<typeof withRedux>;
 const TypingTest: FC<props> = ({ user, setPractice, resetPractice }) => {
   // State for preventing multiple fetches
   const [loadingTest, setLoadingTest] = useState(false);
+  const [resultData, setResultData] = useState<null | finishedTestStats>(null);
   const nav = useHistory();
 
   const loadTest = () => {
@@ -50,9 +51,22 @@ const TypingTest: FC<props> = ({ user, setPractice, resetPractice }) => {
     }
   };
 
-  const finishTypingTest = (practice: practiceObject) => {
+  const handleFinishTypingTest = (practice: practiceObject) => {
     resetPractice();
     nav.push(routes.typingTestFinished);
+    finishTypingTest({
+      onError: () => null,
+      onSuccess(data) {
+        setResultData(data);
+      },
+      practiceId: practice.id,
+      practiceUpdateFields: {
+        index: practice.index,
+        errors: JSON.stringify(practice.errors),
+        time_spent:
+          practice.time_spent + new Date().getTime() - practice.start_time,
+      },
+    });
     // Finish test mutation
     //  Retrieve test info
   };
@@ -66,10 +80,10 @@ const TypingTest: FC<props> = ({ user, setPractice, resetPractice }) => {
         />
       </Route>
       <Route exact path={routes.typingTestRun}>
-        <Practice typingTest={(practice) => finishTypingTest(practice)} />
+        <Practice typingTest={(practice) => handleFinishTypingTest(practice)} />
       </Route>
       <Route exact path={routes.typingTestFinished}>
-        <TestSummary data="Some data" />
+        <TestSummary data={JSON.stringify(resultData)} />
       </Route>
     </>
   );

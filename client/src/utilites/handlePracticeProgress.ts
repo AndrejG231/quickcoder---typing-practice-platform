@@ -5,7 +5,7 @@ const handlePracticeProgress = ({
   keyPressed,
   state,
   onFinish,
-  typingTest,
+  typingTest, // on test finish function
 }: {
   keyPressed: schemeCharacters;
   state: practiceObject;

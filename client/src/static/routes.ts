@@ -14,6 +14,7 @@ const routes = {
     `/home/change_password_w_token/${token}/`,
   profileUnfinished: "/profile/unfinished/",
   profileHistory: "/profile/history/",
+  profileTests: "/profile/typing_tests/",
   settings: "/settings/",
   practicePreferences: "/settings/practice_preferences/",
   typingTest: "/typing_test/",
