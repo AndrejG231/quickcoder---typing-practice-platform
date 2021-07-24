@@ -5,7 +5,7 @@ import { routes } from "./static";
 
 //pages
 import Home from "./pages/Home";
-import Profile from "./pages/profile/Profile";
+import Profile from "./pages/Profile";
 import PracticeMenu from "./pages/PracticeMenu";
 import Practice from "./pages/Practice";
 import PracticeSummary from "./pages/PracticeSummary";

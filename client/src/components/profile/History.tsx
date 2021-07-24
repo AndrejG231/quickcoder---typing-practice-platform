@@ -14,7 +14,7 @@ import {
   ItemRow,
   Items,
   SummaryLinkButton,
-} from "../../components/profile/history";
+} from "./history/";
 import { getCategoryIndex } from "../../utilites";
 import { routes } from "../../static";
 

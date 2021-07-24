@@ -3,18 +3,22 @@ import { Dispatch } from "redux";
 import { connect, ConnectedProps } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 
-import { routes } from "../../static";
+import { routes } from "../static";
 
-import { Routes, ProfileGrid, UnfinishedCount } from "../../components/profile";
-import { ArrowButton, NavBar } from "../../components";
-import { getUnfinishedPracticesCount } from "../../api";
-import { reduxStore } from "../../types";
-import { setUnfinishedPracticesCount } from "../../redux/actions";
+import {
+  Routes,
+  ProfileGrid,
+  UnfinishedCount,
+  Unfinished,
+  History,
+  Overview,
+} from "../components/profile";
+import { ArrowButton, NavBar } from "../components";
+import { getUnfinishedPracticesCount } from "../api";
+import { reduxStore } from "../types";
+import { setUnfinishedPracticesCount } from "../redux/actions";
 
 // SubRoutes
-import Overview from "./Overview";
-import History from "./History";
-import Unfinished from "./Unfinished";
 
 const rdxProps = (state: reduxStore) => ({
   unfinishedCount: state.profile.unfinishedCount,
