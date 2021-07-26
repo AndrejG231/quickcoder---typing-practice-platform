@@ -22,6 +22,7 @@ const rdxState = (state: reduxStore) => ({
   history: state.profile.history,
   awaitingUpdate: state.profile.awaitingHistoryUpdate,
   menu: state.practiceMenu,
+  animation: state.animations.profileChild,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -31,13 +32,17 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 
 const withRedux = connect(rdxState, rdxDispatch);
 
-type props = ConnectedProps<typeof withRedux>;
+type props = ConnectedProps<typeof withRedux> & {
+  redirectOut: (path: string) => void;
+};
 
 const History: FC<props> = ({
   awaitingUpdate,
   history,
   updateHistory,
   menu,
+  animation,
+  redirectOut,
 }) => {
   const nav = useHistory();
   const template = "2fr 2fr 2.5fr 1fr 1fr 1fr 1fr 1fr";
@@ -68,7 +73,7 @@ const History: FC<props> = ({
 
   return (
     <HistoryGrid>
-      <Items>
+      <Items isOnScreen={animation}>
         <ItemList>
           {history.lastPractices.map((item, index) => {
             const categoryIndex = getCategoryIndex(item.category, menu);
@@ -86,14 +91,14 @@ const History: FC<props> = ({
                 <ItemInfoText>{item.error_rate.toFixed(2)}</ItemInfoText>
                 <ItemInfoText darken>{item.length}</ItemInfoText>
                 <SummaryLinkButton
-                  onClick={() => nav.push(routes.finishedPractice(item.id))}
+                  onClick={() => redirectOut(routes.finishedPractice(item.id))}
                 />
               </ItemRow>
             );
           })}
         </ItemList>
       </Items>
-      <Indexes template={template}>
+      <Indexes template={template} isOnScreen={animation}>
         <ItemInfoText index darken>
           Time of practice
         </ItemInfoText>

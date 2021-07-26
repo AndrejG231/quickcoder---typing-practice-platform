@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
-const NavBar = styled.div`
-  ${({ theme }) => `
+interface props {
+  isOnScreen?: boolean;
+}
+
+const NavBar = styled.div<props>`
+  ${({ theme, isOnScreen }) => `
+ ${!isOnScreen ? "transform: translateY(-200px)" : ""};
+ transition: 0.3s all linear;
   display: flex;
   justify-content: space-between;
   grid-area: nav;

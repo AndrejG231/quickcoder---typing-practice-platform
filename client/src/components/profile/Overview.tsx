@@ -25,6 +25,7 @@ const rdxProps = (state: reduxStore) => ({
   overview: state.profile.overview,
   username: state.authentication.user?.username,
   menu: state.practiceMenu,
+  animation: state.animations.profileChild,
 });
 
 const rdxDispatch = (dispatch: Dispatch) => ({
@@ -41,6 +42,7 @@ const Overview: FC<props> = ({
   setProfileOverview,
   overview,
   menu,
+  animation,
 }) => {
   useEffect(() => {
     if (!overview) {
@@ -61,8 +63,8 @@ const Overview: FC<props> = ({
 
   return (
     <OverviewGrid>
-      <UserName>{username}</UserName>
-      <Stats>
+      <UserName isOnScreen={animation}>{username}</UserName>
+      <Stats isOnScreen={animation}>
         {/* Average user's overall stats */}
         <StatPair>
           <StatValue>{averageStats.averageScore}</StatValue>
@@ -88,7 +90,7 @@ const Overview: FC<props> = ({
         </StatPair>
       </Stats>
       {/* Stats and its visuals of last 5 finished practices */}
-      <RecentPractices>
+      <RecentPractices isOnScreen={animation}>
         <RecentStatsMainLine />
         <RecentStatsIndex>CPM</RecentStatsIndex>
         <RecentStatsIndex error>Error Rate</RecentStatsIndex>

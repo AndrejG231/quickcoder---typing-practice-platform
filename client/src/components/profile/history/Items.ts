@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-const Items = styled.div`
+interface props {
+  isOnScreen?: boolean;
+}
+
+const Items = styled.div<props>`
+  transition: 0.2s all linear;
+  ${({ isOnScreen }) => (!isOnScreen ? "transform: translateX(100vw)" : "")};
   grid-area: items;
   overflow-y: scroll;
   border: 3px solid black;

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-const RecentPractices = styled.div`
+interface props {
+  isOnScreen?: boolean;
+}
+
+const RecentPractices = styled.div<props>`
+  ${({ isOnScreen }) => (isOnScreen ? "" : "transform: translateY(90vh)")};
+  transition: 0.2s all linear;
   position: relative;
   grid-area: recent;
   margin-top: 120px;

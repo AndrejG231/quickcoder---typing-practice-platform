@@ -1,4 +1,9 @@
-export type field = "modal" | "home" | "message";
+export type field =
+  | "modal"
+  | "home"
+  | "message"
+  | "profileContainer"
+  | "profileChild";
 
 export type animations = {
   [key in field]: boolean;

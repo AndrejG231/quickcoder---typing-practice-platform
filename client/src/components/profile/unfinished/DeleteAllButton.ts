@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-const DeleteAllButton = styled.button`
+interface props {
+  isOnScreen?: boolean;
+}
+
+const DeleteAllButton = styled.button<props>`
+  transition: 0.2s all linear;
+  ${({ isOnScreen }) => (!isOnScreen ? "transform: translateX(-100vw)" : "")};
   margin: 10px;
   font-size: 20px;
   grid-area: delete;

@@ -4,6 +4,8 @@ const defaultState = {
   modal: false,
   home: false,
   message: false,
+  profileContainer: false,
+  profileChild: false,
 };
 
 const animations: reducer = (state = defaultState, action) => {

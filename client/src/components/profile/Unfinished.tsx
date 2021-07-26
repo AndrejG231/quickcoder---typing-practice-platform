@@ -33,6 +33,7 @@ import { routes } from "../../static";
 const rdxState = (state: reduxStore) => ({
   unfinishedPractices: state.profile.unfinished,
   unfinishedCount: state.profile.unfinishedCount,
+  animation: state.animations.profileChild,
   menu: state.practiceMenu,
 });
 
@@ -45,7 +46,9 @@ const rdxDispatch = (dispatch: Dispatch) => ({
 });
 
 const withRedux = connect(rdxState, rdxDispatch);
-type props = ConnectedProps<typeof withRedux>;
+type props = ConnectedProps<typeof withRedux> & {
+  redirectOut: (path: string) => void;
+};
 
 const Unfinished: FC<props> = ({
   menu,
@@ -54,6 +57,8 @@ const Unfinished: FC<props> = ({
   setUnfinishedCount,
   setGlobalMsg,
   unfinishedCount,
+  redirectOut,
+  animation,
 }) => {
   const nav = useHistory();
   const template = `2fr 2fr 2fr 1fr 1fr 1fr 1fr`;
@@ -106,8 +111,8 @@ const Unfinished: FC<props> = ({
 
   return (
     <UnfinishedGrid>
-      <DeleteAllButton onClick={doDeleteAll} />
-      <Items>
+      <DeleteAllButton onClick={doDeleteAll} isOnScreen={animation} />
+      <Items isOnScreen={animation}>
         <ItemList>
           {unfinishedPractices.map((item, index) => {
             const categoryIndex = getCategoryIndex(item.category, menu);
@@ -126,14 +131,14 @@ const Unfinished: FC<props> = ({
                   onClick={() => doDeletePractice(item.id, index)}
                 />
                 <ContinueButton
-                  onClick={() => nav.push(routes.runningPractice(item.id))}
+                  onClick={() => redirectOut(routes.runningPractice(item.id))}
                 />
               </ItemRow>
             );
           })}
         </ItemList>
       </Items>
-      <Indexes template={template}>
+      <Indexes template={template} isOnScreen={animation}>
         <ItemInfoText index darken>
           Time of practice
         </ItemInfoText>

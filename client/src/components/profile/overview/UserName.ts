@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
-const UserNameContainer = styled.div`
-  ${({ theme }) => `
+interface props {
+  isOnScreen?: boolean;
+}
+
+const UserNameContainer = styled.div<props>`
+  ${({ theme, isOnScreen }) => `
+  transition: 0.2s all linear;
   position: relative;
   height: 100%;
   grid-area: user;
@@ -14,6 +19,7 @@ const UserNameContainer = styled.div`
   line-height: 160px;
   padding-left: 40px;
   text-align: center;
+  ${!isOnScreen ? "transform: translateX(70vw)" : ""};
   `}
 `;
 
