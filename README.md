@@ -1,5 +1,5 @@
 # QuickCoder.com
-Fullstack app focused on typing practice.
+Fullstack application concept focused on typing practice.
 
 ### Client:
 - development tools: yarn, typescript, webpack and eslint
