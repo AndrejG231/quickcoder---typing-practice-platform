@@ -1,4 +1,4 @@
-# QuickCoder.com
+# QuickCoder
 Fullstack application concept focused on typing practice.
 
 ### Client:
